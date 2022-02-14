@@ -1,0 +1,53 @@
+.background-container {
+  position: absolute;
+  overflow: hidden;
+}
+
+.sub-container {
+  filter: blur(4px);
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.background-left,
+.background-right,
+.background-top {
+  position: absolute;
+}
+
+@media screen and (orientation: landscape) {
+  .background-top {
+    width: 40vw;
+    left: -15vw;
+    top: -10vw
+  }
+  .background-left {
+    width: 15vw;
+    bottom: -3vw;
+    left: -2vw;
+  }
+  .background-right {
+    width: 15vw;
+    bottom: -10vw;
+    right: -0vw;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .background-top {
+    width: 70vh;
+    left: -25vh;
+    top: -35vh
+  }
+  .background-left {
+    width: 30vh;
+    bottom: -4vh;
+    left: -7vh;
+  }
+  .background-right {
+    width: 30vh;
+    bottom: -15vh;
+    right: -10vh;
+  }
+}
