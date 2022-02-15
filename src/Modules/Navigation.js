@@ -14,7 +14,8 @@ const Navigation = () => {
           <div className="navigation-top-sub">
             <div className="title-logo">
               <div className="logo-container">
-                <Icon icon="Mascot" />
+                <div className="icon-white"><Icon icon="Mascot" /></div>
+                <div className="icon-color"><Icon icon="MascotColor" /></div>
               </div>
               <h1>STACK-MEMENTO</h1>
             </div>

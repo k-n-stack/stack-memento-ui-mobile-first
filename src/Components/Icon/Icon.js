@@ -9,6 +9,7 @@ import {
   RobotCircle,
   Smartphone,
   Monitor,
+  MascotColor,
 } from "./Svg";
 
 const Icon = (props) => {
@@ -22,6 +23,7 @@ const Icon = (props) => {
     RobotCircle: RobotCircle,
     Smartphone: Smartphone,
     Monitor: Monitor,
+    MascotColor: MascotColor,
   }
 
   const getSvg = (svgName) => {

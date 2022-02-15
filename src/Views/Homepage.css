@@ -1,3 +1,12 @@
+.homepage-content {
+  /* background-color: rgba(255, 0, 0, 0.26); */
+  overflow: hidden;
+}
+
+.homepage-margin-bottom {
+  height: 55px;
+}
+
 .quick-stats {
   display: flex;
   flex-wrap: wrap;
@@ -118,4 +127,16 @@
 .monitor-text {
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.footer {
+  color: aliceblue;
+  height: 120px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.footer-content {
+  padding: 10px;
+  background-color: black;
 }

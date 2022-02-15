@@ -1,5 +1,10 @@
-.login-button-container {
+.login-button-container,
+.icon-color {
   display: none;
+}
+
+.icon-white {
+  display: block;
 }
 
 .navigation-layout {
@@ -18,41 +23,53 @@
   display: flex;
   justify-content: space-between;
   height: 35px;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 10px 10px 10px;
   background: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(0, 0, 0, 0) 101.62%), linear-gradient(221.42deg, #3650AB 59.99%, rgba(60, 147, 174, 0.65) 104.23%);
+  box-shadow: 0px -1px 20px 8px rgb(0, 0, 0);
 }
 
 .navigation-top {
-  padding: 10px 20px 10px 20px;
+  padding: 10px 10px 0px 10px;
   background: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(0, 0, 0, 0) 101.62%), linear-gradient(221.42deg, #3650AB 59.99%, rgba(60, 147, 174, 0.65) 104.23%);
+  box-shadow: 0px 1px 20px 3px rgba(0, 0, 0, 0.5);
 }
 .navigation-top-input {
   margin-top: 5px;
   width: 100%;
 }
 .navigation-top-input > input {
+  box-sizing: border-box;
+  margin-bottom: 5px;
   width: 100%;
   font-size: medium;
+  pointer-events: all;
 }
 .navigation-top-sub {
-  height: 50px;
   display: flex;
   justify-content: space-between;
 }
 .title-logo {
+  font-family: "Roboto Condensed";
+  color: white;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items:flex-end;
   font-size: 8px;
   width: min-content;
-  gap: 10px;
+  gap: 3px;
+  white-space: nowrap;
 }
+
+.title-logo > h1 {
+  margin: 0;
+}
+
 .robot-icon-container {
   width: 35px;
   height: 35px;
 }
 .logo-container {
-  width: 100px;
+  width: 50px;
 }
 .top-view-margin {
   height: 100px;
@@ -78,8 +95,12 @@
   }
   .navigation-bottom,
   .robot-icon-container,
-  .top-view-margin {
+  .top-view-margin,
+  .icon-white {
     display: none;
+  }
+  .icon-color {
+    display: block;
   }
   .navigation-layout {
     display: inline-block;
@@ -90,6 +111,7 @@
   }
   .navigation-top {
     background-color: rgba(255, 255, 255, 0.01);
+    background: none;
     padding: 20px 160px;
   }
   .navigation-top-sub {
@@ -110,6 +132,9 @@
     justify-content: space-around;
   }
   .title-logo > h1 {
-    font-size: 25px;
+    background-image: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(0, 0, 0, 0) 101.62%), linear-gradient(221.42deg, #3650AB 59.99%, rgba(60, 147, 174, 0.65) 104.23%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 40px;
   }
 }
