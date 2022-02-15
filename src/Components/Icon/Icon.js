@@ -7,6 +7,8 @@ import {
   Register,
   NavCircle,
   RobotCircle,
+  Smartphone,
+  Monitor,
 } from "./Svg";
 
 const Icon = (props) => {
@@ -18,6 +20,8 @@ const Icon = (props) => {
     Magnifier: Magnifier,
     NavCircle: NavCircle,
     RobotCircle: RobotCircle,
+    Smartphone: Smartphone,
+    Monitor: Monitor,
   }
 
   const getSvg = (svgName) => {
