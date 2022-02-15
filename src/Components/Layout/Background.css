@@ -1,6 +1,10 @@
 .background-container {
-  position: absolute;
+  z-index: -2;
+  position: fixed;
   overflow: hidden;
+  background: 
+    radial-gradient(ellipse at -50% -50%, #fbfbfb 50%, transparent),
+    radial-gradient(ellipse at 150% 150%, #4c0c9f -30%, transparent 100%);
 }
 
 .sub-container {

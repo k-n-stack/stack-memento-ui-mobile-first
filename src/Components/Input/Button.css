@@ -1,0 +1,22 @@
+button {
+  border-radius: 5px;
+  border-style: none;
+  font-size: 1.125rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.blue-button {
+  background-color: #9EB6FF;
+}
+
+.homepage-button-size {
+  height: 2.5rem;
+  width: 8.5rem;
+}
+
+.button-icon-container {
+  height: 1.25rem;
+}
