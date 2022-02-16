@@ -115,6 +115,7 @@ const IntroFooterCarousel = () => {
           <BulletNav 
             bulletNumber={bulletNumber}
             pxGap="15px"
+            pxSize="15px"
             selected={selectedBullet}
           />
         </div>

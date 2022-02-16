@@ -7,7 +7,6 @@ const DarkSmokeLayer = () => {
     <>
       <div className="background-dark-container">
         <div className="presentation-background-dark"></div>
-        <div className="presentation-background-dark-blue"></div>
       </div>
     </>
   );

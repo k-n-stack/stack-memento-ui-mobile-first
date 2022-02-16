@@ -6,46 +6,12 @@ import Navigation from "../Modules/Navigation";
 import IntroFooterCarousel from "../Components/Layout/IntroFooterCarousel";
 import DarkSmokeLayer from "../Components/Layout/DarkSmokeLayer";
 import ThreadPreview from "../Modules/TheadPreview";
-import {
-  TechnoPackAnimate1, 
-  TechnoPackAnimate2, 
-  TechnoPackAnimate3, 
-  TechnoPackAnimate4, 
-} from "../Components/Icon/TechnoPackAnimate";
 
 import "./Homepage.css";
 import Icon from "../Components/Icon/Icon";
+import DarkBlueSmokeLayer from "../Components/Layout/DarkBlueSmokeLayer";
 
 const Homepage = () => {
-
-  const controls1 = useAnimation();
-  const controls2 = useAnimation();
-  const controls3 = useAnimation();
-  const controls4 = useAnimation();
-
-  const _controlss = [controls1, controls2, controls3, controls4];
-  const _durations = [40, 30, 20, 10];
-
-  const getAnimateProps = (duration) => {
-    return {
-      x: "-50%",
-      transition: {
-        x: {
-          repeat: Infinity,
-          duration: duration,
-          ease: "linear",
-        }
-      }
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('resize', (event) => {
-      _controlss.forEach((value) => value.stop());
-    });
-
-    _controlss.forEach((value, index) => value.start(getAnimateProps(_durations[index])));
-  }, []);
 
   return (
     <>
@@ -88,28 +54,8 @@ const Homepage = () => {
           <h2>Covered technologies</h2>
           <p>From front to back technologis, Stack-Memento can cover as many stacks knowledge as you want.<br/><br/>By default Stack-memento have default thread about web development, but you are free to make custom thread.</p>
         </div>
+        <DarkBlueSmokeLayer />
 
-        <div 
-          className="technologies-list-animation-container"
-          onClick={() => { _controlss.forEach((value) => value.stop()) }}
-        >
-          <motion.div className="technologies-list-animation" animate={controls1}>
-            <div><TechnoPackAnimate1 /></div>
-            <div><TechnoPackAnimate1 /></div>
-          </motion.div>
-          <motion.div className="technologies-list-animation" animate={controls2}>
-            <div><TechnoPackAnimate2 /></div>
-            <div><TechnoPackAnimate2 /></div>
-          </motion.div>
-          <motion.div className="technologies-list-animation" animate={controls3}>
-            <div><TechnoPackAnimate3 /></div>
-            <div><TechnoPackAnimate3 /></div>
-          </motion.div>
-          <motion.div className="technologies-list-animation" animate={controls4}>
-            <div><TechnoPackAnimate4 /></div>
-            <div><TechnoPackAnimate4 /></div>
-          </motion.div>
-        </div>
 
         <div className="medias">
           <div className="smartphone">

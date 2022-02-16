@@ -1,19 +1,18 @@
 .intro-footer-container {
   box-sizing: border-box;
-  background-color: rgba(255, 255, 255, 0.90);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   width: 100vw;
-  height: 300px;
+  height: 260px;
   padding: 15px 15px;
   margin-top: 20px;
   border-radius: 20px;
-  box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.233);
 }
 
 .intro-footer-header {
-  padding: 0px 10px;
+  padding: 0px 30px;
+  text-align: center;
 }
 
 .footer-container-remainder {
@@ -25,6 +24,10 @@
 
 .intro-text > p {
   font-size: 20px;
+}
+
+.intro-text {
+  text-align: center;
 }
 
 @media screen and (min-width: 360px) {
@@ -60,8 +63,4 @@
   .intro-text {
     text-align: center;
   }
-}
-
-@media screen and (min-width: 720px) {
-
 }
