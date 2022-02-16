@@ -3,4 +3,3 @@
 - fix/change font size in media zone in mobile resolution
 
 - add breakpoint on high resolution mobile
--

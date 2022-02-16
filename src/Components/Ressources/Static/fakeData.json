@@ -1,0 +1,8 @@
+{
+  "homepageHeaderText": [
+    "Be aware that this website first purpose is for learning web development techniques.",
+    "This front page have been developed with React, Redux, and other libraries such as framer-motion, react-swiper, react router and much more !",
+    "If you feel more adventureous, feel free to search about a thread subject with the input below our mascot",
+    "For the bravest, account creation is available !"
+  ]
+}

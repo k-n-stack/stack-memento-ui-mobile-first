@@ -21,6 +21,7 @@
   width: 45vw;
   text-align: center;
   border-radius: 5px;
+  box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.233);
 }
 
 .bottom-margin {
@@ -28,10 +29,11 @@
 }
 
 .features {
-  background-color: rgba(255, 255, 255, 0.90);
+  background: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(200, 200, 200, 0) 101.62%), linear-gradient(221.42deg, #8011ca 59.99%, rgba(55, 173, 209, 0.65) 104.23%);
   display: flex;
   flex-direction: column;
   border-radius: 20px;
+  padding-top: 20px;
 }
 
 .features-carousel {
@@ -56,6 +58,7 @@
   flex-direction: column;
   border-radius: 10px;
   padding: 0px 5px;
+  box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.233);
 }
 
 .technologies-header {
@@ -96,12 +99,12 @@
 .smartphone {
   color: white;
   margin-right: 10px;
-  font-size: 14px;
+  font-size: 17px;
 }
 
 .monitor {
   color: white;
-  font-size: 14px;
+  font-size: 17px;
   text-align: right;
 }
 
@@ -139,4 +142,80 @@
 .footer-content {
   padding: 10px;
   background-color: black;
+}
+
+@media screen and (min-width: 360px) {
+  .homepage-content {
+    /* background-color: rgba(255, 0, 0, 0.26); */
+  }
+
+
+
+  .quick-stats {
+    margin-top: 80px;
+    margin-right: 10px;
+    margin-left: 10px;
+    flex-wrap: nowrap;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.233);
+    border-radius: 10px;
+  }
+  .quick-stats > div {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .quick-stats > div > h1 {
+    font-size: 25px;
+  }
+
+  .features-carousel {
+    height: 400px;
+    margin: 0px 10px;
+    width: auto;
+  }
+
+  .features-carousel-selection > div > p {
+    font-size: 16px;
+  }
+
+  .features-carousel-selection > div {
+    justify-content: center;
+  }
+
+  .features-carousel-selection {
+    margin: 10px 0px;
+  }
+
+  .technologies-header > h2 {
+    font-size: 30px;
+  }
+
+  .technologies-header > p {
+    font-size: 18px;
+  }
+
+  .technologies-list-animation > div {
+    width: 1600px;
+  }
+
+  .medias {
+    gap: 180px;
+    margin-top: 180px;
+  }
+
+  .smartphone-illustration {
+    width: 250px;
+    margin-left: -100px;
+  }
+
+  .monitor-illustration {
+    margin: 0px 30px;
+    height: auto;
+    float: none;
+  }
+
+  .monitor-text {
+    text-align: center;
+  }
 }

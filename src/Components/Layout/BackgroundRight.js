@@ -8,17 +8,17 @@ const BackgroundRight = () => {
       <path d="M160.491 106.613C163.225 106.22 165.759 108.117 166.153 110.85L195.344 313.685C195.737 316.418 193.84 318.953 191.107 319.346L133.93 327.575C131.197 327.968 128.662 326.072 128.269 323.338L99.0772 120.503C98.6838 117.77 100.581 115.235 103.314 114.842L160.491 106.613Z" fill="url(#paint2_linear_524_67240)"/>
       <defs>
         <linearGradient id="paint0_linear_524_67240" x1="97.8234" y1="0.03125" x2="97.8234" y2="327.627" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#8A8FBF"/>
-          <stop offset="0.708333" stop-color="#8A8FBF" stop-opacity="0.614583"/>
-          <stop offset="1" stop-color="#8A8FBF" stop-opacity="0"/>
+          <stop stopColor="#8A8FBF"/>
+          <stop offset="0.708333" stopColor="#8A8FBF" stopOpacity="0.614583"/>
+          <stop offset="1" stopColor="#8A8FBF" stopOpacity="0"/>
         </linearGradient>
         <linearGradient id="paint1_linear_524_67240" x1="97.8234" y1="0.03125" x2="97.8234" y2="327.627" gradientUnits="userSpaceOnUse">
-          <stop offset="0.307292" stop-color="#1E3BA2"/>
-          <stop offset="1" stop-color="#3650AB" stop-opacity="0"/>
+          <stop offset="0.307292" stopColor="#1E3BA2"/>
+          <stop offset="1" stopColor="#3650AB" stopOpacity="0"/>
         </linearGradient>
         <linearGradient id="paint2_linear_524_67240" x1="1.75695" y1="130.978" x2="231.883" y2="130.565" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#3C93AE"/>
-          <stop offset="1" stop-color="#3C93AE" stop-opacity="0"/>
+          <stop stopColor="#3C93AE"/>
+          <stop offset="1" stopColor="#3C93AE" stopOpacity="0"/>
         </linearGradient>
       </defs>
     </svg>

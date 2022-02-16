@@ -77,7 +77,7 @@ const Homepage = () => {
 
         <div className="technologies-header">
           <h2>Covered technologies</h2>
-          <p>The href attribute is required for an anchor to be keyboard accessible. Provide a valid, navigable address as the href value. If you cannot provide an href, but still need the element</p>
+          <p>From front to back technologis, Stack-Memento can cover as many stacks knowledge as you want.<br/><br/>By default Stack-memento have default thread about web development, but you are free to make custom thread.</p>
         </div>
 
         <div 
@@ -106,17 +106,16 @@ const Homepage = () => {
           <div className="smartphone">
             <div className="smartphone-illustration"><Icon icon="Smartphone" /></div>
             <div className="smartphone-text">
-              <h3>Mobile App is comming soon !</h3>
-              <p>The href value. If you cannot provide an href, but.</p><br/>
-              <p>asset static/js/bundle.js 2.84 MiB [emitted] (name: main) 1 related asset asset main.5f35c733e16550ffe895.hot-update. asset main.5f35c733e16550ffe895.hot-update.js 22.9 KiB [emitted] [immutable] [hmr] (name: main) 1 related asset</p>
+              <h3>Mobile App comming soon !</h3>
+              <p>With memento take away, just get your centralized favorite links everywhere with your smartphone.<br/><br/>(Application still in development state)</p>
             </div>
           </div>
           <div className="monitor">
             <div className="monitor-illustration"><Icon icon="Monitor" /></div>
             <div className="monitor-text">
               <h3>Desktop App</h3>
-              <p>The href value. If you cannot provide an href, but.</p><br/>
-              <p>asset static/js/bundle.js 2.84 MiB [emitted] (name: main) 1 related asset asset main.5f35c733e16550ffe895.hot-update. asset main.5f35c733e16550ffe895.hot-update.js 22.9 KiB [emitted] [immutable] [hmr] (name: main) 1 related asset</p>
+              <p>Centralize Your bookmark with 2 touch.</p><br/>
+              <p>With memento-clip, focus on any url and stock your bookmark with a customizable shortcut.<br/><br/>(Application still in development state.</p>
             </div>
           </div>
         </div>
