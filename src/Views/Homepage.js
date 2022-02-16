@@ -1,11 +1,17 @@
-import React, { useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 
 import Background from "../Components/Layout/Background";
 import Navigation from "../Modules/Navigation";
 import IntroFooterCarousel from "../Components/Layout/IntroFooterCarousel";
 import DarkSmokeLayer from "../Components/Layout/DarkSmokeLayer";
 import ThreadPreview from "../Modules/TheadPreview";
+import { 
+  TechnoPack1, 
+  TechnoPack2, 
+  TechnoPack3, 
+  TechnoPack4 
+} from "../Components/Icon/TechnoPack";
 
 import "./Homepage.css";
 import Icon from "../Components/Icon/Icon";
@@ -19,10 +25,6 @@ const Homepage = () => {
     <>
       <Background />
       <Navigation />
-      {/* <div className="wrapper">
-        <div className="testheader">hello</div>
-        <div className="testfooter">world</div>
-      </div> */}
 
       <div className="homepage-content">
 
@@ -62,6 +64,20 @@ const Homepage = () => {
         </div>
         <DarkBlueSmokeLayer />
 
+        <div className="technologies-icons-container">
+          <motion.div 
+            className="technologies-icons" 
+            drag="x" 
+            // dragTransition={{ bounceStiffness: 2, bounceDamping: 2 }}
+            dragConstraints={{ left: -500, right: 500}}
+            dragElastic={0.2}
+          >
+            <TechnoPack1 />
+            <TechnoPack2 />
+            <TechnoPack3 />
+            <TechnoPack4 />
+          </motion.div>
+        </div>
 
         <div className="medias">
           <div className="smartphone">

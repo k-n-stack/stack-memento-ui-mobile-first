@@ -185,6 +185,20 @@
     font-size: 30px;
   }
 
+  .technologies-icons-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .technologies-icons {
+    flex-shrink: 0;
+    margin-top: 40px;
+    width: 1400px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px
+  }
+
   .technologies-header > p {
     font-size: 18px;
   }
