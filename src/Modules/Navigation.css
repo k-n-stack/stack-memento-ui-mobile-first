@@ -88,6 +88,21 @@
   text-align: center;
 }
 
+@media screen and (min-width: 720px) { 
+  .logo-container {
+    width: 80px;
+  }
+
+  .title-logo > h1 {
+    font-size: 23px;
+  }
+
+  .navigation-top-input > input {
+    width: 40%;
+  }
+}
+
+
 @media screen and (min-width: 900px) and (orientation: landscape) {
   .login-button-container {
     display: flex;

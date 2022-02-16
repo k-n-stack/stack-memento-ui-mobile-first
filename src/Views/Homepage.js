@@ -5,6 +5,7 @@ import Background from "../Components/Layout/Background";
 import Navigation from "../Modules/Navigation";
 import IntroFooterCarousel from "../Components/Layout/IntroFooterCarousel";
 import DarkSmokeLayer from "../Components/Layout/DarkSmokeLayer";
+import ThreadPreview from "../Modules/TheadPreview";
 import {
   TechnoPackAnimate1, 
   TechnoPackAnimate2, 
@@ -53,9 +54,17 @@ const Homepage = () => {
 
       <div className="homepage-content">
 
-        <div className="homepage-view-content">
-          <IntroFooterCarousel />
-        </div>
+        <div className="top-header-container">
+          <div className="input-edge-breakpoint">
+            <input/>
+            <div className="thread-preview-container">
+              <ThreadPreview /> 
+            </div>
+          </div>
+          <div className="homepage-view-content">
+            <IntroFooterCarousel />
+          </div>
+        </div>      
 
         <div className="quick-stats">
           <div><h1>654</h1><p>Bookmarks</p></div>
@@ -115,7 +124,7 @@ const Homepage = () => {
             <div className="monitor-text">
               <h3>Desktop App</h3>
               <p>Centralize Your bookmark with 2 touch.</p><br/>
-              <p>With memento-clip, focus on any url and stock your bookmark with a customizable shortcut.<br/><br/>(Application still in development state.</p>
+              <p>With memento-clip, focus on any url and stock your bookmark with a customizable shortcut.<br/><br/>(Application still in development state.)</p>
             </div>
           </div>
         </div>

@@ -41,3 +41,27 @@
   }
 
 }
+
+@media screen and (min-width: 550px) {
+  
+  .intro-footer-header {
+    text-align: center;
+    font-size: 40px;
+    margin: 50px 120px 0px 120px;
+  }
+
+  .intro-footer-container {
+    padding: 15px 80px 15px 80px;
+    height: 250px;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .intro-text {
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 720px) {
+
+}
