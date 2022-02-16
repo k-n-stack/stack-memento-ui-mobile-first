@@ -7,7 +7,6 @@ import "./Navigation.css";
 
 const Navigation = () => {
   return (
-    <>
       <div className="navigation-layout">
         <div className="navigation-top">
         
@@ -49,8 +48,6 @@ const Navigation = () => {
         </div>
 
       </div>
-      <div className="top-view-margin"></div>
-    </>
   );
 };
 

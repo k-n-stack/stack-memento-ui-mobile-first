@@ -11,12 +11,18 @@ import "./Homepage.css";
 import Icon from "../Components/Icon/Icon";
 import DarkBlueSmokeLayer from "../Components/Layout/DarkBlueSmokeLayer";
 
+import "./test.css";
+
 const Homepage = () => {
 
   return (
     <>
       <Background />
       <Navigation />
+      {/* <div className="wrapper">
+        <div className="testheader">hello</div>
+        <div className="testfooter">world</div>
+      </div> */}
 
       <div className="homepage-content">
 

@@ -8,15 +8,17 @@
 }
 
 .navigation-layout {
-  position: fixed;
-  overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+  box-sizing: border-box;
+  position: sticky;
+  top:0;
   width: 100%;
-  height: 100%;
-  pointer-events: none;
+  height: 100vh;
+  margin-bottom: -100vh;
   z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .navigation-bottom {
@@ -47,6 +49,7 @@
 .navigation-top-sub {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .title-logo {
   font-family: "Roboto Condensed";
@@ -87,21 +90,6 @@
 .navigation-menu > a {
   text-align: center;
 }
-
-/* @media screen and (min-width: 720px) { 
-  .logo-container {
-    width: 80px;
-  }
-
-  .title-logo > h1 {
-    font-size: 23px;
-  }
-
-  .navigation-top-input > input {
-    width: 40%;
-  }
-} */
-
 
 @media screen and (min-width: 720px) and (orientation: landscape) {
   .login-button-container {

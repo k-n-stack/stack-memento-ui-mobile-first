@@ -1,5 +1,6 @@
 {
   "name": "stack-memento-ui-mobile-first",
+  "homepage": "https://stack-memento.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
