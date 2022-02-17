@@ -1,9 +1,9 @@
-.login-button-container,
-.icon-color {
+.login-button-container-desktop,
+.icon-color-mobile {
   display: none;
 }
 
-.icon-white {
+.icon-white-mobile {
   display: block;
 }
 
@@ -21,7 +21,7 @@
   justify-content: space-between;
 }
 
-.navigation-bottom {
+.navigation-bottom-mobile {
   display: flex;
   justify-content: space-between;
   height: 35px;
@@ -36,11 +36,11 @@
   box-shadow: 0px 1px 20px 3px rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
-.navigation-top-input {
+.navigation-top-bottom {
   margin-top: 5px;
   width: 100%;
 }
-.navigation-top-input > input {
+.navigation-top-bottom > input {
   box-sizing: border-box;
   margin-bottom: 5px;
   width: 100%;
@@ -52,7 +52,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.title-logo {
+.navigation-logo-title {
   font-family: "Roboto Condensed";
   color: white;
   display: flex;
@@ -64,11 +64,11 @@
   white-space: nowrap;
 }
 
-.title-logo > h1 {
+.navigation-logo-title > h1 {
   margin: 0;
 }
 
-.robot-icon-container {
+.robot-icon-container-mobile {
   width: 35px;
   height: 35px;
 }
@@ -93,17 +93,17 @@
 }
 
 @media screen and (min-width: 720px) and (orientation: landscape) {
-  .login-button-container {
+  .login-button-container-desktop {
     display: flex;
     gap: 20px;
   }
-  .navigation-bottom,
-  .robot-icon-container,
+  .navigation-bottom-mobile,
+  .robot-icon-container-mobile,
   .top-view-margin,
-  .icon-white {
+  .icon-white-mobile {
     display: none;
   }
-  .icon-color {
+  .icon-color-mobile {
     display: block;
   }
   .navigation-layout {
@@ -128,13 +128,13 @@
     flex-direction: column;
     align-items: center;
   }
-  .navigation-top-input {
+  .navigation-top-bottom {
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
     margin-top: 30px;
   }
-  .navigation-top-input > input {
+  .navigation-top-bottom > input {
     width: 400px;
     font-size: medium;
     height: 25px;
@@ -145,20 +145,20 @@
     display: flex;
     justify-content: space-around;
   }
-  .title-logo > h1 {
+  .navigation-logo-title > h1 {
     background-image: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(0, 0, 0, 0) 101.62%), linear-gradient(221.42deg, #3650AB 59.99%, rgba(60, 147, 174, 0.65) 104.23%);
     background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 30px;
   }
-  .title-logo {
+  .navigation-logo-title {
     flex-shrink: 2;
   }
 }
 
 @media screen and (min-width: 950px) and (orientation: landscape) {
 
-  .features {
+  .features-container{
     
   }
 
@@ -177,12 +177,12 @@
     flex-direction: row;
   }
 
-  .navigation-top-input {
+  .navigation-top-bottom {
     margin: 0px;
     flex-direction: row;
   }
 
-  .navigation-top-input > input {
+  .navigation-top-bottom > input {
     margin: 0px;
   }
 

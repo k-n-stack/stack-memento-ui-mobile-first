@@ -1,4 +1,4 @@
-.intro-footer-container {
+.introduction-paragraphs-slider-container {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -10,36 +10,29 @@
   border-radius: 20px;
 }
 
-.intro-footer-header {
-  padding: 50px 30px 0px 30px;
-  text-align: center;
-}
-
-.footer-container-remainder {
+.introduction-paragraphs-slider-remainder {
   flex-grow: 1;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
 }
 
-.intro-text > p {
+.introduction-paragraphs-text > p {
   font-size: 20px;
 }
 
-.intro-text {
+.introduction-paragraphs-text {
   text-align: center;
 }
 
 @media screen and (min-width: 360px) {
-  .intro-footer-header {
-    font-size: 30px;
-  }
-  .intro-footer-container {
+
+  .introduction-paragraphs-slider-container {
     box-sizing: border-box;
     width: auto;
     margin: 0px 10px;
   }
-  .intro-text > h3 {
+  .introduction-paragraphs-text > h3 {
     font-size: 25px;
   }
 
@@ -47,36 +40,27 @@
 
 @media screen and (min-width: 550px) {
   
-  .intro-footer-header {
-    text-align: center;
-    font-size: 40px;
-    margin: 50px 120px 0px 120px;
-  }
 
-  .intro-footer-container {
+
+  .introduction-paragraphs-slider-container {
     padding: 15px 80px 15px 80px;
     height: 250px;
     background-color: transparent;
     box-shadow: none;
   }
 
-  .intro-text {
+  .introduction-paragraphs-text {
     text-align: center;
   }
 }
 
 @media screen and (min-width: 950px) and (orientation: landscape) {
-  .intro-footer-header {
-    margin: 0px;
-    padding: 0px;
-    font-size: 30px;
-    text-align: left;
-  }
-  .intro-text {
+
+  .introduction-paragraphs-text {
     text-align: left;
   }
 
-  .intro-footer-container {
+  .introduction-paragraphs-slider-container {
     margin: 0px;
     padding: 0px;
   }

@@ -1,37 +1,36 @@
 import React from "react";
 
-import Icon from "../Components/Icon/Icon";
-import Button from "../Components/Input/Button";
+import Icon   from "Components/Icon/Icon";
+import Button from "Components/Input/Button";
 
 import "./Navigation.css";
 
 const Navigation = () => {
   return (
     <div className="navigation-layout">
+
       <div className="navigation-top">
-      
+
         <div className="navigation-top-sub">
-          <div className="title-logo">
+          <div className="navigation-logo-title">
             <div className="logo-container">
-              <div className="icon-white"><Icon icon="Mascot" /></div>
-              <div className="icon-color"><Icon icon="MascotColor" /></div>
+              <div className="icon-white-mobile"><Icon icon="Mascot" /></div>
+              <div className="icon-color-mobile"><Icon icon="MascotColor" /></div>
             </div>
             <h1>STACK-MEMENTO</h1>
           </div>
-
           {/* mobile */}
-          <div className="robot-icon-container">
+          <div className="robot-icon-container-mobile">
             <Icon icon="RobotCircle"/>
           </div>
-
           {/* desktop */}
-          <div className="login-button-container">
+          <div className="login-button-container-desktop">
             <Button buttonText="Login" icon="Login"/>
             <Button buttonText="Register" icon="Register"/>
           </div>
         </div>
 
-        <div className="navigation-top-input">
+        <div className="navigation-top-bottom">
           <input/>
           <div className="navigation-menu">
             <a>Categories</a>
@@ -43,7 +42,7 @@ const Navigation = () => {
 
       </div>
 
-      <div className="navigation-bottom">
+      <div className="navigation-bottom-mobile">
         <Icon icon="NavCircle"/>
       </div>
 

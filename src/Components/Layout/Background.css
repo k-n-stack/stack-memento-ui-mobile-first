@@ -7,7 +7,7 @@
     radial-gradient(ellipse at 150% 150%, #4c0c9f -30%, transparent 100%);
 }
 
-.sub-container {
+.background-sub-container {
   filter: blur(4px);
   position: relative;
   width: 100vw;

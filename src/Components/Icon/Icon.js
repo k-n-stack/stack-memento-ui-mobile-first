@@ -10,7 +10,8 @@ import {
   Smartphone,
   Monitor,
   MascotColor,
-} from "./Svg";
+} from "Components/Icon/Svg";
+
 
 const Icon = (props) => {
 

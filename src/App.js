@@ -1,4 +1,4 @@
-import Homepage from "./Views/Homepage";
+import Homepage from "Views/Homepage";
 
 function App() {
   return (
