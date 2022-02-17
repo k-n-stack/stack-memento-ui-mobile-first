@@ -4,9 +4,7 @@ import "./ThreadPreview.css";
 
 const ThreadPreview = () => {
   return (
-    <div className="thread-preview">
-      hello
-    </div>
+    <div className="thread-preview"></div>
   );
 };
 

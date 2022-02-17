@@ -11,7 +11,7 @@
 }
 
 .intro-footer-header {
-  padding: 0px 30px;
+  padding: 50px 30px 0px 30px;
   text-align: center;
 }
 
@@ -62,5 +62,22 @@
 
   .intro-text {
     text-align: center;
+  }
+}
+
+@media screen and (min-width: 950px) and (orientation: landscape) {
+  .intro-footer-header {
+    margin: 0px;
+    padding: 0px;
+    font-size: 30px;
+    text-align: left;
+  }
+  .intro-text {
+    text-align: left;
+  }
+
+  .intro-footer-container {
+    margin: 0px;
+    padding: 0px;
   }
 }

@@ -6,6 +6,7 @@ import Navigation from "../Modules/Navigation";
 import IntroFooterCarousel from "../Components/Layout/IntroFooterCarousel";
 import DarkSmokeLayer from "../Components/Layout/DarkSmokeLayer";
 import ThreadPreview from "../Modules/TheadPreview";
+import Icon from "../Components/Icon/Icon";
 import { 
   TechnoPack1, 
   TechnoPack2, 
@@ -14,8 +15,6 @@ import {
 } from "../Components/Icon/TechnoPack";
 
 import "./Homepage.css";
-import Icon from "../Components/Icon/Icon";
-import DarkBlueSmokeLayer from "../Components/Layout/DarkBlueSmokeLayer";
 
 import "./test.css";
 
@@ -27,13 +26,9 @@ const Homepage = () => {
       <Navigation />
 
       <div className="homepage-content">
-
         <div className="top-header-container">
-          <div className="input-edge-breakpoint">
-            <input/>
-            <div className="thread-preview-container">
-              <ThreadPreview /> 
-            </div>
+          <div className="thread-preview-container">
+            <ThreadPreview /> 
           </div>
           <div className="homepage-view-content">
             <IntroFooterCarousel />
@@ -47,9 +42,11 @@ const Homepage = () => {
           <div><h1>99</h1><p>Tags</p></div>
         </div>
 
+        <div class="dark-smoke-layer-container">
+          <DarkSmokeLayer />
+        </div>
 
         <div className="features">
-        <DarkSmokeLayer />
           <div className="features-carousel"></div>
           <div className="features-carousel-selection">
             <div><p>What is Stack-Memento ?</p></div>
@@ -62,13 +59,11 @@ const Homepage = () => {
           <h2>Covered technologies</h2>
           <p>From front to back technologis, Stack-Memento can cover as many stacks knowledge as you want.<br/><br/>By default Stack-memento have default thread about web development, but you are free to make custom thread.</p>
         </div>
-        <DarkBlueSmokeLayer />
 
         <div className="technologies-icons-container">
           <motion.div 
             className="technologies-icons" 
-            drag="x" 
-            // dragTransition={{ bounceStiffness: 2, bounceDamping: 2 }}
+            drag="x"
             dragConstraints={{ left: -500, right: 500}}
             dragElastic={0.2}
           >
