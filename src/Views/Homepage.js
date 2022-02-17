@@ -26,7 +26,7 @@ const Homepage = () => {
       <Navigation />
 
       <div className="homepage-content">
-        <div className="top-header-container">
+        <div className="introduction-section">
           <div className="thread-preview-container">
             <ThreadPreview /> 
           </div>
@@ -46,12 +46,18 @@ const Homepage = () => {
           <DarkSmokeLayer />
         </div>
 
-        <div className="features">
-          <div className="features-carousel"></div>
-          <div className="features-carousel-selection">
-            <div><p>What is Stack-Memento ?</p></div>
-            <div><p>Features and tools</p></div>
-            <div><p>Sociable bookmark manager</p></div>
+        <div class="separator-top"></div>
+
+        <div className="features-zone">
+          <div className="features-carousel-selection-desk"></div>
+
+          <div className="features">
+            <div className="features-carousel"></div>
+            <div className="features-carousel-selection">
+              <div><p>What is Stack-Memento ?</p></div>
+              <div><p>Features and tools</p></div>
+              <div><p>Sociable bookmark manager</p></div>
+            </div>
           </div>
         </div>
 
@@ -95,8 +101,6 @@ const Homepage = () => {
         <div className="footer">
           <div className="footer-content">© 2022 KHIN Nicolas</div>
         </div>
-
-        <div className="homepage-margin-bottom"></div>
 
       </div>
     </>

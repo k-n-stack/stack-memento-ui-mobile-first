@@ -1,9 +1,6 @@
 .homepage-content {
   overflow: hidden;
 }
-.homepage-margin-bottom {
-  height: 55px;
-}
 .quick-stats {
   display: flex;
   flex-wrap: wrap;
@@ -27,11 +24,12 @@
   display: flex;
   flex-direction: column;
   border-radius: 20px;
-  padding-top: 20px;
-  height: 400px;
+  /* padding-top: 20px; */
+  height: 70vh;
 }
 
 .features-carousel {
+  margin: 2%;
   flex-grow: 1;
   border-radius: 20px;
   background: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(0, 0, 0, 0) 101.62%), linear-gradient(221.42deg, #040d2f 59.99%, rgba(29, 93, 112, 0.65) 104.23%);
@@ -130,11 +128,19 @@
   color: aliceblue;
   display: flex;
   flex-direction: column-reverse;
+  margin-bottom: 55px;
 }
 
 .footer-content {
   padding: 10px;
   background-color: black;
+}
+
+.separator-top {
+  display: none;
+  border-top: rgb(15, 163, 72);
+  border-top-style: solid;
+  border-top-width: 6px;
 }
 
 @media screen and (min-width: 360px) {
@@ -158,11 +164,11 @@
   }
 
   .features {
-    height: 500px;
+    /* height: 500px; */
   }
 
   .features-carousel {
-    margin: 0px 10px;
+    /* margin: 0px 10px; */
     width: auto;
   }
 
@@ -228,10 +234,6 @@
 
 @media screen and (min-width: 550px) {
 
-  .features {
-    height: 650px;
-  }
-
   .features-carousel-selection > div {
     width: 110px;
     height: 110px;
@@ -269,6 +271,20 @@
 
 }
 
+@media screen and (orientation: landscape) {
+  .features {
+    flex-direction: row-reverse;
+  }
+  .features-carousel-selection {
+    flex-direction: column;
+  }
+}
+@media screen and (orientation: portrait) {
+  .features {
+
+  }
+}
+
 @media screen and (min-width: 570px) {
   .monitor-illustration {
     margin: 0px 150px;
@@ -288,7 +304,7 @@
   }
   .features {
     flex-direction: row-reverse;
-    padding: 20px 0px;
+    /* padding: 20px 0px; */
   }
   .features-carousel-selection {
     flex-direction: column;
@@ -304,11 +320,50 @@
     margin: 150px 80px 0px 80px;
     text-align: center;
   }
+  .quick-stats {
+    margin: 100px 100px 150px 100px;
+    background-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .quick-stats > div > h1 {
+    font-size: 28px;
+    color: rgb(173, 173, 173);
+  }
+  .quick-stats > div > p {
+    font-size: 18px;
+  }
 }
 
 @media screen and (min-width: 950px) and (orientation: landscape) {
 
-  .top-header-container {
+  .features-zone {
+    display: flex;
+
+  }
+
+  .features-carousel-selection-desk {
+    width: 300px;
+  }
+
+  .features-carousel-selection {
+    display: none;
+  }
+
+  .features {
+    flex-grow: 1;
+    margin-right: -30px;
+    margin-top: 100px;
+  }
+
+  .quick-stats > div > h1 {
+    font-size: 35px;
+  }
+
+  .separator-top {
+    display: block;
+  }
+
+  .introduction-section {
     margin-top: 40px;
     display: flex;
     padding: 0px 50px;
@@ -329,29 +384,16 @@
     padding: 30px 40px;
   }
 
-  .quick-stats {
-    margin: 200px 150px;
-    background-color: rgba(255, 255, 255, 0.25);
-  }
-
-  .quick-stats > div > h1 {
-    font-size: 40px;
-    color: rgb(173, 173, 173);
-  }
-  .quick-stats > div > p {
-    font-size: 18px;
-  }
-
 }
 
 @media screen and (min-width: 1200px) and (orientation: landscape) {
-  .top-header-container {
+  .introduction-section {
     padding: 0px 150px;
   }
 }
 
 @media screen and (min-width: 1450px) and (orientation: landscape) {
-  .top-header-container {
+  .introduction-section {
     padding: 0px 300px;
   }
   

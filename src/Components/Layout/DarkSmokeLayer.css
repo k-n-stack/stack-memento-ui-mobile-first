@@ -27,3 +27,8 @@
   }
 }
 
+@media screen and (min-width: 950px) {
+  .presentation-background-dark {
+    top: 0px;
+  }
+}

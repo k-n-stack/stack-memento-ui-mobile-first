@@ -5,7 +5,7 @@ import "./BulletNav.css";
 
 const BulletNav = (props) => {
 
-  const idleColor = props.idleColor || "rgb(200, 200, 200)";
+  const idleColor = props.idleColor || "rgba(81, 144, 204, 0.3)";
   const focusColor = props.focusColor || "rgb(81, 144, 204)";
   const pxSize = props.pxSize || "25px";
 
