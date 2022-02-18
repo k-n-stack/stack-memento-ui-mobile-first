@@ -38,10 +38,12 @@ const Homepage = () => {
         </div>      
 
         <div className="stats">
-          <div><h1>654</h1><p>Bookmarks</p></div>
-          <div><h1>45</h1><p>Users</p></div>
-          <div><h1>12</h1><p>Threads</p></div>
-          <div><h1>99</h1><p>Tags</p></div>
+          <div className="stats-container">
+            <div><h1>654</h1><p>Bookmarks</p></div>
+            <div><h1>45</h1><p>Users</p></div>
+            <div><h1>12</h1><p>Threads</p></div>
+            <div><h1>99</h1><p>Tags</p></div>
+          </div>
         </div>
 
         <>
@@ -51,7 +53,11 @@ const Homepage = () => {
         </>
 
         <div className="features">
-          <div className="features-carousel-selection-desk"></div>
+          <div className="features-carousel-selection-desk">
+            <p>What is Stack-Memento</p>
+            <p>Features and tools</p>
+            <p>Social bookmarks manager</p>
+          </div>
           <div className="features-container">
             {/* black window */}
             <div className="features-carousel">
