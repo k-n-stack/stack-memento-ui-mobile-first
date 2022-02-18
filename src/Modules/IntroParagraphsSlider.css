@@ -1,0 +1,48 @@
+.introduction-paragraphs-slider-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 220px;
+  margin: 0px 15px;
+  margin-top: 20px;
+  border-radius: 20px;
+}
+
+.introduction-paragraphs-slider-remainder {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.introduction-paragraphs-text {
+  text-align: center;
+  overflow: hidden;
+}
+
+.introduction-paragraphs-text > p {
+  font-size: 20px;
+}
+
+@media screen and (min-width: 360px) {
+  .introduction-paragraphs-text > h3 {
+    font-size: 25px;
+  }
+}
+
+@media screen and (min-width: 550px) {
+  .introduction-paragraphs-slider-container {
+    margin: 15px 80px 15px 80px;
+  }
+}
+
+@media screen and (min-width: 950px) and (orientation: landscape) {
+  .introduction-paragraphs-text {
+    text-align: left;
+  }
+
+  .introduction-paragraphs-slider-container {
+    margin: 0px;
+    padding: 0px;
+  }
+}

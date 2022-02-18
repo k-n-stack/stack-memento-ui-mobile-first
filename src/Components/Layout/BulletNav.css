@@ -1,0 +1,7 @@
+.bullet-nav-container {
+  display: flex;
+}
+
+.bullet {
+  border-radius: 100%;
+}

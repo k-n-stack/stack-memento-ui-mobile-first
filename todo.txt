@@ -1,0 +1,5 @@
+- add shadow on white boxes in mobile resolution
+- add a magnifier icon in search bar in mobile resolution
+- fix/change font size in media zone in mobile resolution
+
+- add breakpoint on high resolution mobile

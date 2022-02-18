@@ -1,0 +1,209 @@
+.login-button-container-desktop,
+.icon-color-mobile {
+  display: none;
+}
+
+.icon-white-mobile {
+  display: block;
+}
+
+.navigation-layout {
+  box-sizing: border-box;
+  position: sticky;
+  top:0;
+  width: 100%;
+  height: 100vh;
+  margin-bottom: calc(-100vh + 80px);
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.navigation-top {
+  padding: 10px 10px 0px 10px;
+  background: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(0, 0, 0, 0) 101.62%), linear-gradient(221.42deg, #3650AB 59.99%, rgba(60, 147, 174, 0.65) 104.23%);
+  box-shadow: 0px 1px 20px 3px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.navigation-top-sub {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.navigation-logo-title {
+  font-family: "Roboto Condensed";
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items:flex-end;
+  font-size: 8px;
+  width: min-content;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+.navigation-logo-title > h1 {
+  margin: 0;
+}
+
+.logo-container {
+  width: 50px;
+}
+
+.robot-icon-container-mobile {
+  width: 35px;
+  height: 35px;
+}
+
+.navigation-top-bottom {
+  margin-top: 5px;
+  width: 100%;
+}
+
+.navigation-top-bottom > input {
+  box-sizing: border-box;
+  margin-bottom: 5px;
+  width: 100%;
+  font-size: medium;
+  pointer-events: all;
+}
+
+.navigation-menu {
+  background-color: rgba(255, 255, 255, 0.7);
+  align-items: center;
+  height: 3rem;
+  border-radius: 5px;
+  display: none;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.164);
+  width: 700px;
+}
+
+.navigation-bottom-mobile {
+  display: flex;
+  justify-content: space-between;
+  height: 35px;
+  padding: 10px 10px 10px 10px;
+  background: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(0, 0, 0, 0) 101.62%), linear-gradient(221.42deg, #3650AB 59.99%, rgba(60, 147, 174, 0.65) 104.23%);
+  box-shadow: 0px -1px 20px 8px rgb(0, 0, 0);
+}
+
+@media screen and (min-width: 720px) and (orientation: landscape) {
+  .navigation-bottom-mobile,
+  .robot-icon-container-mobile,
+  .top-view-margin,
+  .icon-white-mobile {
+    display: none;
+  }
+
+  .icon-color-mobile {
+    display: block;
+  }
+
+  .login-button-container-desktop {
+    display: flex;
+    gap: 20px;
+  }
+
+  .navigation-layout {
+    display: inline-block;
+    position: relative;
+    height: fit-content;
+    margin-bottom: 0px;
+  }
+
+  .navigation-top {
+    background-color: rgba(255, 255, 255, 0.01);
+    background: none;
+    padding: 20px 160px;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .navigation-top-sub {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navigation-logo-title {
+    flex-shrink: 2;
+  }
+
+  .navigation-logo-title > h1 {
+    background-image: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(0, 0, 0, 0) 101.62%), linear-gradient(221.42deg, #3650AB 59.99%, rgba(60, 147, 174, 0.65) 104.23%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 30px;
+  }
+
+  .logo-container {
+    width: 100px;
+  }
+
+  .navigation-top-bottom {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    margin-top: 30px;
+  }
+
+  .navigation-top-bottom > input {
+    width: 400px;
+    font-size: medium;
+    height: 25px;
+    margin-top: 20px;
+  }
+
+  .navigation-menu {
+    width: 500px;
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+@media screen and (min-width: 950px) and (orientation: landscape) {
+  .navigation-layout {
+    padding: 0px 50px;
+  }
+
+  .navigation-top {
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+  }
+
+  .navigation-top-sub {
+    flex-direction: row;
+  }
+
+  .navigation-top-bottom {
+    margin: 0px;
+    flex-direction: row;
+  }
+
+  .navigation-top-bottom > input {
+    margin: 0px;
+  }
+
+  .navigation-menu {
+    margin-left: 30px;
+  }
+}
+
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .navigation-layout {
+    padding: 0px 150px;
+  }
+}
+
+@media screen and (min-width: 1450px) and (orientation: landscape) {
+  .navigation-layout {
+    padding: 0px 300px;
+  }
+}
