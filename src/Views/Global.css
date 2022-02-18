@@ -1,0 +1,76 @@
+.global-content {
+  width: 100%;
+  overflow: hidden;
+}
+
+.navigation-layout-interface {
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  margin-bottom: calc(-100vh + 80px);
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.navigation-top-interface {
+  padding: 10px;
+  background: linear-gradient(122.1deg, rgba(51, 56, 181, 0.2) 3.16%, rgba(51, 56, 181, 0) 35.47%), linear-gradient(117.65deg, rgba(173, 0, 255, 0.1) 25.47%, rgba(255, 0, 229, 0) 64.69%);
+  box-shadow: 0px 1px 20px 3px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.navigation-top-interface::after {
+  top: 0px;
+  left: 0px;
+  z-index: -100;
+  position: absolute;
+  content: "";
+  background-color: white;
+  width: 100%;
+  height: 80px;
+}
+
+.navigation-top-sub-interface {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.navigation-logo-title-interface {
+  font-family: "Roboto Condensed";
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items:flex-end;
+  font-size: 8px;
+  width: min-content;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+.navigation-logo-title-interface > h1 {
+  margin: 0;
+}
+
+.logo-container-interface {
+  width: 50px;
+}
+
+.robot-icon-container-mobile-interface {
+  width: 60px;
+  height: 60px;
+}
+
+.navigation-bottom-mobile-interface {
+  display: flex;
+  justify-content: space-between;
+  height: 35px;
+  padding: 10px 10px 10px 10px;
+  background: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(0, 0, 0, 0) 101.62%), linear-gradient(221.42deg, #3650AB 59.99%, rgba(60, 147, 174, 0.65) 104.23%);
+  box-shadow: 0px -1px 10px 2px rgba(0, 0, 0, 0.267);
+}

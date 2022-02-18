@@ -1,9 +1,12 @@
 import Homepage from "Views/Homepage";
+import Global from "Views/Global";
+
 
 function App() {
   return (
     <>
-      <Homepage />
+      <Global />
+      {/* <Homepage /> */}
     </>
   );
 }

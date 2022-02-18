@@ -13,7 +13,10 @@ const Background = () => {
         <div className="background-left"><BackgroundLeft /></div>
         <div className="background-right"><BackgroundRight /></div>
         <div className="background-top"><BackgroundTop /></div>
+        {/* CONDITIONALIZE ??? THIS */}
+        <div className="background-sub-overlay"></div>
       </div>
+
     </div>
   );
 };
