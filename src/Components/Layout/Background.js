@@ -6,15 +6,14 @@ import BackgroundTop    from "./BackgroundTop";
 
 import "./Background.css";
 
-const Background = () => {
+const Background = (props) => {
   return (
     <div className="background-container">
       <div className="background-sub-container">
         <div className="background-left"><BackgroundLeft /></div>
         <div className="background-right"><BackgroundRight /></div>
         <div className="background-top"><BackgroundTop /></div>
-        {/* CONDITIONALIZE ??? THIS */}
-        <div className="background-sub-overlay"></div>
+        {props.effect === "white" ? <div className="background-sub-overlay"></div> : null}
       </div>
 
     </div>

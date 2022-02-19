@@ -10,7 +10,7 @@ import Bookmark from "Modules/Bookmark";
 const Global = () => {
   return (
     <>
-      <Background />
+      <Background effect="white"/>
       <div className="navigation-layout-interface">
 
         <div className="navigation-top-interface">
@@ -39,6 +39,8 @@ const Global = () => {
       </div>
 
         <div className="global-content">
+          <Bookmark/>
+          <Bookmark/>
           <Bookmark/>
         </div>
     </>
