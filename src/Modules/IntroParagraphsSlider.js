@@ -6,7 +6,7 @@ import BulletNav from "Components/Layout/BulletNav";
 
 import "./IntroParagraphsSlider.css";
 
-import fakeData from "Components/Ressources/Static/fakeData.json";
+import fakeData from "Ressources/Static/fakeData.json";
 
 const IntroParagraphsSlider = () => {
   

@@ -1,0 +1,27 @@
+.thread {
+  display: flex;
+  background-color: rgba(49, 87, 11, 0.705);
+  /* width: fit-content; */
+  width: 500px;
+}
+
+.thread-vertical-line-container {
+  background-color: rgba(127, 255, 212, 0.555);
+  position: relative;
+  /* height: 700px; */
+  flex-shrink: 0;
+}
+
+.thread-vertical-line-container > * {
+  position: absolute;
+}
+
+.thread-bookmarks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+
+  margin-left: -50px;
+  margin-top: 300px;
+}

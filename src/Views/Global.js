@@ -2,28 +2,30 @@ import Background from "Components/Layout/Background";
 import React from "react";
 
 import Icon from "Components/Icon/Icon";
+import Thread from "Modules/Thread";
 
 import "./Global.css";
-
+import fake from "Ressources/Static/fakeData.json";
 import Bookmark from "Modules/Bookmark";
 
 const Global = () => {
+
+  const _thread = fake.thread;
+
   return (
     <>
       <Background effect="white"/>
       <div className="navigation-layout-interface">
 
         <div className="navigation-top-interface">
-          <div className="navigation-top-sub-interface">
-            <div className="navigation-logo-title-interface">
-              <div className="logo-container-interface">
-                <div className="icon-white-mobile-interface"><Icon icon="Planet" iconColor="#3650AB"/></div>
-              </div>
-              <h1>Global</h1>
+          <div className="navigation-top-interface-left-container">
+            <div className="navigation-top-interface-planet-container">
+              <Icon icon="Planet" iconColor="#3650AB"/>
             </div>
-            <div className="robot-icon-container-mobile-interface">
-              <Icon icon="RobotCircle" iconColor="#3650AB"/>
-            </div>
+            <h1>Global</h1>
+          </div>
+          <div className="navigation-top-interface-right-container">
+            <Icon icon="RobotCircle" iconColor="#3650AB"/>
           </div>
         </div>
 
@@ -39,9 +41,7 @@ const Global = () => {
       </div>
 
         <div className="global-content">
-          <Bookmark/>
-          <Bookmark/>
-          <Bookmark/>
+          <Thread bookmarks={_thread.bookmarks} threadColor={_thread.color}/>
         </div>
     </>
   );
