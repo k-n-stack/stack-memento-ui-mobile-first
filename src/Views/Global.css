@@ -43,7 +43,7 @@
 
 .navigation-logo-title-interface {
   font-family: "Roboto Condensed";
-  color: white;
+  color: #3650AB;
   display: flex;
   justify-content: flex-start;
   align-items:flex-end;
@@ -54,11 +54,8 @@
 }
 
 .navigation-logo-title-interface > h1 {
-  margin: 0;
-}
-
-.logo-container-interface {
-  width: 50px;
+  font-size: x-large;
+  font-weight: bolder
 }
 
 .robot-icon-container-mobile-interface {
@@ -66,9 +63,15 @@
   height: 60px;
 }
 
+.left-panel-icon {
+  width: 35px;
+  height: 35px;
+  pointer-events: all;
+}
+
 .navigation-bottom-mobile-interface {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   height: 35px;
   padding: 10px 10px 10px 10px;
   background: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(0, 0, 0, 0) 101.62%), linear-gradient(221.42deg, #3650AB 59.99%, rgba(60, 147, 174, 0.65) 104.23%);

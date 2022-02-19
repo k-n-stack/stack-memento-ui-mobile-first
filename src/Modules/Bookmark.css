@@ -1,0 +1,20 @@
+.bookmark {
+  position: relative;
+  width: 1000px;
+  height: 1000px;
+}
+
+.pigtail {
+  position: absolute;
+  background-color: rgb(60, 0, 255);
+  width: 140px;
+  height: 140px;
+}
+
+.bookmark-container {
+  position: absolute;
+  left: 140px;
+  background-color: brown;
+  width: 500px;
+  height: 200px;
+}
