@@ -15,6 +15,7 @@ const Global = () => {
   const _thread = fake.thread;
   const [toggleLeftPanel, setToggleLeftPanel] = useState(false);
   const [toggleRightPanel, setToggleRightPanel] = useState(false);
+  const [overflowable, setOverflowable] = useState(true);
 
   const variants = {
     viewContainer: {
@@ -66,8 +67,10 @@ const Global = () => {
       case !toggleRightPanel && !toggleLeftPanel:
         if (direction === "Left") {
           setToggleRightPanel(true);
+          setOverflowable(false);
         } else if (direction === "Right") {
           setToggleLeftPanel(true);
+          setOverflowable(false);
         }
         break;
       default:
@@ -77,12 +80,17 @@ const Global = () => {
 
   return (
     <div className="global"
-      style={{ overflow: toggleLeftPanel || toggleRightPanel ? "hidden" : "visible"}}
+      style={{ overflow: overflowable ? "visible" : "hidden"}}
     >
       <motion.div 
         variants={variants.viewContainer}
         initial={variants.viewContainer.idle}
         animate={toggleLeftPanel ? "swipeRight" : toggleRightPanel ? "swipeLeft" : "idle"}
+        onAnimationComplete={(animation) => {
+          if (animation === "idle") {
+            setOverflowable(true);
+          }
+        }}
       >
 
       <>
