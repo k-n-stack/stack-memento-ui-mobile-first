@@ -12,6 +12,11 @@ import {
   MascotColor,
   Planet,
   ArrowLeftCircle,
+  Threads,
+  Pinned,
+  Friends,
+  Groups,
+  Global,
 } from "Components/Icon/Svg";
 
 
@@ -29,6 +34,11 @@ const Icon = (props) => {
     MascotColor: MascotColor,
     Planet: Planet,
     ArrowLeftCircle: ArrowLeftCircle,
+    Threads: Threads,
+    Pinned: Pinned,
+    Friends: Friends,
+    Groups: Groups,
+    Global: Global,
   }
 
   const getSvg = (svgName) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import Bookmark from "./Bookmark";
 
@@ -11,18 +11,26 @@ const Thread = (props) => {
 
   const threadColor = props.threadColor || "#555555";
   const threadStrokeWidth = props.threadStrokeWidth || 12;
-  const threadLineHeight = props.threadLineHeight || 200; /* dot height + line height */
-
   const dotRadius = props.dotRadius || 50;
-  const diameter = dotRadius * 2;
+  const dotDiameter = dotRadius * 2;
+  const bookmarksTop = props.bookmarksTop || dotDiameter * 3;
+  const nameGap = props.nameGap || 10;
+  const nameSize = props.nameSize || 30;
+  const nameColor = props.nameColor || "#555555"
+  const menuTop = props.menuTop || 100;
+  const bottomExtraLine = props.bottomExtraLine || 30;
+  const bottomDropLength = props.bottomDropLength || 25;
+  const bottomDropGap = props.bottomDropGap || 35;
 
+  const lineBottomY = threadHeight - threadStrokeWidth / 2 + bottomExtraLine;
+  const lineTotalHeight = threadHeight + bottomExtraLine + bottomDropLength * 2 + bottomDropGap * 2;
 
   const getBookmarks = (bookmarks) => {
-    return bookmarks.map((value, index) => {
+    return bookmarks.map((value) => {
       return (
         <Bookmark 
           title={value.title} 
-          pigtailColor="#CCCCCC"
+          pigtailColor={threadColor}
           pigtailStrokeWidth={threadStrokeWidth}
           setThreadHeight={getThreadHeight}
           parentRef={threadRef}
@@ -35,39 +43,81 @@ const Thread = (props) => {
     setThreadHeight(height);
   }
 
-  useEffect(() => {
-    console.log('Thread', threadHeight);
-  });
-
   return (
     <div className="thread" ref={threadRef}>
 
       <div 
         className="thread-vertical-line-container"
         style={{
-          width: `${diameter}px`,
+          width: `${dotDiameter}px`,
         }}
       >
-        <svg 
-          width={`${diameter}px`}
-          height={`${diameter}px`}
-          viewBox={`0 0 ${diameter} ${diameter}`}
-          xmlns="http://www.w3.org/2000/svg"
+        <div className="thread-dot-name">
+          <svg 
+            width={`${dotDiameter}px`}
+            height={`${dotDiameter}px`}
+            viewBox={`0 0 ${dotDiameter} ${dotDiameter}`}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle 
+              cx={dotRadius} 
+              cy={dotRadius} 
+              r={dotRadius} 
+              fill={threadColor}
+            />
+          </svg>
+          <div 
+            className="thread-name-container"
+            style={{
+              height: dotDiameter,
+            }}
+          >
+            <h1 
+              className="thread-name"
+              style={{
+                marginLeft: nameGap,
+                fontSize: `${nameSize}px`,
+                color: nameColor,
+              }}
+            >
+              {props.title || "Error: No thread name"}
+            </h1>
+          </div>
+        </div>
+
+        <div 
+          className="thread-menu-container"
+          style={{
+            left: dotDiameter,
+            top: menuTop,
+          }}
         >
-          <circle cx={dotRadius} cy={dotRadius} r={dotRadius} fill=/*{threadColor}*/"#CCCCCC"/>
-        </svg>
+          <p>Menu placeholder: add a link, expend all, collapse all, quick search...</p>
+        </div>
 
         <svg 
-          width={`${diameter}px`}
-          height={`${threadHeight}px`} 
-          viewBox={`0 0 ${diameter} ${threadHeight}`}
+          width={`${dotDiameter}px`}
+          height={`${lineTotalHeight}px`}
+          viewBox={`0 0 ${dotDiameter} ${lineTotalHeight}`}
           fill="none" 
           xmlns="http://www.w3.org/2000/svg"
         >
           <path 
-            d={`M${dotRadius} ${dotRadius} L${dotRadius} ${threadHeight - threadStrokeWidth / 2}`}
+            d={`M${dotRadius} ${dotRadius} L${dotRadius} ${lineBottomY}`}
             stroke={threadColor} 
             strokeWidth={threadStrokeWidth} 
+            strokeLinecap="round"
+          />
+          <path
+            d={`M${dotRadius} ${lineBottomY + bottomDropGap} L${dotRadius} ${lineBottomY + bottomDropGap + bottomDropLength}`}
+            stroke={threadColor}
+            strokeWidth={threadStrokeWidth}
+            strokeLinecap="round"
+          />
+          <path
+            d={`M${dotRadius} ${lineBottomY + bottomDropGap * 2 + bottomDropLength} L${dotRadius} ${lineBottomY + bottomDropGap * 2 + bottomDropLength * 2}`}
+            stroke={threadColor}
+            strokeWidth={threadStrokeWidth}
             strokeLinecap="round"
           />
         </svg>
@@ -76,7 +126,8 @@ const Thread = (props) => {
       <div 
         className="thread-bookmarks-container"
         style={{
-          marginLeft: `-${dotRadius + threadStrokeWidth / 2}px`
+          marginLeft: `-${dotRadius + threadStrokeWidth / 2}px`,
+          marginTop: `${bookmarksTop}px`,
         }}
       >
         {getBookmarks(props.bookmarks)}

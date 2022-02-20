@@ -1,14 +1,12 @@
 .thread {
+  /* background-color: rgba(49, 87, 11, 0.705); */
   display: flex;
-  background-color: rgba(49, 87, 11, 0.705);
-  /* width: fit-content; */
-  width: 500px;
+  width: fit-content;
 }
 
 .thread-vertical-line-container {
-  background-color: rgba(127, 255, 212, 0.555);
+  /* background-color: rgba(127, 255, 212, 0.555); */
   position: relative;
-  /* height: 700px; */
   flex-shrink: 0;
 }
 
@@ -20,8 +18,31 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
 
+.thread-dot-name {
+  display: flex;
+  align-items: center;
+}
 
-  margin-left: -50px;
-  margin-top: 300px;
+.thread-name-container {
+  /* background-color: rgba(0, 0, 255, 0.322); */
+  display: flex;
+  align-items: center;;
+}
+
+.thread-name {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  align-self: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.thread-menu-container {
+  position: absolute;
+  top: 100px;
+  background-color: rgba(206, 13, 13, 0.26);
+  width: 400px;
+  height: 100px;
 }

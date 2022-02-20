@@ -95,7 +95,7 @@ const Homepage = () => {
 
         <div className="medias">
           <div className="smartphone">
-            <div className="smartphone-illustration"><Icon icon="Smartphone" /></div>
+            <div className="smartphone-illustration"><Icon icon="Smartphone"/></div>
             <div className="smartphone-text">
               <h3>Mobile App comming soon !</h3>
               <p>With memento take away, just get your centralized favorite links everywhere with your smartphone.<br/><br/>(Application still in development state)</p>
