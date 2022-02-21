@@ -1,0 +1,22 @@
+.test {
+  width: 100vw;
+  height: 100vh;
+  background-color: blueviolet;
+}
+
+.div1 {
+  width: fit-content;
+  background-color: aqua;
+  transform: translate(100px, 1000px);
+}
+
+.div2 {
+  width: fit-content;
+  background-color: burlywood;
+  transition: transform 0.5s;
+}
+
+
+.testclass {
+  transform: translate(200px, 500px);
+}

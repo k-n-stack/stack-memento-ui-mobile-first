@@ -26,6 +26,7 @@
 .background-right,
 .background-top {
   position: absolute;
+  /* background-color: aqua; */
 }
 
 @media screen and (orientation: landscape) {
