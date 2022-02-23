@@ -6,10 +6,6 @@
   
 }
 
-.global-container {
-  zoom: 0.5;
-}
-
 .global-underlay-background {
   position: fixed;
   width: 100%;
@@ -28,7 +24,6 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-  /* zoom: 0.5; */
 }
 
 .navigation-layout-interface {
