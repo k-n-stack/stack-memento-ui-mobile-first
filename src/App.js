@@ -11,8 +11,8 @@ import DivBackgroundRight from "Components/Layout/DivBackgroundRight";
 function App() {
   return (
     <>
-      {/* <Global /> */}
-      <Homepage />
+      <Global />
+      {/* <Homepage /> */}
       {/* <div style={{width: "250px"}}><BackgroundTop /></div>
       <div style={{width: "250px", height: "250px"}}><DivBackgroundTop /></div>
       <div style={{width: "250px"}}><BackgroundLeft /></div>

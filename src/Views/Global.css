@@ -1,16 +1,34 @@
 .global {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(255, 0, 0, 0.2) 56.46%), linear-gradient(152.38deg, #3650AB 50.76%, rgba(60, 147, 174, 0.97) 94.26%);
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  position: relative;
+  
 }
 
-.global > div {
+.global-container {
+  zoom: 0.5;
+}
+
+.global-underlay-background {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+}
+
+.global-container-background {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(ellipse at -400% -400%, #3261cf 50%, transparent), radial-gradient(ellipse at 150% 150%, #4c0c9f -30%, white 100%);
+  z-index: -1;
 }
 
 .global-content {
   width: 100%;
   overflow: hidden;
+  position: relative;
+  /* zoom: 0.5; */
 }
 
 .navigation-layout-interface {
@@ -21,7 +39,6 @@
   height: 100vh;
   margin-bottom: calc(-100vh + 80px); /* DELTA TOP */
   z-index: 10;
-  /* pointer-events: none; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
