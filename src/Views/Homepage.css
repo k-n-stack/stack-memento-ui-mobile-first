@@ -121,9 +121,22 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  /* overflow: hidden; */
+  overflow-y: visible;
   gap: 40px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 2.15%, rgba(39, 39, 39, 0.52) 15.83%, rgba(0, 0, 0, 0.8) 27.06%), radial-gradient(146.92% 39.04% at 50% -6.55%, rgba(255, 0, 0, 0) 48.66%, rgba(0, 56, 255, 0.584) 100%);
+}
+
+.medias::before {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: -150px;
+  width: 100%;
+  height: calc(100% + 150px);
+  background: 
+  linear-gradient(180deg, rgba(0, 0, 0, 0) 2.15%, rgba(39, 39, 39, 0.52) 15.83%, rgba(0, 0, 0, 0.8) 27.06%),
+  radial-gradient(146.92% 39.04% at 50% -6.55%, rgba(255, 0, 0, 0) 48.66%, rgba(0, 25, 114, 0.584) 100%);
+
 }
 
 .smartphone {
@@ -338,6 +351,11 @@
     margin-top: 0px;
   }
 
+  .medias::before {
+    top: -200px;
+    height: calc(100% + 200px)
+  }
+
   .smartphone-illustration {
     width: 250px;
     margin-left: -100px;
@@ -390,6 +408,7 @@
 }
 
 @media screen and (min-width: 550px) {
+
   .introduction-header {
     font-size: 40px;
     margin: 0px 120px;
@@ -411,6 +430,11 @@
     margin: 150px 0px 0px 0px;
     width: 400px;
     text-align: center;
+  }
+
+  .medias::before {
+    top: -250px;
+    height: calc(100% + 250px)
   }
 
   .smartphone-illustration {
@@ -457,6 +481,11 @@
     width: 600px;
   }
 
+  .medias::before {
+    top: -300px;
+    height: calc(100% + 300px)
+  }
+
   @media (orientation: landscape) {
     .stats-container {
       margin: 100px 100px 150px 100px;
@@ -488,6 +517,11 @@
 
   .medias {
     align-items: center;
+  }
+
+  .medias::before {
+    top: -350px;
+    height: calc(100% + 350px)
   }
 
   .smartphone {
@@ -580,6 +614,11 @@
 @media screen and (min-width: 1200px) and (orientation: landscape) {
   .introduction {
     padding: 0px 150px;
+  }
+
+  .medias::before {
+    top: -400px;
+    height: calc(100% + 400px)
   }
 
   .smartphone {

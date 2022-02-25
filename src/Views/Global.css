@@ -1,0 +1,104 @@
+.global {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  
+}
+
+.global-underlay-background {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+}
+
+.global-container-background {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(ellipse at -400% -400%, #3261cf 50%, transparent), radial-gradient(ellipse at 150% 150%, #4c0c9f -30%, white 100%);
+  z-index: -1;
+}
+
+.global-content {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.navigation-layout-interface {
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  margin-bottom: calc(-100vh + 80px); /* DELTA TOP */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.navigation-top-interface {
+  background: linear-gradient(122.1deg, rgba(51, 56, 181, 0.2) 3.16%, rgba(51, 56, 181, 0) 35.47%), linear-gradient(117.65deg, rgba(173, 0, 255, 0.1) 25.47%, rgba(255, 0, 229, 0) 64.69%);
+  box-shadow: 0px 1px 20px 3px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  box-sizing: border-box;
+  height: 80px; /* DELTA TOP */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 10px;
+}
+
+.navigation-top-interface::after {
+  top: 0px;
+  left: 0px;
+  z-index: -100;
+  position: absolute;
+  content: "";
+  background-color: white;
+  width: 100%;
+  height: 80px; /* DELTA TOP */
+}
+
+.navigation-top-interface-right-container {
+  width: 55px;
+  height: 55px;
+}
+
+.navigation-top-interface-right-container > img {
+  border-radius: 100%;
+}
+
+.navigation-top-interface-left-container {
+  display: flex;
+  align-items: flex-end;
+}
+
+.navigation-top-interface-left-container > h1 {
+  padding: 0px;
+  margin: 0px;
+  color: #3650AB;
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.navigation-top-interface-planet-container {
+  width: 60px;
+  margin-right: 5px ;
+}
+
+.navigation-bottom-mobile-interface {
+  display: flex;
+  justify-content: space-between;
+  height: 35px;
+  padding: 10px 10px 10px 10px;
+  background: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(0, 0, 0, 0) 101.62%), linear-gradient(221.42deg, #3650AB 59.99%, rgba(60, 147, 174, 0.65) 104.23%);
+  box-shadow: 0px -1px 10px 2px rgba(0, 0, 0, 0.267);
+}
+
+.navigation-bottom-mobile-interface > * {
+  width: 35px;
+  height: 35px;
+}

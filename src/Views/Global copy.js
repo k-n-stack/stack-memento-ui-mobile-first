@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import Background from "Components/Layout/Background";
+import React, { useEffect, useRef, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import { motion } from "framer-motion";
 
@@ -14,8 +15,10 @@ const Global = () => {
   const _thread = fake.thread;
   const [toggleLeftPanel, setToggleLeftPanel] = useState(false);
   const [toggleRightPanel, setToggleRightPanel] = useState(false);
-  const [panelOn, setPanelOn] = useState(true);
-  const [scrollTop, setScrollTop] = useState(0);
+  const [overflowable, setOverflowable] = useState(true);
+  const [test, setTest] = useState(0);
+
+  const testRef = useRef(null);
 
   const variants = {
     viewContainer: {
@@ -54,28 +57,27 @@ const Global = () => {
 
   const handleSwipeAnimation = (direction) => {
 
-    console.log("scrollTop", document.documentElement.scrollTop);
-    
+    setTest(document.documentElement.scrollTop);
+    console.log(test);
+
     switch (true) {
       case toggleLeftPanel:
         if (direction === "Left") {
           setToggleLeftPanel(false);
         }
         break;
-        case toggleRightPanel: 
+      case toggleRightPanel: 
         if (direction === "Right") {
           setToggleRightPanel(false);
         }
         break;
       case !toggleRightPanel && !toggleLeftPanel:
-        console.log('here');
-        setScrollTop(document.documentElement.scrollTop);
         if (direction === "Left") {
           setToggleRightPanel(true);
-          setPanelOn(false);
+          setOverflowable(false);
         } else if (direction === "Right") {
           setToggleLeftPanel(true);
-          setPanelOn(false);
+          setOverflowable(false);
         }
         break;
       default:
@@ -85,14 +87,13 @@ const Global = () => {
 
   return (
     <div className="global"
-      style={{ 
-        overflow: panelOn ? "visible" : "hidden",
-      }}
+      style={{ overflow: overflowable ? "visible" : "hidden"}}
+      ref={testRef}
     >
       <div 
         className="global-underlay-background"
         style={{
-          background: panelOn ? 
+          background: overflowable ? 
             "radial-gradient(ellipse at -400% -400%, #3261cf 50%, transparent), radial-gradient(ellipse at 150% 150%, #4c0c9f -30%, white 100%)" :
             "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(255, 0, 0, 0.2) 56.46%), linear-gradient(152.38deg, #3650AB 50.76%, rgba(60, 147, 174, 0.97) 94.26%)"
         }}
@@ -105,19 +106,17 @@ const Global = () => {
         animate={toggleLeftPanel ? "swipeRight" : toggleRightPanel ? "swipeLeft" : "idle"}
         onAnimationComplete={(animation) => {
           if (animation === "idle") {
-            setPanelOn(true);
-            window.scrollTo (0, scrollTop);
+            setOverflowable(true);
+            window.scrollTo (0, 300);
           }
         }}
-        style={{ 
-          overflow: panelOn ? "visible" : "hidden" 
-        }}
+        style={{ overflow: overflowable ? "visible" : "hidden" }}
       >
 
         <div 
           className="global-container-background"
           style={{
-            display: panelOn ? "none" : "block"
+            display: overflowable ? "none" : "block"
           }}
         />
 
@@ -160,7 +159,8 @@ const Global = () => {
         <div 
           className="global-content"
           style={{
-            transform: panelOn ? "translate(0px, 0px)" : `translate(0px, -${scrollTop}px)`,
+            // ICI !!!!!!!!!!!!!!!
+            top: overflowable ? "0px" : `-${document.documentElement.scrollTop}px`,
           }}
         >
           <Thread 

@@ -1,0 +1,25 @@
+.bookmark {
+  /* background-color: brown; */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
+.pigtail {
+  position: absolute;
+}
+
+.bookmark-container {
+  box-sizing: border-box;
+  align-self: flex-end;
+  border-radius: 10px;
+  background-color: rgba(127, 255, 212, 0.534);
+}
+
+.bookmark-title {
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

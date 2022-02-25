@@ -1,19 +1,21 @@
 import React from "react";
 
-import BackgroundLeft   from "./BackgroundLeft";
-import BackgroundRight  from "./BackgroundRight";
-import BackgroundTop    from "./BackgroundTop";
+import DivBackgroundLeft   from "./BackgroundLeft";
+import DivBackgroundRight  from "./BackgroundRight";
+import DivBackgroundTop    from "./BackgroundTop";
 
 import "./Background.css";
 
-const Background = () => {
+const Background = (props) => {
   return (
     <div className="background-container">
       <div className="background-sub-container">
-        <div className="background-left"><BackgroundLeft /></div>
-        <div className="background-right"><BackgroundRight /></div>
-        <div className="background-top"><BackgroundTop /></div>
+        <div className="background-left"><DivBackgroundLeft /></div>
+        <div className="background-right"><DivBackgroundRight /></div>
+        <div className="background-top"><DivBackgroundTop /></div>
+        {props.effect === "white" ? <div className="background-sub-overlay"></div> : null}
       </div>
+
     </div>
   );
 };
