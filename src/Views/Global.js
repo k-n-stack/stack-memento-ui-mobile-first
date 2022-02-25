@@ -169,16 +169,13 @@ const Global = () => {
             title={_thread.name}
             nameColor={_thread.color}
           />
-          <p>hello</p><p>hello</p><p>hello</p>
-          <p>hello</p><p>hello</p><p>hello</p>
-          <p>hello</p><p>hello</p><p>hello</p>
-          <p>hello</p><p>hello</p><p>hello</p>
-          <p>hello</p><p>hello</p><p>hello</p>
-          <p>hello</p><p>hello</p><p>hello</p>
-          <p>hello</p><p>hello</p><p>hello</p>
-          <p>hello</p><p>hello</p><p>hello</p>
-          <p>hello</p><p>hello</p><p>hello</p>
-          <p>hello</p><p>hello</p><p>hello</p>
+
+          <Thread 
+            bookmarks={_thread.bookmarks} 
+            threadColor={_thread.color}
+            title={_thread.name}
+            nameColor={_thread.color}
+          />
         </div>
 
       </motion.div>

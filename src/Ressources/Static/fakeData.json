@@ -29,5 +29,15 @@
         "title": "How to destroy $_SESSION variable"
       }
     ]
+  },
+
+  "singleBookmarkThread": {
+    "name": "JavaScript",
+    "color": "#0075FF",
+    "bookmarks": [
+      {
+        "title": "What is JavaScript?"
+      }
+    ]
   }
 }
