@@ -1,9 +1,9 @@
 .bookmark {
-  /* background-color: brown; */
   position: relative;
   display: flex;
   flex-direction: column;
   height: fit-content;
+  box-sizing: border-box;
 }
 
 .pigtail {
@@ -14,11 +14,12 @@
   box-sizing: border-box;
   align-self: flex-end;
   border-radius: 10px;
-  background-color: rgba(127, 255, 212, 0.534);
+  background-color: rgba(255, 255, 255, 0.979);
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .bookmark-title {
-  font-size: 18px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -11,8 +11,9 @@ const Bookmark = (props) => {
   const pigtailHeight = props.pigtailHeight || 100;
   const pigtailStrokeWidth = props.pigtailStrokeWidth || 8;
 
-  const bookmarkWidth = props.bookmarkWidth || 400; // WITH pigtail
+  const bookmarkTitleSize = props.bookmarkTitleSize || 18;
   const bookmarkAnchorTop = props.bookmarkAnchorTop || 20;
+  const compactBookmark = props.compactBookmark || false;
 
   const title = props.title || "Error: No title provided";
   const _testUrl = "http://www.stack-memento.com/";
@@ -24,9 +25,6 @@ const Bookmark = (props) => {
   return (
     <div 
       className="bookmark"
-      style={{
-        width: `${bookmarkWidth}px`,
-      }}
     >
 
       <div 
@@ -61,7 +59,16 @@ const Bookmark = (props) => {
         }}
         onClick={() => setShowUrl(!showUrl)}
       >
-        <h1 className="bookmark-title">{title}</h1>
+        <h1 
+          className="bookmark-title"
+          style={{
+            fontSize: `${bookmarkTitleSize}px`,
+            marginTop: compactBookmark === false ? "" : "6px",
+            marginBottom: compactBookmark === false ? "" : "6px",
+          }}
+        >
+          {title}
+        </h1>
         {showUrl && <h2 className="bookmark-url">{_testUrl}</h2>}
       </div>
 

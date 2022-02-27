@@ -1,11 +1,9 @@
 .thread {
-  /* background-color: rgba(49, 87, 11, 0.705); */
   display: flex;
-  width: fit-content;
+  /* background-color: blueviolet; */
 }
 
 .thread-vertical-line-container {
-  /* background-color: rgba(127, 255, 212, 0.555); */
   position: relative;
   flex-shrink: 0;
 }
@@ -15,9 +13,11 @@
 }
 
 .thread-bookmarks-container {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 8px;
+  overflow-x: hidden;
 }
 
 .thread-dot-name {
@@ -26,7 +26,6 @@
 }
 
 .thread-name-container {
-  /* background-color: rgba(0, 0, 255, 0.322); */
   display: flex;
   align-items: center;;
 }
