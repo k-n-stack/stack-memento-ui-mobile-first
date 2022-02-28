@@ -45,9 +45,27 @@ const InterfaceLayout = (props) => {
     navContainer: {
       expand: {
         width: 250,
+        transition: {
+          width: {
+            type: "linear",
+          },
+        }
       },
       collapse: {
-        width: "auto",
+        width: "55px",
+        transition: {
+          width: {
+            type: "linear",
+          },
+        }
+      },
+    },
+    arrowIcon: {
+      expand: {
+        transform: "rotate(180deg)",
+      },
+      collapse: {
+        transform: "rotate(0deg)",
       },
     }
   }
@@ -147,16 +165,19 @@ const InterfaceLayout = (props) => {
             className="navigation-bottom-mobile-interface"
             initial={variants.navContainer.collapse}
             variants={variants.navContainer}
-            animate={expandNav ? 'expand' : 'collapse'}
+            animate={expandNav ? "expand" : "collapse"}
           >
-            <div 
+            <motion.div 
               className="navigation-arrow-icon-container"
               onClick={() => {
                 setExpandNav(!expandNav);
               }}
+              initial={variants.arrowIcon.collapse}
+              variants={variants.arrowIcon}
+              animate={expandNav ? "expand" : "collapse"}
             >
               <Icon icon="ArrowLeftCircle" iconColor="#FFFFFF"/>
-            </div>
+            </motion.div>
             <div onClick={() => alert("clicked")}>
               <Icon icon="Global" iconColor="#96B9DA"/>
             </div>

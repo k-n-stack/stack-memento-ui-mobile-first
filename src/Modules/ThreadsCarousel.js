@@ -32,6 +32,7 @@ const ThreadCarousel = (props) => {
     return threads.map((value, index) => {
       return (
         <motion.div
+          className="thread-group-element"
           style={{opacity: 0.4}}
           animate={{opacity: index === selectedThread - 1 ? 1 : 0.4}}
         >
