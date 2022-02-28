@@ -11,6 +11,7 @@ const InterfaceLayout = (props) => {
 
   const [toggleLeftPanel, setToggleLeftPanel] = useState(false);
   const [toggleRightPanel, setToggleRightPanel] = useState(false);
+  const [expandNav, setExpandNav] = useState(false);
   const [panelOn, setPanelOn] = useState(true);
   const [scrollTop, setScrollTop] = useState(0);
 
@@ -40,6 +41,14 @@ const InterfaceLayout = (props) => {
           y: { type: "linear" },
         }
       }
+    },
+    navContainer: {
+      expand: {
+        width: 250,
+      },
+      collapse: {
+        width: "auto",
+      },
     }
   }
 
@@ -134,7 +143,20 @@ const InterfaceLayout = (props) => {
             </div>
           </div>
 
-          <div className="navigation-bottom-mobile-interface">
+          <motion.div 
+            className="navigation-bottom-mobile-interface"
+            initial={variants.navContainer.collapse}
+            variants={variants.navContainer}
+            animate={expandNav ? 'expand' : 'collapse'}
+          >
+            <div 
+              className="navigation-arrow-icon-container"
+              onClick={() => {
+                setExpandNav(!expandNav);
+              }}
+            >
+              <Icon icon="ArrowLeftCircle" iconColor="#FFFFFF"/>
+            </div>
             <div onClick={() => alert("clicked")}>
               <Icon icon="Global" iconColor="#96B9DA"/>
             </div>
@@ -150,7 +172,7 @@ const InterfaceLayout = (props) => {
             <div>
               <Icon icon="Groups" iconColor="#FFFFFF"/>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         <div 

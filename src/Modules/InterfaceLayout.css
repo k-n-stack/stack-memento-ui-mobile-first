@@ -1,3 +1,7 @@
+.navigation-arrow-icon-container {
+  display: none;
+}
+
 .interface-layout {
   width: 100%;
   height: 100vh;
@@ -104,4 +108,38 @@
 .navigation-bottom-mobile-interface > * {
   width: 35px;
   height: 35px;
+}
+
+@media screen and (orientation: landscape) {
+  .navigation-arrow-icon-container {
+    display: block;
+    margin-bottom: 100px;
+  }
+
+  .interface-layout-content {
+    margin-left: 55px;
+    width: calc(100% - 55px);
+    overflow: hidden;
+    position: relative;
+    min-height: calc(100vh - 80px); /* DELTA TOP */
+  }
+
+  .navigation-layout-interface {
+    flex-direction: row-reverse;
+  }
+
+  .navigation-bottom-mobile-interface {
+    position: absolute;
+    left: 0px;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: start;
+    height: 100vh;
+    padding: 10px 10px 0px 10px;
+  }
+
+  .navigation-top-interface {
+    flex-grow: 1;
+    margin-left: 55px;
+  }
 }
