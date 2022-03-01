@@ -17,6 +17,7 @@ import {
   Friends,
   Groups,
   Global,
+  Plus,
 } from "Components/Icon/Svg";
 
 
@@ -39,6 +40,7 @@ const Icon = (props) => {
     Friends: Friends,
     Groups: Groups,
     Global: Global,
+    Plus: Plus,
   }
 
   const getSvg = (svgName) => {

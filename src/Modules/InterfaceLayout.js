@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSwipeable } from "react-swipeable";
 import { motion } from "framer-motion";
 
@@ -12,8 +12,17 @@ const InterfaceLayout = (props) => {
   const [toggleLeftPanel, setToggleLeftPanel] = useState(false);
   const [toggleRightPanel, setToggleRightPanel] = useState(false);
   const [expandNav, setExpandNav] = useState(false);
+  const [isPortrait, setIsPortrait] = useState(window.matchMedia('(orientation: portrait)').matches);
   const [panelOn, setPanelOn] = useState(true);
   const [scrollTop, setScrollTop] = useState(0);
+
+  const editionRef = useRef(null);
+  const subPanelRef = useRef(null);
+
+  const hasSubPanel = props.hasSubPanel === undefined ? false : true;
+
+  const [test, setTest] = useState(0);
+  const [test2, setTest2] = useState(0);
 
   const variants = {
     viewContainer: {
@@ -59,6 +68,14 @@ const InterfaceLayout = (props) => {
           },
         }
       },
+      noAnimation: {
+        width: "auto",
+        transition: {
+          width: {
+            duration: 0,
+          }
+        }
+      }
     },
     arrowIcon: {
       expand: {
@@ -103,10 +120,25 @@ const InterfaceLayout = (props) => {
     }
   }
 
+  useEffect(() => {
+
+    setTest(editionRef.current ? editionRef.current.clientWidth : 0);
+    setTest2(subPanelRef.current ? subPanelRef.current.clientWidth : 0);
+
+    window.matchMedia("(orientation: portrait)").addEventListener("change", (event) => {
+      setIsPortrait(event.matches);
+    });
+    window.addEventListener("resize", () => {
+      setTest(editionRef.current ? editionRef.current.clientWidth : 0);
+      setTest2(subPanelRef.current ? subPanelRef.current.clientWidth : 0);
+    });
+  }, []);
+
   return (
     <div className="interface-layout"
       style={{ 
         overflow: panelOn ? "visible" : "hidden",
+        overflow: panelOn ? (isPortrait ? "visible" : (hasSubPanel ? "hidden" : "visible")) : "hidden",
       }}
     >
       <div 
@@ -141,17 +173,34 @@ const InterfaceLayout = (props) => {
           }}
         />
 
-        <div className="navigation-layout-interface">
-          <div className="navigation-top-interface">
-            <div className="navigation-top-interface-left-container">
-              <div className="navigation-top-interface-planet-container">
-                <Icon icon="Planet" iconColor="#3650AB"/>
+        <div 
+          className="navigation-layout-interface"
+          style={{
+            marginBottom: `calc(-100vh + ${isPortrait ? "80px" : (hasSubPanel ? "50px" : "90px")})`
+          }}
+        >
+          <div className="navigation-top-interface"
+            style={{
+              marginLeft: isPortrait ? "" : (hasSubPanel ? "0px" : "55px"), 
+              flexGrow: isPortrait ? "" : (hasSubPanel ? 0 : 1),
+              height: isPortrait ? "80px" : (hasSubPanel ? "100vh" : "90px"),
+              width: isPortrait || !hasSubPanel ? "auto" : "450px",
+              flexDirection: hasSubPanel ? "column" : "row",
+              
+            }}
+          >
+            <div className="navigation-top-interface-white-background" />
+            {
+              !hasSubPanel &&
+              <div className="navigation-top-interface-left-container">
+                <div className="navigation-top-interface-planet-container">
+                  <Icon icon="Planet" iconColor="#3650AB"/>
+                </div>
+                <h1>Global</h1>
               </div>
-              <h1>Global</h1>
-            </div>
-            <div 
-              className="navigation-top-interface-right-container"
-              onClick={() => alert("clicked")}
+            }
+            <div className="navigation-top-interface-right-container"
+              onClick={() => {console.log(test)}}
             >
               <img 
                 src={avatar}
@@ -161,11 +210,46 @@ const InterfaceLayout = (props) => {
             </div>
           </div>
 
+
+
+          {
+            hasSubPanel && !isPortrait &&
+            <>
+              <div className="edition-panel" ref={editionRef}>
+                <div>
+                  <div className="edition-panel-icon-container">
+                    <Icon icon="Plus" iconColor="#3650AB" />
+                  </div>
+                  <p>New thread</p>
+                </div>
+                <div>
+                  <div className="edition-panel-icon-container">
+                    <Icon icon="Plus" iconColor="#3650AB" />
+                  </div>
+                  <p>Add bookmark</p>
+                </div>
+                <div>
+                  <div className="edition-panel-icon-container">
+                    <Icon icon="Plus" iconColor="#3650AB" />
+                  </div>
+                  <p>Import/Export</p>
+                </div>
+              </div>
+
+
+              <div className="interface-sub-panel" ref={subPanelRef}>
+                hello
+              </div>
+            </>
+          }
+
+
+
           <motion.div 
             className="navigation-bottom-mobile-interface"
-            initial={variants.navContainer.collapse}
+            initial={isPortrait ? variants.navContainer.noAnimation : variants.navContainer.collapse}
             variants={variants.navContainer}
-            animate={expandNav ? "expand" : "collapse"}
+            animate={isPortrait ? "noAnimation" : expandNav ? "expand" : "collapse"}
           >
             <motion.div 
               className="navigation-arrow-icon-container"
@@ -200,10 +284,16 @@ const InterfaceLayout = (props) => {
           className="interface-layout-content"
           style={{
             transform: panelOn ? "translate(0px, 0px)" : `translate(0px, -${scrollTop}px)`,
+            marginLeft: isPortrait ? "" : (hasSubPanel ? `${test2 + 55}px` : "55px"),
+            width: isPortrait ? "100%" : (hasSubPanel ? `${test + 80}px` : "calc(100% - 55px)"),
+            minHeight: `calc(100vh - ${isPortrait ? "80px" : (hasSubPanel ? "50px" : "90px")})`,
+            overflowY: isPortrait || !hasSubPanel ? "hidden" : "scroll",
+            height: hasSubPanel ? "calc(100vh - 50px)" : "auto",
+            padding: isPortrait || !hasSubPanel ? "" : "20px 40px 0px 50px",
           }}
           {...swipeHandlers}
         >
-          {props.children}          
+          {props.children}
         </div>
 
       </motion.div>

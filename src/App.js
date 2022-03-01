@@ -1,5 +1,6 @@
 import Homepage from "Views/Homepage";
 import Global from "Views/Global";
+import MyThreads from "Views/MyThreads";
 import BackgroundLeft from "Components/Layout/BackgroundLeft";
 import BackgroundRight from "Components/Layout/BackgroundRight";
 import BackgroundTop from "Components/Layout/BackgroundTop";
@@ -11,7 +12,8 @@ import DivBackgroundRight from "Components/Layout/DivBackgroundRight";
 function App() {
   return (
     <>
-      <Global />
+      <MyThreads /> 
+      {/* <Global /> */}
       {/* <Homepage /> */}
       {/* <div style={{width: "250px"}}><BackgroundTop /></div>
       <div style={{width: "250px", height: "250px"}}><DivBackgroundTop /></div>

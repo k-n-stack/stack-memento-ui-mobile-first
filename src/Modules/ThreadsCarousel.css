@@ -27,7 +27,7 @@
 }
 
 @media screen and (orientation: landscape) {
-  /* .thread-group-element {
+  .thread-group-element {
     opacity: 1 !important;
   }
 
@@ -39,5 +39,5 @@
     flex-wrap: wrap;
     transform: translate(0px) !important;
     margin-bottom: 170px;
-  } */
+  }
 }
