@@ -6,7 +6,10 @@ import "./Button.css";
 
 const Button = (props) => {
   return (
-    <button className={`blue-button homepage-button-size ${props.className || ''}`}>
+    <button 
+      className={`blue-button homepage-button-size ${props.className || ''}`}
+      onClick={props.onClick}
+    >
       {props.icon !== undefined ? <div className="button-icon-container"><Icon icon={props.icon}/></div> : null}
       <p>{props.buttonText}</p>
     </button>
