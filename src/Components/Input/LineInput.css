@@ -6,7 +6,6 @@
   background-color: transparent;
   border-style: none;
   border-bottom-style: solid;
-  border-bottom-color: #3650AB;
   border-bottom-width: 1px;
   width: 100%;
   line-height: 1.5rem;
@@ -14,10 +13,6 @@
   padding-left: 1.75rem;
   padding-right: 1.45rem;
   box-sizing: border-box;
-}
-
-.line-input[value=""] {
-  background-color: aqua;
 }
 
 .line-input-icon-container {

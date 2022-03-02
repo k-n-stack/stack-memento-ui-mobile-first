@@ -22,6 +22,7 @@ import {
   ChevronCircle,
   ExitCircle,
   CogCircle,
+  Sort,
 } from "Components/Icon/Svg";
 
 
@@ -49,6 +50,7 @@ const Icon = (props) => {
     ChevronCircle: ChevronCircle,
     ExitCircle: ExitCircle,
     CogCircle: CogCircle,
+    Sort: Sort,
   }
 
   const getSvg = (svgName) => {

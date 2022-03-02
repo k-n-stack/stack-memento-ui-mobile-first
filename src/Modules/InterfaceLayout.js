@@ -216,7 +216,7 @@ const InterfaceLayout = (props) => {
                 {
                   !isPortrait &&
                   <>
-                    <LineInput />
+                    <LineInput inputColor="#3650AB"/>
                     <div className="navigation-top-interface-search-advanced">
                       <div className="navigation-top-interface-search-advanced-icon">
                         <Icon icon="ChevronCircle" iconColor="#3650AB"/>
@@ -294,7 +294,38 @@ const InterfaceLayout = (props) => {
 
 
               <div className="interface-sub-panel" ref={subPanelRef}>
-                hello
+                <div className="interface-sub-panel-header">
+                  <div className="interface-sub-panel-icon">
+                    <Icon icon="Threads" iconColor="white"/>
+                  </div>
+                  <h1>My Threads</h1>
+                </div>
+                <div className="interface-sub-panel-settings">
+                  <div className="interface-sub-panel-search">
+                    <LineInput inputColor="#FFFFFF"/>
+                  </div>
+                  <div className="interface-sub-panel-sort">
+                    <div>Bookmarks (Desc)</div>
+                    <div className="interface-sub-panel-sort-icon">
+                      <Icon icon="Sort" iconColor="white"/>
+                    </div>
+                  </div>
+                </div>
+                <div className="interface-sub-panel-content">
+                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
+                  {/* <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
+                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
+                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
+                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
+                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
+                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
+                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
+                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
+                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
+                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p> */}
+                </div>
+                <div className="interface-sub-panel-footer">
+                </div>
               </div>
             </>
           }

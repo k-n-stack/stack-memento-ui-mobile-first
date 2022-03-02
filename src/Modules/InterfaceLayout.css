@@ -44,6 +44,7 @@
 
 .navigation-top-interface {
   position: relative; /*********************/
+  flex-shrink: 0;
 
   background: linear-gradient(122.1deg, rgba(51, 56, 181, 0.2) 3.16%, rgba(51, 56, 181, 0) 35.47%), linear-gradient(117.65deg, rgba(173, 0, 255, 0.1) 25.47%, rgba(255, 0, 229, 0) 64.69%);
   box-shadow: 0px 1px 20px 3px rgba(0, 0, 0, 0.5);
@@ -190,10 +191,66 @@
   }
 
   .interface-sub-panel {
+    pointer-events: all;
+    height: 100vh;
+    justify-content: space-between;
+
+
     margin-left: 55px; /*DYNAMIC*/
     width: 325px;
     flex-shrink: 1;
     background: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(0, 0, 0, 0) 101.62%), linear-gradient(221.42deg, #3650AB 59.99%, rgba(60, 147, 174, 0.65) 104.23%);
+    display: flex;
+    flex-direction: column;
+    color: white;
+  }
+
+  .interface-sub-panel-header {
+    background-color: aquamarine;
+    padding: 15px 0px 15px 15px;
+    display: flex;
+    align-items: center;
+  }
+
+  .interface-sub-panel-content {
+    background-color: #4c0c9f;
+    min-height: 0;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .interface-sub-panel-footer {
+    background-color: chartreuse;
+    height: 60px;
+    flex-shrink: 0;
+    /* flex-grow: 1; */
+  }
+
+  .interface-sub-panel-search {
+    margin-bottom: 40px;
+  }
+
+  .interface-sub-panel-sort {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .interface-sub-panel-sort-icon {
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+  }
+
+  .interface-sub-panel-header > h1 {
+    font-size: x-large;
+  }
+
+  .interface-sub-panel-icon {
+    width: 55px;
+    height: 55px;
+    margin-right: 10px;
   }
 
   .edition-panel {
