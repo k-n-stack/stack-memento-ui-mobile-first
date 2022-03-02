@@ -69,17 +69,48 @@
 }
 
 .navigation-top-interface-right-container {
+  display: flex;
+  align-items: center;
+}
+
+.navigation-top-interface-search {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 10px;
+}
+
+.navigation-top-interface-magnifier {
+  width: 24px;
+  height: 24px;
+}
+
+.navigation-top-interface-avatar > img {
+  border-radius: 100%;
   width: 55px;
   height: 55px;
 }
 
-.navigation-top-interface-right-container > img {
-  border-radius: 100%;
+.navigation-top-interface-avatar {
+  position: relative;
+  z-index: 1;
+}
+
+.user-panel {
+  z-index: -1;
+  position: absolute;
+  background-color: #3650AB;
+
+  width: 100vw;
+  height: 80px;
+  right: -10px;
+  top: -10px;
+  border-radius: 0px;
 }
 
 .navigation-top-interface-left-container {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .navigation-top-interface-left-container > h1 {
@@ -87,12 +118,30 @@
   margin: 0px;
   color: #3650AB;
   font-weight: 700;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .navigation-top-interface-planet-container {
-  width: 60px;
+  width: 35px;
   margin-right: 5px ;
+}
+
+.navigation-top-interface-search-advanced {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #3650AB;
+}
+
+.navigation-top-interface-search-advanced > p {
+  margin: 0px;
+}
+
+.navigation-top-interface-search-advanced-icon {
+  height: 20px;
+  width: 20px;
+  margin-right: 5px;
 }
 
 .navigation-bottom-mobile-interface {
@@ -181,5 +230,52 @@
     min-height: 26px;
     width: 26px;
     height: 26px;
+  }
+
+  .user-panel {
+    box-sizing: border-box;
+    width: 350px;
+    height: 70px;
+    right: -5px;
+    top: -5px;
+    border-radius: 5px;
+    padding: 5px 70px 5px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    font-size: large;
+    font-weight: bold;
+    color: white;
+  }
+
+  .user-panel > p {
+    flex-grow: 1;
+    margin: 0px;
+  }
+
+  .user-panel > p > span {
+    font-size: x-large;
+    font-weight: 300;
+  }
+
+  .user-panel-options {
+    user-select: none;
+    justify-content: flex-end;
+    width: 100%;
+    font-size: medium;
+    display: flex;
+    gap: 20px;
+  }
+
+  .user-panel-options > div {
+    display: flex;
+    align-items: center;
+  }
+
+  .user-panel-icon-container {
+    height: 23px;
+    width: 23px;
+    margin-right: 3px;
   }
 }

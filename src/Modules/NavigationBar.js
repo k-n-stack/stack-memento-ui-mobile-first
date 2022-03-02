@@ -1,11 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setView } from "Store/Features/Navigation/navigationSlice";
 
 import Icon   from "Components/Icon/Icon";
 import Button from "Components/Input/Button";
 
-import "./Navigation.css";
+import "./NavigationBar.css";
 
-const Navigation = () => {
+const NavigationBar = () => {
+
+  const dispatch = useDispatch();
+
   return (
     <div className="navigation-layout">
 
@@ -25,8 +30,20 @@ const Navigation = () => {
           </div>
           {/* desktop */}
           <div className="login-button-container-desktop">
-            <Button buttonText="Login" icon="Login"/>
-            <Button buttonText="Register" icon="Register"/>
+            <Button 
+              buttonText="Login" 
+              icon="Login"
+              onClick={() => {
+                dispatch(setView("login"));
+              }}
+            />
+            <Button 
+              buttonText="Register" 
+              icon="Register"
+              onClick={() => {
+                dispatch(setView("register"));
+              }}
+            />
           </div>
         </div>
 
@@ -50,4 +67,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default NavigationBar;

@@ -18,6 +18,10 @@ import {
   Groups,
   Global,
   Plus,
+  Cross,
+  ChevronCircle,
+  ExitCircle,
+  CogCircle,
 } from "Components/Icon/Svg";
 
 
@@ -41,6 +45,10 @@ const Icon = (props) => {
     Groups: Groups,
     Global: Global,
     Plus: Plus,
+    Cross: Cross,
+    ChevronCircle: ChevronCircle,
+    ExitCircle: ExitCircle,
+    CogCircle: CogCircle,
   }
 
   const getSvg = (svgName) => {

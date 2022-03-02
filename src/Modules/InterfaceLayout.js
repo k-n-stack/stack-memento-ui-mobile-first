@@ -1,16 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSwipeable } from "react-swipeable";
 import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { setView, setIsLogin } from "Store/Features/Navigation/navigationSlice";
 
 import Icon from "Components/Icon/Icon";
 
 import "./InterfaceLayout.css";
 import avatar from "Ressources/Images/Avatars/john_doe.png";
+import LineInput from "Components/Input/LineInput";
 
 const InterfaceLayout = (props) => {
 
   const [toggleLeftPanel, setToggleLeftPanel] = useState(false);
   const [toggleRightPanel, setToggleRightPanel] = useState(false);
+  const [toggleUserPanel, setToggleUserPanel] = useState(false);
   const [expandNav, setExpandNav] = useState(false);
   const [isPortrait, setIsPortrait] = useState(window.matchMedia('(orientation: portrait)').matches);
   const [panelOn, setPanelOn] = useState(true);
@@ -19,10 +23,14 @@ const InterfaceLayout = (props) => {
   const editionRef = useRef(null);
   const subPanelRef = useRef(null);
 
-  const hasSubPanel = props.hasSubPanel === undefined ? false : true;
+  const dispatch = useDispatch();
+  const selectedView = useSelector((state) => (state.navigation.view));
 
-  const [test, setTest] = useState(0);
-  const [test2, setTest2] = useState(0);
+  const hasSubPanel = props.hasSubPanel === undefined ? false : true;
+  const pageName = props.pageName || "Page Name";
+
+  const [contentWidth, setContentWidth] = useState(0);
+  const [contentMarginLeft, setContentMarginLeft] = useState(0);
 
   const variants = {
     viewContainer: {
@@ -121,18 +129,17 @@ const InterfaceLayout = (props) => {
   }
 
   useEffect(() => {
-
-    setTest(editionRef.current ? editionRef.current.clientWidth : 0);
-    setTest2(subPanelRef.current ? subPanelRef.current.clientWidth : 0);
+    setContentWidth(editionRef.current ? editionRef.current.clientWidth : 0);
+    setContentMarginLeft(subPanelRef.current ? subPanelRef.current.clientWidth : 0);
 
     window.matchMedia("(orientation: portrait)").addEventListener("change", (event) => {
       setIsPortrait(event.matches);
     });
     window.addEventListener("resize", () => {
-      setTest(editionRef.current ? editionRef.current.clientWidth : 0);
-      setTest2(subPanelRef.current ? subPanelRef.current.clientWidth : 0);
+      setContentWidth(editionRef.current ? editionRef.current.clientWidth : 0);
+      setContentMarginLeft(subPanelRef.current ? subPanelRef.current.clientWidth : 0);
     });
-  }, []);
+  });
 
   return (
     <div className="interface-layout"
@@ -183,35 +190,84 @@ const InterfaceLayout = (props) => {
             style={{
               marginLeft: isPortrait ? "" : (hasSubPanel ? "0px" : "55px"), 
               flexGrow: isPortrait ? "" : (hasSubPanel ? 0 : 1),
-              height: isPortrait ? "80px" : (hasSubPanel ? "100vh" : "90px"),
+              height: isPortrait ? "80px" : (hasSubPanel ? "100vh" : "80px"),
               width: isPortrait || !hasSubPanel ? "auto" : "450px",
-              flexDirection: hasSubPanel ? "column" : "row",
-              
+              flexDirection: hasSubPanel && !isPortrait ? "column" : "row",
             }}
           >
             <div className="navigation-top-interface-white-background" />
             {
-              !hasSubPanel &&
+              (!hasSubPanel || isPortrait) &&
               <div className="navigation-top-interface-left-container">
                 <div className="navigation-top-interface-planet-container">
-                  <Icon icon="Planet" iconColor="#3650AB"/>
+                  <Icon icon={props.iconName} iconColor="#3650AB"/>
                 </div>
-                <h1>Global</h1>
+                <h1>{pageName}</h1>
               </div>
             }
-            <div className="navigation-top-interface-right-container"
-              onClick={() => {console.log(test)}}
-            >
-              <img 
-                src={avatar}
-                width="100%"
-                height="100%"
-              />
+            <div className="navigation-top-interface-right-container">
+              <div className="navigation-top-interface-search">
+                {
+                  isPortrait &&
+                  <div className="navigation-top-interface-magnifier">
+                    <Icon icon="Magnifier" iconColor="#3650AB" />
+                  </div>
+                }
+                {
+                  !isPortrait &&
+                  <>
+                    <LineInput />
+                    <div className="navigation-top-interface-search-advanced">
+                      <div className="navigation-top-interface-search-advanced-icon">
+                        <Icon icon="ChevronCircle" iconColor="#3650AB"/>
+                      </div>
+                      <p>Open advanced search panel</p>
+                    </div>
+                  </>
+                }
+              </div>
+              <div className="navigation-top-interface-avatar">
+                <img 
+                  src={avatar}
+                  width="100%"
+                  height="100%"
+                  onClick={() => {
+                    setToggleUserPanel(!toggleUserPanel);
+                  }}
+                />
+                {
+                  toggleUserPanel &&
+                  <div className="user-panel">
+                    <p>John Doe : <span>230 Bookmarks</span></p>
+                    <div className="user-panel-options">
+                      <div>
+                        <div className="user-panel-icon-container">
+                          <Icon icon="Friends" iconColor="white"/>
+                        </div>
+                        <div>Profile</div>
+                      </div>
+                      <div>
+                        <div className="user-panel-icon-container">
+                          <Icon icon="CogCircle" iconColor="white"/>
+                        </div>
+                        <div>Settings</div>
+                      </div>
+                      <div 
+                        onClick={() => {
+                          dispatch(setIsLogin(false));
+                        }}
+                      >
+                        <div className="user-panel-icon-container">
+                          <Icon icon="ExitCircle" iconColor="white"/>
+                        </div>
+                        <div>Logout</div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
             </div>
           </div>
-
-
-
           {
             hasSubPanel && !isPortrait &&
             <>
@@ -242,9 +298,6 @@ const InterfaceLayout = (props) => {
               </div>
             </>
           }
-
-
-
           <motion.div 
             className="navigation-bottom-mobile-interface"
             initial={isPortrait ? variants.navContainer.noAnimation : variants.navContainer.collapse}
@@ -262,20 +315,20 @@ const InterfaceLayout = (props) => {
             >
               <Icon icon="ArrowLeftCircle" iconColor="#FFFFFF"/>
             </motion.div>
-            <div onClick={() => alert("clicked")}>
-              <Icon icon="Global" iconColor="#96B9DA"/>
+            <div onClick={() => { dispatch(setView("global")); }}>
+              <Icon icon="Global" iconColor={selectedView === "global" ? "#96B9DA" : "#FFFFFF"}/>
             </div>
-            <div>
-              <Icon icon="Pinned" iconColor="#FFFFFF"/>
+            <div onClick={() => { dispatch(setView("pinnedThreads")) }}>
+              <Icon icon="Pinned" iconColor={selectedView === "pinnedThreads" ? "#96B9DA" : "#FFFFFF"}/>
             </div>
-            <div>
-              <Icon icon="Threads" iconColor="#FFFFFF"/>
+            <div onClick={() => { dispatch(setView("myThreads")) }}>
+              <Icon icon="Threads" iconColor={selectedView === "myThreads" ? "#96B9DA" : "#FFFFFF"}/>
             </div>
-            <div>
-              <Icon icon="Friends" iconColor="#FFFFFF"/>
+            <div onClick={() => { dispatch(setView("fellows")) }}>
+              <Icon icon="Friends" iconColor={selectedView === "fellows" ? "#96B9DA" : "#FFFFFF"}/>
             </div>
-            <div>
-              <Icon icon="Groups" iconColor="#FFFFFF"/>
+            <div onClick={() => { dispatch(setView("groups")) }}>
+              <Icon icon="Groups" iconColor={selectedView === "groups" ? "#96B9DA" : "#FFFFFF"}/>
             </div>
           </motion.div>
         </div>
@@ -284,8 +337,8 @@ const InterfaceLayout = (props) => {
           className="interface-layout-content"
           style={{
             transform: panelOn ? "translate(0px, 0px)" : `translate(0px, -${scrollTop}px)`,
-            marginLeft: isPortrait ? "" : (hasSubPanel ? `${test2 + 55}px` : "55px"),
-            width: isPortrait ? "100%" : (hasSubPanel ? `${test + 80}px` : "calc(100% - 55px)"),
+            marginLeft: isPortrait ? "" : (hasSubPanel ? `${contentMarginLeft + 55}px` : "55px"),
+            width: isPortrait ? "100%" : (hasSubPanel ? `${contentWidth + 80}px` : "calc(100% - 55px)"),
             minHeight: `calc(100vh - ${isPortrait ? "80px" : (hasSubPanel ? "50px" : "90px")})`,
             overflowY: isPortrait || !hasSubPanel ? "hidden" : "scroll",
             height: hasSubPanel ? "calc(100vh - 50px)" : "auto",

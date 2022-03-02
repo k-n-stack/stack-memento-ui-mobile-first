@@ -43,7 +43,7 @@ const Global = () => {
   };
 
   return (
-    <InterfaceLayout>
+    <>
       <div className="last-commented">
         <h1>Last commented</h1>
         <div className="last-commented-threads-container">
@@ -69,7 +69,7 @@ const Global = () => {
         <h1>Top viewed</h1>
         <ThreadCarousel threads={_topViewed} />
       </div>
-    </InterfaceLayout>
+    </>
   );
 };
 

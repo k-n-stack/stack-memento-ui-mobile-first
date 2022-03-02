@@ -9,7 +9,7 @@ import {
 } from "Components/Icon/TechnoPack";
 import Background             from "Components/Layout/Background";
 import Icon                   from "Components/Icon/Icon";
-import Navigation             from "Modules/Navigation";
+import NavigationBar          from "Modules/NavigationBar";
 import IntroParagraphsSlider  from "Modules/IntroParagraphsSlider";
 import ThreadPreview          from "Modules/TheadPreview";
 import FeaturesCarousel       from "Modules/FeaturesCarousel";
@@ -22,7 +22,7 @@ const Homepage = () => {
     <>
 
       <Background />
-      <Navigation />
+      <NavigationBar />
 
       <div className="homepage-content">
 
