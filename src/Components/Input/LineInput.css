@@ -1,18 +1,23 @@
 .line-input-container {
   position: relative;
+  pointer-events: all;
+}
+
+.line-input-container > input {
+  /* color: white; */
 }
 
 .line-input {
   background-color: transparent;
   border-style: none;
   border-bottom-style: solid;
-  border-bottom-color: #3650AB;
+  border-bottom-color: blue;
   border-bottom-width: 1px;
   width: 100%;
   line-height: 1.5rem;
   font-size: 15px;
-  padding-left: 1.75rem;
-  padding-right: 1.45rem;
+  /* padding-left: 1.75rem;
+  padding-right: 1.45rem; */
   box-sizing: border-box;
 }
 

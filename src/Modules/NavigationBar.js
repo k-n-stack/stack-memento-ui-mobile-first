@@ -4,6 +4,7 @@ import { setView } from "Store/Features/Navigation/navigationSlice";
 
 import Icon   from "Components/Icon/Icon";
 import Button from "Components/Input/Button";
+import LineInput from "Components/Input/LineInput";
 
 import "./NavigationBar.css";
 
@@ -22,10 +23,15 @@ const NavigationBar = () => {
               <div className="icon-white-mobile"><Icon icon="Mascot" iconColor="white"/></div>
               <div className="icon-color-mobile"><Icon icon="MascotColor"/></div>
             </div>
-            <h1>STACK-MEMENTO</h1>
+            <h1>Title</h1>
           </div>
           {/* mobile */}
-          <div className="robot-icon-container-mobile">
+          <div 
+            className="robot-icon-container-mobile"
+            onClick={() => {
+              dispatch(setView("login"));
+            }}
+          >
             <Icon icon="RobotCircle" iconColor="white"/>
           </div>
           {/* desktop */}
@@ -48,7 +54,9 @@ const NavigationBar = () => {
         </div>
 
         <div className="navigation-top-bottom">
-          <input/>
+          <div className="navigation-top-bottom-input-container">
+            <LineInput inputColor="#FFFFFF"/>
+          </div>
           <div className="navigation-menu">
             <a>Categories</a>
             <a>About</a>

@@ -1,0 +1,30 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-header-container {
+    /* background-color: blueviolet; */
+    margin-top: 200px;
+    margin-bottom: 50px;
+}
+
+.login-header-container > h1 {
+    font-size: 30px;
+}
+
+.login-form {
+    box-sizing: border-box;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    margin-bottom: 100px;
+    padding: 0px 30px;
+}
+
+.login-form > label {
+    text-align: end;
+    margin-right: 10px;
+}

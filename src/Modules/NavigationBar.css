@@ -32,6 +32,7 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-bottom: 15px;
 }
 
 .navigation-logo-title {
@@ -57,6 +58,7 @@
 .robot-icon-container-mobile {
   width: 35px;
   height: 35px;
+  pointer-events: all;
 }
 
 .navigation-top-bottom {
@@ -70,6 +72,10 @@
   width: 100%;
   font-size: medium;
   pointer-events: all;
+}
+
+.navigation-top-bottom-input-container {
+  margin-bottom: 10px;
 }
 
 .navigation-menu {

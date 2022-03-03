@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 
 import "./LineInput.css";
 
-const LineInput = () => {
+const LineInput = (props) => {
 
   const [value, setValue] = useState("");
   const inputRef = useRef();
@@ -18,9 +18,13 @@ const LineInput = () => {
         }}
         ref={inputRef}
       />
-      <div className="line-input-icon-container">
-        <Icon icon="Magnifier" iconColor="#3650AB"/>
-      </div>
+      
+      {
+        props.hasIcon &&
+        <div className="line-input-icon-container">
+          <Icon icon="Magnifier" iconColor="black"/>
+        </div>
+      }
       <div 
         className="line-input-clear-container"
         onClick={() => {
@@ -28,7 +32,10 @@ const LineInput = () => {
           inputRef.current.value = "";
         }}
       >
-        <Icon icon="Cross" iconColor={`rgba(54, 80, 171, ${value ? "1" : "0.3"})`}/>
+        {
+          props.hasIcon &&
+          <Icon icon="Cross" iconColor={`rgba(0, 0, 0, ${value ? "1" : "0.3"})`}/>
+        }
       </div>
     </div>
   );

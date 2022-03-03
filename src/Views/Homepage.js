@@ -32,8 +32,8 @@ const Homepage = () => {
             <ThreadPreview /> 
           </div>
           <div className="introduction-container">
-            <h2 className="introduction-header">Stack-Memento is a graphical bookmarks manager</h2>
-            <IntroParagraphsSlider />
+            {/* <h2 className="introduction-header">Stack-Memento is a graphical bookmarks manager</h2> */}
+            {/* <IntroParagraphsSlider /> */}
           </div>
         </div>      
 
