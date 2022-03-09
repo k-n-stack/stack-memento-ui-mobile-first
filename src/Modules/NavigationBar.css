@@ -32,6 +32,7 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-bottom: 15px;
 }
 
 .navigation-logo-title {
@@ -57,11 +58,16 @@
 .robot-icon-container-mobile {
   width: 35px;
   height: 35px;
+  pointer-events: all;
 }
 
 .navigation-top-bottom {
   margin-top: 5px;
   width: 100%;
+}
+
+.navigation-top-bottom-input-container {
+  margin-bottom: 10px;
 }
 
 .navigation-top-bottom > input {
@@ -164,6 +170,11 @@
     display: flex;
     justify-content: space-around;
   }
+  
+  .line-input-container {
+    margin-top: 20px;
+  }
+
 }
 
 @media screen and (min-width: 950px) and (orientation: landscape) {
@@ -194,6 +205,11 @@
   .navigation-menu {
     margin-left: 30px;
   }
+
+  .line-input-container {
+    margin-top: auto;
+  }
+
 }
 
 @media screen and (min-width: 1200px) and (orientation: landscape) {

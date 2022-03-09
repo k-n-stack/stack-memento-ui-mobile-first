@@ -1,5 +1,6 @@
 .line-input-container {
   position: relative;
+  pointer-events: all;
 }
 
 .line-input {
@@ -10,18 +11,16 @@
   width: 100%;
   line-height: 1.5rem;
   font-size: 15px;
-  padding-left: 1.75rem;
-  padding-right: 1.45rem;
   box-sizing: border-box;
 }
 
 .line-input-icon-container {
   /* z-index: -1; */
   position: absolute;
-  top: 0px;
+  bottom: 4px;
   left: 0px;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .line-input-clear-container {

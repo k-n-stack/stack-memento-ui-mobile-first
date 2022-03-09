@@ -313,16 +313,8 @@ const InterfaceLayout = (props) => {
                 </div>
                 <div className="interface-sub-panel-content">
                   <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-                  {/* <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
                   <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p> */}
+
                 </div>
                 <div className="interface-sub-panel-footer">
                 </div>
