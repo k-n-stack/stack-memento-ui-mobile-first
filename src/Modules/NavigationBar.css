@@ -171,8 +171,9 @@
     justify-content: space-around;
   }
   
-  .line-input-container {
+  .navigation-top-bottom-input-container {
     margin-top: 20px;
+    width: 350px;
   }
 
 }
@@ -195,19 +196,18 @@
 
   .navigation-top-bottom {
     margin: 0px;
-    flex-direction: row;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
   }
 
   .navigation-top-bottom > input {
     margin: 0px;
   }
 
-  .navigation-menu {
-    margin-left: 30px;
-  }
-
-  .line-input-container {
-    margin-top: auto;
+  .navigation-top-bottom-input-container {
+    box-sizing: border-box;
+    margin: 0px 0px 0px 30px;
   }
 
 }

@@ -23,6 +23,9 @@ import {
   ExitCircle,
   CogCircle,
   Sort,
+  SortCircle,
+  CloseSortCircle,
+  CrossCircle,
 } from "Components/Icon/Svg";
 
 
@@ -51,6 +54,9 @@ const Icon = (props) => {
     ExitCircle: ExitCircle,
     CogCircle: CogCircle,
     Sort: Sort,
+    SortCircle: SortCircle,
+    CloseSortCircle: CloseSortCircle,
+    CrossCircle: CrossCircle,
   }
 
   const getSvg = (svgName) => {

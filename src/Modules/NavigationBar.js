@@ -15,13 +15,25 @@ const NavigationBar = () => {
   const [isMinWidth, setIsMinWidth] = useState(window.matchMedia("(min-width: 720px)").matches);
 
   useEffect(() => {
-    window.matchMedia("(orientation: portrait)").addEventListener("change", (event) => {
-      setIsPortrait(event.matches);
-    });
-    window.matchMedia("(min-width: 720px)").addEventListener("change", (event) => {
-      setIsMinWidth(event.matches);
-    });
+    const mediaOrientation = window.matchMedia("(orientation: portrait)");
+    const mediaWidth = window.matchMedia("(min-width: 720px)");
+
+    mediaOrientation.addEventListener("change", checkOrientation);
+    mediaWidth.addEventListener("change", handleResize);
+    
+    return () => {
+      mediaOrientation.removeEventListener("change", checkOrientation);
+      mediaWidth.removeEventListener("change", handleResize);
+    }
   });
+
+  const checkOrientation = (event) => {
+    setIsPortrait(event.matches);
+  };
+
+  const handleResize = (event) => {
+    setIsMinWidth(event.matches);
+  }
 
   return (
     <div className="navigation-layout">

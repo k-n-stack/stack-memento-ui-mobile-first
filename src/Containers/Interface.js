@@ -9,6 +9,7 @@ import MyThreads from "Views/MyThreads";
 import PinnedThreads from "Views/PinnedThreads";
 import Fellows from "Views/Fellows";
 import Groups from "Views/Groups";
+import UserPanel from "Modules/UserPanel";
 
 const Interface = () => {
 
@@ -60,13 +61,16 @@ const Interface = () => {
   };
 
   return (
-    <InterfaceLayout 
-      hasSubPanel={hasSubPanel(view)}
-      pageName={getPageName(view)}
-      iconName={getIconName(view)}
-    >
-      {viewPage(view)}
-    </InterfaceLayout>
+    <>
+      <UserPanel/>
+      <InterfaceLayout 
+        hasSubPanel={hasSubPanel(view)}
+        pageName={getPageName(view)}
+        iconName={getIconName(view)}
+      >
+        {viewPage(view)}
+      </InterfaceLayout>
+    </>
   );
 }
 

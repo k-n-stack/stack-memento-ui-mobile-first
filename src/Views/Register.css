@@ -1,0 +1,125 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+.register-header-container {
+  /* background-color: blueviolet; */
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.register-header-container > h1 {
+  font-size: 30px;
+}
+
+.register-form-inputs {
+  box-sizing: border-box;
+  /* width: 100%; */
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  margin-bottom: 40px;
+  gap: 10px;
+}
+
+.register-form {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.register-form-inputs > label {
+  text-align: end;
+}
+
+.register-title-container {
+  margin-top: 50px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-logo-title-container {
+  background-image: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(0, 0, 0, 0) 101.62%), linear-gradient(221.42deg, #3650AB 59.99%, rgba(60, 147, 174, 0.65) 104.23%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 20px;
+}
+
+.register-form-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.register-bottom-container {
+  margin-top: 50px;
+  /* background-color: aqua; */
+  flex-grow: 1;
+  width: calc(100vw - 60px);
+}
+
+.register-bottom-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.register-bottom-link {
+  background-color: rgba(255, 255, 255, 0.877);
+  width: fit-content;
+  height: fit-content;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.register-bottom-link > p {
+  margin: 0px;
+}
+
+.register-bottom-link > a {
+  color: #3650AB;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.remember-option-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.remember-option-container > p {
+  margin: 0px
+}
+
+.terms-link {
+  font-weight: bold;
+  color: #3650AB;
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 550px) {
+  .register-form {
+    width: 550px;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .register-bottom-container {
+    width: 70%;
+  }
+
+  .register-bottom-link {
+    background-color: transparent;
+    padding: 0px;
+  }
+}
