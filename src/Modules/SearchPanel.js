@@ -53,7 +53,7 @@ const SearchPanel = () => {
       <div className="search-panel-content">
         <div className="search-panel-input">
           <LineInput light hasRightIcon hasLeftIcon/>
-          <p>hello hello hello</p>
+          <p>Everywhere for everything</p>
         </div>
         <div 
           className="search-magnifier-cog-icon"
@@ -61,13 +61,53 @@ const SearchPanel = () => {
             dispatch(setExpandSearchOptions(!expandSearchOptions));
           }}
         >
-          <Icon icon={expandSearchOptions ? "MagnifierCog" : "MagnifierCross"} iconColor="#FFFFFF"/>
+          <Icon icon={expandSearchOptions ? "MagnifierCross" : "MagnifierCog"} iconColor="#FFFFFF"/>
         </div>
       </div>
 
-      <div className="search-panel-options">
-        hello
-      </div>
+      <motion.div 
+        className="search-panel-options"
+        animate={{ 
+          height: expandSearchOptions ? 190 : 0,
+          borderBottomColor: expandSearchOptions ? "rgba(255, 255, 255, 0.4)" : "rgba(255, 255, 255, 0)",
+        }}
+        transition={{
+          borderBottomColor: { delay: 0.2, duration: 0.6 }
+        }}
+      >
+        <div>
+          <div className="search-criteria">Search in...</div>
+          <div>Everywhere</div>
+          <div>Global</div>
+          <div>Group</div>
+          <div>My threads</div>
+          <div>User threads</div>
+        </div>
+        <div>
+          <div className="search-criteria">For...</div>
+          <div>Everything</div>
+          <div>Group</div>
+          <div>User</div>
+          <div>Thread</div>
+          <div>Bookmark</div>
+          <div>Comment</div>
+        </div>
+        <div>
+          <div className="search-criteria">Where...</div>
+          <div>Date</div>
+          <div>Comments</div>
+          <div>Votes</div>
+          <div>Bookmark</div>
+          <div>Comment</div>
+        </div>
+        <div>
+          <div>Less than</div>
+          <div>Greater than</div>
+          <div>Between</div>
+        </div>
+      </motion.div>
+
+      <div className="test">hello</div>
 
     </motion.div>
   );

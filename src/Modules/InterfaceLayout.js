@@ -162,6 +162,39 @@ const InterfaceLayout = (props) => {
         height: "50px",
         y: 0,
       },
+    },
+    navMenuName: {
+      expand: {
+        display: "block",
+      },
+      collapse: {
+        display: "none",
+        transition: { delay: 0.7 }
+      },
+    },
+    navMenuFast: {
+      expand: {
+        display: "block",
+        height: 0,
+        transition: {
+          duration: 0.5,
+        }
+      },
+      selected: {
+        display: "block",
+        height: 400,
+        transition: {
+          duration: 0.8,
+        },
+      },
+      collapse: {
+        display: "none",
+        height: 0,
+        transition: { 
+          display: { delay: 0.7 },
+          height: { delay: 0, duration: 0.7 },
+        }
+      },
     }
   }
 
@@ -220,16 +253,19 @@ const InterfaceLayout = (props) => {
   const checkOrientation = (event) => {
     setIsPortrait(event.matches);
   };
-
+  
   const checkLargeWidth = (event) => {
     setIsSubPanelStatic(event.matches);
   }
-
+  
   const handleResize = () => {
     setContentWidth(editionRef.current ? editionRef.current.clientWidth : 0);
     setContentMarginLeft(subPanelRef.current ? subPanelRef.current.clientWidth : 0);
+    setExpandNav(false);
+    setExpandSubPanel(false);
+    setExpandSemiSub(false);
   };
-
+  
   return (
     <div className="interface-layout"
       style={{ 
@@ -454,7 +490,7 @@ const InterfaceLayout = (props) => {
             }
             
             <motion.div 
-              className="navigation-arrow-icon-container"
+              className="navigation-arrow-icon-container navigation-menu-icon"
               onClick={() => {
                 setExpandNav(!expandNav);
                 setExpandSubPanel(false);
@@ -466,23 +502,110 @@ const InterfaceLayout = (props) => {
             >
               <Icon icon="ArrowLeftCircle" iconColor="#FFFFFF"/>
             </motion.div>
-            <div onClick={() => { 
+
+            <div className="navigation-menu-container" onClick={() => { 
               dispatch(setView("global")); 
             }}>
-              <Icon icon="Global" iconColor={selectedView === "global" ? "#96B9DA" : "#FFFFFF"}/>
+              <div className="navigation-menu-icon">
+                <Icon icon="Global" iconColor={selectedView === "global" ? "#96B9DA" : "#FFFFFF"}/>
+              </div>
+              <motion.div className="navigation-menu-name"
+                variants={variants.navMenuName}
+                initial={variants.navMenuName.collapse}
+                animate={expandNav ? "expand" : "collapse"}
+                style={{ color : selectedView === "global" ? "#96B9DA" : "#FFFFFF" }}
+              >
+                Explore Global
+              </motion.div>
             </div>
-            <div onClick={() => { dispatch(setView("pinnedThreads")) }}>
-              <Icon icon="Pinned" iconColor={selectedView === "pinnedThreads" ? "#96B9DA" : "#FFFFFF"}/>
+            <div className="navigation-menu-container" onClick={() => { dispatch(setView("pinnedThreads")) }}>
+              <div className="navigation-menu-icon">
+                <Icon icon="Pinned" iconColor={selectedView === "pinnedThreads" ? "#96B9DA" : "#FFFFFF"}/>
+              </div>
+              <motion.div className="navigation-menu-name"
+                variants={variants.navMenuName}
+                initial={variants.navMenuName.collapse}
+                animate={expandNav ? "expand" : "collapse"}
+                style={{ color : selectedView === "pinnedThreads" ? "#96B9DA" : "#FFFFFF" }}
+              >
+                Pinned threads
+              </motion.div>
             </div>
-            <div onClick={() => { dispatch(setView("myThreads")) }}>
-              <Icon icon="Threads" iconColor={selectedView === "myThreads" ? "#96B9DA" : "#FFFFFF"}/>
+            <motion.div className="fast-nav fast-nav-pinned"
+                variants={variants.navMenuFast}
+                initial={variants.navMenuFast.collapse}
+                animate={expandNav ? (selectedView === "pinnedThreads" ? "selected" : "expand") : "collapse"}            
+            >
+              <div>hello</div><div>hello</div><div>hello</div>
+              <div>hello</div><div>hello</div><div>hello</div>
+              <div>hello</div><div>hello</div><div>hello</div>
+            </motion.div>
+            <div className="navigation-menu-container" onClick={() => { dispatch(setView("myThreads")) }}>
+              <div className="navigation-menu-icon">
+                <Icon icon="Threads" iconColor={selectedView === "myThreads" ? "#96B9DA" : "#FFFFFF"}/>
+              </div>
+              <motion.div className="navigation-menu-name"
+                variants={variants.navMenuName}
+                initial={variants.navMenuName.collapse}
+                animate={expandNav ? "expand" : "collapse"}
+                style={{ color : selectedView === "myThreads" ? "#96B9DA" : "#FFFFFF" }}
+              >
+                My Threads
+              </motion.div>
             </div>
-            <div onClick={() => { dispatch(setView("fellows")) }}>
-              <Icon icon="Friends" iconColor={selectedView === "fellows" ? "#96B9DA" : "#FFFFFF"}/>
+            <motion.div className="fast-nav fast-nav-my-threads"
+                variants={variants.navMenuFast}
+                initial={variants.navMenuFast.collapse}
+                animate={expandNav ? (selectedView === "myThreads" ? "selected" : "expand") : "collapse"}            
+            >
+              <div>hello</div><div>hello</div><div>hello</div>
+              <div>hello</div><div>hello</div><div>hello</div>
+              <div>hello</div><div>hello</div><div>hello</div>
+            </motion.div>
+            <div className="navigation-menu-container" onClick={() => { dispatch(setView("fellows")) }}>
+              <div className="navigation-menu-icon">
+                <Icon icon="Friends" iconColor={selectedView === "fellows" ? "#96B9DA" : "#FFFFFF"}/>
+              </div>
+              <motion.div className="navigation-menu-name"
+                variants={variants.navMenuName}
+                initial={variants.navMenuName.collapse}
+                animate={expandNav ? "expand" : "collapse"}
+                style={{ color : selectedView === "fellows" ? "#96B9DA" : "#FFFFFF" }}
+              >
+                Fellows
+              </motion.div>
             </div>
-            <div onClick={() => { dispatch(setView("groups")) }}>
-              <Icon icon="Groups" iconColor={selectedView === "groups" ? "#96B9DA" : "#FFFFFF"}/>
+            <motion.div className="fast-nav fast-nav-fellows"
+                variants={variants.navMenuFast}
+                initial={variants.navMenuFast.collapse}
+                animate={expandNav ? (selectedView === "fellows" ? "selected" : "expand") : "collapse"}            
+            >
+              <div>hello</div><div>hello</div><div>hello</div>
+              <div>hello</div><div>hello</div><div>hello</div>
+              <div>hello</div><div>hello</div><div>hello</div>
+            </motion.div>
+            <div className="navigation-menu-container" onClick={() => { dispatch(setView("groups")) }}>
+              <div className="navigation-menu-icon">
+                <Icon icon="Groups" iconColor={selectedView === "groups" ? "#96B9DA" : "#FFFFFF"}/>
+              </div>
+              <motion.div className="navigation-menu-name"
+                variants={variants.navMenuName}
+                initial={variants.navMenuName.collapse}
+                animate={expandNav ? "expand" : "collapse"}
+                style={{ color : selectedView === "groups" ? "#96B9DA" : "#FFFFFF" }}
+              >
+                Groups
+              </motion.div>
             </div>
+            <motion.div className="fast-nav fast-nav-group"
+                variants={variants.navMenuFast}
+                initial={variants.navMenuFast.collapse}
+                animate={expandNav ? (selectedView === "groups" ? "selected" : "expand") : "collapse"}
+            >
+              <div>hello</div><div>hello</div><div>hello</div>
+              <div>hello</div><div>hello</div><div>hello</div>
+              <div>hello</div><div>hello</div><div>hello</div>
+            </motion.div>
           </motion.div>
         </div>
 
@@ -494,8 +617,8 @@ const InterfaceLayout = (props) => {
             marginLeft: isPortrait ? "" : (hasSubPanel && isSubPanelStatic ? `${contentMarginLeft + 55}px` : "55px"),
             width: isPortrait ? "100%" : (hasSubPanel ? `${contentWidth + 80}px` : "calc(100% - 55px)"),
             minHeight: `calc(100vh - ${isPortrait ? "80px" : (hasSubPanel ? (isSubPanelStatic ? "50px" : "80px") : "90px")})`,
-            // overflowY: isPortrait || !hasSubPanel ? "hidden" : "scroll", <---- ORIGINAL WEIRD BUG
-            overflowY: "scroll",
+            overflowY: isPortrait || !hasSubPanel ? "hidden" : "scroll", /*<---- ORIGINAL WEIRD BUG*/
+            // overflowY: "scroll",
             height: hasSubPanel ? `calc(100vh - ${isSubPanelStatic ? "50px" : "80px"})` : "auto",
             padding: isPortrait || !hasSubPanel ? "" : "20px 40px 0px 50px",
           }}

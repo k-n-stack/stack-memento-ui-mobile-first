@@ -24,7 +24,8 @@
 .search-panel-header {
   margin: 0px;
   top: 10px;
-  left: 60px;
+  /* left: 60px; */
+  right: 10px;
   position: absolute;
   display: flex;
   align-items: center;
@@ -38,7 +39,7 @@
 .search-panel-header-icon {
   width: 50px;
   height: 50px;
-  margin-right: 10px;
+  /* margin-right: 5px; */
 }
 
 .search-panel-content {
@@ -47,7 +48,7 @@
 }
 
 .search-magnifier-cog-icon {
-  height: 40px;
+  height: 30px;
   margin-left: 10px;
 }
 
@@ -60,9 +61,26 @@
 
 .search-panel-input > p {
   margin: 5px 0px 0px 0px;
+  font-style: italic;
 }
 
 .search-panel-options {
-  background-color: aqua;
   height: 200px;
+  overflow: hidden;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+} 
+.search-panel-options > div {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.search-panel-options .search-criteria {
+  font-size: 16px;
+  font-weight: 700;
+  opacity: 0.6;
 }
