@@ -8,6 +8,10 @@ export const navigationSlice = createSlice({
     view: "homepage",
     isLogin: false,
     expandUserPanel: false,
+    expandSearchPanel: false,
+    expandSearchOptions: false,
+    userPanelView: "stats",
+    userSettingsView: "profile",
   },
 
   reducers: {
@@ -20,6 +24,18 @@ export const navigationSlice = createSlice({
     setExpandUserPanel: (state, action) => {
       state.expandUserPanel = action.payload;
     },
+    setExpandSearchPanel: (state, action) => {
+      state.expandSearchPanel = action.payload;
+    },
+    setExpandSearchOptions: (state, action) => {
+      state.expandSearchOptions = action.payload;
+    },
+    setUserPanelView: (state, action) => {
+      state.userPanelView = action.payload;
+    },
+    setUserSettingsView: (state, action) => {
+      state.userSettingsView = action.payload;
+    },
   },
 
 });
@@ -28,6 +44,10 @@ export const {
   setView,
   setIsLogin,
   setExpandUserPanel,
+  setExpandSearchPanel,
+  setExpandSearchOptions,
+  setUserPanelView,
+  setUserSettingsView,
 } = navigationSlice.actions;
 
 export default navigationSlice.reducer;

@@ -26,6 +26,9 @@ import {
   SortCircle,
   CloseSortCircle,
   CrossCircle,
+  MagnifierPlus,
+  MagnifierCog,
+  MagnifierCross,
 } from "Components/Icon/Svg";
 
 
@@ -57,6 +60,9 @@ const Icon = (props) => {
     SortCircle: SortCircle,
     CloseSortCircle: CloseSortCircle,
     CrossCircle: CrossCircle,
+    MagnifierPlus: MagnifierPlus,
+    MagnifierCog: MagnifierCog,
+    MagnifierCross: MagnifierCross,
   }
 
   const getSvg = (svgName) => {

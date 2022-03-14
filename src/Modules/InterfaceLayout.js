@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useSwipeable } from "react-swipeable";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { setView, setIsLogin, setExpandUserPanel } from "Store/Features/Navigation/navigationSlice";
+import { setView, setExpandUserPanel, setExpandSearchPanel } from "Store/Features/Navigation/navigationSlice";
 
 import Icon from "Components/Icon/Icon";
 
@@ -307,7 +307,12 @@ const InterfaceLayout = (props) => {
                   !isPortrait &&
                   <>
                     <LineInput hasLeftIcon hasRightIcon/>
-                    <div className="navigation-top-interface-search-advanced">
+                    <div 
+                      className="navigation-top-interface-search-advanced"
+                      onClick={() => {
+                        dispatch(setExpandSearchPanel(true));
+                      }}
+                    >
                       <div className="navigation-top-interface-search-advanced-icon">
                         <Icon icon="ChevronCircle" iconColor="#3650AB"/>
                       </div>

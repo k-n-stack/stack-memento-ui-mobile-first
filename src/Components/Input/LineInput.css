@@ -1,6 +1,7 @@
 .line-input-container {
   position: relative;
   pointer-events: all;
+  width: 100%;
 }
 
 .line-input {
