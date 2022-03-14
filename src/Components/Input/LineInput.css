@@ -1,32 +1,27 @@
 .line-input-container {
   position: relative;
+  pointer-events: all;
+  width: 100%;
 }
 
 .line-input {
   background-color: transparent;
   border-style: none;
   border-bottom-style: solid;
-  border-bottom-color: #3650AB;
   border-bottom-width: 1px;
   width: 100%;
   line-height: 1.5rem;
   font-size: 15px;
-  padding-left: 1.75rem;
-  padding-right: 1.45rem;
   box-sizing: border-box;
-}
-
-.line-input[value=""] {
-  background-color: aqua;
 }
 
 .line-input-icon-container {
   /* z-index: -1; */
   position: absolute;
-  top: 0px;
+  bottom: 4px;
   left: 0px;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .line-input-clear-container {

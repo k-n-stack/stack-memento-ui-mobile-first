@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useSwipeable } from "react-swipeable";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { setView, setIsLogin } from "Store/Features/Navigation/navigationSlice";
+import { setView, setExpandUserPanel, setExpandSearchPanel } from "Store/Features/Navigation/navigationSlice";
 
 import Icon from "Components/Icon/Icon";
 
@@ -14,9 +14,11 @@ const InterfaceLayout = (props) => {
 
   const [toggleLeftPanel, setToggleLeftPanel] = useState(false);
   const [toggleRightPanel, setToggleRightPanel] = useState(false);
-  const [toggleUserPanel, setToggleUserPanel] = useState(false);
   const [expandNav, setExpandNav] = useState(false);
-  const [isPortrait, setIsPortrait] = useState(window.matchMedia('(orientation: portrait)').matches);
+  const [expandSubPanel, setExpandSubPanel] = useState(false);
+  const [expandSemiSub, setExpandSemiSub] = useState(false);
+  const [isPortrait, setIsPortrait] = useState(window.matchMedia('(max-width: 1100px)').matches);
+  const [isSubPanelStatic, setIsSubPanelStatic] = useState(window.matchMedia('(min-width: 1400px)').matches);
   const [panelOn, setPanelOn] = useState(true);
   const [scrollTop, setScrollTop] = useState(0);
 
@@ -73,6 +75,7 @@ const InterfaceLayout = (props) => {
         transition: {
           width: {
             type: "linear",
+            duration: 0.7
           },
         }
       },
@@ -91,6 +94,106 @@ const InterfaceLayout = (props) => {
       },
       collapse: {
         transform: "rotate(0deg)",
+      },
+    },
+    sortIcon: {
+      expand: {
+        opacity: 0,
+      },
+      collapse: {
+        opacity: 1,
+      }
+    },
+    interfaceSubPanel: {
+      static: {
+        x: "0px",
+        transition: {
+          duration: 0,
+        }
+      },
+      expand: {
+        x: "325px",
+        transition: {
+          duration: 0.7,
+        }
+      },
+      semi: {
+        x: "195px",
+        transition: {
+          duration: 0.7,
+        },
+      },
+      collapse: {
+        x: "0px",
+        transition: {
+          duration: 0.4,
+        }
+      },
+    },
+    sortIcon: {
+      hide: {
+        opacity: 0,
+        transition: {
+          duration: 0
+        }
+      },
+      show: {
+        opacity: 1,
+        transition: {
+          delay: 0.8
+        }
+      },
+    },
+    closeIcon: {
+      expand: {
+        width: "30px",
+        height: "30px",
+        x: -10,
+        y: -50,
+        transition: {
+          y: {
+            delay: 0.2,
+            duration: 0.7,
+          }
+        }
+      },
+      collapse: {
+        width: "50px",
+        height: "50px",
+        y: 0,
+      },
+    },
+    navMenuName: {
+      expand: {
+        display: "block",
+      },
+      collapse: {
+        display: "none",
+        transition: { delay: 0.7 }
+      },
+    },
+    navMenuFast: {
+      expand: {
+        display: "block",
+        height: 0,
+        transition: {
+          duration: 0.5,
+        }
+      },
+      selected: {
+        display: "block",
+        height: 400,
+        transition: {
+          duration: 0.8,
+        },
+      },
+      collapse: {
+        display: "none",
+        height: 0,
+        transition: { 
+          display: { delay: 0.7 },
+          height: { delay: 0, duration: 0.7 },
+        }
       },
     }
   }
@@ -129,18 +232,40 @@ const InterfaceLayout = (props) => {
   }
 
   useEffect(() => {
+
     setContentWidth(editionRef.current ? editionRef.current.clientWidth : 0);
     setContentMarginLeft(subPanelRef.current ? subPanelRef.current.clientWidth : 0);
 
-    window.matchMedia("(orientation: portrait)").addEventListener("change", (event) => {
-      setIsPortrait(event.matches);
-    });
-    window.addEventListener("resize", () => {
-      setContentWidth(editionRef.current ? editionRef.current.clientWidth : 0);
-      setContentMarginLeft(subPanelRef.current ? subPanelRef.current.clientWidth : 0);
-    });
+    const mediaOrientation = window.matchMedia("(max-width: 1100px)");
+    const mediaLargeWidth = window.matchMedia("(min-width: 1400px)");
+
+    mediaOrientation.addEventListener("change", checkOrientation);
+    mediaLargeWidth.addEventListener("change", checkLargeWidth);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      mediaOrientation.removeEventListener("change", checkOrientation);
+      mediaLargeWidth.removeEventListener("change", checkLargeWidth);
+      window.removeEventListener("resize", handleResize);
+    }
   });
 
+  const checkOrientation = (event) => {
+    setIsPortrait(event.matches);
+  };
+  
+  const checkLargeWidth = (event) => {
+    setIsSubPanelStatic(event.matches);
+  }
+  
+  const handleResize = () => {
+    setContentWidth(editionRef.current ? editionRef.current.clientWidth : 0);
+    setContentMarginLeft(subPanelRef.current ? subPanelRef.current.clientWidth : 0);
+    setExpandNav(false);
+    setExpandSubPanel(false);
+    setExpandSemiSub(false);
+  };
+  
   return (
     <div className="interface-layout"
       style={{ 
@@ -183,7 +308,8 @@ const InterfaceLayout = (props) => {
         <div 
           className="navigation-layout-interface"
           style={{
-            marginBottom: `calc(-100vh + ${isPortrait ? "80px" : (hasSubPanel ? "50px" : "90px")})`
+            ////////////////////////
+            marginBottom: `calc(-100vh + ${isPortrait ? "80px" : (hasSubPanel ? (isSubPanelStatic ? "50px" : "80px") : "90px")})`
           }}
         >
           <div className="navigation-top-interface"
@@ -191,7 +317,7 @@ const InterfaceLayout = (props) => {
               marginLeft: isPortrait ? "" : (hasSubPanel ? "0px" : "55px"), 
               flexGrow: isPortrait ? "" : (hasSubPanel ? 0 : 1),
               height: isPortrait ? "80px" : (hasSubPanel ? "100vh" : "80px"),
-              width: isPortrait || !hasSubPanel ? "auto" : "450px",
+              width: isPortrait || !hasSubPanel ? "auto" : "350px",
               flexDirection: hasSubPanel && !isPortrait ? "column" : "row",
             }}
           >
@@ -216,8 +342,13 @@ const InterfaceLayout = (props) => {
                 {
                   !isPortrait &&
                   <>
-                    <LineInput />
-                    <div className="navigation-top-interface-search-advanced">
+                    <LineInput hasLeftIcon hasRightIcon/>
+                    <div 
+                      className="navigation-top-interface-search-advanced"
+                      onClick={() => {
+                        dispatch(setExpandSearchPanel(true));
+                      }}
+                    >
                       <div className="navigation-top-interface-search-advanced-icon">
                         <Icon icon="ChevronCircle" iconColor="#3650AB"/>
                       </div>
@@ -232,39 +363,9 @@ const InterfaceLayout = (props) => {
                   width="100%"
                   height="100%"
                   onClick={() => {
-                    setToggleUserPanel(!toggleUserPanel);
+                    dispatch(setExpandUserPanel(true));
                   }}
                 />
-                {
-                  toggleUserPanel &&
-                  <div className="user-panel">
-                    <p>John Doe : <span>230 Bookmarks</span></p>
-                    <div className="user-panel-options">
-                      <div>
-                        <div className="user-panel-icon-container">
-                          <Icon icon="Friends" iconColor="white"/>
-                        </div>
-                        <div>Profile</div>
-                      </div>
-                      <div>
-                        <div className="user-panel-icon-container">
-                          <Icon icon="CogCircle" iconColor="white"/>
-                        </div>
-                        <div>Settings</div>
-                      </div>
-                      <div 
-                        onClick={() => {
-                          dispatch(setIsLogin(false));
-                        }}
-                      >
-                        <div className="user-panel-icon-container">
-                          <Icon icon="ExitCircle" iconColor="white"/>
-                        </div>
-                        <div>Logout</div>
-                      </div>
-                    </div>
-                  </div>
-                }
               </div>
             </div>
           </div>
@@ -272,30 +373,97 @@ const InterfaceLayout = (props) => {
             hasSubPanel && !isPortrait &&
             <>
               <div className="edition-panel" ref={editionRef}>
-                <div>
-                  <div className="edition-panel-icon-container">
-                    <Icon icon="Plus" iconColor="#3650AB" />
+                { 
+                  !isSubPanelStatic &&
+                  <div className="edition-panel-title">
+                    <div className="edition-panel-title-logo-container">
+                      <Icon icon="Threads" iconColor="#3650AB" />
+                    </div>
+                    <h1 className="edition-panel-title-header">My Threads</h1>
                   </div>
-                  <p>New thread</p>
-                </div>
-                <div>
-                  <div className="edition-panel-icon-container">
-                    <Icon icon="Plus" iconColor="#3650AB" />
+                }
+                <div className="edition-panel-bottom">
+                  <div>
+                    <div className="edition-panel-icon-container">
+                      <Icon icon="Plus" iconColor="#3650AB" />
+                    </div>
+                    <p>New group</p>
                   </div>
-                  <p>Add bookmark</p>
-                </div>
-                <div>
-                  <div className="edition-panel-icon-container">
-                    <Icon icon="Plus" iconColor="#3650AB" />
+                  <div>
+                    <div className="edition-panel-icon-container">
+                      <Icon icon="Plus" iconColor="#3650AB" />
+                    </div>
+                    <p>Send subsciption invitation</p>
                   </div>
-                  <p>Import/Export</p>
+                  <div>
+                    <div className="edition-panel-icon-container">
+                      <Icon icon="Plus" iconColor="#3650AB" />
+                    </div>
+                    <p>Pending subscription req. (2)</p>
+                  </div>
+                  <div>
+                    <div className="edition-panel-icon-container">
+                      <Icon icon="Plus" iconColor="#3650AB" />
+                    </div>
+                    <p>Manage My group</p>
+                  </div>
+                  <div className="edition-panel-container-last">
+                    <div className="edition-panel-icon-container">
+                      <Icon icon="Plus" iconColor="#3650AB" />
+                    </div>
+                    <p>Leave My group</p>
+                  </div>
                 </div>
               </div>
 
 
-              <div className="interface-sub-panel" ref={subPanelRef}>
-                hello
-              </div>
+              <motion.div 
+                className="interface-sub-panel" 
+                ref={subPanelRef}
+                variants={variants.interfaceSubPanel}
+                initial={isSubPanelStatic ? variants.interfaceSubPanel.static : variants.interfaceSubPanel.collapse}
+                animate={isSubPanelStatic ? "static" : (expandSemiSub ? "semi" : (expandSubPanel ? "expand" : "collapse"))}
+              >
+                {
+                  !isSubPanelStatic && !isPortrait &&
+                  <motion.div 
+                    className="navigation-close-icon-container"
+                    onClick={() => {
+                      setExpandSubPanel(false);
+                      setExpandSemiSub(false);
+                    }}
+                    variants={variants.closeIcon}
+                    initial={variants.closeIcon.collapse}
+                    animate={expandSubPanel ? "expand" : "collapse"}
+                  >
+                    <Icon icon="CrossCircle" iconColor="#FFFFFF"/>
+                  </motion.div>
+                }
+                <div className="interface-sub-panel-header">
+                  <div className="interface-sub-panel-icon">
+                    <Icon icon="Threads" iconColor="white"/>
+                  </div>
+                  <h1>My Threads</h1>
+                </div>
+                <div className="interface-sub-panel-settings">
+                  <div className="interface-sub-panel-search">
+                    <LineInput light hasLeftIcon hasRightIcon/>
+                  </div>
+                  <div className="interface-sub-panel-sort">
+                    <div>Bookmarks (Desc)</div>
+                    <div className="interface-sub-panel-sort-icon">
+                      <Icon icon="Sort" iconColor="white"/>
+                    </div>
+                  </div>
+                </div>
+                <div className="interface-sub-panel-content">
+                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
+                  <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
+
+                </div>
+                <div className="interface-sub-panel-footer">
+                </div>
+              </motion.div>
             </>
           }
           <motion.div 
@@ -304,10 +472,29 @@ const InterfaceLayout = (props) => {
             variants={variants.navContainer}
             animate={isPortrait ? "noAnimation" : expandNav ? "expand" : "collapse"}
           >
+            {
+              hasSubPanel && !isSubPanelStatic && !isPortrait &&
+              <motion.div 
+                className="navigation-sort-icon-container"
+                onClick={() => {
+                  setExpandNav(false);
+                  setExpandSemiSub(false);
+                  setExpandSubPanel(true);
+                }}
+                variants={variants.sortIcon}
+                initial={variants.sortIcon.show}
+                animate={expandSubPanel ? "hide" : "show"}
+              >
+                <Icon icon="SortCircle" iconColor="#FFFFFF"/>
+              </motion.div>
+            }
+            
             <motion.div 
-              className="navigation-arrow-icon-container"
+              className="navigation-arrow-icon-container navigation-menu-icon"
               onClick={() => {
                 setExpandNav(!expandNav);
+                setExpandSubPanel(false);
+                setExpandSemiSub(!expandNav);
               }}
               initial={variants.arrowIcon.collapse}
               variants={variants.arrowIcon}
@@ -315,21 +502,110 @@ const InterfaceLayout = (props) => {
             >
               <Icon icon="ArrowLeftCircle" iconColor="#FFFFFF"/>
             </motion.div>
-            <div onClick={() => { dispatch(setView("global")); }}>
-              <Icon icon="Global" iconColor={selectedView === "global" ? "#96B9DA" : "#FFFFFF"}/>
+
+            <div className="navigation-menu-container" onClick={() => { 
+              dispatch(setView("global")); 
+            }}>
+              <div className="navigation-menu-icon">
+                <Icon icon="Global" iconColor={selectedView === "global" ? "#96B9DA" : "#FFFFFF"}/>
+              </div>
+              <motion.div className="navigation-menu-name"
+                variants={variants.navMenuName}
+                initial={variants.navMenuName.collapse}
+                animate={expandNav ? "expand" : "collapse"}
+                style={{ color : selectedView === "global" ? "#96B9DA" : "#FFFFFF" }}
+              >
+                Explore Global
+              </motion.div>
             </div>
-            <div onClick={() => { dispatch(setView("pinnedThreads")) }}>
-              <Icon icon="Pinned" iconColor={selectedView === "pinnedThreads" ? "#96B9DA" : "#FFFFFF"}/>
+            <div className="navigation-menu-container" onClick={() => { dispatch(setView("pinnedThreads")) }}>
+              <div className="navigation-menu-icon">
+                <Icon icon="Pinned" iconColor={selectedView === "pinnedThreads" ? "#96B9DA" : "#FFFFFF"}/>
+              </div>
+              <motion.div className="navigation-menu-name"
+                variants={variants.navMenuName}
+                initial={variants.navMenuName.collapse}
+                animate={expandNav ? "expand" : "collapse"}
+                style={{ color : selectedView === "pinnedThreads" ? "#96B9DA" : "#FFFFFF" }}
+              >
+                Pinned threads
+              </motion.div>
             </div>
-            <div onClick={() => { dispatch(setView("myThreads")) }}>
-              <Icon icon="Threads" iconColor={selectedView === "myThreads" ? "#96B9DA" : "#FFFFFF"}/>
+            <motion.div className="fast-nav fast-nav-pinned"
+                variants={variants.navMenuFast}
+                initial={variants.navMenuFast.collapse}
+                animate={expandNav ? (selectedView === "pinnedThreads" ? "selected" : "expand") : "collapse"}            
+            >
+              <div>hello</div><div>hello</div><div>hello</div>
+              <div>hello</div><div>hello</div><div>hello</div>
+              <div>hello</div><div>hello</div><div>hello</div>
+            </motion.div>
+            <div className="navigation-menu-container" onClick={() => { dispatch(setView("myThreads")) }}>
+              <div className="navigation-menu-icon">
+                <Icon icon="Threads" iconColor={selectedView === "myThreads" ? "#96B9DA" : "#FFFFFF"}/>
+              </div>
+              <motion.div className="navigation-menu-name"
+                variants={variants.navMenuName}
+                initial={variants.navMenuName.collapse}
+                animate={expandNav ? "expand" : "collapse"}
+                style={{ color : selectedView === "myThreads" ? "#96B9DA" : "#FFFFFF" }}
+              >
+                My Threads
+              </motion.div>
             </div>
-            <div onClick={() => { dispatch(setView("fellows")) }}>
-              <Icon icon="Friends" iconColor={selectedView === "fellows" ? "#96B9DA" : "#FFFFFF"}/>
+            <motion.div className="fast-nav fast-nav-my-threads"
+                variants={variants.navMenuFast}
+                initial={variants.navMenuFast.collapse}
+                animate={expandNav ? (selectedView === "myThreads" ? "selected" : "expand") : "collapse"}            
+            >
+              <div>hello</div><div>hello</div><div>hello</div>
+              <div>hello</div><div>hello</div><div>hello</div>
+              <div>hello</div><div>hello</div><div>hello</div>
+            </motion.div>
+            <div className="navigation-menu-container" onClick={() => { dispatch(setView("fellows")) }}>
+              <div className="navigation-menu-icon">
+                <Icon icon="Friends" iconColor={selectedView === "fellows" ? "#96B9DA" : "#FFFFFF"}/>
+              </div>
+              <motion.div className="navigation-menu-name"
+                variants={variants.navMenuName}
+                initial={variants.navMenuName.collapse}
+                animate={expandNav ? "expand" : "collapse"}
+                style={{ color : selectedView === "fellows" ? "#96B9DA" : "#FFFFFF" }}
+              >
+                Fellows
+              </motion.div>
             </div>
-            <div onClick={() => { dispatch(setView("groups")) }}>
-              <Icon icon="Groups" iconColor={selectedView === "groups" ? "#96B9DA" : "#FFFFFF"}/>
+            <motion.div className="fast-nav fast-nav-fellows"
+                variants={variants.navMenuFast}
+                initial={variants.navMenuFast.collapse}
+                animate={expandNav ? (selectedView === "fellows" ? "selected" : "expand") : "collapse"}            
+            >
+              <div>hello</div><div>hello</div><div>hello</div>
+              <div>hello</div><div>hello</div><div>hello</div>
+              <div>hello</div><div>hello</div><div>hello</div>
+            </motion.div>
+            <div className="navigation-menu-container" onClick={() => { dispatch(setView("groups")) }}>
+              <div className="navigation-menu-icon">
+                <Icon icon="Groups" iconColor={selectedView === "groups" ? "#96B9DA" : "#FFFFFF"}/>
+              </div>
+              <motion.div className="navigation-menu-name"
+                variants={variants.navMenuName}
+                initial={variants.navMenuName.collapse}
+                animate={expandNav ? "expand" : "collapse"}
+                style={{ color : selectedView === "groups" ? "#96B9DA" : "#FFFFFF" }}
+              >
+                Groups
+              </motion.div>
             </div>
+            <motion.div className="fast-nav fast-nav-group"
+                variants={variants.navMenuFast}
+                initial={variants.navMenuFast.collapse}
+                animate={expandNav ? (selectedView === "groups" ? "selected" : "expand") : "collapse"}
+            >
+              <div>hello</div><div>hello</div><div>hello</div>
+              <div>hello</div><div>hello</div><div>hello</div>
+              <div>hello</div><div>hello</div><div>hello</div>
+            </motion.div>
           </motion.div>
         </div>
 
@@ -337,11 +613,13 @@ const InterfaceLayout = (props) => {
           className="interface-layout-content"
           style={{
             transform: panelOn ? "translate(0px, 0px)" : `translate(0px, -${scrollTop}px)`,
-            marginLeft: isPortrait ? "" : (hasSubPanel ? `${contentMarginLeft + 55}px` : "55px"),
+            // marginLeft: isPortrait ? "" : (hasSubPanel ? `${contentMarginLeft + 55}px` : "55px"),
+            marginLeft: isPortrait ? "" : (hasSubPanel && isSubPanelStatic ? `${contentMarginLeft + 55}px` : "55px"),
             width: isPortrait ? "100%" : (hasSubPanel ? `${contentWidth + 80}px` : "calc(100% - 55px)"),
-            minHeight: `calc(100vh - ${isPortrait ? "80px" : (hasSubPanel ? "50px" : "90px")})`,
-            overflowY: isPortrait || !hasSubPanel ? "hidden" : "scroll",
-            height: hasSubPanel ? "calc(100vh - 50px)" : "auto",
+            minHeight: `calc(100vh - ${isPortrait ? "80px" : (hasSubPanel ? (isSubPanelStatic ? "50px" : "80px") : "90px")})`,
+            overflowY: isPortrait || !hasSubPanel ? "hidden" : "scroll", /*<---- ORIGINAL WEIRD BUG*/
+            // overflowY: "scroll",
+            height: hasSubPanel ? `calc(100vh - ${isSubPanelStatic ? "50px" : "80px"})` : "auto",
             padding: isPortrait || !hasSubPanel ? "" : "20px 40px 0px 50px",
           }}
           {...swipeHandlers}

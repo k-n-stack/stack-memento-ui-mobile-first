@@ -7,6 +7,8 @@ import Login from "Views/Login";
 import Register from "Views/Register";
 import Interface from "./Interface";
 
+import UserPanel from "Modules/UserPanel";
+
 const Navigation = (props) => {
 
   const view = useSelector((state) => (state.navigation.view));

@@ -32,6 +32,7 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-bottom: 15px;
 }
 
 .navigation-logo-title {
@@ -57,11 +58,16 @@
 .robot-icon-container-mobile {
   width: 35px;
   height: 35px;
+  pointer-events: all;
 }
 
 .navigation-top-bottom {
   margin-top: 5px;
   width: 100%;
+}
+
+.navigation-top-bottom-input-container {
+  margin-bottom: 10px;
 }
 
 .navigation-top-bottom > input {
@@ -164,6 +170,12 @@
     display: flex;
     justify-content: space-around;
   }
+  
+  .navigation-top-bottom-input-container {
+    margin-top: 20px;
+    width: 350px;
+  }
+
 }
 
 @media screen and (min-width: 950px) and (orientation: landscape) {
@@ -184,16 +196,20 @@
 
   .navigation-top-bottom {
     margin: 0px;
-    flex-direction: row;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
   }
 
   .navigation-top-bottom > input {
     margin: 0px;
   }
 
-  .navigation-menu {
-    margin-left: 30px;
+  .navigation-top-bottom-input-container {
+    box-sizing: border-box;
+    margin: 0px 0px 0px 30px;
   }
+
 }
 
 @media screen and (min-width: 1200px) and (orientation: landscape) {

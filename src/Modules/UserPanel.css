@@ -1,0 +1,104 @@
+.user-panel {
+  box-sizing: border-box;
+  z-index: 1;
+  position: fixed;
+  height: 100vh;
+  background: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(0, 0, 0, 0) 101.62%), linear-gradient(221.42deg, #3650AB 59.99%, rgba(60, 147, 174, 0.65) 104.23%);
+  right: 0px;
+  top: 0px;
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+
+.user-panel-close-icon-container {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.user-panel-avatar-big {
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  right: 10px;
+  top: 10px;
+  border-radius: 170px;
+  overflow: hidden;
+}
+
+.user-panel-content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-end;
+  color: white;
+}
+
+.user-panel-content-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-grow: 1;
+}
+
+.user-panel-content-top > * {
+  margin: 3px 0px;
+}
+
+.user-panel-content-top > p {
+  font-size: 18px;
+}
+
+.user-panel-actions {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-panel-actions > div {
+  display: flex;
+  align-items: center;
+}
+
+.user-panel-actions > div > p {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 5px 0px;
+}
+
+.user-panel-action-icon {
+  height: 30px;
+  width: 30px;
+  margin-left: 10px;
+}
+
+.user-panel-logout {
+  color: rgb(255, 65, 65);
+}
+
+.user-panel-settings-header {
+  padding-bottom: 20px;
+}
+
+.user-panel-navbar {
+  /* box-sizing: border-box; */
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  gap: 50px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(255, 255, 255, 0.226);
+  padding-bottom: 15px;
+}
+
+.user-panel-settings-content {
+  /* background-color: aquamarine ; */
+  width: 100%;
+  flex-grow: 2;
+}
