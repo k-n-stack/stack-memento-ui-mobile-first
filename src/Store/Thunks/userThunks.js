@@ -1,13 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const fetchUserByEmailThunk = () => createAsyncThunk(
-  "users/byEmail",
-  async (userEmail, { rejectWithValue }) => {
-    try {
-      const res = await fetch("/test")
-        .then(res => res.json());
+  "users/fetchUserByEmail",
+  async (data, { rejectWithValue }) => {
+    try {      
+      const { email, password } = data;
+      const res = await fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email, 
+          password,
+        }),
+      })
+      .then(res => res.json());
 
-      console.log(res);
+      console.log('thunk', res);
       return res.get;
 
     } catch (error) {

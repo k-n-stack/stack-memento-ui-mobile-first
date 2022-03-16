@@ -1,40 +1,42 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchUserByEmailThunk } from "Store/Thunks/userThunks";
 
-export const fetchUserByEmail = fetchUserByEmailThunk();
+export const login = fetchUserByEmailThunk();
 
 export const userSlice = createSlice({
   
   name: "user",
   
   initialState: {
+    isLogin: false,
     email: "",
     pseudonym: "",
-    test: "initial",
+    image_url: "",
+    email_verified_at: "",
   },
   
   reducers: {
-    setEmail: (state, action) => {
-      state.email = action.payload;
-    },
-    setPseudonym: (state, action) => {
-      state.pseudonym = action.payload;
-    },
-  },
-  
-  extraReducers: {
-    [fetchUserByEmail.rejected]: (state, action) => {},
-    [fetchUserByEmail.pending]: (state, action) => {},
-    [fetchUserByEmail.fulfilled]: (state, action) => {
-      state.test = action.payload;
+    setIsLogin: (state, action) => {
+      state.isLogin = action.payload;
     }
   },
   
+  extraReducers: {
+    [login.rejected]: (state, action) => {},
+    [login.pending]: (state, action) => {},
+    [login.fulfilled]: (state, action) => {
+      state.isLogin = action.payload.status === "authenticated";
+      state.email = action.payload.email;
+      state.pseudonym = action.payload.pseudonym;
+      state.image_url = action.payload.image_url;
+      state.email_verified_at = action.payload.email_verified_at;
+    }
+  },
+
 });
 
 export const {
-  setEmail,
-  setPseudonym,
+  setIsLogin,
 } = userSlice.actions;
 
 
