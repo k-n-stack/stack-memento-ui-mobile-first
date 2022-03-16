@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { 
   setIsLogin, 
   setView, 
-} from "Store/Features/Navigation/navigationSlice";
+} from "Store/Features/navigationSlice";
 
 import Button from "Components/Input/Button";
 import Background from "Components/Layout/Background";

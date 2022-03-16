@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useSwipeable } from "react-swipeable";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { setView, setExpandUserPanel, setExpandSearchPanel } from "Store/Features/Navigation/navigationSlice";
+import { setView, setExpandUserPanel, setExpandSearchPanel } from "Store/Features/navigationSlice";
 
 import Icon from "Components/Icon/Icon";
 
@@ -269,7 +269,7 @@ const InterfaceLayout = (props) => {
   return (
     <div className="interface-layout"
       style={{ 
-        overflow: panelOn ? "visible" : "hidden",
+        // overflow: panelOn ? "visible" : "hidden",
         overflow: panelOn ? (isPortrait ? "visible" : (hasSubPanel ? "hidden" : "visible")) : "hidden",
       }}
     >

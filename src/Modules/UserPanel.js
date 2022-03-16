@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 import Icon from "Components/Icon/Icon";
 
-import { setExpandUserPanel, setIsLogin, setView, setUserPanelView, setUserSettingsView } from "Store/Features/Navigation/navigationSlice";
+import { setExpandUserPanel, setIsLogin, setView, setUserPanelView, setUserSettingsView } from "Store/Features/navigationSlice";
 
 import "./UserPanel.css";
 import avatar from "Ressources/Images/Avatars/john_doe.png";
