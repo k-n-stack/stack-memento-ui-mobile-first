@@ -1,9 +1,8 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { 
-  setIsLogin, 
-  setView, 
-} from "Store/Features/Navigation/navigationSlice";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setView, setIsLogin } from "Store/Features/navigationSlice";
+import { setStatus } from "Store/Features/userSlice";
+import { login } from "Store/Features/userSlice";
 
 import Button from "Components/Input/Button";
 import Background from "Components/Layout/Background";
@@ -16,6 +15,26 @@ import ToggleSwitch from "Components/Input/ToggleSwitch";
 const Login = (props) => {
 
   const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleEmailChange = (value) => {
+    setEmail(value);
+  };
+
+  const handlePasswordChange = (value) => {
+    setPassword(value);
+  };
+
+  const loginStatus = useSelector((state) => (state.user.status));
+
+  useEffect(() => {
+    if (loginStatus === 'authenticated') {
+      dispatch(setStatus(""));
+      dispatch(setIsLogin(true));
+      dispatch(setView("global"));
+    }
+  });
 
   return (
     <>
@@ -41,9 +60,9 @@ const Login = (props) => {
         <form className="login-form">
           <div className="login-form-inputs">
             <label>Email :</label>
-            <LineInput />
+            <LineInput onChange={handleEmailChange}/>
             <label>Password :</label>
-            <LineInput />
+            <LineInput onChange={handlePasswordChange}/>
           </div>
           <div className="login-form-buttons">
             <div className="remember-option-container">
@@ -54,9 +73,9 @@ const Login = (props) => {
               <Button 
                 buttonText="Login Action !" 
                 icon="Login"
-                onClick={() => {
-                  dispatch(setView("global"));
-                  dispatch(setIsLogin(true));
+                onClick={(event) => {
+                  event.preventDefault();
+                  dispatch(login({ email: email, password: password }));
                 }}
                 backgroundColor="#99D17E"
               />

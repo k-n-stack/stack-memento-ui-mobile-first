@@ -5,8 +5,8 @@ export const navigationSlice = createSlice({
   name: "navigation",
 
   initialState: {
-    view: "homepage",
     isLogin: false,
+    view: "homepage",
     expandUserPanel: false,
     expandSearchPanel: false,
     expandSearchOptions: false,
@@ -15,11 +15,11 @@ export const navigationSlice = createSlice({
   },
 
   reducers: {
-    setView: (state, action) => {
-      state.view = action.payload;
-    },
     setIsLogin: (state, action) => {
       state.isLogin = action.payload;
+    },
+    setView: (state, action) => {
+      state.view = action.payload;
     },
     setExpandUserPanel: (state, action) => {
       state.expandUserPanel = action.payload;
@@ -41,8 +41,8 @@ export const navigationSlice = createSlice({
 });
 
 export const {
-  setView,
   setIsLogin,
+  setView,
   setExpandUserPanel,
   setExpandSearchPanel,
   setExpandSearchOptions,

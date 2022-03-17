@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 
 import Icon from "Components/Icon/Icon";
 
-import { setExpandUserPanel, setIsLogin, setView, setUserPanelView, setUserSettingsView } from "Store/Features/Navigation/navigationSlice";
+import { setExpandUserPanel, setView, setUserPanelView, setUserSettingsView, setIsLogin } from "Store/Features/navigationSlice";
+import { clearUser } from "Store/Features/userSlice";
 
 import "./UserPanel.css";
 import avatar from "Ressources/Images/Avatars/john_doe.png";
@@ -172,6 +173,7 @@ const UserPanel = () => {
           <div 
             className="user-panel-logout-container"
             onClick={() => {
+              dispatch(clearUser())
               dispatch(setView("login"));
               dispatch(setIsLogin(false));
             }}

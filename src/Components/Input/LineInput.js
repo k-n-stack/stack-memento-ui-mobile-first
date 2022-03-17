@@ -16,6 +16,9 @@ const LineInput = (props) => {
         className={`line-input ${props.light !== undefined ? "light-input" : "dark-input"}`}
         placeholder="Search users, threads, tags..."
         onChange={(event) => {
+          if (props.onChange) {
+            props.onChange(event.target.value);
+          }
           setValue(event.target.value);
         }}
         ref={inputRef}
