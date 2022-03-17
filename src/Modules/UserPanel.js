@@ -21,11 +21,17 @@ const UserPanel = () => {
 
   const variants = {
     userPanel: {
-      expand: {
-        x: 0,
+      stats: {
+        width: '380px',
+        padding: "190px 30px 50px 10px",
+      },
+      settings: {
+        width: '600px',
+        padding: "50px 30px 50px 10px",
       },
       collapse: {
-        x: 600,
+        width: '0px',
+        padding: "0px",
       },
     }
   }
@@ -61,11 +67,8 @@ const UserPanel = () => {
       className="user-panel" 
       variants={variants.userPanel}
       initial={variants.userPanel.collapse}
-      animate={expandUserPanel ? "expand" : "collapse"}
+      animate={expandUserPanel ? (userPanelView === "stats" ? "stats" : "settings") : "collapse"}
       transition={{ type: "linear", duration: 0.5 }}
-      style={{
-        padding: userPanelView === "stats" ? "190px 30px 50px 10px" : "50px 30px 50px 10px",
-      }}
     >
 
       <div 
@@ -189,7 +192,8 @@ const UserPanel = () => {
           <div 
             className="user-panel-logout-container"
             onClick={() => {
-              dispatch(clearUser())
+              dispatch(clearUser());
+              dispatch(expandUserPanel(false));
               dispatch(setView("login"));
               dispatch(setIsLogin(false));
             }}

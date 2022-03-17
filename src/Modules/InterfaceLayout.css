@@ -97,7 +97,7 @@
   z-index: 2;
 }
 
-.user-panel {
+/* .user-panel {
   z-index: -1;
   position: fixed;
   background-color: #3650AB;
@@ -107,7 +107,7 @@
   right: 30px;
   top: 30px;
   border-radius: 0px;
-}
+} */
 
 .navigation-top-interface-left-container {
   display: flex;

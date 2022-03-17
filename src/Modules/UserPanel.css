@@ -8,7 +8,8 @@
   top: 0px;
   display: flex;
   flex-direction: column;
-  width: 600px;
+  overflow: hidden;
+  /* padding-left: 100px; */
 }
 
 .user-panel-close-icon-container {
@@ -47,6 +48,7 @@
 
 .user-panel-content-top > * {
   margin: 3px 0px;
+  white-space: nowrap;
 }
 
 .user-panel-content-top > p {
