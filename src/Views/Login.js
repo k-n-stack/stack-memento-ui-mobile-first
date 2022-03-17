@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setView } from "Store/Features/navigationSlice";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setView, setIsLogin } from "Store/Features/navigationSlice";
+import { setStatus } from "Store/Features/userSlice";
+import { login } from "Store/Features/userSlice";
 
 import Button from "Components/Input/Button";
 import Background from "Components/Layout/Background";
@@ -22,7 +24,17 @@ const Login = (props) => {
 
   const handlePasswordChange = (value) => {
     setPassword(value);
-  }
+  };
+
+  const loginStatus = useSelector((state) => (state.user.status));
+
+  useEffect(() => {
+    if (loginStatus === 'authenticated') {
+      dispatch(setStatus(""));
+      dispatch(setIsLogin(true));
+      dispatch(setView("global"));
+    }
+  });
 
   return (
     <>
@@ -63,7 +75,7 @@ const Login = (props) => {
                 icon="Login"
                 onClick={(event) => {
                   event.preventDefault();
-                  
+                  dispatch(login({ email: email, password: password }));
                 }}
                 backgroundColor="#99D17E"
               />

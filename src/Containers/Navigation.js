@@ -10,7 +10,7 @@ import Interface from "./Interface";
 const Navigation = (props) => {
 
   const view = useSelector((state) => (state.navigation.view));
-  const isLogin = useSelector((state) => (state.user.isLogin));
+  const isLogin = useSelector((state) => (state.navigation.isLogin));
 
   const getView = (view, isLogin) => {
     switch (true) {

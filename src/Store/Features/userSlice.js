@@ -8,24 +8,31 @@ export const userSlice = createSlice({
   name: "user",
   
   initialState: {
-    isLogin: false,
+    status: "",
     email: "",
     pseudonym: "",
     image_url: "",
     email_verified_at: "",
   },
-  
+
   reducers: {
-    setIsLogin: (state, action) => {
-      state.isLogin = action.payload;
-    }
+    setStatus: (state, action) => {
+      state.status = action.payload;
+    },
+    clearUser: (state, action = "") => {
+      state.status = "";
+      state.email = "";
+      state.pseudonym = "";
+      state.image_url = "";
+      state.email_verified_at = "";
+    },
   },
   
   extraReducers: {
     [login.rejected]: (state, action) => {},
     [login.pending]: (state, action) => {},
     [login.fulfilled]: (state, action) => {
-      state.isLogin = action.payload.status === "authenticated";
+      state.status = action.payload.status;
       state.email = action.payload.email;
       state.pseudonym = action.payload.pseudonym;
       state.image_url = action.payload.image_url;
@@ -36,7 +43,8 @@ export const userSlice = createSlice({
 });
 
 export const {
-  setIsLogin,
+  setStatus,
+  clearUser,
 } = userSlice.actions;
 
 

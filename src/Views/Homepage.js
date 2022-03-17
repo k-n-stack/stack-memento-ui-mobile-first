@@ -49,7 +49,7 @@ const Homepage = () => {
         <>
           {/* style purpose divs */}
           <div className="background-dark-container"></div>
-          <div class="separator-top"></div>
+          <div className="separator-top"></div>
         </>
 
         <div className="features">

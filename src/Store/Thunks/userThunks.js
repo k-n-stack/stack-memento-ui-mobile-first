@@ -15,8 +15,9 @@ const fetchUserByEmailThunk = () => createAsyncThunk(
       })
       .then(res => res.json());
 
-      console.log('thunk', res);
-      return res.get;
+      localStorage.setItem('stmn_token', res.token);
+
+      return res;
 
     } catch (error) {
 
