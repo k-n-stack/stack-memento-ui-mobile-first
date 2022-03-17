@@ -8,7 +8,6 @@ import { setExpandUserPanel, setView, setUserPanelView, setUserSettingsView, set
 import { clearUser } from "Store/Features/userSlice";
 
 import "./UserPanel.css";
-import avatar from "Ressources/Images/Avatars/john_doe.png";
 
 const UserPanel = () => {
 
@@ -41,6 +40,14 @@ const UserPanel = () => {
     }
   };
 
+  const getImageModule = (image) => {
+    try {
+      return require(`../Ressources/Images/Avatars/${image}`);
+    } catch (error) {
+      return require("../Ressources/Images/Avatars/default.png");
+    }
+  };
+
   return (
     <motion.div 
       className="user-panel" 
@@ -66,7 +73,7 @@ const UserPanel = () => {
         userPanelView === "stats" &&
         <div className="user-panel-avatar-big">
           <img 
-            src={avatar}
+            src={getImageModule(sessionStorage.getItem('stmn_image_url'))}
             width="100%"
             height="100%"
             onClick={() => {
@@ -80,7 +87,8 @@ const UserPanel = () => {
         {
           userPanelView === "stats" &&
           <div className="user-panel-content-top">
-            <h1>John Doe</h1>
+            <p>{sessionStorage.getItem('stmn_email')}</p>
+            <h1>{sessionStorage.getItem('stmn_pseudonym')}</h1>
             <h2>350 Bookmarks</h2>
             <h3>10 Threads</h3>
             <p>492 Redirections</p>

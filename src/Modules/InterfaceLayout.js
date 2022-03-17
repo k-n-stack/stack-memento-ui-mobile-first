@@ -7,7 +7,6 @@ import { setView, setExpandUserPanel, setExpandSearchPanel } from "Store/Feature
 import Icon from "Components/Icon/Icon";
 
 import "./InterfaceLayout.css";
-import avatar from "Ressources/Images/Avatars/john_doe.png";
 import LineInput from "Components/Input/LineInput";
 
 const InterfaceLayout = (props) => {
@@ -198,6 +197,15 @@ const InterfaceLayout = (props) => {
     }
   }
 
+  const getImageModule = (image) => {
+    try {
+      return require(`../Ressources/Images/Avatars/${image}`);
+    } catch (error) {
+      return require("../Ressources/Images/Avatars/default.png");
+    }
+  };
+
+
   const swipeHandlers = useSwipeable({
     onSwiped: (event) => {
       handleSwipeAnimation(event.dir);
@@ -359,7 +367,7 @@ const InterfaceLayout = (props) => {
               </div>
               <div className="navigation-top-interface-avatar">
                 <img 
-                  src={avatar}
+                  src={getImageModule(sessionStorage.getItem('stmn_image_url'))}
                   width="100%"
                   height="100%"
                   onClick={() => {

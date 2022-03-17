@@ -15,7 +15,11 @@ const fetchUserByEmailThunk = () => createAsyncThunk(
       })
       .then(res => res.json());
 
-      localStorage.setItem('stmn_token', res.token);
+      sessionStorage.setItem('stmn_token', res.token);
+      sessionStorage.setItem('stmn_email', res.email);
+      sessionStorage.setItem('stmn_pseudonym', res.pseudonym);
+      sessionStorage.setItem('stmn_image_url', res.image_url);
+      sessionStorage.setItem('stmn_email_verified_at', res.email_verified_at);
 
       return res;
 
