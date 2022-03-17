@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUserByEmailThunk } from "Store/Thunks/userThunks";
+import { 
+  fetchUserByEmailThunk,
+  fetchUserThreadCountThunk,
+  fetchUserBookmarkCountThunk,
+} from "Store/Thunks/userThunks";
 
 export const login = fetchUserByEmailThunk();
+export const setUserThreadCount = fetchUserThreadCountThunk();
+export const setUserBookmarkCount = fetchUserBookmarkCountThunk();
 
 export const userSlice = createSlice({
   
@@ -13,6 +19,12 @@ export const userSlice = createSlice({
     pseudonym: "",
     image_url: "",
     email_verified_at: "",
+
+    threadCount: 0,
+    bookmarkCount: 0,
+    redirectionCount: 0,
+    commentCount: 0,
+    voteCount: 0,
   },
 
   reducers: {
@@ -37,7 +49,20 @@ export const userSlice = createSlice({
       state.pseudonym = action.payload.pseudonym;
       state.image_url = action.payload.image_url;
       state.email_verified_at = action.payload.email_verified_at;
-    }
+    },
+
+    [setUserThreadCount.rejected]: (state, action) => {},
+    [setUserThreadCount.pending]: (state, action) => {},
+    [setUserThreadCount.fulfilled]: (state, action) => {
+      state.threadCount = action.payload;
+    },
+
+    [setUserBookmarkCount.rejected]: (state, action) => {},
+    [setUserBookmarkCount.pending]: (state, action) => {},
+    [setUserBookmarkCount.fulfilled]: (state, action) => {
+      state.bookmarkCount = action.payload;
+    },
+
   },
 
 });
