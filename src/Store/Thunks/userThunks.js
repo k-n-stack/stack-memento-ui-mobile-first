@@ -24,6 +24,8 @@ const routes = {
   fetchUserByEmail: "/login",
   fetchUserThreadCount: "/user-thread-count",
   fetchUserBookmarkCount: "/user-bookmark-count",
+  fetchUserRedirectionCount: "/user-redirection-count",
+  fetchUserCommentCount: "/user-comment-count",
 };
 
 const fetchUserByEmailThunk = () => createAsyncThunk(
@@ -84,8 +86,40 @@ const fetchUserBookmarkCountThunk = () => createAsyncThunk(
   }
 );
 
+const fetchUserRedirectionCountThunk = () => createAsyncThunk(
+  "users/fetchUserRedirectionCount",
+  async (data, { rejectWithValue }) => {
+    try {
+      return await fetch(routes.fetchUserRedirectionCount, {
+          method: "GET",
+          headers: httpHeaders,
+      })
+      .then(res => res.json());
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const fetchUserCommentCountThunk = () => createAsyncThunk(
+  "users/fetchUserCommentCount",
+  async (data, { rejectWithValue }) => {
+    try {
+      return await fetch(routes.fetchUserCommentCount, {
+        method: "GET",
+        headers: httpHeaders,
+      })
+      .then(res => res.json());
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
 export {
   fetchUserByEmailThunk,
   fetchUserThreadCountThunk,
   fetchUserBookmarkCountThunk,
+  fetchUserRedirectionCountThunk,
+  fetchUserCommentCountThunk,
 };

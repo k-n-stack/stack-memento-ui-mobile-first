@@ -3,11 +3,15 @@ import {
   fetchUserByEmailThunk,
   fetchUserThreadCountThunk,
   fetchUserBookmarkCountThunk,
+  fetchUserRedirectionCountThunk,
+  fetchUserCommentCountThunk,
 } from "Store/Thunks/userThunks";
 
 export const login = fetchUserByEmailThunk();
 export const setUserThreadCount = fetchUserThreadCountThunk();
 export const setUserBookmarkCount = fetchUserBookmarkCountThunk();
+export const setUserRedirectionCount = fetchUserRedirectionCountThunk();
+export const setUserCommentCount = fetchUserCommentCountThunk();
 
 export const userSlice = createSlice({
   
@@ -61,6 +65,18 @@ export const userSlice = createSlice({
     [setUserBookmarkCount.pending]: (state, action) => {},
     [setUserBookmarkCount.fulfilled]: (state, action) => {
       state.bookmarkCount = action.payload;
+    },
+
+    [setUserRedirectionCount.rejected]: (state, action) => {},
+    [setUserRedirectionCount.pending]: (state, action) => {},
+    [setUserRedirectionCount.fulfilled]: (state, action) => {
+      state.redirectionCount = action.payload;
+    },
+
+    [setUserCommentCount.rejected]: (state, action) => {},
+    [setUserCommentCount.pending]: (state, action) => {},
+    [setUserCommentCount.fulfilled]: (state, action) => {
+      state.commentCount = action.payload;
     },
 
   },

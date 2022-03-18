@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Icon from "Components/Icon/Icon";
 
 import { setExpandUserPanel, setView, setUserPanelView, setUserSettingsView, setIsLogin } from "Store/Features/navigationSlice";
-import { setUserThreadCount, setUserBookmarkCount } from "Store/Features/userSlice";
+import { setUserThreadCount, setUserBookmarkCount, setUserRedirectionCount, setUserCommentCount } from "Store/Features/userSlice";
 import { clearUser } from "Store/Features/userSlice";
 
 import "./UserPanel.css";
@@ -18,6 +18,8 @@ const UserPanel = () => {
   const userSettingsView = useSelector((state) => (state.navigation.userSettingsView));
   const userThreadCount = useSelector((state) => (state.user.threadCount));
   const userBookmarkCount = useSelector((state) => (state.user.bookmarkCount));
+  const userRedirectionCount = useSelector((state) => (state.user.redirectionCount));
+  const userCommentCount = useSelector((state) => (state.user.commentCount));
 
   const variants = {
     userPanel: {
@@ -60,6 +62,8 @@ const UserPanel = () => {
   useEffect(() => {
     dispatch(setUserThreadCount());
     dispatch(setUserBookmarkCount());
+    dispatch(setUserRedirectionCount());
+    dispatch(setUserCommentCount());
   }, []);
 
   return (
@@ -102,8 +106,8 @@ const UserPanel = () => {
             <h1>{sessionStorage.getItem('stmn_pseudonym')}</h1>
             <h2>{userThreadCount} Threads</h2>
             <h3>{userBookmarkCount} Bookmarks</h3>
-            <p>492 Redirections</p>
-            <p>18 Comments</p>
+            <p>{userRedirectionCount} Redirections</p>
+            <p>{userCommentCount} Comments</p>
             <p>667 Upvotes</p>
           </div>
         }
@@ -192,10 +196,10 @@ const UserPanel = () => {
           <div 
             className="user-panel-logout-container"
             onClick={() => {
-              dispatch(clearUser());
-              dispatch(expandUserPanel(false));
-              dispatch(setView("login"));
               dispatch(setIsLogin(false));
+              dispatch(setView("login"));
+              dispatch(expandUserPanel(false));
+              dispatch(clearUser());
             }}
           >
             <p className="user-panel-logout">Logout</p>
