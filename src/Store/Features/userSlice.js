@@ -5,6 +5,8 @@ import {
   fetchUserBookmarkCountThunk,
   fetchUserRedirectionCountThunk,
   fetchUserCommentCountThunk,
+  fetchUserVoteCountThunk,
+  fetchUserThreadsThunk,
 } from "Store/Thunks/userThunks";
 
 export const login = fetchUserByEmailThunk();
@@ -12,6 +14,8 @@ export const setUserThreadCount = fetchUserThreadCountThunk();
 export const setUserBookmarkCount = fetchUserBookmarkCountThunk();
 export const setUserRedirectionCount = fetchUserRedirectionCountThunk();
 export const setUserCommentCount = fetchUserCommentCountThunk();
+export const setUserVoteCount = fetchUserVoteCountThunk();
+export const setUserThreads = fetchUserThreadsThunk()
 
 export const userSlice = createSlice({
   
@@ -29,6 +33,8 @@ export const userSlice = createSlice({
     redirectionCount: 0,
     commentCount: 0,
     voteCount: 0,
+
+    threads: [],
   },
 
   reducers: {
@@ -41,6 +47,11 @@ export const userSlice = createSlice({
       state.pseudonym = "";
       state.image_url = "";
       state.email_verified_at = "";
+      state.threadCount = 0;
+      state.bookmarkCount = 0;
+      state.redirectionCount = 0;
+      state.commentCount = 0;
+      state.voteCount = 0;
     },
   },
   
@@ -77,6 +88,18 @@ export const userSlice = createSlice({
     [setUserCommentCount.pending]: (state, action) => {},
     [setUserCommentCount.fulfilled]: (state, action) => {
       state.commentCount = action.payload;
+    },
+
+    [setUserVoteCount.rejected]: (state, action) => {},
+    [setUserVoteCount.pending]: (state, action) => {},
+    [setUserVoteCount.fulfilled]: (state, action) => {
+      state.voteCount = action.payload;
+    },
+
+    [setUserThreads.rejected]: (state, action) => {},
+    [setUserThreads.pending]: (state, action) => {},
+    [setUserThreads.fulfilled]: (state, action) => {
+      state.threads = action.payload;
     },
 
   },

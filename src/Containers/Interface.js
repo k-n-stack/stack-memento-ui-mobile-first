@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import InterfaceLayout from "Modules/InterfaceLayout";
 
 import { useSelector } from "react-redux";
@@ -12,12 +13,16 @@ import Groups from "Views/Groups";
 import UserPanel from "Modules/UserPanel";
 import SearchPanel from "Modules/SearchPanel";
 
+import { setUserBookmarkCount, setUserThreadCount, setUserRedirectionCount, setUserCommentCount } from "Store/Features/userSlice";
+import Test from "Views/Test";
+
 const Interface = () => {
 
+  const dispatch = useDispatch();
   const view = useSelector((state) => (state.navigation.view));
 
   const hasSubPanel = (view) => {
-    return ["myThreads", "pinnedThreads", "fellows", "groups"].includes(view) ? true : undefined;
+    return ["myThreads", "pinnedThreads", "fellows", "groups", "test"].includes(view) ? true : undefined;
   };
 
   const getPageName = (view) => {

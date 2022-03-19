@@ -1,10 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const httpHeaders = {
-  "Content-Type": "application/json",
-  "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
-};
-
 const handleError = (error) => {
   let _error = { error: "" };
   switch(error.name) {
@@ -26,6 +21,8 @@ const routes = {
   fetchUserBookmarkCount: "/user-bookmark-count",
   fetchUserRedirectionCount: "/user-redirection-count",
   fetchUserCommentCount: "/user-comment-count",
+  fetchUserVoteCount: "/user-vote-count",
+  fetchUserThreads: "/user-thread-full",
 };
 
 const fetchUserByEmailThunk = () => createAsyncThunk(
@@ -62,7 +59,10 @@ const fetchUserThreadCountThunk = () => createAsyncThunk(
     try {
       return await fetch(routes.fetchUserThreadCount, {
         method: "GET",
-        headers: httpHeaders,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
       })
       .then(res => res.json());
     } catch (error) {
@@ -77,7 +77,10 @@ const fetchUserBookmarkCountThunk = () => createAsyncThunk(
     try {
       return await fetch(routes.fetchUserBookmarkCount, {
         method: "GET",
-        headers: httpHeaders,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
       })
       .then(res => res.json());
     } catch (error) {
@@ -92,7 +95,10 @@ const fetchUserRedirectionCountThunk = () => createAsyncThunk(
     try {
       return await fetch(routes.fetchUserRedirectionCount, {
           method: "GET",
-          headers: httpHeaders,
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+          },
       })
       .then(res => res.json());
     } catch (error) {
@@ -107,7 +113,46 @@ const fetchUserCommentCountThunk = () => createAsyncThunk(
     try {
       return await fetch(routes.fetchUserCommentCount, {
         method: "GET",
-        headers: httpHeaders,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+      })
+      .then(res => res.json());
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const fetchUserVoteCountThunk = () => createAsyncThunk(
+  "user/fetchUserVoteCount",
+  async (data, { rejectWithValue }) => {
+    try {
+      return await fetch(routes.fetchUserVoteCount, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+      })
+      .then(res => res.json());
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const fetchUserThreadsThunk = () => createAsyncThunk(
+  "user/fetchUserThreads",
+  async (data, { rejectWithValue }) => {
+    try {
+      return await fetch(routes.fetchUserThreads, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
       })
       .then(res => res.json());
     } catch (error) {
@@ -122,4 +167,6 @@ export {
   fetchUserBookmarkCountThunk,
   fetchUserRedirectionCountThunk,
   fetchUserCommentCountThunk,
+  fetchUserVoteCountThunk,
+  fetchUserThreadsThunk,
 };

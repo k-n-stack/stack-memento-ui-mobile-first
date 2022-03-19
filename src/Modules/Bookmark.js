@@ -15,7 +15,7 @@ const Bookmark = (props) => {
   const bookmarkAnchorTop = props.bookmarkAnchorTop || 20;
   const compactBookmark = props.compactBookmark || false;
 
-  const title = props.title || "Error: No title provided";
+  const description = props.description || "Error: No title provided";
   const _testUrl = "http://www.stack-memento.com/";
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const Bookmark = (props) => {
             marginBottom: compactBookmark === false ? "" : "6px",
           }}
         >
-          {title}
+          {description}
         </h1>
         {showUrl && <h2 className="bookmark-url">{_testUrl}</h2>}
       </div>

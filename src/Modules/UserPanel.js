@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Icon from "Components/Icon/Icon";
 
 import { setExpandUserPanel, setView, setUserPanelView, setUserSettingsView, setIsLogin } from "Store/Features/navigationSlice";
-import { setUserThreadCount, setUserBookmarkCount, setUserRedirectionCount, setUserCommentCount } from "Store/Features/userSlice";
+import { setUserThreadCount, setUserBookmarkCount, setUserRedirectionCount, setUserCommentCount, setUserVoteCount } from "Store/Features/userSlice";
 import { clearUser } from "Store/Features/userSlice";
 
 import "./UserPanel.css";
@@ -20,6 +20,7 @@ const UserPanel = () => {
   const userBookmarkCount = useSelector((state) => (state.user.bookmarkCount));
   const userRedirectionCount = useSelector((state) => (state.user.redirectionCount));
   const userCommentCount = useSelector((state) => (state.user.commentCount));
+  const userVoteCount = useSelector((state) => (state.user.voteCount))
 
   const variants = {
     userPanel: {
@@ -60,10 +61,11 @@ const UserPanel = () => {
   };
 
   useEffect(() => {
-    dispatch(setUserThreadCount());
     dispatch(setUserBookmarkCount());
-    dispatch(setUserRedirectionCount());
+    dispatch(setUserThreadCount());
     dispatch(setUserCommentCount());
+    dispatch(setUserRedirectionCount());
+    dispatch(setUserVoteCount());
   }, []);
 
   return (
@@ -74,7 +76,6 @@ const UserPanel = () => {
       animate={expandUserPanel ? (userPanelView === "stats" ? "stats" : "settings") : "collapse"}
       transition={{ type: "linear", duration: 0.5 }}
     >
-
       <div 
         className="user-panel-close-icon-container"
         onClick={() => {
@@ -108,7 +109,7 @@ const UserPanel = () => {
             <h3>{userBookmarkCount} Bookmarks</h3>
             <p>{userRedirectionCount} Redirections</p>
             <p>{userCommentCount} Comments</p>
-            <p>667 Upvotes</p>
+            <p>{userVoteCount} Upvotes</p>
           </div>
         }
 
@@ -169,7 +170,6 @@ const UserPanel = () => {
           <div
             onClick={() => {
               dispatch(setUserPanelView("stats"));
-              console.log(userPanelView);
             }}
             style={{
               opacity: userPanelView === "stats" ? 0.5 : 1,
@@ -196,10 +196,10 @@ const UserPanel = () => {
           <div 
             className="user-panel-logout-container"
             onClick={() => {
-              dispatch(setIsLogin(false));
-              dispatch(setView("login"));
-              dispatch(expandUserPanel(false));
               dispatch(clearUser());
+              dispatch(setView("login"));
+              dispatch(setExpandUserPanel(false));
+              dispatch(setIsLogin(false));
             }}
           >
             <p className="user-panel-logout">Logout</p>
