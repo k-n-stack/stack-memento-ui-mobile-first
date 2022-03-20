@@ -5,7 +5,6 @@ import Thread from "Modules/Thread";
 import fake from "Ressources/Static/fakeData.json";
 import "./Global.css";
 import ThreadCarousel from "Modules/ThreadsCarousel";
-import { useSelector } from "react-redux";
 
 const Global = () => {
 
@@ -14,8 +13,6 @@ const Global = () => {
   const _topRedirections = fake.global.topRedirections.threads;
   const _topContributed = fake.global.topContributed.threads;
   const _topViewed = fake.global.topViewed.threads;
-
-  const threads = useSelector((state) => state.global.threads);
  
   const style = {
     singleBookmarkThread: {
@@ -47,12 +44,33 @@ const Global = () => {
 
   return (
     <>
+      <div className="last-commented">
+        <h1>Last commented</h1>
+        <div className="last-commented-threads-container">
+          {getSingleBookmarkThread(_lastCommented)}
+        </div>
+
+      </div>
+      <div className="last-bookmarks">
+        <h1>Last bookmarks</h1>
+        <div className="last-bookmarks-threads-container">
+          {getSingleBookmarkThread(_lastBookmarks)}
+        </div>
+      </div>
       <div className="top-redirections">
         <h1>Top redirection</h1>
-        <ThreadCarousel threads={threads} />
+        <ThreadCarousel threads={_topRedirections} />
+      </div>
+      <div className="top-contributed">
+        <h1>Top contributed</h1>
+        <ThreadCarousel threads={_topContributed} />
+      </div>
+      <div className="top-viewed">
+        <h1>Top viewed</h1>
+        <ThreadCarousel threads={_topViewed} />
       </div>
     </>
   );
 };
 
-export default Global;
+// export default Global;

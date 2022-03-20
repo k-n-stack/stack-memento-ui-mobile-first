@@ -9,7 +9,7 @@ const Thread = (props) => {
   const threadRef = useRef(null);
   const [threadHeight, setThreadHeight] = useState(0);
 
-  const threadColor = props.threadColor || "#555555";
+  const threadColor = props.color ? `#${props.color}` : "#555555";
   const threadStrokeWidth = props.threadStrokeWidth || 12;
 
   const dotRadius = props.dotRadius || 50;
@@ -36,8 +36,6 @@ const Thread = (props) => {
     return bookmarks.map((value) => {
       return (
         <Bookmark 
-          // description={value.description}
-          // url={value.url} 
           {...value}
           pigtailColor={threadColor}
           pigtailStrokeWidth={threadStrokeWidth}

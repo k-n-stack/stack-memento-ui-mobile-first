@@ -30,10 +30,6 @@ const MyThreads = () => {
 
   return (
     <>
-      <Bookmark
-        {..._bookmark}
-        {...testStyle}
-      />
     </>
   );
 };

@@ -12,10 +12,11 @@ import Fellows from "Views/Fellows";
 import Groups from "Views/Groups";
 import UserPanel from "Modules/UserPanel";
 import SearchPanel from "Modules/SearchPanel";
+import ThreadBrowser from "Views/ThreadBrowser";
 
 import { setUserBookmarkCount, setUserThreadCount, setUserRedirectionCount, setUserCommentCount } from "Store/Features/userSlice";
 import { setUserThreads } from "Store/Features/userSlice";
-import Test from "Views/Test";
+import { setGlobalThreads } from "Store/Features/globalSlice";
 
 const Interface = () => {
 
@@ -23,7 +24,7 @@ const Interface = () => {
   const view = useSelector((state) => (state.navigation.view));
 
   const hasSubPanel = (view) => {
-    return ["myThreads", "pinnedThreads", "fellows", "groups", "test"].includes(view) ? true : undefined;
+    return ["myThreads", "pinnedThreads", "fellows", "groups"].includes(view) ? true : undefined;
   };
 
   const getPageName = (view) => {
@@ -33,6 +34,7 @@ const Interface = () => {
       pinnedThreads: "Pinned Threads",
       fellows: "Fellows",
       groups: "Groups",
+      threadBrowser: "test",
     }
 
     return view in pageNames ? pageNames[view] : undefined;
@@ -62,6 +64,8 @@ const Interface = () => {
         return <Fellows />;
       case view === "groups" :
         return <Groups />;
+      case view === "threadBrowser":
+        return <ThreadBrowser />;
       default: 
         return <Homepage />;
     }
@@ -69,6 +73,7 @@ const Interface = () => {
 
   useEffect(() => {
     dispatch(setUserThreads());
+    dispatch(setGlobalThreads());
   }, []);
 
   return (

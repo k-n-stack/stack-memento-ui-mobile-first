@@ -25,7 +25,12 @@ const Bookmark = (props) => {
     return comments.map(function (comment) {
       return (
         <div style={{ marginLeft: _marginLeft }}>
-          <div>{comment.body}</div>
+          <div style={{
+            backgroundColor: "pink"
+          }}>
+            <p>{comment.body}</p>
+            <p>{comment.poster_name}</p>
+          </div>
           {comment.childs.length ? getComments(comment.childs, _marginLeft + 20) : null}
         </div>
       );
