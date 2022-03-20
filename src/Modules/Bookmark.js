@@ -20,6 +20,18 @@ const Bookmark = (props) => {
   const description = props.description || "Error: No title provided";
   const url = props.url || "Error: No url provided";
 
+  // !!! RECURSIVE
+  const getComments = (comments, _marginLeft = 0) => {
+    return comments.map(function (comment) {
+      return (
+        <div style={{ marginLeft: _marginLeft }}>
+          <div>{comment.body}</div>
+          {comment.childs.length ? getComments(comment.childs, _marginLeft + 20) : null}
+        </div>
+      );
+    });
+  }
+
   useEffect(() => {
     if (props.parentRef !== undefined) {
       props.setThreadHeight(props.parentRef.current.clientHeight);
@@ -90,10 +102,24 @@ const Bookmark = (props) => {
             </div>
             <p>{props.created_at}</p>
           </div>
-          <p>redirections: {props.redirection_count}</p>
-          <p>votes: {props.vote_count}</p>
-          <p>comments: {props.comment_count}</p>
-          <p>tags : </p>
+          <div className="bookmark-tags">
+            {
+              props.tags.map((tag) => {
+                return <div className="bookmark-tag">{tag}</div>
+              })
+            }
+          </div>
+
+          {/* !!! RECURSIVE */}
+          <div className="bookmark-comments">
+            {/* <div className="parent">hello</div>
+            <div className="child">hello</div>
+            <div className="child">hello</div>
+            <div className="parent">hello</div>
+            <div className="parent">hello</div>
+            <div className="child">hello</div> */}
+            {getComments(props.comments)}
+          </div>
 
         </div>
       </div>

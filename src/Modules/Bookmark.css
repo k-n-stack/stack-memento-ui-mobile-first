@@ -51,6 +51,7 @@
   justify-content: space-between;
   font-size: 20px;
   color: rgb(161, 161, 161);
+  margin-bottom: 15px;
 }
 
 .bookmark-info > p {
@@ -73,4 +74,28 @@
 .bookmark-icon-container {
   width: 25px;
   height: 25px;
+}
+
+.bookmark-tags {
+  display: flex;
+  gap: 10px;
+}
+
+.bookmark-tag {
+  background-color: rgb(204, 204, 204);
+  padding: 5px 20px;
+  border-radius: 20px;
+}
+
+.bookmark-comments {
+  background-color: aqua;
+}
+
+.parent {
+  background-color: #3650AB;
+}
+
+.child {
+  background-color: blueviolet;
+  margin-left: 40px;
 }

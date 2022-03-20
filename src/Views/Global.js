@@ -44,7 +44,7 @@ const Global = () => {
 
   return (
     <>
-      <div className="last-commented">
+      {/* <div className="last-commented">
         <h1>Last commented</h1>
         <div className="last-commented-threads-container">
           {getSingleBookmarkThread(_lastCommented)}
@@ -68,7 +68,7 @@ const Global = () => {
       <div className="top-viewed">
         <h1>Top viewed</h1>
         <ThreadCarousel threads={_topViewed} />
-      </div>
+      </div> */}
     </>
   );
 };
