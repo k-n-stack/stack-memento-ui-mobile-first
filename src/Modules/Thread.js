@@ -36,7 +36,9 @@ const Thread = (props) => {
     return bookmarks.map((value) => {
       return (
         <Bookmark 
-          description={value.description} 
+          // description={value.description}
+          // url={value.url} 
+          {...value}
           pigtailColor={threadColor}
           pigtailStrokeWidth={threadStrokeWidth}
           pigtailWidth={pigtailWidth}

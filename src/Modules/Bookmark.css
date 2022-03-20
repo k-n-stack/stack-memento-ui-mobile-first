@@ -19,6 +19,10 @@
   padding-right: 10px;
 }
 
+.bookmark-container > p {
+  margin: 0px;
+}
+
 .bookmark-title {
   white-space: nowrap;
   overflow: hidden;

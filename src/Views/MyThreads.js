@@ -1,55 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import Thread from "Modules/Thread";
-
-import { setUserThreads } from "Store/Features/userSlice";
 
 import "./Global.css";
 
 const MyThreads = () => {
-
-  const dispatch = useDispatch();
   const userThreads = useSelector((state) => (state.user.threads));
- 
-  const style = {
-    singleBookmarkThread: {
-      nameSize: 20,
-      dotRadius: 13,
-      threadStrokeWidth: 5,
-      pigtailWidth: 25,
-      pigtailHeight: 25,
-      bookmarksTop: 25,
-      bookmarkTitleSize: 16,
-      noBottomLine: true,
-      noMenu: true,
-    },
-  };
 
-  const getSingleBookmarkThread = (threads) => {
-    return threads.map((value) => {
-      return (
-        <Thread
-          bookmarks={value.bookmarks}
-          threadColor={"#"+value.color}
-          title={value.title}
-          nameColor={"#"+value.color}
-          {...style.singleBookmarkThread}
-        />
-      );
-    });
-  };
+  const testStyle = {
+    nameSize: 16,
+    dotRadius: 10,
+    threadStrokeWidth: 5,
+    pigtailWidth: 20,
+    pigtailHeight: 20,
+    bookmarkTitleSize: 14,
+    bookmarksTop: 40,
+    bottomExtraLine: 1,
+    bottomDropLength: 1,
+    bottomDropGap: 1,
+  }
 
   useEffect(() => {
-    dispatch(setUserThreads());
-    console.log(userThreads);
+    
   }, []);
 
   return (
     <>
-      {/* <Thread 
-        bookmarks={[]}
-      /> */}
-      {getSingleBookmarkThread(userThreads)}
+      <Thread 
+        bookmarks={userThreads[2].bookmarks}
+        title={userThreads[2].title}
+        threadColor={"#"+userThreads[2].color}
+        nameColor={"#"+userThreads[2].color}
+        {...testStyle}
+      />
     </>
   );
 };

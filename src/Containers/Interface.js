@@ -14,6 +14,7 @@ import UserPanel from "Modules/UserPanel";
 import SearchPanel from "Modules/SearchPanel";
 
 import { setUserBookmarkCount, setUserThreadCount, setUserRedirectionCount, setUserCommentCount } from "Store/Features/userSlice";
+import { setUserThreads } from "Store/Features/userSlice";
 import Test from "Views/Test";
 
 const Interface = () => {
@@ -65,6 +66,10 @@ const Interface = () => {
         return <Homepage />;
     }
   };
+
+  useEffect(() => {
+    dispatch(setUserThreads());
+  }, []);
 
   return (
     <>

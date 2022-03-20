@@ -16,10 +16,19 @@ const Bookmark = (props) => {
   const compactBookmark = props.compactBookmark || false;
 
   const description = props.description || "Error: No title provided";
-  const _testUrl = "http://www.stack-memento.com/";
+  const url = props.url || "Error: No url provided";
+
+  const nestComments = () => {
+    return (
+      <>
+        
+      </>
+    )
+  }
 
   useEffect(() => {
     props.setThreadHeight(props.parentRef.current.clientHeight);
+    console.log(props);
   });
 
   return (
@@ -59,17 +68,14 @@ const Bookmark = (props) => {
         }}
         onClick={() => setShowUrl(!showUrl)}
       >
-        <h1 
-          className="bookmark-title"
-          style={{
-            fontSize: `${bookmarkTitleSize}px`,
-            marginTop: compactBookmark === false ? "" : "6px",
-            marginBottom: compactBookmark === false ? "" : "6px",
-          }}
-        >
-          {description}
-        </h1>
-        {showUrl && <h2 className="bookmark-url">{_testUrl}</h2>}
+        <p className="bookmark-title">{description}</p>
+        <p className="bookmark-url">{url}</p>
+        <p>redirections: {props.redirection_count}</p>
+        <p>votes: {props.vote_count}</p>
+        <p>comments: {props.comment_count}</p>
+        <p>
+          tags: {props.tags.reduce((prev, curr) => prev + " | " + curr, '')}
+        </p>
       </div>
 
     </div>

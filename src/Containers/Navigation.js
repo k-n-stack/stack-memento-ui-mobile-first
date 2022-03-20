@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Homepage from "Views/Homepage";
 import Login from "Views/Login";
@@ -7,8 +7,11 @@ import Login from "Views/Login";
 import Register from "Views/Register";
 import Interface from "./Interface";
 
+import { setUserThreads } from "Store/Features/userSlice";
+
 const Navigation = (props) => {
 
+  const dispatch = useDispatch();
   const view = useSelector((state) => (state.navigation.view));
   const isLogin = useSelector((state) => (state.navigation.isLogin));
 
