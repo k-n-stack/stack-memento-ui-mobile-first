@@ -77,7 +77,7 @@ const Login = (props) => {
                   event.preventDefault();
                   dispatch(login({ email: email, password: password }));
                 }}
-                backgroundColor="#99D17E"
+                color="green"
               />
             </div>
           </div>

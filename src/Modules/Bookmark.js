@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import Icon from "Components/Icon/Icon";
+
 import "./Bookmark.css";
 
 const Bookmark = (props) => {
@@ -18,17 +20,10 @@ const Bookmark = (props) => {
   const description = props.description || "Error: No title provided";
   const url = props.url || "Error: No url provided";
 
-  const nestComments = () => {
-    return (
-      <>
-        
-      </>
-    )
-  }
-
   useEffect(() => {
-    props.setThreadHeight(props.parentRef.current.clientHeight);
-    console.log(props);
+    if (props.parentRef !== undefined) {
+      props.setThreadHeight(props.parentRef.current.clientHeight);
+    }
   });
 
   return (
@@ -68,14 +63,39 @@ const Bookmark = (props) => {
         }}
         onClick={() => setShowUrl(!showUrl)}
       >
-        <p className="bookmark-title">{description}</p>
-        <p className="bookmark-url">{url}</p>
-        <p>redirections: {props.redirection_count}</p>
-        <p>votes: {props.vote_count}</p>
-        <p>comments: {props.comment_count}</p>
-        <p>
-          tags: {props.tags.reduce((prev, curr) => prev + " | " + curr, '')}
-        </p>
+        <div className="bookmark-content-container">
+
+          <p className="bookmark-title">{description}</p>
+          <a className="bookmark-url">{url}</a>
+          <div className="bookmark-info">
+            <div className="bookmark-stats">
+              <div>
+                <div className="bookmark-icon-container">
+                  <Icon icon="Redirections"/>
+                </div>
+                <div>{props.redirection_count}</div>
+              </div>
+              <div>
+                <div className="bookmark-icon-container">
+                  <Icon icon="Upvotes"/>
+                </div>
+                <div>{props.vote_count}</div>
+              </div>
+              <div>
+                <div className="bookmark-icon-container">
+                  <Icon icon="Comments"/>
+                </div>
+                <div>{props.comment_count}</div>
+              </div>
+            </div>
+            <p>{props.created_at}</p>
+          </div>
+          <p>redirections: {props.redirection_count}</p>
+          <p>votes: {props.vote_count}</p>
+          <p>comments: {props.comment_count}</p>
+          <p>tags : </p>
+
+        </div>
       </div>
 
     </div>

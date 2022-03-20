@@ -15,6 +15,24 @@
   box-sizing: border-box;
 }
 
+.line-input-light {
+  border-bottom-color: white;
+  color: white;
+}
+
+.line-input-dark {
+  border-bottom-color: #3650AB;
+  color: #3650AB
+}
+
+.line-input-has-left-icon {
+  padding-left: 1.75rem;
+}
+
+.line-input-has-right-icon {
+  padding-right: 1.45rem;
+}
+
 .line-input-icon-container {
   /* z-index: -1; */
   position: absolute;
@@ -31,4 +49,8 @@
   right: 0px;
   width: 1.2rem;
   height: 1.2rem;
+}
+
+.line-input-clear-container-transparent {
+  opacity: 0.3;
 }

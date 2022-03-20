@@ -2,7 +2,7 @@ import React from "react";
 
 const DivBackgroundLeft = () => {
   return (
-    <div style={{width: "100%", height: "100%", position: "relative"}}>
+    <div style={{width: "100%", height: "100%", position: "relative", zIndex: 3000}}>
 
       <div style={{
         position: "absolute",

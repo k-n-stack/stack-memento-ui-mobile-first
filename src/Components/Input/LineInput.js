@@ -10,10 +10,21 @@ const LineInput = (props) => {
 
   const color = props.light !== undefined ? "#FFFFFF" : "#3650AB";
 
+  const styleClasses = {
+    lineInput: [
+      props.light !== undefined ? "line-input-light" : "line-input-dark",
+      props.hasLeftIcon ? "line-input-has-left-icon" : "",
+      props.hasRightIcon ? "line-input-has-right-icon" : "",
+    ],
+    lineInputClearContainer: [
+      value ? "" : "line-input-clear-container-transparent",
+    ]
+  }
+
   return (
     <div className="line-input-container">
       <input 
-        className={`line-input ${props.light !== undefined ? "light-input" : "dark-input"}`}
+        className={`line-input ${styleClasses.lineInput.join(" ")}`}
         placeholder="Search users, threads, tags..."
         onChange={(event) => {
           if (props.onChange) {
@@ -22,12 +33,6 @@ const LineInput = (props) => {
           setValue(event.target.value);
         }}
         ref={inputRef}
-        style={{
-          borderBottomColor: color,
-          paddingLeft: props.hasLeftIcon ? "1.75rem" : "",
-          paddingRight: props.hasRightIcon ? "1.45rem" : "",
-          color: color,
-        }}
       />
       {
         props.hasLeftIcon !== undefined &&
@@ -38,13 +43,10 @@ const LineInput = (props) => {
       {
         props.hasRightIcon !== undefined &&
         <div 
-          className="line-input-clear-container"
+          className={`line-input-clear-container ${styleClasses.lineInputClearContainer.join(" ")}`}
           onClick={() => {
             setValue("");
             inputRef.current.value = "";
-          }}
-          style={{
-            opacity: value ? 1 : 0.3,
           }}
         >
           <Icon icon="Cross" iconColor={color}/>

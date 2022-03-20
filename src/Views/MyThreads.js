@@ -4,8 +4,12 @@ import Thread from "Modules/Thread";
 
 import "./Global.css";
 
+import fakeData from "Ressources/Static/fakeData.json";
+import Bookmark from "Modules/Bookmark";
+
 const MyThreads = () => {
-  const userThreads = useSelector((state) => (state.user.threads));
+
+  const _bookmark = fakeData.bookmark;
 
   const testStyle = {
     nameSize: 16,
@@ -26,11 +30,8 @@ const MyThreads = () => {
 
   return (
     <>
-      <Thread 
-        bookmarks={userThreads[2].bookmarks}
-        title={userThreads[2].title}
-        threadColor={"#"+userThreads[2].color}
-        nameColor={"#"+userThreads[2].color}
+      <Bookmark
+        {..._bookmark}
         {...testStyle}
       />
     </>

@@ -29,6 +29,9 @@ import {
   MagnifierPlus,
   MagnifierCog,
   MagnifierCross,
+  Comments,
+  Redirections,
+  Upvotes,
 } from "Components/Icon/Svg";
 
 
@@ -63,6 +66,9 @@ const Icon = (props) => {
     MagnifierPlus: MagnifierPlus,
     MagnifierCog: MagnifierCog,
     MagnifierCross: MagnifierCross,
+    Comments: Comments,
+    Redirections: Redirections,
+    Upvotes: Upvotes,
   }
 
   const getSvg = (svgName) => {

@@ -10,8 +10,11 @@ const ToggleSwitch = (props) => {
   const toggleOnColor = "rgb(117, 168, 92)";
   const toggleOffColor = "rgb(204, 204, 204)";
 
-  const height = props.height || 30;
-  const width = props.width || 55; 
+  const styleClasses = {
+    dot: [
+      isOn ? "dot-right" : "dot-left",
+    ]
+  }
 
   return (
     <div className="toggle-switch">
@@ -23,10 +26,6 @@ const ToggleSwitch = (props) => {
           if(props.onClick !== undefined) {
             props.onClick();
           }
-        }}
-        style={{
-          width: width,
-          height: height,
         }}
       >
         <LayoutGroup>
@@ -41,13 +40,8 @@ const ToggleSwitch = (props) => {
             layout
           >
             <motion.div 
-              className="dot"
+              className={`dot ${styleClasses.dot.join(" ")}`}
               layout
-              style={{
-                width: height,
-                right: isOn ? 0 : "",
-                left: isOn ? "" : 0,
-              }}
             >
             </motion.div>
           </motion.div>
