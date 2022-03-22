@@ -40,11 +40,13 @@ const ThreadCarousel = (props) => {
           style={{opacity: 0.4}}
           animate={{opacity: index === selectedThread - 1 ? 1 : 0.4}}
         >
-          <div onClick={() => {
-            window.scrollTo(0, 0);
-            dispatch(setView('threadBrowser'));
-            dispatch(setBrowseThread(value));
-          }}>
+          <div 
+            onClick={() => {
+              window.scrollTo(0, 0);
+              dispatch(setView('threadBrowser'));
+              dispatch(setBrowseThread(value));
+            }
+          }>
             <Thread
               {...value}
               {...style.multipleBookmarksThread}

@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 
 import Bookmark from "./Bookmark";
+import ThreadDot from "Components/Svg/ThreadDot";
+import ThreadLine from "Components/Svg/ThreadLine";
 
 import "./Thread.css";
 
@@ -31,6 +33,8 @@ const Thread = (props) => {
 
   const lineBottomY = threadHeight - threadStrokeWidth / 2 + bottomExtraLine;
   const lineTotalHeight = threadHeight + bottomExtraLine + bottomDropLength * 2 + bottomDropGap * 2;
+
+  const bookmarksOnly = props.bookmarksOnly !== undefined;
 
   const getBookmarks = (bookmarks) => {
     return bookmarks.map((value) => {
@@ -67,38 +71,32 @@ const Thread = (props) => {
           width: `${dotDiameter}px`,
         }}
       >
-        <div className="thread-dot-name">
-          <svg 
-            width={`${dotDiameter}px`}
-            height={`${dotDiameter}px`}
-            viewBox={`0 0 ${dotDiameter} ${dotDiameter}`}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle 
-              cx={dotRadius} 
-              cy={dotRadius} 
-              r={dotRadius} 
-              fill={threadColor}
+        { !bookmarksOnly &&
+          <div className="thread-dot-name">
+            <ThreadDot 
+              dotDiameter={dotDiameter}
+              dotRadius={dotRadius}
+              threadColor={threadColor}
             />
-          </svg>
-          <div 
-            className="thread-name-container"
-            style={{
-              height: dotDiameter,
-            }}
-          >
-            <h1 
-              className="thread-name"
+            <div 
+              className="thread-name-container"
               style={{
-                marginLeft: nameGap,
-                fontSize: `${nameSize}px`,
-                color: nameColor,
+                height: dotDiameter,
               }}
             >
-              {props.title || "Error: No thread name"}
-            </h1>
+              <h1 
+                className="thread-name"
+                style={{
+                  marginLeft: nameGap,
+                  fontSize: `${nameSize}px`,
+                  color: nameColor,
+                }}
+              >
+                {props.title || "Error: No thread name"}
+              </h1>
+            </div>
           </div>
-        </div>
+        }
 
         {
           props.noMenu === undefined &&
@@ -115,32 +113,16 @@ const Thread = (props) => {
 
         {
           props.noBottomLine === undefined &&
-          <svg 
-            width={`${dotDiameter}px`}
-            height={`${lineTotalHeight}px`}
-            viewBox={`0 0 ${dotDiameter} ${lineTotalHeight}`}
-            fill="none" 
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path 
-              d={`M${dotRadius} ${dotRadius} L${dotRadius} ${lineBottomY}`}
-              stroke={threadColor} 
-              strokeWidth={threadStrokeWidth} 
-              strokeLinecap="round"
-            />
-            <path
-              d={`M${dotRadius} ${lineBottomY + bottomDropGap} L${dotRadius} ${lineBottomY + bottomDropGap + bottomDropLength}`}
-              stroke={threadColor}
-              strokeWidth={threadStrokeWidth}
-              strokeLinecap="round"
-            />
-            <path
-              d={`M${dotRadius} ${lineBottomY + bottomDropGap * 2 + bottomDropLength} L${dotRadius} ${lineBottomY + bottomDropGap * 2 + bottomDropLength * 2}`}
-              stroke={threadColor}
-              strokeWidth={threadStrokeWidth}
-              strokeLinecap="round"
-            />
-          </svg>
+          <ThreadLine 
+            dotDiameter={dotDiameter}
+            lineTotalHeight={lineTotalHeight}
+            dotRadius={dotRadius}
+            lineBottomY={lineBottomY}
+            threadColor={threadColor}
+            threadStrokeWidth={threadStrokeWidth}
+            bottomDropGap={bottomDropGap}
+            bottomDropLength={bottomDropLength}
+          />
         }
       </div>
 

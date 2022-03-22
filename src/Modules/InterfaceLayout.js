@@ -8,6 +8,8 @@ import Icon from "Components/Icon/Icon";
 
 import "./InterfaceLayout.css";
 import LineInput from "Components/Input/LineInput";
+import ThreadDot from "Components/Svg/ThreadDot";
+import ThreadLine from "Components/Svg/ThreadLine";
 
 const InterfaceLayout = (props) => {
 
@@ -26,6 +28,7 @@ const InterfaceLayout = (props) => {
 
   const dispatch = useDispatch();
   const selectedView = useSelector((state) => (state.navigation.view));
+  const browseThread = useSelector((state) => (state.navigation.browseThread));
 
   const hasSubPanel = props.hasSubPanel === undefined ? false : true;
   const pageName = props.pageName || "Page Name";
@@ -320,6 +323,32 @@ const InterfaceLayout = (props) => {
             marginBottom: `calc(-100vh + ${isPortrait ? "80px" : (hasSubPanel ? (isSubPanelStatic ? "50px" : "80px") : "90px")})`
           }}
         >
+
+          {
+            selectedView === "threadBrowser" && !isPortrait &&
+            <div className="thread-title">
+              <div className="thread-title-dot-container">
+                <ThreadDot
+                  dotDiameter={66}
+                  dotRadius={33}
+                  threadColor={`#${browseThread.color}`}
+                />
+              </div>
+              <div className="thread-title-line-container">
+                <ThreadLine
+                  dotDiameter={66}
+                  lineTotalHeight={150}
+                  dotRadius={33}
+                  lineBottomY={150}
+                  threadColor={`#${browseThread.color}`}
+                  threadStrokeWidth={12}
+                  bottomDropGap={0}
+                  bottomDropLength={0}
+                />
+              </div>
+            </div>
+          }
+
           <div className="navigation-top-interface"
             style={{
               marginLeft: isPortrait ? "" : (hasSubPanel ? "0px" : "55px"), 
