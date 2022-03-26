@@ -7,6 +7,7 @@ import {
   fetchUserCommentCountThunk,
   fetchUserVoteCountThunk,
   fetchUserThreadsThunk,
+  fetchUserPinnedThreadsThunk,
 } from "Store/Thunks/userThunks";
 
 export const login = fetchUserByEmailThunk();
@@ -15,7 +16,8 @@ export const setUserBookmarkCount = fetchUserBookmarkCountThunk();
 export const setUserRedirectionCount = fetchUserRedirectionCountThunk();
 export const setUserCommentCount = fetchUserCommentCountThunk();
 export const setUserVoteCount = fetchUserVoteCountThunk();
-export const setUserThreads = fetchUserThreadsThunk()
+export const setUserThreads = fetchUserThreadsThunk();
+export const setUserPinnedThreads = fetchUserPinnedThreadsThunk();
 
 export const userSlice = createSlice({
   
@@ -35,6 +37,7 @@ export const userSlice = createSlice({
     voteCount: 0,
 
     threads: [],
+    pinnedThreads: [],
   },
 
   reducers: {
@@ -100,6 +103,12 @@ export const userSlice = createSlice({
     [setUserThreads.pending]: (state, action) => {},
     [setUserThreads.fulfilled]: (state, action) => {
       state.threads = action.payload;
+    },
+
+    [setUserPinnedThreads.rejected]: (state, action) => {},
+    [setUserPinnedThreads.pending]: (state, action) => {},
+    [setUserPinnedThreads.fulfilled]: (state, action) => {
+      state.pinnedThreads = action.payload;
     },
 
   },

@@ -23,6 +23,7 @@ const routes = {
   fetchUserCommentCount: "/user-comment-count",
   fetchUserVoteCount: "/user-vote-count",
   fetchUserThreads: "/user-thread-full",
+  fetchUserPinnedThreads: "/user-pinned",
 };
 
 const fetchUserByEmailThunk = () => createAsyncThunk(
@@ -161,6 +162,24 @@ const fetchUserThreadsThunk = () => createAsyncThunk(
   }
 );
 
+const fetchUserPinnedThreadsThunk = () => createAsyncThunk(
+  "user/fetchUserPinnedThreads",
+  async (data, { rejectWithValue }) => {
+    try {
+      return await fetch(routes.fetchUserPinnedThreads, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        }
+      })
+      .then(res => res.json());
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
 export {
   fetchUserByEmailThunk,
   fetchUserThreadCountThunk,
@@ -169,4 +188,5 @@ export {
   fetchUserCommentCountThunk,
   fetchUserVoteCountThunk,
   fetchUserThreadsThunk,
+  fetchUserPinnedThreadsThunk,
 };

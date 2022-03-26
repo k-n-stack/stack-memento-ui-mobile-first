@@ -28,7 +28,8 @@
 
 .thread-name-container {
   display: flex;
-  align-items: center;;
+  align-items: center;
+
 }
 
 .thread-name {
@@ -37,6 +38,8 @@
   align-self: center;
   vertical-align: middle;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .thread-menu-container {

@@ -17,6 +17,7 @@ import ThreadBrowser from "Views/ThreadBrowser";
 import { setUserBookmarkCount, setUserThreadCount, setUserRedirectionCount, setUserCommentCount } from "Store/Features/userSlice";
 import { setUserThreads } from "Store/Features/userSlice";
 import { setGlobalThreads } from "Store/Features/globalSlice";
+import { setBrowseThread } from "Store/Features/navigationSlice";
 
 const Interface = () => {
 

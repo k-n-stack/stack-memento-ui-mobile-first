@@ -23,15 +23,20 @@ const MyThreads = () => {
     noMenu: true,
     bookmarkTitleOnly: true,
     compactBookmark: true,
+    expandable: true,
   }
 
   const getExpandableThreads = (threads) => {
     return threads.map((thread) => {
       return (
-        <Thread 
-          {...thread}
-          {...testStyle}
-        />
+        <div style={{
+          opacity: thread.bookmarks.length ? 1 : 0.5,
+        }}>
+          <Thread 
+            {...thread}
+            {...testStyle}
+          />
+        </div>
       );
     });
   };

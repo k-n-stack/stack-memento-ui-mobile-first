@@ -370,7 +370,7 @@ const InterfaceLayout = (props) => {
               (!hasSubPanel || isPortrait) &&
               <div className="navigation-top-interface-left-container">
               {
-                (!browseThread) &&
+                selectedView !== "threadBrowser" &&
                 <>
                   <div className="navigation-top-interface-planet-container">
                       <Icon icon={props.iconName} iconColor="#3650AB"/>

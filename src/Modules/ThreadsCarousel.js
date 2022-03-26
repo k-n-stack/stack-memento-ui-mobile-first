@@ -25,8 +25,13 @@ const ThreadCarousel = (props) => {
       bottomDropGap: 15,
       pigtailWidth: 25,
       pigtailHeight: 25,
-      bookmarksTop: 50,
+      bookmarksTop: 45,
+      bookmarkTitleSize: 18,
+      bookmarkAnchorTop: 15,
+      nameContainerWidth: 270,
       noMenu: true,
+      bookmarkTitleOnly: true,
+      compactBookmark: true,
     },
   }
 
@@ -57,7 +62,7 @@ const ThreadCarousel = (props) => {
 
   return (
     <>
-      <div className="threads-carousel-bottom">
+      <div className="threads-carousel-top">
         <div 
           className="arrow-left-container"
           onClick={() => {
