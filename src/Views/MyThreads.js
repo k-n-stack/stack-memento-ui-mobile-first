@@ -2,14 +2,11 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Thread from "Modules/Thread";
 
-import "./Global.css";
-
-import fakeData from "Ressources/Static/fakeData.json";
-import Bookmark from "Modules/Bookmark";
+import "./MyThreads.css";
 
 const MyThreads = () => {
 
-  const _bookmark = fakeData.bookmark;
+  const threads = useSelector((state) => (state.user.threads));
 
   const testStyle = {
     nameSize: 16,
@@ -17,19 +14,33 @@ const MyThreads = () => {
     threadStrokeWidth: 5,
     pigtailWidth: 20,
     pigtailHeight: 20,
-    bookmarkTitleSize: 14,
-    bookmarksTop: 40,
+    bookmarkTitleSize: 16,
+    bookmarkAnchorTop: 12,
+    bookmarksTop: 0,
     bottomExtraLine: 1,
     bottomDropLength: 1,
     bottomDropGap: 1,
+    noMenu: true,
+    bookmarkTitleOnly: true,
+    compactBookmark: true,
   }
 
-  useEffect(() => {
-    
-  }, []);
+  const getExpandableThreads = (threads) => {
+    return threads.map((thread) => {
+      return (
+        <Thread 
+          {...thread}
+          {...testStyle}
+        />
+      );
+    });
+  };
 
   return (
     <>
+      <div className="my-threads-threads-container">
+        {getExpandableThreads(threads)}
+      </div>
     </>
   );
 };

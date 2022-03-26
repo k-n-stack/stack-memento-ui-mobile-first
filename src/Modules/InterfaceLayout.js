@@ -333,6 +333,13 @@ const InterfaceLayout = (props) => {
                   dotRadius={33}
                   threadColor={`#${browseThread.color}`}
                 />
+                <h1
+                  style={{
+                    color: `#${browseThread.color}`,
+                  }}
+                >
+                  Thread Title
+                </h1>
               </div>
               <div className="thread-title-line-container">
                 <ThreadLine
@@ -362,10 +369,15 @@ const InterfaceLayout = (props) => {
             {
               (!hasSubPanel || isPortrait) &&
               <div className="navigation-top-interface-left-container">
-                <div className="navigation-top-interface-planet-container">
-                  <Icon icon={props.iconName} iconColor="#3650AB"/>
-                </div>
-                <h1>{pageName}</h1>
+              {
+                (!browseThread) &&
+                <>
+                  <div className="navigation-top-interface-planet-container">
+                      <Icon icon={props.iconName} iconColor="#3650AB"/>
+                  </div>
+                  <h1>{pageName}</h1>
+                </>
+              }
               </div>
             }
             <div className="navigation-top-interface-right-container">

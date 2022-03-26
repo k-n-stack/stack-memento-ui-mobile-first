@@ -1,6 +1,7 @@
 .thread {
   display: flex;
-  /* background-color: blueviolet; */
+  flex-direction: column;
+  /* background-color: gold; */
 }
 
 .thread-vertical-line-container {

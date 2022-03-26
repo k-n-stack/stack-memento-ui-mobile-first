@@ -25,7 +25,6 @@ const Global = () => {
       pigtailWidth: 25,
       pigtailHeight: 25,
       bookmarksTop: 25,
-      bookmarkTitleSize: 16,
       noBottomLine: true,
       noMenu: true,
     },

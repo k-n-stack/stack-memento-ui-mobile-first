@@ -29,7 +29,6 @@
 }
 
 .bookmark-title {
-  font-size: 24px;
   font-weight: bold;
   color: rgb(151, 151, 151);
   white-space: nowrap;
@@ -43,6 +42,9 @@
   font-weight: bold;
   text-decoration: underline;
   color: #3650AB;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .bookmark-info {
@@ -57,6 +59,7 @@
 .bookmark-info > p {
   margin: 0px;
   font-style: italic;
+  font-size: 16px;
 }
 
 .bookmark-stats {

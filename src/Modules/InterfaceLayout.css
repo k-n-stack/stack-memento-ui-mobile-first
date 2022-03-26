@@ -423,7 +423,7 @@
   .thread-title {
     z-index: 1;
     position: absolute;
-    left: 55px;
+    left: calc(55px + 20px);
     top: 5px;
     width: fit-content;
     height: fit-content;
@@ -433,6 +433,18 @@
   .thread-title-line-container {
     top: 0px;
     position: absolute;
+  }
+
+  .thread-title-dot-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .thread-title-dot-container > h1 {
+    margin: 0px 0px 0px 10px;
+    padding: 0px;
+    font-weight: bolder;
+    font-size: 26px;
   }
 }
 

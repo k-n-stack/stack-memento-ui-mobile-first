@@ -4,6 +4,8 @@ import Thread from "Modules/Thread";
 
 import { useSelector } from "react-redux";
 
+import "./ThreadBrowser.css";
+
 const ThreadBrowser = () => {
 
   const browseThread = useSelector((state) => (state.navigation.browseThread));
@@ -22,16 +24,12 @@ const ThreadBrowser = () => {
   
   return (
     <>
-      <Thread 
-        {...browseThread}
-        {...style.multipleBookmarksThread}
-        // dotRadius={33}
-        // pigtailWidth={60}
-        // pigtailHeight={60}
-        // bookmarksTop={200}
-        // bookmarksOnly
-        // noMenu
-      />
+      <div className="thread-browser-left-container">
+        <Thread 
+          {...browseThread}
+          {...style.multipleBookmarksThread}
+        />
+      </div>
     </>
   );
 };

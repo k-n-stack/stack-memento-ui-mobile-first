@@ -26,8 +26,6 @@ const ThreadCarousel = (props) => {
       pigtailWidth: 25,
       pigtailHeight: 25,
       bookmarksTop: 50,
-      bookmarkTitleSize: 14,
-      compactBookmark: true,
       noMenu: true,
     },
   }
@@ -59,13 +57,6 @@ const ThreadCarousel = (props) => {
 
   return (
     <>
-      <motion.div 
-        className="threads-carousel-container"
-        animate={{x: -350 * (selectedThread - 1)}}
-        transition={{duration: 0.6}}
-      >
-        {getMultipleBookmarksThread(props.threads)}
-      </motion.div>
       <div className="threads-carousel-bottom">
         <div 
           className="arrow-left-container"
@@ -94,6 +85,15 @@ const ThreadCarousel = (props) => {
           <Icon icon="ArrowLeftCircle" iconColor="rgba(255, 255, 255, 0.5)" /> 
         </div>
       </div>
+
+      <motion.div 
+        className="threads-carousel-container"
+        animate={{x: -350 * (selectedThread - 1)}}
+        transition={{duration: 0.6}}
+      >
+        {getMultipleBookmarksThread(props.threads)}
+      </motion.div>
+
     </>
   );
 };

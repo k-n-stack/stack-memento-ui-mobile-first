@@ -26,17 +26,21 @@ const Thread = (props) => {
   const menuTop = props.menuTop || 100;
   
   const bookmarksTop = props.bookmarksTop || dotDiameter;
-  const bookmarkTitleSize = props.bookmarkTitleSize || 18;
+  const bookmarkAnchorTop = props.bookmarkAnchorTop || 20;
+  const bookmarkTitleSize = props.bookmarkTitleSize || 22;
   const pigtailWidth = props.pigtailWidth || 100;
   const pigtailHeight = props.pigtailHeight || 100;
-  const compactBookmark = props.compactBookmark;
 
   const lineBottomY = threadHeight - threadStrokeWidth / 2 + bottomExtraLine;
   const lineTotalHeight = threadHeight + bottomExtraLine + bottomDropLength * 2 + bottomDropGap * 2;
 
   const bookmarksOnly = props.bookmarksOnly !== undefined;
+  const bookmarkTitleOnly = props.bookmarkTitleOnly !== undefined;
+  const compactBookmark = props.compactBookmark !== undefined;
 
   const getBookmarks = (bookmarks) => {
+    console.log(bookmarkTitleSize);
+
     return bookmarks.map((value) => {
       return (
         <Bookmark 
@@ -46,9 +50,11 @@ const Thread = (props) => {
           pigtailWidth={pigtailWidth}
           pigtailHeight={pigtailHeight}
           bookmarkTitleSize={bookmarkTitleSize}
+          bookmarkAnchorTop={bookmarkAnchorTop}
           compactBookmark={compactBookmark}
           setThreadHeight={getThreadHeight}
           parentRef={threadRef}
+          bookmarkTitleOnly={bookmarkTitleOnly}
         />
       );
     });
@@ -129,8 +135,11 @@ const Thread = (props) => {
       <div 
         className="thread-bookmarks-container"
         style={{
-          marginLeft: `-${dotRadius + threadStrokeWidth / 2}px`,
+          // marginLeft: `-${dotRadius + threadStrokeWidth / 2}px`,
+          marginLeft: `${dotRadius - threadStrokeWidth / 2}px`,
           marginTop: `${bookmarksTop}px`,
+          height: "0px",
+          overflow: "hidden"
         }}
       >
         {getBookmarks(props.bookmarks)}
