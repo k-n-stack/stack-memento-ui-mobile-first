@@ -10,7 +10,7 @@ import Background from "Components/Layout/Background";
 import LineInput from "Components/Input/LineInput";
 import Icon from "Components/Icon/Icon";
 
-import { register } from "Store/Features/userSlice";
+import { register, setStatus } from "Store/Features/userSlice";
 
 import "./Register.css";
 import ToggleSwitch from "Components/Input/ToggleSwitch";
@@ -27,11 +27,12 @@ const Register = (props) => {
         opacity: 0,
       })
     }
-    else {
-      controls.start({
-        opacity: 1,
-      })
+
+    if (registrationStatus === "Registration success") {
+      dispatch(setStatus(""));
+      dispatch(setView('login'));
     }
+
   });
 
   const controls = useAnimation()
