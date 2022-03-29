@@ -8,9 +8,11 @@ import {
   fetchUserVoteCountThunk,
   fetchUserThreadsThunk,
   fetchUserPinnedThreadsThunk,
+  fetchUserRegistrationThunk
 } from "Store/Thunks/userThunks";
 
 export const login = fetchUserByEmailThunk();
+export const register = fetchUserRegistrationThunk();
 export const setUserThreadCount = fetchUserThreadCountThunk();
 export const setUserBookmarkCount = fetchUserBookmarkCountThunk();
 export const setUserRedirectionCount = fetchUserRedirectionCountThunk();
@@ -67,6 +69,14 @@ export const userSlice = createSlice({
       state.pseudonym = action.payload.pseudonym;
       state.image_url = action.payload.image_url;
       state.email_verified_at = action.payload.email_verified_at;
+    },
+
+    [register.rejected]: (state, action) => {},
+    [register.pending]: (state, action) => {
+      state.status = "pending registration";
+    },
+    [register.fulfilled]: (state, action) => {
+      state.status = action.payload.status;
     },
 
     [setUserThreadCount.rejected]: (state, action) => {},
