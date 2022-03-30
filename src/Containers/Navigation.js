@@ -9,21 +9,20 @@ import Fail from "Views/Fail";
 import Success from "Views/Success";
 
 import Interface from "./Interface";
-import { setView } from "Store/Features/navigationSlice";
 
 const Navigation = (props) => {
 
-  const dispatch = useDispatch();
   const view = useSelector((state) => (state.navigation.view));
   const isLogin = useSelector((state) => (state.navigation.isLogin));
+  const overrideView = useSelector((state) => (state.navigation.overrideView));
 
   const getView = (view, isLogin) => {
 
-    // view = props.override || view;
+    if (props.override && overrideView) {
+      view = props.override;
+    }
 
     switch (true) {
-      case view === "void" :
-        return <></>;
       case view === "homepage" :
         return <Homepage />;
       case view === "login" :
@@ -33,21 +32,15 @@ const Navigation = (props) => {
       case view === "validation" :
         return <Validation />;
       case view === "validationFail" :
-        return <Fail />
+        return <Fail />;
       case view === "validationSuccess" :
-        return <Success />
+        return <Success />;
       case isLogin :
         return <Interface />;
       default:
         return <Homepage />
     }
   }
-
-  useEffect(() => {
-    if (view === "void") {
-      dispatch(setView("homepage"));
-    }
-  });
 
   return getView(view, isLogin);
 };

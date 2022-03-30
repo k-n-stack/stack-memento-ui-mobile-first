@@ -108,7 +108,7 @@ const Register = (props) => {
 
     if (registerStatus === "Registration success") {
       dispatch(setStatus(""));
-      dispatch(setIsRegistered);
+      dispatch(setIsRegistered(true));
       dispatch(setView("validation"));
     }
   });

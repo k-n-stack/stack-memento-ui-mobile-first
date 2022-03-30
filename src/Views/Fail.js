@@ -4,6 +4,7 @@ import Background from "Components/Layout/Background";
 import Icon from "Components/Icon/Icon";
 
 import { setView } from "Store/Features/navigationSlice";
+import { setOverrideView } from "Store/Features/navigationSlice";
 
 import "./Validation.css";
 
@@ -21,7 +22,8 @@ const Fail = (props) => {
         <div 
           className="validation-title-container"
           onClick={() => {
-            dispatch(setView("homepage"));
+            dispatch(setOverrideView(false));
+            dispatch(setView("login"));
           }}
         >
           <Icon icon="MascotColor"/>
@@ -40,7 +42,8 @@ const Fail = (props) => {
           <div className="validation-bottom-link">
             <a
               onClick={() => {
-                dispatch(setView("homepage"));
+                dispatch(setOverrideView(false));
+                dispatch(setView("login"));
               }}
             >
               ← Back to homepage

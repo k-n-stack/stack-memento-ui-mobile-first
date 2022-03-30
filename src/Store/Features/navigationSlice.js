@@ -7,8 +7,8 @@ export const navigationSlice = createSlice({
   initialState: {
     isLogin: false,
     isRegistered: false,
-    view: "void",
-    overrideView: null,
+    view: "homepage",
+    overrideView: true,
     browseThread: 0,
     expandUserPanel: false,
     expandSearchPanel: false,
@@ -28,7 +28,7 @@ export const navigationSlice = createSlice({
       state.view = action.payload;
     },
     setOverrideView: (state, action) => {
-      state.view = action.payload;
+      state.overrideView = action.payload;
     },
     setBrowseThread: (state, action) => {
       state.browseThread = action.payload;
