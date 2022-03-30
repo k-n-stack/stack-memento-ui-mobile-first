@@ -17,6 +17,7 @@ const handleError = (error) => {
 
 const routes = {
   fetchUserByEmail: "/login",
+  fetchUserRegistration: "/register",
   fetchUserThreadCount: "/user-thread-count",
   fetchUserBookmarkCount: "/user-bookmark-count",
   fetchUserRedirectionCount: "/user-redirection-count",
@@ -48,6 +49,42 @@ const fetchUserByEmailThunk = () => createAsyncThunk(
 
       return res;
 
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const fetchUserRegistrationThunk = () => createAsyncThunk(
+  "users/fetchUserRegistration",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { email, pseudonym, password } = data;
+      const res = await fetch(routes.fetchUserRegistration, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email, 
+          pseudonym,
+          password,
+        }),
+      })
+      .then(res => res.json());
+      return res;
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const fetchUserRegistrationVerificationThunk = () => createAsyncThunk(
+  "users/fetchUserRegistrationVerification",
+  async (url, { rejectWithValue }) => {
+    try {
+      return await fetch(url, {
+        method: "GET",
+      })
+      .then(res => res.json());
     } catch (error) {
       return rejectWithValue(handleError(error));
     }
@@ -182,6 +219,8 @@ const fetchUserPinnedThreadsThunk = () => createAsyncThunk(
 
 export {
   fetchUserByEmailThunk,
+  fetchUserRegistrationThunk,
+  fetchUserRegistrationVerificationThunk,
   fetchUserThreadCountThunk,
   fetchUserBookmarkCountThunk,
   fetchUserRedirectionCountThunk,

@@ -6,9 +6,13 @@ import "./LineInput.css";
 const LineInput = (props) => {
 
   const [value, setValue] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const inputRef = useRef();
 
   const color = props.light !== undefined ? "#FFFFFF" : "#3650AB";
+  const isPassword = props.password !== undefined;
+
+  const iconRight = props.iconRight || "Cross";
 
   const styleClasses = {
     lineInput: [
@@ -17,9 +21,18 @@ const LineInput = (props) => {
       props.hasRightIcon ? "line-input-has-right-icon" : "",
     ],
     lineInputClearContainer: [
-      value ? "" : "line-input-clear-container-transparent",
-    ]
+      isPassword ? "" : (value ? "" : "line-input-clear-container-transparent"),
+    ],
   }
+
+  const reset = () => {
+    setValue("");
+    inputRef.current.value = "";
+  };
+
+  const toggleVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <div className="line-input-container">
@@ -33,6 +46,7 @@ const LineInput = (props) => {
           setValue(event.target.value);
         }}
         ref={inputRef}
+        type={props.password === undefined ? null : (showPassword ? "" : "password")}
       />
       {
         props.hasLeftIcon !== undefined &&
@@ -44,12 +58,9 @@ const LineInput = (props) => {
         props.hasRightIcon !== undefined &&
         <div 
           className={`line-input-clear-container ${styleClasses.lineInputClearContainer.join(" ")}`}
-          onClick={() => {
-            setValue("");
-            inputRef.current.value = "";
-          }}
+          onClick={isPassword ? toggleVisibility : reset}
         >
-          <Icon icon="Cross" iconColor={color}/>
+          <Icon icon={isPassword ? showPassword ? "EyeCross" : "Eye" : "Cross"} iconColor={color}/>
         </div>
       }
     </div>

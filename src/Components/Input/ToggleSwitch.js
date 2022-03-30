@@ -22,9 +22,9 @@ const ToggleSwitch = (props) => {
       <div 
         className="switch-container"
         onClick={() => {
-          setIsOn(!isOn);
-          if(props.onClick !== undefined) {
-            props.onClick();
+          if(props.onClick) {
+            props.onClick(!isOn);
+            setIsOn(!isOn);
           }
         }}
       >

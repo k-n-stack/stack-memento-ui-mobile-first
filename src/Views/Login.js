@@ -62,7 +62,12 @@ const Login = (props) => {
             <label>Email :</label>
             <LineInput onChange={handleEmailChange}/>
             <label>Password :</label>
-            <LineInput onChange={handlePasswordChange}/>
+            <LineInput 
+              onChange={handlePasswordChange} 
+              iconRight="Eye"
+              hasRightIcon
+              password
+            />
           </div>
           <div className="login-form-buttons">
             <div className="remember-option-container">

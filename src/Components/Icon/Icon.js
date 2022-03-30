@@ -32,6 +32,8 @@ import {
   Comments,
   Redirections,
   Upvotes,
+  EyeCross,
+  Eye,
 } from "Components/Icon/Svg";
 
 
@@ -69,6 +71,8 @@ const Icon = (props) => {
     Comments: Comments,
     Redirections: Redirections,
     Upvotes: Upvotes,
+    EyeCross: EyeCross,
+    Eye: Eye,
   }
 
   const getSvg = (svgName) => {
