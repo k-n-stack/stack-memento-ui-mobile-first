@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Background from "Components/Layout/Background";
 import Icon from "Components/Icon/Icon";
 
-import { setView } from "Store/Features/navigationSlice";
+import { setOverrideView, setView } from "Store/Features/navigationSlice";
 
 import "./Validation.css";
 
@@ -21,6 +21,7 @@ const Fail = (props) => {
         <div 
           className="validation-title-container"
           onClick={() => {
+            dispatch(setOverrideView(false));
             dispatch(setView("homepage"));
           }}
         >
@@ -41,6 +42,7 @@ const Fail = (props) => {
             <a
               onClick={() => {
                 dispatch(setView("homepage"));
+                dispatch(setOverrideView(false));
               }}
             >
               ← Back to homepage
