@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setView } from "Store/Features/Navigation/navigationSlice";
+import { setView } from "Store/Features/navigationSlice";
 
 import Icon   from "Components/Icon/Icon";
 import Button from "Components/Input/Button";

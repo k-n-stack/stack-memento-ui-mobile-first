@@ -11,10 +11,9 @@ const Test = () => {
   };
 
   return (
-    <div className="test">
-      <div className="div1" onClick={() => handleClick()}>hello</div>
-      <div className="div2" ref={testRef}>world</div>
-    </div>
+    <>
+      <div>hello mama</div>
+    </>
   );
 };
 

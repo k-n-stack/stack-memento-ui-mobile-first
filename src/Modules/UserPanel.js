@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 
 import Icon from "Components/Icon/Icon";
 
-import { setExpandUserPanel, setIsLogin, setView, setUserPanelView, setUserSettingsView } from "Store/Features/Navigation/navigationSlice";
+import { setExpandUserPanel, setView, setUserPanelView, setUserSettingsView, setIsLogin } from "Store/Features/navigationSlice";
+import { setUserThreadCount, setUserBookmarkCount, setUserRedirectionCount, setUserCommentCount, setUserVoteCount } from "Store/Features/userSlice";
+import { clearUser } from "Store/Features/userSlice";
 
 import "./UserPanel.css";
-import avatar from "Ressources/Images/Avatars/john_doe.png";
 
 const UserPanel = () => {
 
@@ -15,14 +16,25 @@ const UserPanel = () => {
   const expandUserPanel = useSelector((state) => (state.navigation.expandUserPanel));
   const userPanelView = useSelector((state) => (state.navigation.userPanelView));
   const userSettingsView = useSelector((state) => (state.navigation.userSettingsView));
+  const userThreadCount = useSelector((state) => (state.user.threadCount));
+  const userBookmarkCount = useSelector((state) => (state.user.bookmarkCount));
+  const userRedirectionCount = useSelector((state) => (state.user.redirectionCount));
+  const userCommentCount = useSelector((state) => (state.user.commentCount));
+  const userVoteCount = useSelector((state) => (state.user.voteCount))
 
   const variants = {
     userPanel: {
-      expand: {
-        x: 0,
+      stats: {
+        width: '380px',
+        padding: "190px 30px 50px 10px",
+      },
+      settings: {
+        width: '600px',
+        padding: "50px 30px 50px 10px",
       },
       collapse: {
-        x: 600,
+        width: '0px',
+        padding: "0px",
       },
     }
   }
@@ -40,18 +52,30 @@ const UserPanel = () => {
     }
   };
 
+  const getImageModule = (image) => {
+    try {
+      return require(`../Ressources/Images/Avatars/${image}`);
+    } catch (error) {
+      return require("../Ressources/Images/Avatars/default.png");
+    }
+  };
+
+  useEffect(() => {
+    dispatch(setUserBookmarkCount());
+    dispatch(setUserThreadCount());
+    dispatch(setUserCommentCount());
+    dispatch(setUserRedirectionCount());
+    dispatch(setUserVoteCount());
+  }, []);
+
   return (
     <motion.div 
       className="user-panel" 
       variants={variants.userPanel}
       initial={variants.userPanel.collapse}
-      animate={expandUserPanel ? "expand" : "collapse"}
+      animate={expandUserPanel ? (userPanelView === "stats" ? "stats" : "settings") : "collapse"}
       transition={{ type: "linear", duration: 0.5 }}
-      style={{
-        padding: userPanelView === "stats" ? "190px 30px 50px 10px" : "50px 30px 50px 10px",
-      }}
     >
-
       <div 
         className="user-panel-close-icon-container"
         onClick={() => {
@@ -65,7 +89,7 @@ const UserPanel = () => {
         userPanelView === "stats" &&
         <div className="user-panel-avatar-big">
           <img 
-            src={avatar}
+            src={getImageModule(sessionStorage.getItem('stmn_image_url'))}
             width="100%"
             height="100%"
             onClick={() => {
@@ -79,12 +103,13 @@ const UserPanel = () => {
         {
           userPanelView === "stats" &&
           <div className="user-panel-content-top">
-            <h1>John Doe</h1>
-            <h2>350 Bookmarks</h2>
-            <h3>10 Threads</h3>
-            <p>492 Redirections</p>
-            <p>18 Comments</p>
-            <p>667 Upvotes</p>
+            <p>{sessionStorage.getItem('stmn_email')}</p>
+            <h1>{sessionStorage.getItem('stmn_pseudonym')}</h1>
+            <h2>{userThreadCount} Threads</h2>
+            <h3>{userBookmarkCount} Bookmarks</h3>
+            <p>{userRedirectionCount} Redirections</p>
+            <p>{userCommentCount} Comments</p>
+            <p>{userVoteCount} Upvotes</p>
           </div>
         }
 
@@ -145,7 +170,6 @@ const UserPanel = () => {
           <div
             onClick={() => {
               dispatch(setUserPanelView("stats"));
-              console.log(userPanelView);
             }}
             style={{
               opacity: userPanelView === "stats" ? 0.5 : 1,
@@ -172,7 +196,9 @@ const UserPanel = () => {
           <div 
             className="user-panel-logout-container"
             onClick={() => {
+              dispatch(clearUser());
               dispatch(setView("login"));
+              dispatch(setExpandUserPanel(false));
               dispatch(setIsLogin(false));
             }}
           >

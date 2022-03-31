@@ -6,15 +6,16 @@ import "./Button.css";
 
 const Button = (props) => {
 
-  const backgroundColor = props.backgroundColor || "#9EB6FF";
+  const styleClasses = {
+    button: [
+      props.color === "green" ? "button-green" : "button-blue",
+    ]
+  }
 
   return (
     <button 
-      className="button"
+      className={`button ${styleClasses.button.join(" ")}`}
       onClick={props.onClick}
-      style={{
-        backgroundColor: backgroundColor,
-      }}
     >
       <div className="button-icon-container">
         <Icon icon={props.icon}/>

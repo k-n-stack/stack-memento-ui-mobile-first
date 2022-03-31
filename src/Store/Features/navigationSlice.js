@@ -5,8 +5,11 @@ export const navigationSlice = createSlice({
   name: "navigation",
 
   initialState: {
-    view: "homepage",
     isLogin: false,
+    isRegistered: false,
+    view: "homepage",
+    overrideView: true,
+    browseThread: 0,
     expandUserPanel: false,
     expandSearchPanel: false,
     expandSearchOptions: false,
@@ -15,11 +18,20 @@ export const navigationSlice = createSlice({
   },
 
   reducers: {
+    setIsLogin: (state, action) => {
+      state.isLogin = action.payload;
+    },
+    setIsRegistered: (state, action) => {
+      state.isRegistered = action.payload;
+    },
     setView: (state, action) => {
       state.view = action.payload;
     },
-    setIsLogin: (state, action) => {
-      state.isLogin = action.payload;
+    setOverrideView: (state, action) => {
+      state.overrideView = action.payload;
+    },
+    setBrowseThread: (state, action) => {
+      state.browseThread = action.payload;
     },
     setExpandUserPanel: (state, action) => {
       state.expandUserPanel = action.payload;
@@ -41,8 +53,11 @@ export const navigationSlice = createSlice({
 });
 
 export const {
-  setView,
   setIsLogin,
+  setIsRegistered,
+  setView,
+  setOverrideView,
+  setBrowseThread,
   setExpandUserPanel,
   setExpandSearchPanel,
   setExpandSearchOptions,

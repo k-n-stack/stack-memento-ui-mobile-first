@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Icon from "Components/Icon/Icon";
 import LineInput from "Components/Input/LineInput";
 
-import { setExpandSearchPanel, setExpandSearchOptions } from "Store/Features/Navigation/navigationSlice";
+import { setExpandSearchPanel, setExpandSearchOptions } from "Store/Features/navigationSlice";
 
 import "./SearchPanel.css";
 

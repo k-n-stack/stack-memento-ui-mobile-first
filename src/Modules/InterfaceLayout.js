@@ -2,13 +2,14 @@ import React, { useEffect, useState, useRef } from "react";
 import { useSwipeable } from "react-swipeable";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { setView, setExpandUserPanel, setExpandSearchPanel } from "Store/Features/Navigation/navigationSlice";
+import { setView, setExpandUserPanel, setExpandSearchPanel } from "Store/Features/navigationSlice";
 
 import Icon from "Components/Icon/Icon";
 
 import "./InterfaceLayout.css";
-import avatar from "Ressources/Images/Avatars/john_doe.png";
 import LineInput from "Components/Input/LineInput";
+import ThreadDot from "Components/Svg/ThreadDot";
+import ThreadLine from "Components/Svg/ThreadLine";
 
 const InterfaceLayout = (props) => {
 
@@ -27,6 +28,7 @@ const InterfaceLayout = (props) => {
 
   const dispatch = useDispatch();
   const selectedView = useSelector((state) => (state.navigation.view));
+  const browseThread = useSelector((state) => (state.navigation.browseThread));
 
   const hasSubPanel = props.hasSubPanel === undefined ? false : true;
   const pageName = props.pageName || "Page Name";
@@ -198,6 +200,15 @@ const InterfaceLayout = (props) => {
     }
   }
 
+  const getImageModule = (image) => {
+    try {
+      return require(`../Ressources/Images/Avatars/${image}`);
+    } catch (error) {
+      return require("../Ressources/Images/Avatars/default.png");
+    }
+  };
+
+
   const swipeHandlers = useSwipeable({
     onSwiped: (event) => {
       handleSwipeAnimation(event.dir);
@@ -228,6 +239,21 @@ const InterfaceLayout = (props) => {
         break;
       default:
         break;
+    }
+  }
+
+  const getSubPanelTitleIconName = (view) => {
+    switch (view) {
+      case "myThreads" :
+        return "Threads";
+      case "pinnedThreads" :
+        return "Pinned";
+      case "fellows":
+        return "Friends";
+      case "groups":
+        return "Groups";
+      default:
+        return "Threads";
     }
   }
 
@@ -269,7 +295,7 @@ const InterfaceLayout = (props) => {
   return (
     <div className="interface-layout"
       style={{ 
-        overflow: panelOn ? "visible" : "hidden",
+        // overflow: panelOn ? "visible" : "hidden",
         overflow: panelOn ? (isPortrait ? "visible" : (hasSubPanel ? "hidden" : "visible")) : "hidden",
       }}
     >
@@ -312,6 +338,39 @@ const InterfaceLayout = (props) => {
             marginBottom: `calc(-100vh + ${isPortrait ? "80px" : (hasSubPanel ? (isSubPanelStatic ? "50px" : "80px") : "90px")})`
           }}
         >
+
+          {
+            selectedView === "threadBrowser" && !isPortrait &&
+            <div className="thread-title">
+              <div className="thread-title-dot-container">
+                <ThreadDot
+                  dotDiameter={66}
+                  dotRadius={33}
+                  threadColor={`#${browseThread.color}`}
+                />
+                <h1
+                  style={{
+                    color: `#${browseThread.color}`,
+                  }}
+                >
+                  Thread Title
+                </h1>
+              </div>
+              <div className="thread-title-line-container">
+                <ThreadLine
+                  dotDiameter={66}
+                  lineTotalHeight={150}
+                  dotRadius={33}
+                  lineBottomY={150}
+                  threadColor={`#${browseThread.color}`}
+                  threadStrokeWidth={12}
+                  bottomDropGap={0}
+                  bottomDropLength={0}
+                />
+              </div>
+            </div>
+          }
+
           <div className="navigation-top-interface"
             style={{
               marginLeft: isPortrait ? "" : (hasSubPanel ? "0px" : "55px"), 
@@ -325,10 +384,15 @@ const InterfaceLayout = (props) => {
             {
               (!hasSubPanel || isPortrait) &&
               <div className="navigation-top-interface-left-container">
-                <div className="navigation-top-interface-planet-container">
-                  <Icon icon={props.iconName} iconColor="#3650AB"/>
-                </div>
-                <h1>{pageName}</h1>
+              {
+                selectedView !== "threadBrowser" &&
+                <>
+                  <div className="navigation-top-interface-planet-container">
+                      <Icon icon={props.iconName} iconColor="#3650AB"/>
+                  </div>
+                  <h1>{pageName}</h1>
+                </>
+              }
               </div>
             }
             <div className="navigation-top-interface-right-container">
@@ -359,7 +423,7 @@ const InterfaceLayout = (props) => {
               </div>
               <div className="navigation-top-interface-avatar">
                 <img 
-                  src={avatar}
+                  src={getImageModule(sessionStorage.getItem('stmn_image_url'))}
                   width="100%"
                   height="100%"
                   onClick={() => {
@@ -441,7 +505,7 @@ const InterfaceLayout = (props) => {
                 }
                 <div className="interface-sub-panel-header">
                   <div className="interface-sub-panel-icon">
-                    <Icon icon="Threads" iconColor="white"/>
+                    <Icon icon={getSubPanelTitleIconName(selectedView)} iconColor="white"/>
                   </div>
                   <h1>My Threads</h1>
                 </div>

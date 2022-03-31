@@ -5,6 +5,8 @@
 
 .switch-container {
   flex-shrink: 0;
+  height: 30px;
+  width: 55px;
 }
 
 .switch {
@@ -23,4 +25,13 @@
   border-style: solid;
   border-color: rgb(113, 126, 153);
   border-width: 2px;
+  width: 30px;
+}
+
+.dot-right {
+  right: 0;
+}
+
+.dot-left {
+  left: 0;
 }

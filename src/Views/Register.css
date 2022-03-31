@@ -107,6 +107,22 @@
   text-decoration: underline;
 }
 
+.register-error-message {
+  opacity: 0;
+  color: rgb(107, 0, 0);
+  font-style: italic;
+  text-align: right;
+  height: 30px;
+}
+
+/* to delete */
+.modal-placeholder {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.39);
+  width: 100vw;
+  height: 100vh;
+}
+
 @media screen and (min-width: 550px) {
   .register-form {
     width: 550px;

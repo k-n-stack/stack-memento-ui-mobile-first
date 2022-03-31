@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import Icon from "Components/Icon/Icon";
+
 import "./Bookmark.css";
 
 const Bookmark = (props) => {
@@ -11,15 +13,40 @@ const Bookmark = (props) => {
   const pigtailHeight = props.pigtailHeight || 100;
   const pigtailStrokeWidth = props.pigtailStrokeWidth || 8;
 
-  const bookmarkTitleSize = props.bookmarkTitleSize || 18;
+  const bookmarkTitleSize = props.bookmarkTitleSize || 22;
   const bookmarkAnchorTop = props.bookmarkAnchorTop || 20;
+  const titleOnly = props.bookmarkTitleOnly || false;
   const compactBookmark = props.compactBookmark || false;
 
-  const title = props.title || "Error: No title provided";
-  const _testUrl = "http://www.stack-memento.com/";
+  const description = props.description || "Error: No title provided";
+  const url = props.url || "Error: No url provided";
+
+  // !!! RECURSIVE
+  const getComments = (comments, _marginLeft = 0) => {
+    return comments.map(function (comment) {
+      return (
+        <div style={{ marginLeft: _marginLeft }}>
+          <div style={{
+            backgroundColor: "pink"
+          }}>
+            <p>{comment.body}</p>
+            <p>{comment.poster_name}</p>
+          </div>
+          {comment.childs.length ? getComments(comment.childs, _marginLeft + 20) : null}
+        </div>
+      );
+    });
+  }
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("us-US", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+  }
 
   useEffect(() => {
-    props.setThreadHeight(props.parentRef.current.clientHeight);
+    if (props.parentRef !== undefined) {
+      props.setThreadHeight(props.parentRef.current.clientHeight);
+    }
   });
 
   return (
@@ -56,20 +83,66 @@ const Bookmark = (props) => {
         style={{
           left: pigtailWidth,
           width: `calc(100% - ${pigtailWidth}px)`,
+          paddingTop: compactBookmark ? "2px" : "",
+          paddingBottom: compactBookmark ? "2px" : "",
+          paddingLeft: compactBookmark ? "10px" : "",
+          paddingRight: compactBookmark ? "10px" : "",
         }}
         onClick={() => setShowUrl(!showUrl)}
       >
-        <h1 
-          className="bookmark-title"
-          style={{
-            fontSize: `${bookmarkTitleSize}px`,
-            marginTop: compactBookmark === false ? "" : "6px",
-            marginBottom: compactBookmark === false ? "" : "6px",
-          }}
-        >
-          {title}
-        </h1>
-        {showUrl && <h2 className="bookmark-url">{_testUrl}</h2>}
+        <div className="bookmark-content-container">
+
+          <p 
+            className="bookmark-title"
+            style={{
+              fontSize: `${bookmarkTitleSize}px`,
+            }}
+          >
+            {description}
+          </p>
+          {
+            !titleOnly &&
+            <>
+              <a className="bookmark-url">{url}</a>
+              <div className="bookmark-info">
+                <div className="bookmark-stats">
+                  <div>
+                    <div className="bookmark-icon-container">
+                      <Icon icon="Redirections"/>
+                    </div>
+                    <div>{props.redirection_count}</div>
+                  </div>
+                  <div>
+                    <div className="bookmark-icon-container">
+                      <Icon icon="Upvotes"/>
+                    </div>
+                    <div>{props.vote_count}</div>
+                  </div>
+                  <div>
+                    <div className="bookmark-icon-container">
+                      <Icon icon="Comments"/>
+                    </div>
+                    <div>{props.comment_count}</div>
+                  </div>
+                </div>
+                <p>{formatDate(props.created_at)}</p>
+              </div>
+              <div className="bookmark-tags">
+                {
+                  props.tags.map((tag) => {
+                    return <div className="bookmark-tag">{tag}</div>
+                  })
+                }
+              </div>
+
+              {/* !!! RECURSIVE */}
+              <div className="bookmark-comments">
+                {getComments(props.comments)}
+              </div>
+            </>  
+          }
+
+        </div>
       </div>
 
     </div>

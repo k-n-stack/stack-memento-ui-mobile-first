@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import InterfaceLayout from "Modules/InterfaceLayout";
 
 import { useSelector } from "react-redux";
@@ -11,9 +12,16 @@ import Fellows from "Views/Fellows";
 import Groups from "Views/Groups";
 import UserPanel from "Modules/UserPanel";
 import SearchPanel from "Modules/SearchPanel";
+import ThreadBrowser from "Views/ThreadBrowser";
+
+import { setUserBookmarkCount, setUserThreadCount, setUserRedirectionCount, setUserCommentCount } from "Store/Features/userSlice";
+import { setUserThreads } from "Store/Features/userSlice";
+import { setGlobalThreads } from "Store/Features/globalSlice";
+import { setBrowseThread } from "Store/Features/navigationSlice";
 
 const Interface = () => {
 
+  const dispatch = useDispatch();
   const view = useSelector((state) => (state.navigation.view));
 
   const hasSubPanel = (view) => {
@@ -27,6 +35,7 @@ const Interface = () => {
       pinnedThreads: "Pinned Threads",
       fellows: "Fellows",
       groups: "Groups",
+      threadBrowser: "test",
     }
 
     return view in pageNames ? pageNames[view] : undefined;
@@ -56,10 +65,17 @@ const Interface = () => {
         return <Fellows />;
       case view === "groups" :
         return <Groups />;
+      case view === "threadBrowser":
+        return <ThreadBrowser />;
       default: 
         return <Homepage />;
     }
   };
+
+  useEffect(() => {
+    dispatch(setUserThreads());
+    dispatch(setGlobalThreads());
+  }, []);
 
   return (
     <>

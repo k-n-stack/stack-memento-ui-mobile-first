@@ -6,25 +6,47 @@ import "./LineInput.css";
 const LineInput = (props) => {
 
   const [value, setValue] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const inputRef = useRef();
 
   const color = props.light !== undefined ? "#FFFFFF" : "#3650AB";
+  const isPassword = props.password !== undefined;
+
+  const iconRight = props.iconRight || "Cross";
+
+  const styleClasses = {
+    lineInput: [
+      props.light !== undefined ? "line-input-light" : "line-input-dark",
+      props.hasLeftIcon ? "line-input-has-left-icon" : "",
+      props.hasRightIcon ? "line-input-has-right-icon" : "",
+    ],
+    lineInputClearContainer: [
+      isPassword ? "" : (value ? "" : "line-input-clear-container-transparent"),
+    ],
+  }
+
+  const reset = () => {
+    setValue("");
+    inputRef.current.value = "";
+  };
+
+  const toggleVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <div className="line-input-container">
       <input 
-        className={`line-input ${props.light !== undefined ? "light-input" : "dark-input"}`}
+        className={`line-input ${styleClasses.lineInput.join(" ")}`}
         placeholder="Search users, threads, tags..."
         onChange={(event) => {
+          if (props.onChange) {
+            props.onChange(event.target.value);
+          }
           setValue(event.target.value);
         }}
         ref={inputRef}
-        style={{
-          borderBottomColor: color,
-          paddingLeft: props.hasLeftIcon ? "1.75rem" : "",
-          paddingRight: props.hasRightIcon ? "1.45rem" : "",
-          color: color,
-        }}
+        type={props.password === undefined ? null : (showPassword ? "" : "password")}
       />
       {
         props.hasLeftIcon !== undefined &&
@@ -35,16 +57,10 @@ const LineInput = (props) => {
       {
         props.hasRightIcon !== undefined &&
         <div 
-          className="line-input-clear-container"
-          onClick={() => {
-            setValue("");
-            inputRef.current.value = "";
-          }}
-          style={{
-            opacity: value ? 1 : 0.3,
-          }}
+          className={`line-input-clear-container ${styleClasses.lineInputClearContainer.join(" ")}`}
+          onClick={isPassword ? toggleVisibility : reset}
         >
-          <Icon icon="Cross" iconColor={color}/>
+          <Icon icon={isPassword ? showPassword ? "EyeCross" : "Eye" : "Cross"} iconColor={color}/>
         </div>
       }
     </div>

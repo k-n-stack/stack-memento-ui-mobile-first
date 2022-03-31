@@ -1,50 +1,9 @@
-.last-commented > h1,
-.last-bookmarks > h1,
-.top-redirections > h1,
-.top-contributed > h1,
-.top-viewed > h1 {
-  color: white;
-  text-align: end;
-  margin-right: 15px;
-  margin-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 5px;
-  text-shadow: 2px 2px rgb(146, 146, 146);
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: rgba(255, 255, 255, 0.329);
+.my-threads-threads-container {
+  width: 300px;
 }
 
-.last-commented {
-  margin-top: 70px;
-}
-
-.last-commented-threads-container,
-.last-bookmarks-threads-container {
-  display: flex;
-}
-
-.last-commented-threads-container,
-.last-bookmarks-threads-container {
-  margin: 0px 30px 100px 30px;
-  flex-direction: column;
-  gap: 20px;
-}
-
-@media screen and (orientation: landscape) {
-
-  .last-bookmarks-threads-container,
-  .last-commented-threads-container {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .last-commented-threads-container > *,
-  .last-bookmarks-threads-container > * {
-    min-width: 230px;
-    max-width: 380px;
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 230px;
+@media screen and (min-width: 1650px) {
+  .my-threads-threads-container {
+    width: 400px;
   }
 }

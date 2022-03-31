@@ -1,0 +1,17 @@
+.thread-browser-left-container {
+  box-sizing: border-box;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+@media screen and (min-width: 1101px) {
+  .thread-browser-left-container {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .thread-browser-left-container {
+    width: 60%;
+  }
+}

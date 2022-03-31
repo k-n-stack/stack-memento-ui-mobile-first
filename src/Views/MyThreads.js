@@ -1,58 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import Thread from "Modules/Thread";
 
-import "./Global.css";
+import "./MyThreads.css";
 
 const MyThreads = () => {
- 
-  const style = {
-    singleBookmarkThread: {
-      nameSize: 20,
-      dotRadius: 13,
-      threadStrokeWidth: 5,
-      pigtailWidth: 25,
-      pigtailHeight: 25,
-      bookmarksTop: 25,
-      bookmarkTitleSize: 16,
-      noBottomLine: true,
-      noMenu: true,
-    },
-  };
 
-  const getSingleBookmarkThread = (threads) => {
-    return threads.map((value) => {
+  const threads = useSelector((state) => (state.user.threads));
+
+  const testStyle = {
+    nameSize: 16,
+    dotRadius: 10,
+    threadStrokeWidth: 5,
+    pigtailWidth: 20,
+    pigtailHeight: 20,
+    bookmarkTitleSize: 16,
+    bookmarkAnchorTop: 12,
+    bookmarksTop: 0,
+    bottomExtraLine: 1,
+    bottomDropLength: 1,
+    bottomDropGap: 1,
+    noMenu: true,
+    bookmarkTitleOnly: true,
+    compactBookmark: true,
+    expandable: true,
+  }
+
+  const getExpandableThreads = (threads) => {
+    return threads.map((thread) => {
       return (
-        <Thread
-          bookmarks={value.bookmarks}
-          threadColor={value.color}
-          title={value.name}
-          nameColor={value.color}
-          {...style.singleBookmarkThread}
-        />
+        <div style={{
+          opacity: thread.bookmarks.length ? 1 : 0.5,
+        }}>
+          <Thread 
+            {...thread}
+            {...testStyle}
+          />
+        </div>
       );
     });
   };
 
   return (
     <>
-      <p>hello world</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-      <p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p><p>hello</p>
+      <div className="my-threads-threads-container">
+        {getExpandableThreads(threads)}
+      </div>
     </>
   );
 };

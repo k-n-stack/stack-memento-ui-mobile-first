@@ -1,6 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 import Bookmark from "./Bookmark";
+import ThreadDot from "Components/Svg/ThreadDot";
+import ThreadLine from "Components/Svg/ThreadLine";
 
 import "./Thread.css";
 
@@ -8,8 +11,10 @@ const Thread = (props) => {
 
   const threadRef = useRef(null);
   const [threadHeight, setThreadHeight] = useState(0);
+  const [threadStaticHeight, setThreadStaticHeight] = useState(0);
+  const [isExpand, setIsExpand] = useState(false);
 
-  const threadColor = props.threadColor || "#555555";
+  const threadColor = props.color ? `#${props.color}` : "#555555";
   const threadStrokeWidth = props.threadStrokeWidth || 12;
 
   const dotRadius = props.dotRadius || 50;
@@ -22,29 +27,36 @@ const Thread = (props) => {
   const nameSize = props.nameSize || 30;
   const nameColor = props.nameColor || "#555555"
   const menuTop = props.menuTop || 100;
+  const nameContainerWidth = props.nameContainerWidth || "";
   
   const bookmarksTop = props.bookmarksTop || dotDiameter;
-  const bookmarkTitleSize = props.bookmarkTitleSize || 18;
+  const bookmarkAnchorTop = props.bookmarkAnchorTop || 20;
+  const bookmarkTitleSize = props.bookmarkTitleSize || 22;
   const pigtailWidth = props.pigtailWidth || 100;
   const pigtailHeight = props.pigtailHeight || 100;
-  const compactBookmark = props.compactBookmark;
 
-  const lineBottomY = threadHeight - threadStrokeWidth / 2 + bottomExtraLine;
-  const lineTotalHeight = threadHeight + bottomExtraLine + bottomDropLength * 2 + bottomDropGap * 2;
+  const lineBottomY = (props.expandable === undefined ? threadHeight : threadStaticHeight) - threadStrokeWidth / 2 + bottomExtraLine;
+  const lineTotalHeight = (props.expandable === undefined ? threadHeight : threadStaticHeight) + bottomExtraLine + bottomDropLength * 2 + bottomDropGap * 2;
+
+  const bookmarksOnly = props.bookmarksOnly !== undefined;
+  const bookmarkTitleOnly = props.bookmarkTitleOnly !== undefined;
+  const compactBookmark = props.compactBookmark !== undefined;
 
   const getBookmarks = (bookmarks) => {
     return bookmarks.map((value) => {
       return (
         <Bookmark 
-          title={value.title} 
+          {...value}
           pigtailColor={threadColor}
           pigtailStrokeWidth={threadStrokeWidth}
           pigtailWidth={pigtailWidth}
           pigtailHeight={pigtailHeight}
           bookmarkTitleSize={bookmarkTitleSize}
+          bookmarkAnchorTop={bookmarkAnchorTop}
           compactBookmark={compactBookmark}
           setThreadHeight={getThreadHeight}
           parentRef={threadRef}
+          bookmarkTitleOnly={bookmarkTitleOnly}
         />
       );
     });
@@ -54,10 +66,36 @@ const Thread = (props) => {
     setThreadHeight(height);
   }
 
+  const variants = {
+    threadLine: {
+      expand: {
+        height: "auto",
+      }, 
+      collapse: {
+        height: "0px",
+      },
+    },
+    bookmarkContainer: {
+      expand: {
+        height: "auto",
+      },
+      collapse: {
+        height: "0px",
+      },
+    }
+  }
+
+  useEffect(() => {
+    setThreadStaticHeight((props.bookmarks.length) * 31);
+  }, [])
+
   return (
     <div className="thread" ref={threadRef}
       style={{ 
         marginBottom: `${props.noBottomLine === undefined ? bottomExtraLine + bottomDropLength * 2 + bottomDropGap * 2 : 0}px`,
+      }}
+      onClick={() => {
+        setIsExpand(!isExpand);
       }}
     >
 
@@ -67,38 +105,33 @@ const Thread = (props) => {
           width: `${dotDiameter}px`,
         }}
       >
-        <div className="thread-dot-name">
-          <svg 
-            width={`${dotDiameter}px`}
-            height={`${dotDiameter}px`}
-            viewBox={`0 0 ${dotDiameter} ${dotDiameter}`}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle 
-              cx={dotRadius} 
-              cy={dotRadius} 
-              r={dotRadius} 
-              fill={threadColor}
+        { !bookmarksOnly &&
+          <div className="thread-dot-name">
+            <ThreadDot 
+              dotDiameter={dotDiameter}
+              dotRadius={dotRadius}
+              threadColor={threadColor}
             />
-          </svg>
-          <div 
-            className="thread-name-container"
-            style={{
-              height: dotDiameter,
-            }}
-          >
-            <h1 
-              className="thread-name"
+            <div 
+              className="thread-name-container"
               style={{
-                marginLeft: nameGap,
-                fontSize: `${nameSize}px`,
-                color: nameColor,
+                height: dotDiameter,
+                width: nameContainerWidth === "" ? "" : `${nameContainerWidth}px`
               }}
             >
-              {props.title || "Error: No thread name"}
-            </h1>
+              <h1 
+                className="thread-name"
+                style={{
+                  marginLeft: nameGap,
+                  fontSize: `${nameSize}px`,
+                  color: nameColor,
+                }}
+              >
+                {props.title || "Error: No thread name"}
+              </h1>
+            </div>
           </div>
-        </div>
+        }
 
         {
           props.noMenu === undefined &&
@@ -115,44 +148,41 @@ const Thread = (props) => {
 
         {
           props.noBottomLine === undefined &&
-          <svg 
-            width={`${dotDiameter}px`}
-            height={`${lineTotalHeight}px`}
-            viewBox={`0 0 ${dotDiameter} ${lineTotalHeight}`}
-            fill="none" 
-            xmlns="http://www.w3.org/2000/svg"
+          <motion.div
+            variants={props.expandable ? variants.threadLine : null}
+            initial={props.expandable ? variants.threadLine.collapse : null}
+            animate={props.expandable ? (isExpand ? "expand" : "collapse") : null}
+            style={{
+              overflow: props.expandable ? "hidden" : "",
+            }}
           >
-            <path 
-              d={`M${dotRadius} ${dotRadius} L${dotRadius} ${lineBottomY}`}
-              stroke={threadColor} 
-              strokeWidth={threadStrokeWidth} 
-              strokeLinecap="round"
+            <ThreadLine 
+              dotDiameter={dotDiameter}
+              lineTotalHeight={lineTotalHeight}
+              dotRadius={dotRadius}
+              lineBottomY={lineBottomY}
+              threadColor={threadColor}
+              threadStrokeWidth={threadStrokeWidth}
+              bottomDropGap={bottomDropGap}
+              bottomDropLength={bottomDropLength}
             />
-            <path
-              d={`M${dotRadius} ${lineBottomY + bottomDropGap} L${dotRadius} ${lineBottomY + bottomDropGap + bottomDropLength}`}
-              stroke={threadColor}
-              strokeWidth={threadStrokeWidth}
-              strokeLinecap="round"
-            />
-            <path
-              d={`M${dotRadius} ${lineBottomY + bottomDropGap * 2 + bottomDropLength} L${dotRadius} ${lineBottomY + bottomDropGap * 2 + bottomDropLength * 2}`}
-              stroke={threadColor}
-              strokeWidth={threadStrokeWidth}
-              strokeLinecap="round"
-            />
-          </svg>
+          </motion.div>
         }
       </div>
 
-      <div 
+      <motion.div 
         className="thread-bookmarks-container"
+        variants={props.expandable ? variants.bookmarkContainer : null}
+        initial={props.expandable ? variants.bookmarkContainer.collapse : null}
+        animate={props.expandable ? (isExpand ? "expand" : "collapse") : null}
         style={{
-          marginLeft: `-${dotRadius + threadStrokeWidth / 2}px`,
+          marginLeft: `${dotRadius - threadStrokeWidth / 2}px`,
           marginTop: `${bookmarksTop}px`,
+          overflow: props.expandable ? "hidden" : "",
         }}
       >
         {getBookmarks(props.bookmarks)}
-      </div>
+      </motion.div>
     </div>
   ) 
 };
