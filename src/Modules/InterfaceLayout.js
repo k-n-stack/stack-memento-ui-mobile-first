@@ -10,6 +10,7 @@ import "./InterfaceLayout.css";
 import LineInput from "Components/Input/LineInput";
 import ThreadDot from "Components/Svg/ThreadDot";
 import ThreadLine from "Components/Svg/ThreadLine";
+import EditionPanel from "./EditionPanel";
 
 const InterfaceLayout = (props) => {
 
@@ -22,8 +23,8 @@ const InterfaceLayout = (props) => {
   const [isSubPanelStatic, setIsSubPanelStatic] = useState(window.matchMedia('(min-width: 1400px)').matches);
   const [panelOn, setPanelOn] = useState(true);
   const [scrollTop, setScrollTop] = useState(0);
+  const [editionPanelRef, setEditionPanelRef] = useState(0);
 
-  const editionRef = useRef(null);
   const subPanelRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -257,9 +258,24 @@ const InterfaceLayout = (props) => {
     }
   }
 
+  const getSubPanelTitle = (view) => {
+    switch (view) {
+      case "myThreads" :
+        return "My Threads";
+      case "pinnedThreads" :
+        return "Pinned Threads";
+      case "fellows":
+        return "Fellows";
+      case "groups":
+        return "Groups";
+      default:
+        return "My Threads";
+    }
+  }
+
   useEffect(() => {
 
-    setContentWidth(editionRef.current ? editionRef.current.clientWidth : 0);
+    setContentWidth(editionPanelRef.current ? editionPanelRef.current.clientWidth : 0);
     setContentMarginLeft(subPanelRef.current ? subPanelRef.current.clientWidth : 0);
 
     const mediaOrientation = window.matchMedia("(max-width: 1100px)");
@@ -285,7 +301,7 @@ const InterfaceLayout = (props) => {
   }
   
   const handleResize = () => {
-    setContentWidth(editionRef.current ? editionRef.current.clientWidth : 0);
+    setContentWidth(editionPanelRef.current ? editionPanelRef.current.clientWidth : 0);
     setContentMarginLeft(subPanelRef.current ? subPanelRef.current.clientWidth : 0);
     setExpandNav(false);
     setExpandSubPanel(false);
@@ -436,51 +452,11 @@ const InterfaceLayout = (props) => {
           {
             hasSubPanel && !isPortrait &&
             <>
-              <div className="edition-panel" ref={editionRef}>
-                { 
-                  !isSubPanelStatic &&
-                  <div className="edition-panel-title">
-                    <div className="edition-panel-title-logo-container">
-                      <Icon icon="Threads" iconColor="#3650AB" />
-                    </div>
-                    <h1 className="edition-panel-title-header">My Threads</h1>
-                  </div>
-                }
-                <div className="edition-panel-bottom">
-                  <div>
-                    <div className="edition-panel-icon-container">
-                      <Icon icon="Plus" iconColor="#3650AB" />
-                    </div>
-                    <p>New group</p>
-                  </div>
-                  <div>
-                    <div className="edition-panel-icon-container">
-                      <Icon icon="Plus" iconColor="#3650AB" />
-                    </div>
-                    <p>Send subsciption invitation</p>
-                  </div>
-                  <div>
-                    <div className="edition-panel-icon-container">
-                      <Icon icon="Plus" iconColor="#3650AB" />
-                    </div>
-                    <p>Pending subscription req. (2)</p>
-                  </div>
-                  <div>
-                    <div className="edition-panel-icon-container">
-                      <Icon icon="Plus" iconColor="#3650AB" />
-                    </div>
-                    <p>Manage My group</p>
-                  </div>
-                  <div className="edition-panel-container-last">
-                    <div className="edition-panel-icon-container">
-                      <Icon icon="Plus" iconColor="#3650AB" />
-                    </div>
-                    <p>Leave My group</p>
-                  </div>
-                </div>
-              </div>
-
-
+              <EditionPanel 
+                setEditionPanelRef={setEditionPanelRef} 
+                isSubPanelStatic={isSubPanelStatic}
+                title={getSubPanelTitle(selectedView)}
+              />
               <motion.div 
                 className="interface-sub-panel" 
                 ref={subPanelRef}
@@ -507,7 +483,7 @@ const InterfaceLayout = (props) => {
                   <div className="interface-sub-panel-icon">
                     <Icon icon={getSubPanelTitleIconName(selectedView)} iconColor="white"/>
                   </div>
-                  <h1>My Threads</h1>
+                  <h1>{getSubPanelTitle(selectedView)}</h1>
                 </div>
                 <div className="interface-sub-panel-settings">
                   <div className="interface-sub-panel-search">
