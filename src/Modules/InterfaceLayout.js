@@ -242,6 +242,21 @@ const InterfaceLayout = (props) => {
     }
   }
 
+  const getSubPanelTitleIconName = (view) => {
+    switch (view) {
+      case "myThreads" :
+        return "Threads";
+      case "pinnedThreads" :
+        return "Pinned";
+      case "fellows":
+        return "Friends";
+      case "groups":
+        return "Groups";
+      default:
+        return "Threads";
+    }
+  }
+
   useEffect(() => {
 
     setContentWidth(editionRef.current ? editionRef.current.clientWidth : 0);
@@ -490,7 +505,7 @@ const InterfaceLayout = (props) => {
                 }
                 <div className="interface-sub-panel-header">
                   <div className="interface-sub-panel-icon">
-                    <Icon icon="Threads" iconColor="white"/>
+                    <Icon icon={getSubPanelTitleIconName(selectedView)} iconColor="white"/>
                   </div>
                   <h1>My Threads</h1>
                 </div>

@@ -64,7 +64,9 @@ export const userSlice = createSlice({
   
   extraReducers: {
     [login.rejected]: (state, action) => {},
-    [login.pending]: (state, action) => {},
+    [login.pending]: (state, action) => {
+      state.status = "pending login";
+    },
     [login.fulfilled]: (state, action) => {
       state.status = action.payload.status;
       state.email = action.payload.email;

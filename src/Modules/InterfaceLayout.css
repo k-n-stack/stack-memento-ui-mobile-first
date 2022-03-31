@@ -146,6 +146,7 @@
 }
 
 .navigation-bottom-mobile-interface {
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   height: 35px;
