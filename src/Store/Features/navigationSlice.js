@@ -22,6 +22,8 @@ export const navigationSlice = createSlice({
     fellowsSelection: "",
     groupsSelection: "",
     groupOwner: false,
+
+    showModal: false,
   },
 
   reducers: {
@@ -73,6 +75,10 @@ export const navigationSlice = createSlice({
     setGroupOwner: (state, action) => {
       state.groupOwner = action.payload;
     },
+    setShowModal: (state, action) => {
+      state.showModal = action.payload;
+    },
+    
   },
 });
 
