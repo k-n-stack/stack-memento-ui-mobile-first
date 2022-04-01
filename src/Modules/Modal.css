@@ -1,0 +1,56 @@
+.modal {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 10;
+    position: fixed;
+    top: calc(50vh - 650px / 2);
+    left: calc(50vw - 800px / 2);
+    background-color: rgba(255, 255, 255, 0.95);
+    width: 800px;
+    height: 650px;
+    border-radius: 5px;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.164);
+}
+
+.modal-top {
+    margin: 0px 30px;
+    padding: 0px 20px 10px 20px;
+    display: flex;
+    align-items: flex-end;
+    gap: 40px;
+    /* background-color: aqua; */
+    height: 50px;
+    border-bottom-style: solid ;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(0, 0, 0, 0.349);
+}
+
+.modal-top > div {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.modal-thread-list {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    width: 200px;
+    /* box-shadow: inset 20px 10px 20px rgba(0, 41, 175, 0.171),
+        inset -5px -5px 5px rgba(0, 82, 175, 0.171); */
+    box-shadow: inset -10px -5px 50px rgba(52, 0, 175, 0.288),
+        inset 5px 5px 5px rgba(0, 82, 175, 0.171);
+}
+
+.modal-content-container {
+    display: flex;
+    gap: 20px;
+    flex-grow: 1;
+    margin: 10px 30px 20px 30px;
+    /* background-color: blue; */
+}
+
+.modal-form-container {
+    background-color: aqua;
+    flex-grow: 1;
+    /* margin: 20px; */
+}

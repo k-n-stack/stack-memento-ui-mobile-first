@@ -18,6 +18,7 @@ import { setUserBookmarkCount, setUserThreadCount, setUserRedirectionCount, setU
 import { setUserThreads } from "Store/Features/userSlice";
 import { setGlobalThreads } from "Store/Features/globalSlice";
 import { setBrowseThread } from "Store/Features/navigationSlice";
+import Modal from "Modules/Modal";
 
 const Interface = () => {
 
@@ -81,6 +82,7 @@ const Interface = () => {
     <>
       <UserPanel/>
       <SearchPanel/>
+      <Modal />
       <InterfaceLayout 
         hasSubPanel={hasSubPanel(view)}
         pageName={getPageName(view)}

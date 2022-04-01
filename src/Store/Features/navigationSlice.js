@@ -15,6 +15,8 @@ export const navigationSlice = createSlice({
     expandSearchOptions: false,
     userPanelView: "stats",
     userSettingsView: "profile",
+
+    modalOption: 1,
   },
 
   reducers: {
