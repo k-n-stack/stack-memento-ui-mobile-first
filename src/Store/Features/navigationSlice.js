@@ -15,6 +15,17 @@ export const navigationSlice = createSlice({
     expandSearchOptions: false,
     userPanelView: "stats",
     userSettingsView: "profile",
+
+    editionPanelOptions: [],
+    myThreadsSelection: "",
+    pinnedThreadsSelection: "",
+    fellowsSelection: "",
+    groupsSelection: "",
+    groupOwner: false,
+
+    showModal: false,
+    modalView: "",
+    modalSubOptions: [],
   },
 
   reducers: {
@@ -48,8 +59,34 @@ export const navigationSlice = createSlice({
     setUserSettingsView: (state, action) => {
       state.userSettingsView = action.payload;
     },
+    setEditionPanelOptions: (state, action) => {
+      state.editionPanelOptions = action.payload;
+    },
+    setMyThreadsSelection: (state, action) => {
+      state.myThreadsSelection = action.payload;
+    },
+    setPinnedThreadsSelection: (state, action) => {
+      state.pinnedThreadsSelection = action.payload;
+    },
+    setFellowsSelection: (state, action) => {
+      state.fellowsSelection = action.payload;
+    },
+    setGroupsSelection: (state, action) => {
+      state.groupsSelection = action.payload;
+    },
+    setGroupOwner: (state, action) => {
+      state.groupOwner = action.payload;
+    },
+    setShowModal: (state, action) => {
+      state.showModal = action.payload;
+    },
+    setModalView: (state, action) => {
+      state.modalView = action.payload;
+    },
+    setModalSubOptions: (state, action) => {
+      state.modalSubOptions = action.payload;
+    }
   },
-
 });
 
 export const {
@@ -63,6 +100,15 @@ export const {
   setExpandSearchOptions,
   setUserPanelView,
   setUserSettingsView,
+  setEditionPanelOptions,
+  setMyThreadsSelection,
+  setPinnedThreadsSelection,
+  setFellowsSelection,
+  setGroupsSelection,
+  setGroupOwner,
+  setShowModal,
+  setModalView,
+  setModalSubOptions,
 } = navigationSlice.actions;
 
 export default navigationSlice.reducer;

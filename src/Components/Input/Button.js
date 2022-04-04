@@ -17,9 +17,12 @@ const Button = (props) => {
       className={`button ${styleClasses.button.join(" ")}`}
       onClick={props.onClick}
     >
-      <div className="button-icon-container">
-        <Icon icon={props.icon}/>
-      </div>
+      {
+        props.noIcon == undefined &&
+        <div className="button-icon-container">
+            <Icon icon={props.icon}/>
+        </div>
+      }
       <p>{props.buttonText}</p>
     </button>
   );
