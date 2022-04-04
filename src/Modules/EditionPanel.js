@@ -1,10 +1,14 @@
 import React, { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Icon from "Components/Icon/Icon";
+
+import { setModalView, setShowModal } from "Store/Features/navigationSlice";
 
 import "./EditionPanel.css";
 
 const EditionPanel = (props) => {
+
+  const dispatch = useDispatch();
 
   const view = useSelector((state) => (state.navigation.view));
   const myThreadsSelection = useSelector((state) => (state.navigation.myThreadsSelection));
@@ -18,6 +22,8 @@ const EditionPanel = (props) => {
       selection: [
         {
           name: "New thread", 
+          viewName: "newThread", 
+          subOption: ["New thread"],
           icon: "", 
           color: "#3650AB",
           isLast: false,
@@ -25,6 +31,8 @@ const EditionPanel = (props) => {
         },
         {
           name: "Add bookmark", 
+          viewName: "addBookmark", 
+          subOption: ["Add bookmark", "Add multiple bookmarks"],
           icon: "", 
           color: "#3650AB",
           isLast: false,
@@ -32,13 +40,17 @@ const EditionPanel = (props) => {
         },
         {
           name: "Import/Export", 
+          viewName: "importExport", 
+          subOption: ["Import", "Export"],
           icon: "", 
           color: "#3650AB",
           isLast: false,
           action: () => {},
         },
         {
-          name: "Manage group subscription", 
+          name: "Manage sharing", 
+          viewName: "manageSharing", 
+          subOption: ["Group subscription", "Fellow sharing", "Revoked subscription", "Revoked sharing"],
           icon: "", 
           color: "#3650AB",
           isLast: false,
@@ -46,6 +58,8 @@ const EditionPanel = (props) => {
         },
         {
           name: "Delete PHP thread",
+          viewName: "deleteThread",
+          subOption: [],
           icon: "", 
           color: "#882E2E",
           isLast: true,
@@ -55,6 +69,8 @@ const EditionPanel = (props) => {
       noSelection: [
         {
           name: "New thread", 
+          viewName: "newThread", 
+          subOption: ["New thread"],
           icon: "", 
           color: "#3650AB",
           isLast: false,
@@ -62,6 +78,8 @@ const EditionPanel = (props) => {
         },
         {
           name: "Add bookmark", 
+          viewName: "addBookmark", 
+          subOption: ["Add bookmark", "Add multiple bookmarks"],
           icon: "", 
           color: "#3650AB",
           isLast: false,
@@ -69,6 +87,8 @@ const EditionPanel = (props) => {
         },
         {
           name: "Import/Export", 
+          viewName: "importExport", 
+          subOption: ["Import", "Export"],
           icon: "", 
           color: "#3650AB",
           isLast: false,
@@ -80,6 +100,8 @@ const EditionPanel = (props) => {
       selection: [
         {
           name: "Pin a thread", 
+          viewName: "pinThread", 
+          subOption: [],
           icon: "", 
           color: "#3650AB",
           isLast: false,
@@ -87,6 +109,8 @@ const EditionPanel = (props) => {
         },
         {
           name: "Delete Global:JavaScript pin", 
+          viewName: "deletePin", 
+          subOption: [],
           icon: "", 
           color: "#882E2E",
           isLast: true,
@@ -96,6 +120,8 @@ const EditionPanel = (props) => {
       noSelection: [
         {
           name: "Pin a thread", 
+          viewName: "pinThread", 
+          subOption: [],
           icon: "", 
           color: "#3650AB",
           isLast: false,
@@ -103,6 +129,8 @@ const EditionPanel = (props) => {
         },
         {
           name: "Delete pins", 
+          viewName: "deletePins", 
+          subOption: [],
           icon: "", 
           color: "#882E2E",
           isLast: true,
@@ -114,6 +142,8 @@ const EditionPanel = (props) => {
       selection: [
         {
           name: "Send fellow request", 
+          viewName: "sendFellowReq", 
+          subOption: [],
           icon: "", 
           color: "#3650AB",
           isLast: false,
@@ -121,6 +151,8 @@ const EditionPanel = (props) => {
         },
         {
           name: "Pending demands", 
+          viewName: "pendingDemands", 
+          subOption: ["Pending demands - IN", "Pending demands - OUT", "Fellow Request history - IN", "Fellow Request history - OUT"],
           icon: "", 
           color: "#3650AB",
           isLast: false,
@@ -128,6 +160,8 @@ const EditionPanel = (props) => {
         },
         {
           name: "Revoke Scripty~Gurlz", 
+          viewName: "revokeFellow", 
+          subOption: [],
           icon: "", 
           color: "#882E2E",
           isLast: true,
@@ -137,6 +171,8 @@ const EditionPanel = (props) => {
       noSelection: [
         {
           name: "Send fellow request", 
+          viewName: "sendFellowReq", 
+          subOption: [],
           icon: "", 
           color: "#3650AB",
           isLast: false,
@@ -144,6 +180,8 @@ const EditionPanel = (props) => {
         },
         {
           name: "Pending demands", 
+          viewName: "pendingDemands", 
+          subOption: ["Pending demands - IN", "Pending demands - OUT", "Fellow Request history - IN", "Fellow Request history - OUT"],
           icon: "", 
           color: "#3650AB",
           isLast: false,
@@ -156,6 +194,8 @@ const EditionPanel = (props) => {
         owner: [
           {
             name: "New group", 
+            viewName: "newGroup", 
+            subOption: ["New group"],
             icon: "", 
             color: "#3650AB",
             isLast: false,
@@ -163,6 +203,8 @@ const EditionPanel = (props) => {
           },
           {
             name: "Send subscription invit", 
+            viewName: "sendSubInvit", 
+            subOption: ["Send subscription invitation"],
             icon: "", 
             color: "#3650AB",
             isLast: false,
@@ -170,6 +212,8 @@ const EditionPanel = (props) => {
           },
           {
             name: "Pending subscription req (2)", 
+            viewName: "pendingSubReq", 
+            subOption: ["Pending subscription request", "Subscription requests history"],
             icon: "", 
             color: "#3650AB",
             isLast: false,
@@ -177,6 +221,8 @@ const EditionPanel = (props) => {
           },
           {
             name: "Manage MyGroup", 
+            viewName: "manageGroup", 
+            subOption: ["Manage subscribed user", "Manage contribution thread", "Subscribed user history", "Contibution thread history"],
             icon: "", 
             color: "#3650AB",
             isLast: false,
@@ -184,6 +230,8 @@ const EditionPanel = (props) => {
           },
           {
             name: "Leave MyGroup", 
+            viewName: "leaveGroup", 
+            subOption: [],
             icon: "", 
             color: "#882E2E",
             isLast: true,
@@ -193,6 +241,8 @@ const EditionPanel = (props) => {
         notOwner: [
           {
             name: "New group", 
+            viewName: "newGroup", 
+            subOption: ["New group"],
             icon: "", 
             color: "#3650AB",
             isLast: false,
@@ -200,6 +250,8 @@ const EditionPanel = (props) => {
           },
           {
             name: "Send invit suggestion", 
+            viewName: "sendInvitSuggestion", 
+            subOption: ["Send invitation suggestion"],
             icon: "", 
             color: "#3650AB",
             isLast: false,
@@ -207,6 +259,8 @@ const EditionPanel = (props) => {
           },
           {
             name: "Leave Gr4ph15m", 
+            viewName: "leaveGroup", 
+            subOption: [],
             icon: "", 
             color: "#882E2E",
             isLast: true,
@@ -217,6 +271,8 @@ const EditionPanel = (props) => {
       noSelection: [
         {
           name: "New group", 
+          viewName: "newGroup", 
+          subOption: ["New group"],
           icon: "", 
           color: "#3650AB",
           isLast: false,
@@ -254,7 +310,13 @@ const EditionPanel = (props) => {
   const buildOptionsComponents = (options) => {
     return options.map(function (option) {
       return (
-        <div className={option.isLast ? "edition-panel-container-last" : null}>
+        <div 
+          onClick={() => {
+            dispatch(setShowModal(true));
+            dispatch(setModalView(option.viewName));
+          }}
+          className={option.isLast ? "edition-panel-container edition-panel-container-last" : "edition-panel-container"}
+        >
           <div className="edition-panel-icon-container">
             <Icon icon="Plus" iconColor={option.color} />
           </div>

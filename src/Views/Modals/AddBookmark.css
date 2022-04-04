@@ -1,9 +1,33 @@
 .add-bookmark-thread-list {
+  font-weight: bold;
+  padding: 10px 5px;
+  overflow-y: scroll;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
-  width: 200px;
+  width: 250px;
   box-shadow: inset -10px -5px 50px rgba(52, 0, 175, 0.288),
       inset 5px 5px 5px rgba(0, 82, 175, 0.171);
+}
+
+.add-bookmark-thread-list > div {
+  display: flex;
+  align-items: center;
+  max-width: 250px;
+  color: #777777;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.add-bookmark-thread-list-dot-container {
+  flex-shrink: 0;
+  margin-right: 5px;
+}
+
+.add-bookmark-thread-list-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 200px;
+
 }
 
 .add-bookmark-form-container {

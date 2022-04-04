@@ -24,6 +24,7 @@ export const navigationSlice = createSlice({
     groupOwner: false,
 
     showModal: false,
+    modalView: "",
   },
 
   reducers: {
@@ -78,6 +79,9 @@ export const navigationSlice = createSlice({
     setShowModal: (state, action) => {
       state.showModal = action.payload;
     },
+    setModalView: (state, action) => {
+      state.modalView = action.payload;
+    },
     
   },
 });
@@ -99,6 +103,8 @@ export const {
   setFellowsSelection,
   setGroupsSelection,
   setGroupOwner,
+  setShowModal,
+  setModalView,
 } = navigationSlice.actions;
 
 export default navigationSlice.reducer;

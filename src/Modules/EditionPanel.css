@@ -362,6 +362,10 @@
     margin: 0px;
   }
 
+  .edition-panel-container {
+    pointer-events: all;
+  }
+
   .edition-panel-icon-container {
     min-width: 26px;
     min-height: 26px;
