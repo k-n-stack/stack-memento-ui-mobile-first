@@ -24,11 +24,12 @@ import LeaveGroup from "Views/Modals/LeaveGroup";
 import SendInvitSuggestion from "Views/Modals/SendInvitSuggestion";
 
 
-const Modal = () => {
+const Modal = (props) => {
 
   const dispatch = useDispatch();
   const showModal = useSelector((state) => (state.navigation.showModal));
   const modalView = useSelector((state) => (state.navigation.modalView));
+  const modalSubOptions = useSelector((state) => (state.navigation.modalSubOptions));
 
   const getView = (view) => {
     switch (true) {
@@ -78,8 +79,9 @@ const Modal = () => {
       showModal &&
       <div className="modal">
         <div className="modal-top">
-            <div>Add bookmark</div>
-            <div>Add multiple bookmarks</div>
+            {modalSubOptions.map(function (subOption) {
+              return <div>{subOption}</div>;
+            })}
             <div className="modal-top-close">
               <div 
                 className="modal-top-close-container"

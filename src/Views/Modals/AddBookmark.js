@@ -61,8 +61,9 @@ const AddBookmark = () => {
   });
 
   return (
-    <>
+    <div className="add-bookmark">
       <div className="add-bookmark-thread-list">
+        {getThreads(threads)}
         {getThreads(threads)}
       </div>
       <div className="add-bookmark-form-container">
@@ -89,7 +90,7 @@ const AddBookmark = () => {
         </div>
 
       </div>
-    </>
+    </div>
   );
 };
 

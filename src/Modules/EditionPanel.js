@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Icon from "Components/Icon/Icon";
 
-import { setModalView, setShowModal } from "Store/Features/navigationSlice";
+import { setModalSubOptions, setModalView, setShowModal } from "Store/Features/navigationSlice";
 
 import "./EditionPanel.css";
 
@@ -314,6 +314,7 @@ const EditionPanel = (props) => {
           onClick={() => {
             dispatch(setShowModal(true));
             dispatch(setModalView(option.viewName));
+            dispatch(setModalSubOptions(option.subOption)); 
           }}
           className={option.isLast ? "edition-panel-container edition-panel-container-last" : "edition-panel-container"}
         >

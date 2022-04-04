@@ -1,3 +1,10 @@
+.add-bookmark {
+  display: flex;
+  gap: 20px;
+  margin: 10px 30px 20px 30px;
+  flex-grow: 1;
+}
+
 .add-bookmark-thread-list {
   font-weight: bold;
   padding: 10px 5px;
