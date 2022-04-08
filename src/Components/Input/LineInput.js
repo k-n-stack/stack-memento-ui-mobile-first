@@ -1,5 +1,5 @@
 import Icon from "Components/Icon/Icon";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import "./LineInput.css";
 
@@ -13,6 +13,7 @@ const LineInput = (props) => {
   const isPassword = props.password !== undefined;
 
   const iconRight = props.iconRight || "Cross";
+  const placeholder = props.placeholder || "Search users, threads, tags...";
 
   const styleClasses = {
     lineInput: [
@@ -34,11 +35,17 @@ const LineInput = (props) => {
     setShowPassword(!showPassword);
   };
 
+  useEffect(() => {
+    if (props.getInputRef !== undefined) {
+      props.getInputRef(inputRef);
+    }
+  }, []);
+
   return (
     <div className="line-input-container">
       <input 
         className={`line-input ${styleClasses.lineInput.join(" ")}`}
-        placeholder="Search users, threads, tags..."
+        placeholder={placeholder}
         onChange={(event) => {
           if (props.onChange) {
             props.onChange(event.target.value);
@@ -47,6 +54,7 @@ const LineInput = (props) => {
         }}
         ref={inputRef}
         type={props.password === undefined ? null : (showPassword ? "" : "password")}
+        onBlur={props.onBlur || undefined}
       />
       {
         props.hasLeftIcon !== undefined &&
