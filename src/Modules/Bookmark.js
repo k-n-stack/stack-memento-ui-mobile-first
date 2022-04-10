@@ -73,7 +73,7 @@ const Bookmark = (props) => {
               ${pigtailWidth} ${pigtailHeight - pigtailStrokeWidth / 2}`}
             stroke={pigtailColor}
             strokeWidth={pigtailStrokeWidth} 
-            shape-rendering="geometricPrecision"
+            shapeRendering="geometricPrecision"
           />
         </svg>
       </div>

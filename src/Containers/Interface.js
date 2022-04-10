@@ -16,10 +16,8 @@ import ThreadBrowser from "Views/ThreadBrowser";
 
 import Modal from "./Modal";
 
-import { setUserBookmarkCount, setUserThreadCount, setUserRedirectionCount, setUserCommentCount } from "Store/Features/userSlice";
-import { setUserThreads } from "Store/Features/userSlice";
+import { setUserThreads, setUserSubscribedGroups, setUserOwnGroups } from "Store/Features/userSlice";
 import { setGlobalThreads } from "Store/Features/globalSlice";
-import { setBrowseThread } from "Store/Features/navigationSlice";
 
 
 const Interface = () => {
@@ -78,6 +76,8 @@ const Interface = () => {
   useEffect(() => {
     dispatch(setUserThreads());
     dispatch(setGlobalThreads());
+    dispatch(setUserSubscribedGroups());
+    dispatch(setUserOwnGroups());
   }, []);
 
   return (

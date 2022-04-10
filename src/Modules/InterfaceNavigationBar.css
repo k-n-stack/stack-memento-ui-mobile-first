@@ -1,0 +1,93 @@
+.interface-navigation-bar {
+  display: none !important;
+  z-index: 2;
+}
+
+.interface-navigation-bar-m {
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  height: 35px;
+  padding: 10px 10px 10px 10px;
+  background: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(0, 0, 0, 0) 101.62%), linear-gradient(221.42deg, #3650AB 59.99%, rgba(60, 147, 174, 0.65) 104.23%);
+  box-shadow: 0px -1px 10px 2px rgba(0, 0, 0, 0.267);
+  pointer-events: all;
+}
+
+.interface-navigation-bar-menu-container {
+  display: flex;
+  align-items: center;
+}
+
+.interface-navigation-bar-menu-icon {
+  flex-shrink: 0;
+  height: 35px;
+  width: 35px;
+  margin-right: 5px;
+}
+
+.interface-navigation-bar-menu-name {
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.interface-navigation-bar-arrow-icon-container {
+  display: none;
+}
+
+.fast-nav {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.navigation-sort-icon-container {
+  display: block;
+  width: 50px !important;
+  height: 50px !important;
+  padding: 7px;
+  border-radius: 45px;
+  position: absolute;
+  background-color: #3650AB;
+  right: -25px;
+  top: 65px;
+}
+
+@media screen and (min-width: 1100px) {
+
+
+
+  .interface-navigation-bar-m {
+    display: none !important;
+  }
+
+  .interface-navigation-bar {
+    display: flex !important;
+    width: auto;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0px;
+    flex-direction: column;
+    justify-content: start;
+    height: 100vh;
+    padding: 10px 10px 30px 10px;
+    background: #3650AB;
+  }
+
+  .interface-navigation-bar-arrow-icon-container {
+    display: block;
+    margin-bottom: 100px;
+  }
+
+  .interface-navigation-bar-menu-container {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .navigation-sort-icon-container {
+    display: none;
+  }
+}

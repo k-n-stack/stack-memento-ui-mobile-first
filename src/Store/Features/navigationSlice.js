@@ -13,6 +13,9 @@ export const navigationSlice = createSlice({
     expandUserPanel: false,
     expandSearchPanel: false,
     expandSearchOptions: false,
+    expandNavbar: false,
+    expandSubNavbar: false,
+    expandSemiSub: false,
     userPanelView: "stats",
     userSettingsView: "profile",
 
@@ -52,6 +55,15 @@ export const navigationSlice = createSlice({
     },
     setExpandSearchOptions: (state, action) => {
       state.expandSearchOptions = action.payload;
+    },
+    setExpandNavbar: (state, action) => {
+      state.expandNavbar = action.payload;
+    },
+    setExpandSubNavbar: (state, action) => {
+      state.expandSubNavbar = action.payload;
+    },
+    setExpandSemiSub: (state, action) => {
+      state.expandSemiSub = action.payload;
     },
     setUserPanelView: (state, action) => {
       state.userPanelView = action.payload;
@@ -98,6 +110,9 @@ export const {
   setExpandUserPanel,
   setExpandSearchPanel,
   setExpandSearchOptions,
+  setExpandNavbar,
+  setExpandSubNavbar,
+  setExpandSemiSub,
   setUserPanelView,
   setUserSettingsView,
   setEditionPanelOptions,

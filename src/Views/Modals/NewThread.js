@@ -9,11 +9,14 @@ import "./NewThread.css";
 import LineInput from "Components/Input/LineInput";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "Components/Input/Button";
+import GroupCarousel from "Components/Input/GroupCarousel";
 
 const NewThread = () => {
 
   const dispatch = useDispatch();
   const color = useSelector((state) => (state.newThread.color));
+  const subscribedGroups = useSelector((state) => (state.user.subscribedGroups));
+  const ownGroups = useSelector((state) => (state.user.ownGroups));
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [inputColor, setInputColor] = useState('');
   const [inputRef, setInputRef] = useState(null);
@@ -160,6 +163,11 @@ const NewThread = () => {
             <div className="new-thread-visibility-description">
               {buttons[selectedButton].description}
             </div>
+          </div>
+
+          <div className="new-thread-groups-carousel">
+            <GroupCarousel groups={subscribedGroups}/>
+            <GroupCarousel groups={ownGroups} />
           </div>
 
         </form>

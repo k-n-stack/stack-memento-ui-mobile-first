@@ -1,0 +1,15 @@
+.groups-carousel {
+  display: flex;
+  margin-left: 20px;
+}
+
+.group-carousel-image-container {
+  width: 70px; 
+  margin-left: -20px;
+}
+
+.group-carousel-image-container > img {
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+}

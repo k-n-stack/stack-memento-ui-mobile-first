@@ -25,6 +25,8 @@ const routes = {
   fetchUserVoteCount: "/user-vote-count",
   fetchUserThreads: "/user-thread-full",
   fetchUserPinnedThreads: "/user-pinned",
+  fetchUserSubscribedGroups: "/user-subscribed-group",
+  fetchUserOwnGroups: "/user-own-group",
 };
 
 const fetchUserByEmailThunk = () => createAsyncThunk(
@@ -217,6 +219,42 @@ const fetchUserPinnedThreadsThunk = () => createAsyncThunk(
   }
 );
 
+const fetchUserSubscribedGroupsThunk = () => createAsyncThunk(
+  "user/fetchUserSubscribedGroups",
+  async (data, { rejectWithValue }) => {
+    try {
+      return await fetch(routes.fetchUserSubscribedGroups, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        }
+      })
+      .then(res => res.json());
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const fetchUserOwnGroupsThunk = () => createAsyncThunk(
+  "user/fetchUserOwnGroups",
+  async (data, { rejectWithValue }) => {
+    try {
+      return await fetch(routes.fetchUserOwnGroups, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        }
+      })
+      .then(res => res.json());
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
 export {
   fetchUserByEmailThunk,
   fetchUserRegistrationThunk,
@@ -228,4 +266,6 @@ export {
   fetchUserVoteCountThunk,
   fetchUserThreadsThunk,
   fetchUserPinnedThreadsThunk,
+  fetchUserSubscribedGroupsThunk,
+  fetchUserOwnGroupsThunk,
 };

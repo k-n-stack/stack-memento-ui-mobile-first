@@ -10,6 +10,8 @@ import {
   fetchUserVoteCountThunk,
   fetchUserThreadsThunk,
   fetchUserPinnedThreadsThunk,
+  fetchUserSubscribedGroupsThunk,
+  fetchUserOwnGroupsThunk,
 } from "Store/Thunks/userThunks";
 
 export const login = fetchUserByEmailThunk();
@@ -22,6 +24,8 @@ export const setUserCommentCount = fetchUserCommentCountThunk();
 export const setUserVoteCount = fetchUserVoteCountThunk();
 export const setUserThreads = fetchUserThreadsThunk();
 export const setUserPinnedThreads = fetchUserPinnedThreadsThunk();
+export const setUserSubscribedGroups = fetchUserSubscribedGroupsThunk();
+export const setUserOwnGroups = fetchUserOwnGroupsThunk();
 
 export const userSlice = createSlice({
   
@@ -42,6 +46,9 @@ export const userSlice = createSlice({
 
     threads: [],
     pinnedThreads: [],
+
+    subscribedGroups: [],
+    ownGroups: [],
   },
 
   reducers: {
@@ -131,6 +138,18 @@ export const userSlice = createSlice({
     [setUserPinnedThreads.pending]: (state, action) => {},
     [setUserPinnedThreads.fulfilled]: (state, action) => {
       state.pinnedThreads = action.payload;
+    },
+
+    [setUserSubscribedGroups.rejected]: (state, action) => {},
+    [setUserSubscribedGroups.pending]: (state, action) => {},
+    [setUserSubscribedGroups.fulfilled]: (state, action) => {
+      state.subscribedGroups = action.payload;
+    },
+
+    [setUserOwnGroups.rejected]: (state, action) => {},
+    [setUserOwnGroups.pending]: (state, action) => {},
+    [setUserOwnGroups.fulfilled]: (state, action) => {
+      state.ownGroups = action.payload;
     },
 
   },
