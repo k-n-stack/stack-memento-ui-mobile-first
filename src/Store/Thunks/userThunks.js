@@ -28,6 +28,8 @@ const routes = {
   fetchUserSubscribedGroups: "/user-subscribed-group",
   fetchUserOwnGroups: "/user-own-group",
   fetchUserFriends: "/user-fellows",
+  postBookmarks: "/post-bookmark",
+  postThread: "/post-thread",
 };
 
 const fetchUserByEmailThunk = () => createAsyncThunk(
@@ -274,6 +276,58 @@ const fetchUserFriendsThunk = () => createAsyncThunk(
   }
 );
 
+const postBookmarksThunk = () => createAsyncThunk(
+  "user/postBookmarks",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { thread_ids, url, description, comment, tags } = data;
+      const res = await fetch(routes.postBookmarks, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+        body: JSON.stringify({
+          thread_ids, 
+          url,
+          description,
+          comment,
+          tags,
+        }),
+      })
+      .then(res => res.json());
+      return res;
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const postThreadThunk = () => createAsyncThunk(
+  "user/postThread",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { title, visibility, color } = data;
+      const res = await fetch(routes.postBookmarks, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+        body: JSON.stringify({
+          title,
+          visibility,
+          color,
+        }),
+      })
+      .then(res => res.json());
+      return res;
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
 export {
   fetchUserByEmailThunk,
   fetchUserRegistrationThunk,
@@ -288,4 +342,6 @@ export {
   fetchUserSubscribedGroupsThunk,
   fetchUserOwnGroupsThunk,
   fetchUserFriendsThunk,
+  postBookmarksThunk,
+  postThreadThunk,
 };

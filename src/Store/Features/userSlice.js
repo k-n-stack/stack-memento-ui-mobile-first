@@ -13,6 +13,8 @@ import {
   fetchUserSubscribedGroupsThunk,
   fetchUserOwnGroupsThunk,
   fetchUserFriendsThunk,
+  postBookmarksThunk,
+  postThreadThunk,
 } from "Store/Thunks/userThunks";
 
 export const login = fetchUserByEmailThunk();
@@ -28,6 +30,8 @@ export const setUserPinnedThreads = fetchUserPinnedThreadsThunk();
 export const setUserSubscribedGroups = fetchUserSubscribedGroupsThunk();
 export const setUserOwnGroups = fetchUserOwnGroupsThunk();
 export const setUserFriends = fetchUserFriendsThunk();
+export const postBookmarks = postBookmarksThunk();
+export const postThread = postThreadThunk();
 
 export const userSlice = createSlice({
   
@@ -160,6 +164,18 @@ export const userSlice = createSlice({
     [setUserFriends.pending]: (state, action) => {},
     [setUserFriends.fulfilled]: (state, action) => {
       state.friends = action.payload;
+    },
+
+    [postBookmarks.rejected]: (state, action) => {},
+    [postBookmarks.pending]: (state, action) => {},
+    [postBookmarks.fulfilled]: (state, action) => {
+      state.status = action.payload;
+    },
+
+    [postThread.rejected]: (state, action) => {},
+    [postThread.pending]: (state, action) => {},
+    [postThread.fulfilled]: (state, action) => {
+      state.status = action.payload;
     },
 
   },

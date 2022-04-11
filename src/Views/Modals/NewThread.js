@@ -10,6 +10,7 @@ import LineInput from "Components/Input/LineInput";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "Components/Input/Button";
 import GroupCarousel from "Components/Input/GroupCarousel";
+import { postThread } from "Store/Features/userSlice";
 
 const NewThread = () => {
 
@@ -119,6 +120,14 @@ const NewThread = () => {
     );
   }
 
+  const handleSubmit = () => {
+    dispatch(postThread({
+      color: color,
+      title: title,
+      visibility: visibility,
+    }));
+  }
+
   return (
     <>
       <div className="new-thread">
@@ -187,7 +196,11 @@ const NewThread = () => {
                 <GroupCarousel groups={friends}/>
               </div>
               <div className="new-thread-button-container">
-                <Button noIcon buttonText="Add thread"/>
+                <Button 
+                  noIcon 
+                  buttonText="Add thread"
+                  onClick={handleSubmit}
+                />
               </div>
             </div>
           </div>

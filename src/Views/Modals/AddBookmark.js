@@ -6,11 +6,19 @@ import Button from "Components/Input/Button";
 import ThreadDot from "Components/Svg/ThreadDot";
 
 import "./AddBookmark.css";
+import { useDispatch } from "react-redux";
+import { postBookmarks } from "Store/Features/userSlice";
 
 const AddBookmark = () => {
 
+  const dispatch = useDispatch();
   const threads = useSelector((state) => (state.user.threads));
+  const status = useSelector((state) => (state.user.status));
   const [selectedThreads, setSelectedThreads] = useState([]);
+  const [description, setDescription] = useState("");
+  const [url, setUrl] = useState("");
+  const [tags, setTags] = useState([]);
+  const [comment, setComment] = useState("");
 
   const variants = {
     thread: {
@@ -56,37 +64,62 @@ const AddBookmark = () => {
     });
   }
 
+  const handleSubmit = () => {
+    dispatch(postBookmarks({
+      thread_ids: selectedThreads,
+      url: url,
+      description: description,
+      comment: comment,
+      tags: tags,
+    }));
+  }
+
+  const handleTags = (event) => {
+    const _tags = event.target.value.split(" ");
+    setTags(_tags);
+  }
+
   useEffect(() => {
-    console.log(selectedThreads);
+    // console.log(tags);
+    console.log(status);
   });
 
   return (
     <div className="add-bookmark">
       <div className="add-bookmark-thread-list">
         {getThreads(threads)}
-        {getThreads(threads)}
       </div>
       <div className="add-bookmark-form-container">
         <div className="add-bookmark-form-inputs">
           <label>Description :</label>
-          <input/>
+          <input onChange={(event) => {
+            setDescription(event.target.value);
+          }}/>
 
           <label>URL :</label>
-          <input/>
+          <input onChange={(event) => {
+            setUrl(event.target.value);
+          }}/>
 
           <div></div><div></div>
 
           <label>Add tag(s) :</label>
-          <input/>
+          <input onChange={handleTags}/>
 
           <div></div>
           <div className="add-bookmark-tags-container"></div>
 
           <label className="add-bookmark-textarea-label">Main comment : </label>
-          <textarea/>
+          <textarea onChange={(event) => {
+            setComment(event.target.value);
+          }}/>
         </div>
         <div className="add-bookmark-button-container">
-          <Button noIcon buttonText="Add bookmark"/>
+          <Button 
+            noIcon 
+            buttonText="Add bookmark"
+            onClick={handleSubmit}
+          />
         </div>
 
       </div>
