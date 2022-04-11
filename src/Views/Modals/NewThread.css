@@ -35,7 +35,7 @@
 .new-thread-form {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 20px;
 }
 
 .new-thread-form-name {
@@ -67,5 +67,25 @@
 
 .new-thread-groups-carousel {
   display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.new-thread-groups-groups {
+  display: flex;
   gap: 40px;
+}
+
+.new-thread-groups-groups > div {
+  font-size: 14px;
+  font-style: italic;
+}
+
+.new-thread-friends-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-thread-button-container {
+  align-self: flex-end;
 }

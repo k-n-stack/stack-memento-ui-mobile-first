@@ -10,7 +10,7 @@
   width: 325px;
   flex-shrink: 1;
   background: linear-gradient(0deg, rgba(255, 0, 0, 0.2) -1.85%, rgba(215, 0, 0, 0.16875) 30.64%, rgba(0, 0, 0, 0) 101.62%), linear-gradient(221.42deg, #3650AB 59.99%, rgba(60, 147, 174, 0.65) 104.23%);
-  display: flex;
+  display: none;
   flex-direction: column;
   color: white;
 
@@ -71,14 +71,18 @@
 }
 
 .navigation-close-icon-container {
-  /* width: 50px !important;
-  height: 50px !important; */
   padding: 7px;
   border-radius: 45px;
   position: absolute;
   background-color: #3650AB;
   right: -25px;
   top: 65px;
+}
+
+@media screen and (min-width: 1100px) {
+  .interface-sub-panel {
+    display: flex;
+  }
 }
 
 @media screen and (min-width: 1400px) {
@@ -88,5 +92,6 @@
 
   .interface-sub-panel {
     left: 0px;
+    transform: none !important;
   }
 }

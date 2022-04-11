@@ -17,6 +17,7 @@ const NewThread = () => {
   const color = useSelector((state) => (state.newThread.color));
   const subscribedGroups = useSelector((state) => (state.user.subscribedGroups));
   const ownGroups = useSelector((state) => (state.user.ownGroups));
+  const friends = useSelector((state) => (state.user.friends));
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [inputColor, setInputColor] = useState('');
   const [inputRef, setInputRef] = useState(null);
@@ -166,8 +167,29 @@ const NewThread = () => {
           </div>
 
           <div className="new-thread-groups-carousel">
-            <GroupCarousel groups={subscribedGroups}/>
-            <GroupCarousel groups={ownGroups} />
+            <label>Add or suggest to group :</label>
+            <div className="new-thread-groups-groups">
+              <div>
+                <GroupCarousel groups={subscribedGroups}/>
+                <div>Subscribed group(s)</div>
+              </div>
+              <div>
+                <GroupCarousel groups={ownGroups} />
+                <div>Owned group(s)</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="new-thread-groups-carousel">
+            <label>Share with fellows :</label>
+            <div className="new-thread-friends-group">
+              <div>
+                <GroupCarousel groups={friends}/>
+              </div>
+              <div className="new-thread-button-container">
+                <Button noIcon buttonText="Add thread"/>
+              </div>
+            </div>
           </div>
 
         </form>

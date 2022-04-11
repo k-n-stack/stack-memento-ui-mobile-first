@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import {  motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setExpandNavbar, setExpandSubNavbar, setExpandSemiSub } from "Store/Features/navigationSlice";
@@ -10,13 +10,13 @@ import { setView } from "Store/Features/navigationSlice";
 
 import "./InterfaceNavigationBar.css";
 
-const InterfaceNavigationBar = () => {
+const InterfaceNavigationBar = (props) => {
 
   const dispatch = useDispatch();
   const selectedView = useSelector((state) => (state.navigation.view));
   const expandSubNavbar = useSelector((state) => (state.navigation.expandSubNavbar));
   const expandNavbar = useSelector((state) => (state.navigation.expandNavbar));
-  // const [expandNavbar, setExpandNav] = useState(false);
+  const [isSubNavbarStatic, setIsSubNavbarStatic] = useState(window.matchMedia('(min-width: 1400px)').matches);
 
   const variants = {
     navContainer: {
@@ -132,7 +132,7 @@ const InterfaceNavigationBar = () => {
             <motion.div className="interface-navigation-bar-menu-name"
               variants={variants.navMenuName}
               initial={variants.navMenuName.collapse}
-              animate={expandNavbar ? "expand" : "collapse"}
+              animate={isSubNavbarStatic ? undefined : expandNavbar ? "expand" : "collapse"}
               style={{ color : selectedView === menu.dispatch ? "#96B9DA" : "#FFFFFF" }}
             >
               {menu.title}
@@ -172,6 +172,20 @@ const InterfaceNavigationBar = () => {
     });
   }
 
+  const checkLargeWidth = (event) => {
+    dispatch(setExpandNavbar(false));
+    dispatch(setExpandSemiSub(false));
+    dispatch(setExpandSubNavbar(false));
+  }
+
+  useEffect(() => {
+    const largeWidth = window.matchMedia("(min-width: 1400px)");
+    largeWidth.addEventListener("change", checkLargeWidth);
+    return () => {
+      largeWidth.removeEventListener("change", checkLargeWidth);
+    }
+  });
+
   return (
     <>
       {/* DESKTOP */}
@@ -182,19 +196,22 @@ const InterfaceNavigationBar = () => {
         animate={expandNavbar ? "expand" : "collapse"}
       > 
 
-        <motion.div 
-          className="navigation-sort-icon-container"
-          onClick={() => {
-            dispatch(setExpandNavbar(false));
-            dispatch(setExpandSubNavbar(true));
-            dispatch(setExpandSemiSub(false));
-          }}
-          variants={variants.sortIcon}
-          initial={variants.sortIcon.show}
-          animate={expandSubNavbar ? "hide" : "show"}
-        >
-          <Icon icon="SortCircle" iconColor="#FFFFFF"/>
-        </motion.div>
+        {
+          selectedView !== "global" && selectedView !== "threadBrowser" &&
+          <motion.div 
+            className="navigation-sort-icon-container"
+            onClick={() => {
+              dispatch(setExpandNavbar(false));
+              dispatch(setExpandSubNavbar(true));
+              dispatch(setExpandSemiSub(false));
+            }}
+            variants={variants.sortIcon}
+            initial={variants.sortIcon.show}
+            animate={expandSubNavbar ? "hide" : "show"}
+          >
+            <Icon icon="SortCircle" iconColor="#FFFFFF"/>
+          </motion.div>
+        }
 
         <motion.div 
           className="interface-navigation-bar-arrow-icon-container interface-navigation-bar-menu-icon"

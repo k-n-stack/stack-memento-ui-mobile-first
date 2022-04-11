@@ -327,14 +327,8 @@ const EditionPanel = (props) => {
     });
   }
 
-  const editionPanelRef = useRef();
-
-  useEffect(() => {
-    props.setEditionPanelRef(editionPanelRef);
-  });
-
   return (
-    <div className="edition-panel" ref={editionPanelRef}>
+    <div className="edition-panel">
       { 
         !props.isSubPanelStatic &&
         <div className="edition-panel-title">

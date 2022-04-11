@@ -57,7 +57,9 @@
 
 @media screen and (min-width: 1100px) {
 
-
+  .navigation-sort-icon-container {
+    /* display: block; */
+  }
 
   .interface-navigation-bar-m {
     display: none !important;

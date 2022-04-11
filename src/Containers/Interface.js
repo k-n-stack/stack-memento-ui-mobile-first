@@ -16,7 +16,7 @@ import ThreadBrowser from "Views/ThreadBrowser";
 
 import Modal from "./Modal";
 
-import { setUserThreads, setUserSubscribedGroups, setUserOwnGroups } from "Store/Features/userSlice";
+import { setUserThreads, setUserSubscribedGroups, setUserOwnGroups, setUserFriends } from "Store/Features/userSlice";
 import { setGlobalThreads } from "Store/Features/globalSlice";
 
 
@@ -78,6 +78,7 @@ const Interface = () => {
     dispatch(setGlobalThreads());
     dispatch(setUserSubscribedGroups());
     dispatch(setUserOwnGroups());
+    dispatch(setUserFriends());
   }, []);
 
   return (
