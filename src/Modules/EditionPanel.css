@@ -4,6 +4,7 @@
     border-bottom-color: #999999;
     display: none;
     flex-direction: column;
+    flex-shrink: 0;
     padding-left: 10px;
     padding-bottom: 5px;
     font-size: small;

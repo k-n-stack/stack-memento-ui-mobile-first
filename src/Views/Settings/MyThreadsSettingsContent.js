@@ -13,14 +13,17 @@ const MyThreadsSettingsContent = (props) => {
   });
 
   const countThreadsStats = (thread) => {
+
     let redirections = 0;
     let upvotes = 0;
     let comments = 0;
 
-    for (const bookmark of thread.bookmarks) {
-      redirections += bookmark.redirection_count;
-      upvotes += bookmark.vote_count;
-      comments += bookmark.comment_count;
+    if (thread.bookmarks !== undefined) {
+      for (const bookmark of thread.bookmarks) {
+        redirections += bookmark.redirection_count;
+        upvotes += bookmark.vote_count;
+        comments += bookmark.comment_count;
+      }
     }
 
     return {

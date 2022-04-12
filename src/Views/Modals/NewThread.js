@@ -208,12 +208,12 @@ const NewThread = () => {
             <label>Add or suggest to group :</label>
             <div className="new-thread-groups-groups">
               <div>
-                <GroupCarousel groups={subscribedGroups}/>
                 <div>Subscribed group(s)</div>
+                <GroupCarousel groups={subscribedGroups}/>
               </div>
               <div>
-                <GroupCarousel groups={ownGroups} />
                 <div>Owned group(s)</div>
+                <GroupCarousel groups={ownGroups} />
               </div>
             </div>
           </div>

@@ -59,7 +59,7 @@ const GlobalTopBar = () => {
         </div>
         <div className="global-top-bar-avatar">
           <img 
-            src={getImageModule(sessionStorage.getItem('stmn_image_url'))}
+            src={`http://localhost:8000/api/${sessionStorage.getItem('stmn_image_url')}`}
             width="100%"
             height="100%"
             onClick={() => {

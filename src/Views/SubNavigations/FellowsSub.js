@@ -15,6 +15,7 @@ const FellowsSub = () => {
     return fellows.map(function (fellow) {
       return (
         <div className="fellows-sub-list-element">
+          <img src={`http://localhost:8000/api/${fellow.image_url}`} />
           <div>{fellow.pseudonym}</div>
         </div>
       )

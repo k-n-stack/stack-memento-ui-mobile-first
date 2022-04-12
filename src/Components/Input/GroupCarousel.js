@@ -29,7 +29,7 @@ const GroupCarousel = (props) => {
           initial={{ opacity: 0.5 }}
           animate={selectedGroups.includes(group.alphanumeric_id) ? { opacity: 1 } : { opacity : 0.5 }}
         >
-          <img src="http://localhost:8000/api/ressource-avatar/test"/>
+          <img src={`http://localhost:8000/api/${group.image_url}`}/>
         </motion.div>
       );
     });
