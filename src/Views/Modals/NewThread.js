@@ -10,11 +10,15 @@ import LineInput from "Components/Input/LineInput";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "Components/Input/Button";
 import GroupCarousel from "Components/Input/GroupCarousel";
-import { postThread } from "Store/Features/userSlice";
+import { postThread, setStatus } from "Store/Features/userSlice";
+
+import { setUserThreads, setUserSubscribedGroups, setUserOwnGroups, setUserFriends } from "Store/Features/userSlice";
+import { setGlobalThreads } from "Store/Features/globalSlice";
 
 const NewThread = () => {
 
   const dispatch = useDispatch();
+  const status = useSelector((state) => (state.user.status));
   const color = useSelector((state) => (state.newThread.color));
   const subscribedGroups = useSelector((state) => (state.user.subscribedGroups));
   const ownGroups = useSelector((state) => (state.user.ownGroups));
@@ -23,6 +27,7 @@ const NewThread = () => {
   const [inputColor, setInputColor] = useState('');
   const [inputRef, setInputRef] = useState(null);
   const [selectedButton, setSelectedButton] = useState(3);
+  const [title, setTitle] = useState("");
 
   const variants = {
     colorPicker: {
@@ -75,6 +80,11 @@ const NewThread = () => {
     },
   ];
 
+  const getVisibilityEnumValue = (index) => {
+    const _enum = ['control', 'public', 'shareable', 'private'];
+    return _enum[index];
+  }
+
   const checkColor = () => {
     if (inputColor.match(/^#[0-9a-f]{6}$/)) {
       dispatch(setColor(inputColor));
@@ -120,13 +130,30 @@ const NewThread = () => {
     );
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     dispatch(postThread({
-      color: color,
+      color: color.substr(1),
       title: title,
-      visibility: visibility,
+      visibility: getVisibilityEnumValue(selectedButton),
     }));
   }
+
+  useEffect(() => {
+    console.log('in useeffect');
+    console.log(status);
+
+    if (status.status === "thread added") {
+      console.log('hehlo');
+      dispatch(setUserThreads());
+      dispatch(setGlobalThreads());
+      dispatch(setUserSubscribedGroups());
+      dispatch(setUserOwnGroups());
+      dispatch(setUserFriends());
+
+      dispatch(setStatus(""));
+    }
+  });
 
   return (
     <>
@@ -164,7 +191,9 @@ const NewThread = () => {
 
           <div className="new-thread-form-name">
             <label>Thread name :</label>
-            <input/>
+            <input onChange={(event) => {
+              setTitle(event.target.value);
+            }}/>
           </div>
 
           <div className="new-thread-form-visibility">

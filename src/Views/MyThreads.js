@@ -3,9 +3,14 @@ import { useSelector } from "react-redux";
 import Thread from "Modules/Thread";
 
 import "./MyThreads.css";
+import { useDispatch } from "react-redux";
+
+import { setMyThreadsSettingsContent } from "Store/Features/navigationSlice";
 
 const MyThreads = () => {
 
+  const dispatch = useDispatch();
+  const test = useSelector((state) => (state.user.myThreadsSettingsContent));
   const threads = useSelector((state) => (state.user.threads));
 
   const testStyle = {
@@ -29,9 +34,14 @@ const MyThreads = () => {
   const getExpandableThreads = (threads) => {
     return threads.map((thread) => {
       return (
-        <div style={{
-          opacity: thread.bookmarks.length ? 1 : 0.5,
-        }}>
+        <div 
+          style={{
+            opacity: thread.bookmarks.length ? 1 : 0.5,
+          }}
+          onClick={() => {
+            dispatch(setMyThreadsSettingsContent(thread));            
+          }}
+        >
           <Thread 
             {...thread}
             {...testStyle}
@@ -40,6 +50,10 @@ const MyThreads = () => {
       );
     });
   };
+
+  useEffect(() => {
+    console.log(test);
+  });
 
   return (
     <>

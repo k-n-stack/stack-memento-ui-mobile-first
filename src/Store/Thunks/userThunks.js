@@ -308,7 +308,7 @@ const postThreadThunk = () => createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const { title, visibility, color } = data;
-      const res = await fetch(routes.postBookmarks, {
+      const res = await fetch(routes.postThread, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",

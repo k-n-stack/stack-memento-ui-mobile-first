@@ -5,11 +5,15 @@ import LineInput from "Components/Input/LineInput";
 
 import { setExpandSearchPanel, setExpandUserPanel } from "Store/Features/navigationSlice";
 
+import MyThreadsSettingsContent from "Views/Settings/MyThreadsSettingsContent";
+
 import "./SettingsBar.css";
+import { useSelector } from "react-redux";
 
 const SettingsBar = (props) => {
 
   const dispatch = useDispatch();
+  const view = useSelector((state) => (state.navigation.view));
 
   const getImageModule = (image) => {
     try {
@@ -17,6 +21,21 @@ const SettingsBar = (props) => {
     } catch (error) {
       return require("../Ressources/Images/Avatars/default.png");
     }
+  };
+
+  const getContent = (view) => {
+    switch (true) {
+      case view === "myThreads" :
+        return <MyThreadsSettingsContent />;
+      // case view === "pinnedThreads" :
+      //   return <PinnedThreadsSettingsContent />;
+      // case view === "fellows" :
+      //   return <FellowsSettingsContent />;
+      // case view === "groups" :
+      //   return <GroupsSettingsContent />;
+      default: 
+        return <MyThreadsSettingsContent />;
+    };
   };
 
   return (
@@ -59,7 +78,7 @@ const SettingsBar = (props) => {
         </div>
       </div>
       <div className="settings-bar-content">
-        {/* PUT CONTENT HERE */}
+        {getContent(view)}
       </div>
     </div>
   )

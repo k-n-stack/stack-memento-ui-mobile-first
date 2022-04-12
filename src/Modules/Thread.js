@@ -6,8 +6,10 @@ import ThreadDot from "Components/Svg/ThreadDot";
 import ThreadLine from "Components/Svg/ThreadLine";
 
 import "./Thread.css";
+import { useDispatch } from "react-redux";
 
 const Thread = (props) => {
+
 
   const threadRef = useRef(null);
   const [threadHeight, setThreadHeight] = useState(0);

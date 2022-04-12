@@ -9,6 +9,10 @@ import "./AddBookmark.css";
 import { useDispatch } from "react-redux";
 import { postBookmarks } from "Store/Features/userSlice";
 
+import { setStatus } from "Store/Features/userSlice";
+import { setUserThreads, setUserSubscribedGroups, setUserOwnGroups, setUserFriends } from "Store/Features/userSlice";
+import { setGlobalThreads } from "Store/Features/globalSlice";
+
 const AddBookmark = () => {
 
   const dispatch = useDispatch();
@@ -80,8 +84,15 @@ const AddBookmark = () => {
   }
 
   useEffect(() => {
-    // console.log(tags);
-    console.log(status);
+    if (status.status === "bookmark added") {
+      dispatch(setUserThreads());
+      dispatch(setGlobalThreads());
+      dispatch(setUserSubscribedGroups());
+      dispatch(setUserOwnGroups());
+      dispatch(setUserFriends());
+
+      dispatch(setStatus(""));
+    }
   });
 
   return (

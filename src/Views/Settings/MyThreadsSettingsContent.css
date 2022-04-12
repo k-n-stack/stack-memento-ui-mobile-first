@@ -1,0 +1,69 @@
+.settings-content-mythreads {
+  margin: 30px 10px;
+  display: flex; 
+  flex-direction: column;
+}
+
+.settings-content-mythreads-headers {
+  margin-bottom: 30px;
+}
+
+.settings-content-mythreads-color {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.settings-content-mythreads-name {
+  font-size: 20px;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.settings-content-mythreads-visibility,
+.settings-content-mythreads-bookmarks,
+.settings-content-mythreads-id {
+  font-size: 18px;
+}
+
+.settings-content-mythreads-color-picker {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.466);
+  border-width: 1px;
+}
+
+.settings-content-mythreads-stats-icon-container {
+  width: 25px;
+  height: 25px;
+}
+
+.settings-content-mythreads-stats {
+  align-self: flex-end;
+}
+
+.settings-content-mythreads-stats-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.settings-content-mythreads-stats-stats > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.settings-content-mythreads-stats-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+

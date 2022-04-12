@@ -9,11 +9,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { setExpandSubNavbar, setExpandSemiSub } from "Store/Features/navigationSlice";
 
+import MyThreadsSub from "Views/SubNavigations/MyThreadsSub";
+import FellowsSub from "Views/SubNavigations/FellowsSub";
+import GroupsSub from "Views/SubNavigations/GroupsSub";
+import PinnedSub from "Views/SubNavigations/PinnedSub";
+
 const InterfaceSubNavigationBar = () => {
 
   const dispatch = useDispatch();
   const expandSubNavbar = useSelector((state) => (state.navigation.expandSubNavbar));
   const expandSemiSub = useSelector((state) => (state.navigation.expandSemiSub));
+  const view = useSelector((state) => (state.navigation.view));
 
   const variants = {
     viewContainer: {
@@ -200,6 +206,51 @@ const InterfaceSubNavigationBar = () => {
     }
   }
 
+  const getSubPanelTitleIconName = (view) => {
+    switch (view) {
+      case "myThreads" :
+        return "Threads";
+      case "pinnedThreads" :
+        return "Pinned";
+      case "fellows":
+        return "Friends";
+      case "groups":
+        return "Groups";
+      default:
+        return "Threads";
+    }
+  }
+
+  const getSubPanelTitle = (view) => {
+    switch (view) {
+      case "myThreads" :
+        return "My Threads";
+      case "pinnedThreads" :
+        return "Pinned Threads";
+      case "fellows":
+        return "Fellows";
+      case "groups":
+        return "Groups";
+      default:
+        return "My Threads";
+    }
+  }
+
+  const getSubView = (view) => {
+    switch (view) {
+      case "myThreads" :
+        return <MyThreadsSub />
+      case "pinnedThreads" :
+        return <PinnedSub />;
+      case "fellows":
+        return <FellowsSub />;
+      case "groups":
+        return <GroupsSub />;
+      default:
+        return <MyThreadsSub />;
+    }
+  }
+
   return (
     <motion.div 
       className="interface-sub-panel" 
@@ -222,11 +273,9 @@ const InterfaceSubNavigationBar = () => {
         </motion.div>
       <div className="interface-sub-panel-header">
         <div className="interface-sub-panel-icon">
-          {/* <Icon icon={getSubPanelTitleIconName(selectedView)} iconColor="white"/> */}
-          <Icon icon="Friends" iconColor="white"/>
+          <Icon icon={getSubPanelTitleIconName(view)} iconColor="white"/>
         </div>
-        {/* <h1>{getSubPanelTitle(selectedView)}</h1> */}
-        <h1>getSubPanelTitle</h1>
+        <h1>{getSubPanelTitle(view)}</h1>
       </div>
       <div className="interface-sub-panel-settings">
         <div className="interface-sub-panel-search">
@@ -240,9 +289,7 @@ const InterfaceSubNavigationBar = () => {
         </div>
       </div>
       <div className="interface-sub-panel-content">
-        <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-        <p>hello</p><p>hello</p><p>hello</p><p>hello</p>
-
+        {getSubView(view)}
       </div>
       <div className="interface-sub-panel-footer">
       </div>

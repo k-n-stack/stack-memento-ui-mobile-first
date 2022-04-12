@@ -29,6 +29,8 @@ export const navigationSlice = createSlice({
     showModal: false,
     modalView: "",
     modalSubOptions: [],
+
+    myThreadsSettingsContent: {},
   },
 
   reducers: {
@@ -97,6 +99,10 @@ export const navigationSlice = createSlice({
     },
     setModalSubOptions: (state, action) => {
       state.modalSubOptions = action.payload;
+    },
+
+    setMyThreadsSettingsContent: (state, action) => {
+      state.myThreadsSettingsContent = action.payload;
     }
   },
 });
@@ -124,6 +130,7 @@ export const {
   setShowModal,
   setModalView,
   setModalSubOptions,
+  setMyThreadsSettingsContent,
 } = navigationSlice.actions;
 
 export default navigationSlice.reducer;

@@ -24,7 +24,6 @@ const Interface = () => {
 
   const dispatch = useDispatch();
   const view = useSelector((state) => (state.navigation.view));
-
   const hasSubPanel = (view) => {
     return ["myThreads", "pinnedThreads", "fellows", "groups"].includes(view) ? true : undefined;
   };
