@@ -1,0 +1,19 @@
+.settings-content-fellows {
+  margin: 30px 10px;
+  display: flex; 
+  flex-direction: column;
+}
+
+.settings-content-fellows-headers {
+  display: flex;
+}
+
+.settings-content-fellows-headers {
+  margin-bottom: 30px;
+}
+
+.settings-content-fellow-header-avatar > img {
+  width: 190px;
+  height: 190px;
+  border-radius: 95px;
+}

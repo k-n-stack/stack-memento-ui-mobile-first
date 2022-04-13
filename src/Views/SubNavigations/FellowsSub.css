@@ -1,13 +1,46 @@
 .fellows-sub {
-  background-color: aqua;
+  margin: 40px 0px;
+  display: flex;
+  gap: 25px;
+  flex-direction: column;
 }
 
 .fellows-sub-list-element {
   display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .fellows-sub-list-element > img {
   width: 65px;
   height: 65px; 
   border-radius: 33px;
+}
+
+.fellows-sub-list-element-infos {
+  display: flex;
+  flex-grow: 1;
+}
+
+.fellows-sub-list-element-infos-id {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 150px;
+
+}
+
+.fellows-sub-list-element-infos-stats {
+  flex-grow: 1;
+  /* background-color: aqua; */
+  text-align: end;
+  margin-right: 5px;
+}
+
+.fellows-sub-list-element-infos-name {
+  font-size: 20px;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

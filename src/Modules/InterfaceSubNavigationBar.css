@@ -30,7 +30,7 @@
 }
 
 .interface-sub-panel-content {
-  margin: 10px 0px 0px 10px;
+  margin: 10px 0px;
   /* background-color: #4c0c9f79; */
   min-height: 0;
   overflow-y: scroll;
