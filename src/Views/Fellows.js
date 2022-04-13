@@ -6,7 +6,8 @@ import Thread from "Modules/Thread";
 
 const Fellows = () => {
 
-  const fellowThread = useSelector((state) => (state.navigation.fellowThreads));
+  const fellows = useSelector((state) => (state.user.friends));
+  const selectedFellow = useSelector((state) => (state.navigation.selectedFellow));
 
   const style = {
     multipleBookmarksThread: {
@@ -28,7 +29,13 @@ const Fellows = () => {
     },
   }
 
-  const getThreads = (threads) => {
+  const getFellowThreads = (fellow) => {
+    if (Object.keys(fellow).length === 0) {
+      return <div>You have no fellow yet :(</div>
+    }
+
+    const threads = fellow.threads;
+
     if (threads.length === 0) {
       return <div>No thread... please select one fellows.</div>
     }
@@ -43,13 +50,9 @@ const Fellows = () => {
     });
   };
 
-  useEffect(() => {
-    console.log('fellowthreads', fellowThread);
-  });
-
   return (
     <div>
-      {getThreads(fellowThread)}
+      {getFellowThreads(selectedFellow)}
     </div>
   );
 }

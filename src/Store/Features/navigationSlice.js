@@ -33,8 +33,7 @@ export const navigationSlice = createSlice({
     myThreadsSettingsContent: {},
     fellowsSettingsContent: {},
 
-    selectedFellow: "",
-    fellowThreads: [],
+    selectedFellow: {},
 
   },
 
@@ -105,7 +104,6 @@ export const navigationSlice = createSlice({
     setModalSubOptions: (state, action) => {
       state.modalSubOptions = action.payload;
     },
-
     setMyThreadsSettingsContent: (state, action) => {
       state.myThreadsSettingsContent = action.payload;
     },
@@ -114,9 +112,6 @@ export const navigationSlice = createSlice({
     },
     setSelectedFellow: (state, action) => {
       state.selectedFellow = action.payload;
-    },
-    setFellowThreads: (state, action) => {
-      state.fellowThreads = action.payload;
     },
   },
 });
@@ -147,7 +142,6 @@ export const {
   setMyThreadsSettingsContent,
   setFellowsSettingsContent,
   setSelectedFellow,
-  setFellowThreads,
 } = navigationSlice.actions;
 
 export default navigationSlice.reducer;

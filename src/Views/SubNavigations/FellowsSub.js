@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 
 import "./FellowsSub.css";
-import { setFellowThreads, setSelectedFellow } from "Store/Features/navigationSlice";
+import { setSelectedFellow } from "Store/Features/navigationSlice";
 import { useDispatch } from "react-redux";
 
 const FellowsSub = () => {
@@ -12,10 +12,6 @@ const FellowsSub = () => {
   const fellows = useSelector((state) => (state.user.friends));
   const selectedFellow = useSelector((state) => (state.navigation.selectedFellow));
 
-  useState(() => {
-    console.log("toto", fellows);
-  });
-
   const getFellowList = (fellows) => {
 
     return fellows.map(function (fellow) {
@@ -23,10 +19,9 @@ const FellowsSub = () => {
         <motion.div 
           className="fellows-sub-list-element"
           onClick={() => {
-            dispatch(setSelectedFellow(fellow.alphanumeric_id));
-            dispatch(setFellowThreads(fellow.threads));
+            dispatch(setSelectedFellow(fellow));
           }}
-          animate={selectedFellow === fellow.alphanumeric_id ? 
+          animate={selectedFellow.alphanumeric_id === fellow.alphanumeric_id ? 
             { backgroundColor: "rgba(255, 255, 255, 0.3)" } : 
             { backgroundColor: "rgba(255, 255, 255, 0)" }
           }
@@ -40,9 +35,9 @@ const FellowsSub = () => {
             </div>
             <div className="fellows-sub-list-element-infos-stats">
               <div>Threads</div>
-              <div>235</div>
-              <div>Bookmark</div>
-              <div>12 345</div>
+              <div>{fellow.total_threads}</div>
+              <div>Bookmarks</div>
+              <div>{fellow.total_bookmarks}</div>
             </div>
           </div>
         </motion.div>

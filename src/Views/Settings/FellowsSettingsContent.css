@@ -6,14 +6,30 @@
 
 .settings-content-fellows-headers {
   display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  overflow: hidden;
 }
 
-.settings-content-fellows-headers {
-  margin-bottom: 30px;
+.settings-content-fellow-headers-infos {
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+.settings-content-fellow-headers-infos-pseudonym {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.settings-content-fellow-headers-infos > div {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .settings-content-fellow-header-avatar > img {
-  width: 190px;
-  height: 190px;
+  width: 150px;
+  height: 150px;
   border-radius: 95px;
 }
