@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import "./FellowsSettingsContent.css";
 
 import Icon from "Components/Icon/Icon";
-import Thread from "Modules/Thread";
+import ThreadDot from "Components/Svg/ThreadDot";
 
 const FellowsSettingsContent = () => {
 
@@ -32,11 +32,16 @@ const FellowsSettingsContent = () => {
     return threads === undefined ? <div>User has no thread</div> :
     threads.map(function (thread) {
       return thread !== null ?
-        <div>
-          <Thread 
-            {...testStyle}
-            {...thread}
-          />
+        <div className="settings-content-thread-list-element">
+          <div className="settings-thread-dot">
+            <ThreadDot 
+              dotRadius={12}
+              dotDiameter={24}
+              threadColor={`#${thread.color}`}
+            />
+          </div>
+          <div className="settings-thread-title">{thread.title}</div>
+          <div className="bookmark-count">{thread.bookmarks.length}&nbsp;<span className="thread-list-element-small">Bookmarks</span></div>
         </div> :
         null
     });
@@ -75,11 +80,11 @@ const FellowsSettingsContent = () => {
       <div className="settings-content-fellow-sub-header">
         <div className="settings-content-fellow-sub-header-left">
           <div>
-            <div className="settings-content-fellow-sub-header-left-text">Threads : </div>
+            <div className="settings-content-fellow-sub-header-left-text">Threads :&nbsp;</div>
             <div>{selectedFellow.total_threads}</div>
           </div>
           <div>
-            <div className="settings-content-fellow-sub-header-left-text">Bookmarks : </div>
+            <div className="settings-content-fellow-sub-header-left-text">Bookmarks :&nbsp;</div>
             <div>{selectedFellow.total_bookmarks}</div>
           </div>
         </div>
@@ -105,12 +110,9 @@ const FellowsSettingsContent = () => {
           </div>
         </div>
       </div>
-      <div>Fellow threads</div>
+      <div className="settings-content-fellow-threads-title">Fellow threads</div>
       <div className="settings-content-fellow-threads">
-        <div className="testouille">
-          {getThreads(selectedFellow.threads)}
-          {/* {getThreads(selectedFellow.threads)} */}
-        </div>
+        {getThreads(selectedFellow.threads)}
       </div>
     </div>
   )

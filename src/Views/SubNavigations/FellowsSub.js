@@ -28,16 +28,16 @@ const FellowsSub = () => {
         >
           <img src={`http://localhost:8000/api/${fellow.image_url}`} />
           <div className="fellows-sub-list-element-infos">
-            <div className="fellows-sub-list-element-infos-id">
-              <div className="fellows-sub-list-element-infos-name">{fellow.pseudonym}</div>
-              <div>Fellow since :</div>
-              <div>{fellow.friend_since}</div>
-            </div>
-            <div className="fellows-sub-list-element-infos-stats">
-              <div>Threads</div>
-              <div>{fellow.total_threads}</div>
-              <div>Bookmarks</div>
-              <div>{fellow.total_bookmarks}</div>
+            <div className="fellows-sub-list-element-infos-name">{fellow.pseudonym}</div>
+            <div className="fellows-sub-list-element-stats">
+              <div className="fellows-sub-list-element-infos-id">
+                <div>Fellow since :</div>
+                <div>{fellow.friend_since}</div>
+              </div>
+              <div className="fellows-sub-list-element-infos-stats">
+                <div><span>Threads : </span>{fellow.total_threads}</div>
+                <div><span>Bookmark : </span>{fellow.total_bookmarks}</div>
+              </div>
             </div>
           </div>
         </motion.div>

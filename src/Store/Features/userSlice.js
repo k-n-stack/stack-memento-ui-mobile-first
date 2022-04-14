@@ -38,6 +38,7 @@ export const userSlice = createSlice({
   name: "user",
   
   initialState: {
+    alphanumeric_id: "",
     status: "",
     email: "",
     pseudonym: "",
@@ -83,6 +84,7 @@ export const userSlice = createSlice({
       state.status = "pending login";
     },
     [login.fulfilled]: (state, action) => {
+      state.alphanumeric_id = action.payload.alphanumeric_id;
       state.status = action.payload.status;
       state.email = action.payload.email;
       state.pseudonym = action.payload.pseudonym;

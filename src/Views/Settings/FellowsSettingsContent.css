@@ -4,9 +4,6 @@
   margin: 30px 10px;
   display: flex; 
   flex-direction: column;
-  /* justify-content: space-between; */
-  /* background-color: blue; */
-  height: 100%;
 }
 
 .settings-content-fellows-headers {
@@ -82,12 +79,53 @@
 
 .settings-content-fellow-threads {
   box-sizing: border-box;
-  /* background-color: aqua; */
   flex-grow: 1;
   padding: 10px;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.testouille {
-  /* background-color: blueviolet; */
+.settings-content-fellow-threads-title {
+  margin-top: 40px;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.settings-content-thread-list-element {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.thread-list-element-small {
+  font-size: 12px;
+}
+
+.bookmark-count {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+}
+
+.settings-thread-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #444444;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.settings-thread-dot {
+  flex-shrink: 0;
+}
+
+@media screen and (min-width: 1600px) {
+  .settings-thread-title {
+    max-width: 250px;
+  }
 }

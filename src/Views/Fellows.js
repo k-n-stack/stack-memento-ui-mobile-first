@@ -31,7 +31,7 @@ const Fellows = () => {
 
   const getFellowThreads = (fellow) => {
     if (Object.keys(fellow).length === 0) {
-      return <div>You have no fellow yet :(</div>
+      return <div>Select a fellow to proceed</div>
     }
 
     const threads = fellow.threads;

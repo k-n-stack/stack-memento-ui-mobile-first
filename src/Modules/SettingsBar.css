@@ -110,8 +110,9 @@
   }
 
   .settings-bar-content {
+    flex-grow: 1;
     overflow: hidden;
-    display: block;
+    display: flex;
     align-self: stretch;
   }
 }

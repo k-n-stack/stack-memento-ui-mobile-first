@@ -6,6 +6,7 @@
 }
 
 .fellows-sub-list-element {
+  overflow: hidden;
   display: flex;
   gap: 10px;
   align-items: center;
@@ -18,8 +19,11 @@
 }
 
 .fellows-sub-list-element-infos {
+  overflow: hidden;
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
+  gap: 5px
 }
 
 .fellows-sub-list-element-infos-id {
@@ -30,11 +34,16 @@
 
 }
 
+.fellows-sub-list-element-infos-stats > div > span {
+  font-size: 14px;
+}
+
 .fellows-sub-list-element-infos-stats {
   flex-grow: 1;
   /* background-color: aqua; */
   text-align: end;
   margin-right: 5px;
+  align-self: flex-end;
 }
 
 .fellows-sub-list-element-infos-name {
@@ -43,4 +52,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.fellows-sub-list-element-stats {
+  display: flex;
 }

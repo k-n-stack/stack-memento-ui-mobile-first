@@ -34,6 +34,7 @@ export const navigationSlice = createSlice({
     fellowsSettingsContent: {},
 
     selectedFellow: {},
+    selectedGroup: {},
 
   },
 
@@ -113,6 +114,9 @@ export const navigationSlice = createSlice({
     setSelectedFellow: (state, action) => {
       state.selectedFellow = action.payload;
     },
+    setSelectedGroup: (state, action) => {
+      state.selectedGroup = action.payload;
+    },
   },
 });
 
@@ -142,6 +146,7 @@ export const {
   setMyThreadsSettingsContent,
   setFellowsSettingsContent,
   setSelectedFellow,
+  setSelectedGroup,
 } = navigationSlice.actions;
 
 export default navigationSlice.reducer;

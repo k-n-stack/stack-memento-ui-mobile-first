@@ -1,4 +1,6 @@
 .settings-content-mythreads {
+  flex-grow: 1;
+  overflow: hidden;
   margin: 30px 10px;
   display: flex; 
   flex-direction: column;
