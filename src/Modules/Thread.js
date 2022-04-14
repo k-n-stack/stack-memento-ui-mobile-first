@@ -183,7 +183,10 @@ const Thread = (props) => {
           overflow: props.expandable ? "hidden" : "",
         }}
       >
-        {getBookmarks(props.bookmarks)}
+        {
+          !props.noBookmarks &&
+          getBookmarks(props.bookmarks)
+        }
       </motion.div>
     </div>
   ) 

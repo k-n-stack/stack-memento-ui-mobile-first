@@ -89,6 +89,8 @@
     width: 400px;
     flex-direction: column;
     justify-content: flex-start;
+
+    display: flex;
   }
 
   .settings-bar-title {
@@ -108,9 +110,8 @@
   }
 
   .settings-bar-content {
+    overflow: hidden;
     display: block;
-    /* background-color: blueviolet; */
-    flex-grow: 1;
     align-self: stretch;
   }
 }
