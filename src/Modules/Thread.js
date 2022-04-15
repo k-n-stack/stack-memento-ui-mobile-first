@@ -96,9 +96,6 @@ const Thread = (props) => {
       style={{ 
         marginBottom: `${props.noBottomLine === undefined ? bottomExtraLine + bottomDropLength * 2 + bottomDropGap * 2 : 0}px`,
       }}
-      onClick={() => {
-        setIsExpand(!isExpand);
-      }}
     >
 
       <div 
@@ -109,11 +106,18 @@ const Thread = (props) => {
       >
         { !bookmarksOnly &&
           <div className="thread-dot-name">
-            <ThreadDot 
-              dotDiameter={dotDiameter}
-              dotRadius={dotRadius}
-              threadColor={threadColor}
-            />
+            <div
+              className="hello-papa"
+              onClick={() => {
+                setIsExpand(!isExpand);
+              }}
+            >
+              <ThreadDot 
+                dotDiameter={dotDiameter}
+                dotRadius={dotRadius}
+                threadColor={threadColor}
+              />
+            </div>
             <div 
               className="thread-name-container"
               style={{

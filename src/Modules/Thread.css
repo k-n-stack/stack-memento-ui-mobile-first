@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
   /* background-color: gold; */
+
+  /* ######### */
+  overflow: hidden;
 }
 
 .thread-vertical-line-container {
@@ -24,6 +27,10 @@
 .thread-dot-name {
   display: flex;
   align-items: center;
+}
+
+.hello-papa {
+  z-index: 10;
 }
 
 .thread-name-container {

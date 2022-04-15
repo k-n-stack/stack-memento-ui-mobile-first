@@ -1,21 +1,36 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
 
 import InterfaceLayout from "Modules/InterfaceLayout";
 
+import { setSelectedGroup } from "Store/Features/navigationSlice";
+
 import { useSelector } from "react-redux";
+
 
 import "./Groups.css";
 import GroupCarousel from "Components/Input/GroupCarousel";
 
 const Groups = () => {
 
+  const dispatch = useDispatch();
   const subscribedGroups = useSelector((state) => (state.user.subscribedGroups));
   const ownGroups = useSelector((state) => (state.user.ownGroups));
+  const selectedGroup = useSelector((state) => (state.navigation.selectedGroup));
 
   const getGroups = (groups) => {
     return groups.map(function (group) {
       return (
-        <div>
+        <motion.div
+          onClick={() => {
+            dispatch(setSelectedGroup(group));
+          }}
+          animate={selectedGroup.alphanumeric_id === group.alphanumeric_id ? 
+            { backgroundColor: "rgba(255, 255, 255, 0.3)" } : 
+            { backgroundColor: "rgba(255, 255, 255, 0)" }
+          }
+        >
           <div className="groups-group-container">
             <div className="groups-group-image">
               <img src={group.image_url} />
@@ -45,15 +60,13 @@ const Groups = () => {
               }
             </div>
           </div>
-        </div>
+        </motion.div>
       )
     });
   }
 
   return (
     <div className="groups-group">
-      {getGroups(subscribedGroups.concat(ownGroups))}
-      {getGroups(subscribedGroups.concat(ownGroups))}
       {getGroups(subscribedGroups.concat(ownGroups))}
     </div>
   );

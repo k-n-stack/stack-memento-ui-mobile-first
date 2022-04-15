@@ -1,5 +1,15 @@
 .my-threads-threads-container {
+  /* ############ */
+  display: flex;
+  flex-direction: column;
+  /* gap: 10px; */
+
   width: 300px;
+}
+
+.hello-mama {
+  padding: 10px;
+  border-radius: 10px;
 }
 
 @media screen and (min-width: 1650px) {
