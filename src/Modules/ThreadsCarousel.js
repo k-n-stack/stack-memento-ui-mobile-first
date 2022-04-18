@@ -36,7 +36,7 @@ const ThreadCarousel = (props) => {
   }
 
   const getMultipleBookmarksThread = (threads) => {
-    return threads.map((value, index) => {
+    return threads.map((thread, index) => {
       return (
         <motion.div
           className="thread-group-element"
@@ -47,11 +47,11 @@ const ThreadCarousel = (props) => {
             onClick={() => {
               window.scrollTo(0, 0);
               dispatch(setView('threadBrowser'));
-              dispatch(setBrowseThread(value));
+              dispatch(setBrowseThread(thread));
             }
           }>
             <Thread
-              {...value}
+              {...thread}
               {...style.multipleBookmarksThread}
             />
           </div>

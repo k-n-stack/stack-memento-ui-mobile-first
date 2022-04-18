@@ -1,0 +1,85 @@
+.groups-group {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  overflow: hidden;
+}
+
+.groups-group-image {
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+}
+
+.groups-group-container {
+  /* background-color: aqua; */
+  display: flex;
+  gap: 10px;
+}
+
+.groups-group-image > img {
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+}
+
+.groups-group-infos {
+  flex-grow: 1;
+  margin-top: 10px;
+  /* background-color: aquamarine; */
+  display: flex;
+  overflow: hidden;
+  gap: 10px;
+}
+
+.groups-group-infos-left {
+  /* background-color: blueviolet; */
+  width: 200px;
+  flex-shrink: 0;
+  /* max-width: 400px; */
+}
+
+.group-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.group-subscribers {
+  /* background-color: aquamarine; */
+  flex-grow: 1;
+  display: flex;
+  overflow-x: scroll;
+}
+
+.groups-group-infos-right {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: stretch;
+  /* overflow-x: scroll; */
+}
+
+.groups-group-subscriber-header {
+  font-size: 20px;
+  font-weight: bold;
+  /* background-color: red; */
+  /* margin: 20px 0px; */
+}
+
+/* .groups-group-threads-header {
+  flex-grow: 1;
+} */
+
+.groups-group-threads-list {
+  display: flex;
+  overflow: scroll-x;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+.groups-group-threads {
+  overflow: hidden;
+  display: flex;
+  gap: 20px;
+}

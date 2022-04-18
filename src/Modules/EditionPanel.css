@@ -1,0 +1,85 @@
+  .edition-panel {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #999999;
+    display: none;
+    flex-direction: column;
+    flex-shrink: 0;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    font-size: small;
+    font-weight: bold;
+    color: #3650AB;
+    gap: 10px;
+  }
+
+  .edition-panel-title {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    opacity: 0.7;
+  }
+
+  .edition-panel-title-logo-container {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+  }
+
+  .edition-panel-title-header {
+    font-size: 22px;
+    margin: 0px;
+  }
+
+  .edition-panel-bottom {
+    gap: 20px;
+    display: flex;
+    flex-grow: 1;
+    align-items: flex-end;
+  }
+
+  .edition-panel-bottom > div {
+    flex-shrink: 1;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .edition-panel-bottom > div > p {
+    margin: 0px;
+  }
+
+  .edition-panel-container {
+    pointer-events: all;
+  }
+
+  .edition-panel-icon-container {
+    min-width: 26px;
+    min-height: 26px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .edition-panel-container-last {
+    justify-self: flex-end;
+    margin-left: auto;
+  }
+
+@media screen and (min-width: 1100px) {
+  .edition-panel {
+    display: flex;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .interface-sub-panel {
+    position: relative;
+    right: 0px;
+    opacity: 1;
+  }
+
+  .edition-panel {
+    margin: 0px 40px 0px 40px;
+    /* height: 50px; */
+  }
+}

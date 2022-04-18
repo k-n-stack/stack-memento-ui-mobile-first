@@ -1,0 +1,82 @@
+.bookmark-edition {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  overflow: hidden;
+  max-height: calc(100vh - 200px);
+}
+
+.bookmark-edition-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.bookmark-edition-top > div,
+.bookmark-edition-tags,
+.bookmark-edition-comments {
+  display: flex;
+  gap: 25px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #3650AB;
+}
+
+.bookmark-edition-top {
+  user-select: none;
+}
+
+.bookmark-edition-remove {
+  color: #882E2E;
+}
+
+.bookmark-edition-tags,
+.bookmark-edition-comments {
+  margin-top: 30px;
+}
+
+.bookmark-edition-url {
+  font-weight: bold;
+  font-size: 14px;
+  text-decoration: underline;
+  color: #3650AB;
+}
+.bookmark-edition-title {
+  font-weight: bold;
+  font-size: 18px;
+  color: #555555;
+}
+
+.bookmark-edition-title-url > div {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.bookmark-edition-tags-list {
+  background-color: rgb(126, 126, 190);
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
+.bookmark-edition-comments-list {
+  background-color: blueviolet;
+  overflow-y: scroll;
+}
+
+.bookmark-edition-close-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.bookmark-edition-title-input,
+.bookmark-edition-url-input {
+  width: 100%;
+}
+
+.asdf{
+  background-color: #6839d6;
+}

@@ -1,0 +1,91 @@
+.new-thread {
+  /* background-color: aqua; */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 30px 60px 30px 60px;
+  flex-grow: 1;
+}
+
+.new-thread-color-picker {
+  z-index: 1;
+  position: absolute;
+  left: 105px;
+}
+
+.new-thread-color {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.new-thread-color-input {
+  width: 80px;
+}
+
+.new-thread-color-sample {
+  width: 35px;
+  height: 35px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: rgba(0, 0, 0, 0.39);
+}
+
+.new-thread-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.new-thread-form-name {
+  display: flex;
+  align-items: center;
+}
+
+.new-thread-form-name > input {
+  width: 300px;
+  margin-left: 10px;
+}
+
+.new-thread-form-visibility {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.new-thread-form-visibility-buttons-group {
+  display: flex;
+  gap: 15px;
+}
+
+.new-thread-form-visibility > div > p {
+  font-style: italic;
+  margin: 0;
+  color: #222222;
+}
+
+.new-thread-groups-carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.new-thread-groups-groups {
+  display: flex;
+  gap: 40px;
+}
+
+.new-thread-groups-groups > div {
+  font-size: 14px;
+  font-style: italic;
+}
+
+.new-thread-friends-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-thread-button-container {
+  align-self: flex-end;
+}

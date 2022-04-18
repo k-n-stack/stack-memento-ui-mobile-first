@@ -14,16 +14,16 @@ import UserPanel from "Modules/UserPanel";
 import SearchPanel from "Modules/SearchPanel";
 import ThreadBrowser from "Views/ThreadBrowser";
 
-import { setUserBookmarkCount, setUserThreadCount, setUserRedirectionCount, setUserCommentCount } from "Store/Features/userSlice";
-import { setUserThreads } from "Store/Features/userSlice";
+import Modal from "./Modal";
+
+import { setUserThreads, setUserSubscribedGroups, setUserOwnGroups, setUserFriends } from "Store/Features/userSlice";
 import { setGlobalThreads } from "Store/Features/globalSlice";
-import { setBrowseThread } from "Store/Features/navigationSlice";
+
 
 const Interface = () => {
 
   const dispatch = useDispatch();
   const view = useSelector((state) => (state.navigation.view));
-
   const hasSubPanel = (view) => {
     return ["myThreads", "pinnedThreads", "fellows", "groups"].includes(view) ? true : undefined;
   };
@@ -75,12 +75,16 @@ const Interface = () => {
   useEffect(() => {
     dispatch(setUserThreads());
     dispatch(setGlobalThreads());
+    dispatch(setUserSubscribedGroups());
+    dispatch(setUserOwnGroups());
+    dispatch(setUserFriends());
   }, []);
 
   return (
     <>
       <UserPanel/>
       <SearchPanel/>
+      <Modal />
       <InterfaceLayout 
         hasSubPanel={hasSubPanel(view)}
         pageName={getPageName(view)}
