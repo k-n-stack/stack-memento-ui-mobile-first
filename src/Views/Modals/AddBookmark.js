@@ -17,7 +17,6 @@ const AddBookmark = () => {
 
   const dispatch = useDispatch();
   const threads = useSelector((state) => (state.user.threads));
-  const status = useSelector((state) => (state.user.status));
   const [selectedThreads, setSelectedThreads] = useState([]);
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
@@ -41,25 +40,24 @@ const AddBookmark = () => {
         <motion.div 
           onClick={() => {
             const _selectedThreads = [...selectedThreads];
-            if (_selectedThreads.includes(thread.id)) {
-              const i = _selectedThreads.indexOf(thread.id);
+            if (_selectedThreads.includes(thread.alphanumeric_id)) {
+              const i = _selectedThreads.indexOf(thread.alphanumeric_id);
               if (i > -1) {
                 _selectedThreads.splice(i, 1);
               }
             } else {
-              _selectedThreads.push(thread.id);
+              _selectedThreads.push(thread.alphanumeric_id);
             }
             setSelectedThreads(_selectedThreads);
           }}
           variants={variants.thread}
           initial={variants.thread.off}
-          animate={selectedThreads.includes(thread.id) ? "on" : "off"}
+          animate={selectedThreads.includes(thread.alphanumeric_id) ? "on" : "off"}
         >
           <div className="add-bookmark-thread-list-dot-container">
             <ThreadDot 
-              threadColor={`#${thread.color}`}
+              color={thread.color}
               dotRadius={10}
-              dotDiameter={20}
             />
           </div>
           <div className="add-bookmark-thread-list-title">{thread.title}</div>
@@ -70,7 +68,7 @@ const AddBookmark = () => {
 
   const handleSubmit = () => {
     dispatch(postBookmarks({
-      thread_ids: selectedThreads,
+      thread_anids: selectedThreads,
       url: url,
       description: description,
       comment: comment,
@@ -82,18 +80,6 @@ const AddBookmark = () => {
     const _tags = event.target.value.split(" ");
     setTags(_tags);
   }
-
-  useEffect(() => {
-    if (status.status === "bookmark added") {
-      dispatch(setUserThreads());
-      dispatch(setGlobalThreads());
-      dispatch(setUserSubscribedGroups());
-      dispatch(setUserOwnGroups());
-      dispatch(setUserFriends());
-
-      dispatch(setStatus(""));
-    }
-  });
 
   return (
     <div className="add-bookmark">

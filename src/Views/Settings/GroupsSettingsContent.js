@@ -24,8 +24,6 @@ const GroupsSettingsContent = () => {
     });
   }
 
-  useEffect(() => {console.log(selectedGroup)});
-
   return (
     <div className="settings-content-groups">
       <div className="settings-content-groups-headers">

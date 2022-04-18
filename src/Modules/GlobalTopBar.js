@@ -74,9 +74,8 @@ const GlobalTopBar = () => {
         <div className="thread-title">
           <div className="thread-title-dot-container">
             <ThreadDot
-              dotDiameter={66}
               dotRadius={33}
-              threadColor={`#${browseThread.color}`}
+              color={browseThread.color}
             />
             <h1
               style={{
@@ -88,11 +87,10 @@ const GlobalTopBar = () => {
           </div>
           <div className="thread-title-line-container">
             <ThreadLine
-              dotDiameter={66}
               lineTotalHeight={150}
               dotRadius={33}
               lineBottomY={150}
-              threadColor={`#${browseThread.color}`}
+              color={browseThread.color}
               threadStrokeWidth={12}
               bottomDropGap={0}
               bottomDropLength={0}

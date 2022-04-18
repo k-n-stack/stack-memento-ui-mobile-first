@@ -1,0 +1,71 @@
+.mythreads-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mythread-sub-thread-element {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px;
+}
+
+.mythread-dot-container {
+  width: 20px;
+  height: 20px;
+}
+
+.mythread-sub-infos {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.mythread-title {
+  overflow: hidden;
+  display: flex;
+  gap: 5px;
+}
+
+.mythread-title-text {
+  font-size: 18px;
+  font-weight: bold;
+  flex-grow: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.mythread-bookmark-count-header {
+  font-size: 14px;
+}
+
+.mythread-bookmark-count {
+  font-size: 18px;
+  justify-self: flex-end;
+  flex-shrink: 0;
+}
+
+.mythread-sub-stats {
+  font-size: 16px;
+  display: flex;
+  gap: 20px;
+}
+
+.testasdf {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.mythread-sub-stats > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.mythread-sub-stats-icon {
+  width: 20px;
+  height: 20px;
+}

@@ -10,15 +10,11 @@ import LineInput from "Components/Input/LineInput";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "Components/Input/Button";
 import GroupCarousel from "Components/Input/GroupCarousel";
-import { postThread, setStatus } from "Store/Features/userSlice";
-
-import { setUserThreads, setUserSubscribedGroups, setUserOwnGroups, setUserFriends } from "Store/Features/userSlice";
-import { setGlobalThreads } from "Store/Features/globalSlice";
+import { postThread } from "Store/Features/userSlice";
 
 const NewThread = () => {
 
   const dispatch = useDispatch();
-  const status = useSelector((state) => (state.user.status));
   const color = useSelector((state) => (state.newThread.color));
   const subscribedGroups = useSelector((state) => (state.user.subscribedGroups));
   const ownGroups = useSelector((state) => (state.user.ownGroups));
@@ -138,22 +134,6 @@ const NewThread = () => {
       visibility: getVisibilityEnumValue(selectedButton),
     }));
   }
-
-  useEffect(() => {
-    console.log('in useeffect');
-    console.log(status);
-
-    if (status.status === "thread added") {
-      console.log('hehlo');
-      dispatch(setUserThreads());
-      dispatch(setGlobalThreads());
-      dispatch(setUserSubscribedGroups());
-      dispatch(setUserOwnGroups());
-      dispatch(setUserFriends());
-
-      dispatch(setStatus(""));
-    }
-  });
 
   return (
     <>

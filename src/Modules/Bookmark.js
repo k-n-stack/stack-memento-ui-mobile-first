@@ -2,24 +2,29 @@ import React, { useEffect, useState } from "react";
 
 import Icon from "Components/Icon/Icon";
 
+import { setSelectedBookmark, setShowBookmark } from "Store/Features/navigationSlice";
+
 import "./Bookmark.css";
+import { useDispatch, useSelector } from "react-redux";
 
 const Bookmark = (props) => {
 
+  const dispatch = useDispatch();
   const [showUrl, setShowUrl] = useState(false);
+  const selectedBookmark = useSelector((state) => (state.navigation.selectedBookmark));
 
-  const pigtailColor = props.pigtailColor || '#555555'
-  const pigtailWidth = props.pigtailWidth || 100;
-  const pigtailHeight = props.pigtailHeight || 100;
-  const pigtailStrokeWidth = props.pigtailStrokeWidth || 8;
-
-  const bookmarkTitleSize = props.bookmarkTitleSize || 22;
-  const bookmarkAnchorTop = props.bookmarkAnchorTop || 20;
-  const titleOnly = props.bookmarkTitleOnly || false;
-  const compactBookmark = props.compactBookmark || false;
-
-  const description = props.description || "Error: No title provided";
-  const url = props.url || "Error: No url provided";
+  const {
+    pigtailColor = "555555",
+    pigtailWidth = 100,
+    pigtailHeight = 100,
+    pigtailStrokeWidth = 8,
+    bookmarkTitleSize = 22,
+    bookmarkAnchorTop = 20,
+    bookmarkTitleOnly = false,
+    compactBookmark = false,
+    bookmarkClickable = false,
+    noPigtail = false,
+  } = {...props}
 
   // !!! RECURSIVE
   const getComments = (comments, _marginLeft = 0) => {
@@ -38,11 +43,6 @@ const Bookmark = (props) => {
     });
   }
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("us-US", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
-  }
-
   useEffect(() => {
     if (props.parentRef !== undefined) {
       props.setThreadHeight(props.parentRef.current.clientHeight);
@@ -52,41 +52,48 @@ const Bookmark = (props) => {
   return (
     <div 
       className="bookmark"
+      onClick={bookmarkClickable === true ? () => {
+        dispatch(setSelectedBookmark(props.bookmark));
+        dispatch(setShowBookmark(true));
+      } : null}
     >
-
-      <div 
-        className="pigtail"
-        style={{
-          top: `${-(pigtailHeight - bookmarkAnchorTop)}px`,
-        }}
-      >
-        <svg 
-          width={`${pigtailWidth}px`} 
-          height={`${pigtailHeight}px`} 
-          viewBox={`0 0 ${pigtailWidth} ${pigtailHeight}`}
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg"
+      {
+        !noPigtail &&
+        <div 
+          className="pigtail"
+          style={{
+            top: `${-(pigtailHeight - bookmarkAnchorTop)}px`,
+          }}
         >
-          <path 
-            d={`M ${pigtailStrokeWidth / 2} 0 
-              Q ${pigtailStrokeWidth / 2} ${pigtailHeight - pigtailStrokeWidth / 2},
-              ${pigtailWidth} ${pigtailHeight - pigtailStrokeWidth / 2}`}
-            stroke={pigtailColor}
-            strokeWidth={pigtailStrokeWidth} 
-            shapeRendering="geometricPrecision"
-          />
-        </svg>
-      </div>
+          <svg 
+            width={`${pigtailWidth}px`} 
+            height={`${pigtailHeight}px`} 
+            viewBox={`0 0 ${pigtailWidth} ${pigtailHeight}`}
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path 
+              d={`M ${pigtailStrokeWidth / 2} 0 
+                Q ${pigtailStrokeWidth / 2} ${pigtailHeight - pigtailStrokeWidth / 2},
+                ${pigtailWidth} ${pigtailHeight - pigtailStrokeWidth / 2}`}
+              stroke={`#${pigtailColor}`}
+              strokeWidth={pigtailStrokeWidth} 
+              shapeRendering="geometricPrecision"
+            />
+          </svg>
+        </div>
+      }
 
       <div 
         className="bookmark-container"
         style={{
-          left: pigtailWidth,
-          width: `calc(100% - ${pigtailWidth}px)`,
+          left: noPigtail ? 0 : pigtailWidth,
+          width: `calc(100% - ${noPigtail ? 0 : pigtailWidth}px)`,
           paddingTop: compactBookmark ? "2px" : "",
           paddingBottom: compactBookmark ? "2px" : "",
           paddingLeft: compactBookmark ? "10px" : "",
           paddingRight: compactBookmark ? "10px" : "",
+          borderColor: bookmarkClickable === true ? ( selectedBookmark.id === props.bookmark.id ? "#6839d6" : "" ) : "",
         }}
         onClick={() => setShowUrl(!showUrl)}
       >
@@ -98,46 +105,46 @@ const Bookmark = (props) => {
               fontSize: `${bookmarkTitleSize}px`,
             }}
           >
-            {description}
+            {props.bookmark.description || "Error: No title provided"}
           </p>
           {
-            !titleOnly &&
+            !bookmarkTitleOnly &&
             <>
-              <a className="bookmark-url">{url}</a>
+              <a className="bookmark-url">{props.bookmark.url}</a>
               <div className="bookmark-info">
                 <div className="bookmark-stats">
                   <div>
                     <div className="bookmark-icon-container">
                       <Icon icon="Redirections"/>
                     </div>
-                    <div>{props.redirection_count}</div>
+                    <div>{props.bookmark.redirection_count}</div>
                   </div>
                   <div>
                     <div className="bookmark-icon-container">
                       <Icon icon="Upvotes"/>
                     </div>
-                    <div>{props.vote_count}</div>
+                    <div>{props.bookmark.vote_count}</div>
                   </div>
                   <div>
                     <div className="bookmark-icon-container">
                       <Icon icon="Comments"/>
                     </div>
-                    <div>{props.comment_count}</div>
+                    <div>{props.bookmark.comment_count}</div>
                   </div>
                 </div>
-                <p>{formatDate(props.created_at)}</p>
+                <p>{props.bookmark.created_at}</p>
               </div>
               <div className="bookmark-tags">
                 {
-                  props.tags.map((tag) => {
-                    return <div className="bookmark-tag">{tag}</div>
+                  props.bookmark.tags.map((tag) => {
+                    return <div className="bookmark-tag">{tag.name}</div>
                   })
                 }
               </div>
 
               {/* !!! RECURSIVE */}
               <div className="bookmark-comments">
-                {getComments(props.comments)}
+                {getComments(props.bookmark.comments)}
               </div>
             </>  
           }

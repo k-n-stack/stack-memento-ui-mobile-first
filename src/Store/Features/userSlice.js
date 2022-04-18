@@ -15,6 +15,8 @@ import {
   fetchUserFriendsThunk,
   postBookmarksThunk,
   postThreadThunk,
+  updateBookmarkThunk,
+  deactivateBookmarkThunk,
 } from "Store/Thunks/userThunks";
 
 export const login = fetchUserByEmailThunk();
@@ -32,6 +34,8 @@ export const setUserOwnGroups = fetchUserOwnGroupsThunk();
 export const setUserFriends = fetchUserFriendsThunk();
 export const postBookmarks = postBookmarksThunk();
 export const postThread = postThreadThunk();
+export const updateBookmark = updateBookmarkThunk();
+export const deactivateBookmark = deactivateBookmarkThunk();
 
 export const userSlice = createSlice({
   
@@ -171,13 +175,61 @@ export const userSlice = createSlice({
     [postBookmarks.rejected]: (state, action) => {},
     [postBookmarks.pending]: (state, action) => {},
     [postBookmarks.fulfilled]: (state, action) => {
-      state.status = action.payload;
+      const threadAnids = action.payload.thread_anids;
+      if (action.payload.status === "bookmark added") {
+        state.threads = state.threads.map(function (thread) {
+          if (threadAnids.includes(thread.alphanumeric_id)) {
+            thread.bookmarks.push(action.payload.bookmark)
+          }
+          return thread;
+        });
+      }
     },
 
     [postThread.rejected]: (state, action) => {},
     [postThread.pending]: (state, action) => {},
     [postThread.fulfilled]: (state, action) => {
-      state.status = action.payload;
+      state.status = action.payload.status;
+      if (action.payload.status === "thread added") {
+        state.threads = state.threads.concat(action.payload.thread);
+      }
+    },
+
+    [updateBookmark.rejected]: (state, action) => {},
+    [updateBookmark.pending]: (state, action) => {},
+    [updateBookmark.fulfilled]: (state, action) => {
+      state.status = action.payload.status;
+      if (action.payload.status === "Bookmark updated") {
+        const bookmarkId = action.payload.bookmark.id;
+        state.threads = state.threads.map(function (thread) {
+          const bookmarks = thread.bookmarks.map(function (bookmark) {
+            return bookmark.id === bookmarkId ? 
+              action.payload.bookmark :
+              bookmark;
+          });
+          thread.bookmarks = bookmarks;
+          return thread;
+        });
+      }
+    },
+
+    [deactivateBookmark.rejected]: (state, action) => {},
+    [deactivateBookmark.pending]: (state, action) => {},
+    [deactivateBookmark.fulfilled]: (state, action) => {
+      state.status = action.payload.status;
+      if (action.payload.status === "bookmark deleted") {
+        const bookmarkId = action.payload.bookmark.id;
+        state.threads = state.threads.map(function (thread) {
+          const bookmarks = thread.bookmarks.reduce(function (result, bookmark) {
+            if (bookmark.id !== bookmarkId) {
+              result.push(bookmark);
+            }
+            return result;
+          }, []);
+          thread.bookmarks = bookmarks;
+          return thread;
+        });
+      }
     },
 
   },

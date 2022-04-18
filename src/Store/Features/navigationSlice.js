@@ -1,5 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { 
+  updateBookmarkThunk,
+  deactivateBookmarkThunk,
+} from "Store/Thunks/userThunks";
+
+export const updateBookmark = updateBookmarkThunk();
+export const deactivateBookmark = deactivateBookmarkThunk();
+
 export const navigationSlice = createSlice({
 
   name: "navigation",
@@ -30,13 +38,18 @@ export const navigationSlice = createSlice({
     modalView: "",
     modalSubOptions: [],
 
+    showBookmark: false,
+
     myThreadsSettingsContent: {},
     fellowsSettingsContent: {},
 
     selectedThread: {},
+
+    selectedBookmark: {},
+    test: "",
+
     selectedFellow: {},
     selectedGroup: {},
-
   },
 
   reducers: {
@@ -115,6 +128,15 @@ export const navigationSlice = createSlice({
     setSelectedThread: (state, action) => {
       state.selectedThread = action.payload;
     },
+    setShowBookmark: (state, action) => {
+      state.showBookmark = action.payload;
+    },
+    setSelectedBookmark: (state, action) => {
+      state.selectedBookmark = action.payload;
+    },
+    setTest: (state, action) => {
+      state.test = action.payload;
+    },
     setSelectedFellow: (state, action) => {
       state.selectedFellow = action.payload;
     },
@@ -122,6 +144,19 @@ export const navigationSlice = createSlice({
       state.selectedGroup = action.payload;
     },
   },
+
+  extraReducers: {
+    [updateBookmark.fulfilled]: (state, action) => {
+      if (action.payload.status === "Bookmark updated") {
+        state.selectedBookmark = action.payload.bookmark;
+      }
+    },
+    [deactivateBookmark.fulfilled]: (state, action) => {
+      if (action.payload.status === "bookmark deleted") {
+        state.showBookmark = false;
+      }
+    }
+  }
 });
 
 export const {
@@ -147,11 +182,14 @@ export const {
   setShowModal,
   setModalView,
   setModalSubOptions,
+  setShowBookmark,
   setMyThreadsSettingsContent,
   setFellowsSettingsContent,
   setSelectedFellow,
   setSelectedGroup,
   setSelectedThread,
+  setSelectedBookmark,
+  setTest,
 } = navigationSlice.actions;
 
 export default navigationSlice.reducer;

@@ -6,59 +6,69 @@ import ThreadDot from "Components/Svg/ThreadDot";
 import ThreadLine from "Components/Svg/ThreadLine";
 
 import "./Thread.css";
-import { useDispatch } from "react-redux";
 
 const Thread = (props) => {
-
 
   const threadRef = useRef(null);
   const [threadHeight, setThreadHeight] = useState(0);
   const [threadStaticHeight, setThreadStaticHeight] = useState(0);
   const [isExpand, setIsExpand] = useState(false);
 
-  const threadColor = props.color ? `#${props.color}` : "#555555";
-  const threadStrokeWidth = props.threadStrokeWidth || 12;
-
-  const dotRadius = props.dotRadius || 50;
-  const dotDiameter = dotRadius * 2;
-  const bottomExtraLine = props.bottomExtraLine || 30;
-  const bottomDropLength = props.bottomDropLength || 25;
-  const bottomDropGap = props.bottomDropGap || 35;
-
-  const nameGap = props.nameGap || 10;
-  const nameSize = props.nameSize || 30;
-  const nameColor = props.nameColor || "#555555"
-  const menuTop = props.menuTop || 100;
-  const nameContainerWidth = props.nameContainerWidth || "";
+  const {
+    color = "555555",
+    threadStrokeWidth = 12,
+    dotRadius = 50,
+    bottomExtraLine = 30,
+    bottomDropLength = 25,
+    bottomDropGap = 35,
+    nameGap = 10,
+    nameSize = 30,
+    nameColor = "555555",
+    nameContainerWidth = "",
+  } = {...props}
   
-  const bookmarksTop = props.bookmarksTop || dotDiameter;
-  const bookmarkAnchorTop = props.bookmarkAnchorTop || 20;
-  const bookmarkTitleSize = props.bookmarkTitleSize || 22;
-  const pigtailWidth = props.pigtailWidth || 100;
-  const pigtailHeight = props.pigtailHeight || 100;
-
-  const lineBottomY = (props.expandable === undefined ? threadHeight : threadStaticHeight) - threadStrokeWidth / 2 + bottomExtraLine;
-  const lineTotalHeight = (props.expandable === undefined ? threadHeight : threadStaticHeight) + bottomExtraLine + bottomDropLength * 2 + bottomDropGap * 2;
-
+  const bookmarksTop = props.bookmarksTop || dotRadius * 2;
+  
   const bookmarksOnly = props.bookmarksOnly !== undefined;
-  const bookmarkTitleOnly = props.bookmarkTitleOnly !== undefined;
-  const compactBookmark = props.compactBookmark !== undefined;
+  
+  const bookmarkProps = {
+    pigtailColor: color,
+    pigtailStrokeWidth: threadStrokeWidth,
+    pigtailWidth: props.pigtailWidth || 100,
+    pigtailHeight: props.pigtailHeight || 100,
+    bookmarkTitleSize: props.bookmarkTitleSize || 22,
+    bookmarkAnchorTop: props.bookmarkAnchorTop || 20,
+    setThreadHeight: props.setThreadHeight,
+    parentRef: props.parentRef,
+    compactBookmark: props.compactBookmark || false,
+    bookmarkTitleOnly: props.bookmarkTitleOnly || false,
+    bookmarkClickable: props.bookmarkClickable || false,
+  }
+
+  const threadLineProps = {
+    lineTotalHeight: (props.expandable === undefined ? threadHeight : threadStaticHeight) + bottomExtraLine + bottomDropLength * 2 + bottomDropGap * 2,
+    dotRadius: props.dotRadius || 50,
+    lineBottomY: (props.expandable === undefined ? threadHeight : threadStaticHeight) - threadStrokeWidth / 2 + bottomExtraLine,
+    color: color,
+    threadStrokeWidth: props.threadStrokeWidth || 12,
+    bottomDropGap: props.bottomDropGap || 35,
+    bottomDropLength: props.bottomDropLength || 25,
+  }
+
+  const threadDotProps = {
+    dotRadius: props.dotRadius || 50,
+    color: color,
+
+  }
 
   const getBookmarks = (bookmarks) => {
-    return bookmarks.map((value) => {
+    return bookmarks.map((bookmark) => {
       return (
         <Bookmark 
-          {...value}
-          pigtailColor={threadColor}
-          pigtailStrokeWidth={threadStrokeWidth}
-          pigtailWidth={pigtailWidth}
-          pigtailHeight={pigtailHeight}
-          bookmarkTitleSize={bookmarkTitleSize}
-          bookmarkAnchorTop={bookmarkAnchorTop}
-          compactBookmark={compactBookmark}
-          setThreadHeight={getThreadHeight}
-          parentRef={threadRef}
-          bookmarkTitleOnly={bookmarkTitleOnly}
+        bookmark={bookmark}
+        {...bookmarkProps}
+        setThreadHeight={getThreadHeight}
+        parentRef={threadRef}
         />
       );
     });
@@ -80,16 +90,23 @@ const Thread = (props) => {
     bookmarkContainer: {
       expand: {
         height: "auto",
+        overflow: "visible",
+        transition: {
+          overflow : {
+            delay : 0.3
+          }
+        }
       },
       collapse: {
         height: "0px",
+        overflow: "hidden",
       },
     }
   }
 
   useEffect(() => {
-    setThreadStaticHeight((props.bookmarks.length) * 31);
-  }, [])
+    setThreadStaticHeight((props.bookmarks.length) * 37);
+  })
 
   return (
     <div className="thread" ref={threadRef}
@@ -101,27 +118,33 @@ const Thread = (props) => {
       <div 
         className="thread-vertical-line-container"
         style={{
-          width: `${dotDiameter}px`,
+          width: `${dotRadius * 2}px`,
         }}
       >
         { !bookmarksOnly &&
           <div className="thread-dot-name">
             <div
               className="hello-papa"
-              onClick={() => {
+              onClick={(event) => {
+                event.stopPropagation();
+                event.preventDefault();
                 setIsExpand(!isExpand);
+              }}
+              style={{
+                width: dotRadius * 2,
+                height: dotRadius * 2,
               }}
             >
               <ThreadDot 
-                dotDiameter={dotDiameter}
-                dotRadius={dotRadius}
-                threadColor={threadColor}
+                {...threadDotProps}
+                expandable={props.bookmarks.length === 0 ? undefined : props.expandable}
+                isExpand={isExpand}
               />
             </div>
             <div 
               className="thread-name-container"
               style={{
-                height: dotDiameter,
+                height: dotRadius * 2,
                 width: nameContainerWidth === "" ? "" : `${nameContainerWidth}px`
               }}
             >
@@ -130,25 +153,12 @@ const Thread = (props) => {
                 style={{
                   marginLeft: nameGap,
                   fontSize: `${nameSize}px`,
-                  color: nameColor,
+                  color: `#${nameColor}`,
                 }}
               >
                 {props.title || "Error: No thread name"}
               </h1>
             </div>
-          </div>
-        }
-
-        {
-          props.noMenu === undefined &&
-          <div 
-            className="thread-menu-container"
-            style={{
-              left: dotDiameter,
-              top: menuTop,
-            }}
-          >
-            <p>Menu placeholder: add a link, expend all, collapse all, quick search...</p>
           </div>
         }
 
@@ -163,14 +173,7 @@ const Thread = (props) => {
             }}
           >
             <ThreadLine 
-              dotDiameter={dotDiameter}
-              lineTotalHeight={lineTotalHeight}
-              dotRadius={dotRadius}
-              lineBottomY={lineBottomY}
-              threadColor={threadColor}
-              threadStrokeWidth={threadStrokeWidth}
-              bottomDropGap={bottomDropGap}
-              bottomDropLength={bottomDropLength}
+              {...threadLineProps}
             />
           </motion.div>
         }
@@ -184,7 +187,6 @@ const Thread = (props) => {
         style={{
           marginLeft: `${dotRadius - threadStrokeWidth / 2}px`,
           marginTop: `${bookmarksTop}px`,
-          overflow: props.expandable ? "hidden" : "",
         }}
       >
         {

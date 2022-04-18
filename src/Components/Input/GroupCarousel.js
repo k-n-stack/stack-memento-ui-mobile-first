@@ -9,14 +9,14 @@ const GroupCarousel = (props) => {
 
   const getGroups = (groups) => {
 
-    console.log(groups);
+    // console.log(groups);
     return groups.map(function (group) {
       return (
         <motion.div 
           className="group-carousel-image-container"
           onClick={() => {
             const _selectedGroups = [...selectedGroups];
-            console.log(group.alphanumeric_id);
+            // console.log(group.alphanumeric_id);
             if (selectedGroups.includes(group.alphanumeric_id)) {
               const index = _selectedGroups.findIndex(i => i == group.alphanumeric_id);
               _selectedGroups.splice(index, 1);

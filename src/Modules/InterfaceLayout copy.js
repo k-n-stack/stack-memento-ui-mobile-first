@@ -275,7 +275,7 @@ const InterfaceLayout = (props) => {
 
   useEffect(() => {
 
-    console.log(contentMarginLeft);
+    // console.log(contentMarginLeft);
 
     // setContentWidth(editionPanelRef.current ? editionPanelRef.current.clientWidth : 0);
     // setContentMarginLeft(subPanelRef.current ? subPanelRef.current.clientWidth : 0);
@@ -363,13 +363,12 @@ const InterfaceLayout = (props) => {
             <div className="thread-title">
               <div className="thread-title-dot-container">
                 <ThreadDot
-                  dotDiameter={66}
                   dotRadius={33}
-                  threadColor={`#${browseThread.color}`}
+                  color={browseThread.color}
                 />
                 <h1
                   style={{
-                    color: `#${browseThread.color}`,
+                    color: browseThread.color,
                   }}
                 >
                   Thread Title
@@ -377,11 +376,10 @@ const InterfaceLayout = (props) => {
               </div>
               <div className="thread-title-line-container">
                 <ThreadLine
-                  dotDiameter={66}
                   lineTotalHeight={150}
                   dotRadius={33}
                   lineBottomY={150}
-                  threadColor={`#${browseThread.color}`}
+                  color={browseThread.color}
                   threadStrokeWidth={12}
                   bottomDropGap={0}
                   bottomDropLength={0}

@@ -30,6 +30,8 @@ const routes = {
   fetchUserFriends: "/user-fellows",
   postBookmarks: "/post-bookmark",
   postThread: "/post-thread",
+  updateBookmark: "/update-bookmark",
+  deactivateBookmark: "/deactivate-bookmark",
 };
 
 const fetchUserByEmailThunk = () => createAsyncThunk(
@@ -280,7 +282,7 @@ const postBookmarksThunk = () => createAsyncThunk(
   "user/postBookmarks",
   async (data, { rejectWithValue }) => {
     try {
-      const { thread_ids, url, description, comment, tags } = data;
+      const { thread_anids, url, description, comment, tags } = data;
       const res = await fetch(routes.postBookmarks, {
         method: "POST",
         headers: { 
@@ -288,7 +290,7 @@ const postBookmarksThunk = () => createAsyncThunk(
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         },
         body: JSON.stringify({
-          thread_ids, 
+          thread_anids, 
           url,
           description,
           comment,
@@ -328,6 +330,54 @@ const postThreadThunk = () => createAsyncThunk(
   }
 );
 
+const updateBookmarkThunk = () => createAsyncThunk(
+  "user/updateBookmark",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { description, url, id } = data;
+      const res = await fetch(routes.updateBookmark, {
+        method: "PUT",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+        body: JSON.stringify({
+          description,
+          url,
+          id,
+        }),
+      })
+      .then(res => res.json());
+      return res;
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const deactivateBookmarkThunk = () => createAsyncThunk(
+  "user/deactivateBookmark",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { id } = data;
+      const res = await fetch(routes.deactivateBookmark, {
+        method: "DELETE",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+        body: JSON.stringify({
+          id,
+        }),
+      })
+      .then(res => res.json());
+      return res;
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
 export {
   fetchUserByEmailThunk,
   fetchUserRegistrationThunk,
@@ -344,4 +394,6 @@ export {
   fetchUserFriendsThunk,
   postBookmarksThunk,
   postThreadThunk,
+  updateBookmarkThunk,
+  deactivateBookmarkThunk,
 };

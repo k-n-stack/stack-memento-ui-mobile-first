@@ -6,32 +6,7 @@ import Icon from "Components/Icon/Icon";
 
 const MyThreadsSettingsContent = (props) => {
 
-  const thread = useSelector((state) => (state.navigation.myThreadsSettingsContent));
-  
-  useEffect(() => {
-    console.log(thread);
-  });
-
-  const countThreadsStats = (thread) => {
-
-    let redirections = 0;
-    let upvotes = 0;
-    let comments = 0;
-
-    if (thread.bookmarks !== undefined) {
-      for (const bookmark of thread.bookmarks) {
-        redirections += bookmark.redirection_count;
-        upvotes += bookmark.vote_count;
-        comments += bookmark.comment_count;
-      }
-    }
-
-    return {
-      redirections: redirections,
-      upvotes: upvotes,
-      comments: comments,
-    }
-  };
+  const thread = useSelector((state) => (state.navigation.selectedThread));
 
   return (
     <div className="settings-content-mythreads">
@@ -44,7 +19,10 @@ const MyThreadsSettingsContent = (props) => {
             }}
           >
           </div>
-          <div className="settings-content-mythreads-color-input">
+          <div 
+            className="settings-content-mythreads-color-input"
+            // contentEditable={true}
+          >
             {`#${thread.color || "000000"}`}
           </div>
         </div>
@@ -64,19 +42,19 @@ const MyThreadsSettingsContent = (props) => {
             <div className="settings-content-mythreads-stats-icon-container">
               <Icon icon="Redirections" />
             </div>
-            <div>{countThreadsStats(thread).redirections}</div>
+            <div>{thread.redirection_count}</div>
           </div>
           <div>
             <div className="settings-content-mythreads-stats-icon-container">
               <Icon icon="Upvotes" />
             </div>
-            <div>{countThreadsStats(thread).upvotes}</div>
+            <div>{thread.vote_count}</div>
           </div>
           <div>
             <div className="settings-content-mythreads-stats-icon-container">
               <Icon icon="Comments" />
             </div>
-            <div>{countThreadsStats(thread).comments}</div>
+            <div>{thread.comment_count}</div>
           </div>
         </div>
       </div>

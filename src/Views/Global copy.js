@@ -29,13 +29,13 @@ const Global = () => {
   };
 
   const getSingleBookmarkThread = (threads) => {
-    return threads.map((value) => {
+    return threads.map((thread) => {
       return (
         <Thread
-          bookmarks={value.bookmarks}
-          threadColor={value.color}
-          title={value.name}
-          nameColor={value.color}
+          bookmarks={thread.bookmarks}
+          color={thread.color}
+          title={thread.name}
+          nameColor={thread.color}
           {...style.singleBookmarkThread}
         />
       );

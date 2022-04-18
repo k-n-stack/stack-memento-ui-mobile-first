@@ -1,7 +1,7 @@
 .settings-bar {
   background: linear-gradient(122.1deg, rgba(51, 56, 181, 0.2) 3.16%, rgba(51, 56, 181, 0) 35.47%), linear-gradient(117.65deg, rgba(173, 0, 255, 0.1) 25.47%, rgba(255, 0, 229, 0) 64.69%);
   box-shadow: 0px 1px 20px 3px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
+  /* overflow-y: hidden; */
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -10,6 +10,18 @@
   pointer-events: all;
   height: 80px;
   background-color: white;
+  position: relative;
+}
+
+.bookmark-edition-container {
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+  width: 400px;
+  left: -430px;
+  top: 100px;
+  box-shadow: 0px 1px 20px 3px rgba(0, 0, 0, 0.2);
+  display: flex;
 }
 
 .settings-bar-content {

@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import Icon from "Components/Icon/Icon";
 import LineInput from "Components/Input/LineInput";
 
+import { motion } from "framer-motion";
+
 import { setExpandSearchPanel, setExpandUserPanel } from "Store/Features/navigationSlice";
 
 import MyThreadsSettingsContent from "Views/Settings/MyThreadsSettingsContent";
@@ -11,19 +13,19 @@ import GroupsSettingsContent from "Views/Settings/GroupsSettingsContent";
 
 import "./SettingsBar.css";
 import { useSelector } from "react-redux";
+import Bookmark from "./Bookmark";
+import BookmarkEdition from "./BookmarkEdition";
 
 const SettingsBar = (props) => {
 
+  const bookmarkProps = {
+
+  }
+
   const dispatch = useDispatch();
   const view = useSelector((state) => (state.navigation.view));
-
-  const getImageModule = (image) => {
-    try {
-      return require(`../Ressources/Images/Avatars/${image}`);
-    } catch (error) {
-      return require("../Ressources/Images/Avatars/default.png");
-    }
-  };
+  const bookmark = useSelector((state) => (state.navigation.selectedBookmark));
+  const showBookmark = useSelector((state) => (state.navigation.showBookmark));
 
   const getContent = (view) => {
     switch (true) {
@@ -42,6 +44,17 @@ const SettingsBar = (props) => {
 
   return (
     <div className="settings-bar">
+
+      {/* BOOKMARK EDITION */}
+      {/* ################ */}
+      { 
+        showBookmark && view === "myThreads" &&
+        <div className="bookmark-edition-container">
+          <BookmarkEdition bookmark={bookmark} />
+        </div>
+      }
+      {/* ################ */}
+
       <div className="settings-bar-title">
         <div className="settings-bar-icon-container">
             <Icon icon="Friends" iconColor="#3650AB"/>

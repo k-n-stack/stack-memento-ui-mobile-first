@@ -14,7 +14,7 @@
   flex-direction: column;
   flex-grow: 1;
   height: 100vh;
-  padding: 0px 20px;
+  /* padding: 0px 20px; */
   overflow: hidden;
 }
 
@@ -22,7 +22,7 @@
   flex-grow: 1;
   min-height: 0;
   overflow-y: scroll;
-  padding: 20px 20px;
+  /* padding: 20px 20px; */
 }
 
 .interface-layout-underlay-background {
@@ -60,7 +60,7 @@
 
   .interface-layout-content {
     margin-left: 55px;
-    padding: 0px 20px;
+    /* padding: 0px 20px; */
   }
 
   .interface-layout-content-container {

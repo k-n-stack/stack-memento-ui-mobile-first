@@ -36,8 +36,7 @@ const FellowsSettingsContent = () => {
           <div className="settings-thread-dot">
             <ThreadDot 
               dotRadius={12}
-              dotDiameter={24}
-              threadColor={`#${thread.color}`}
+              color={thread.color}
             />
           </div>
           <div className="settings-thread-title">{thread.title}</div>
@@ -46,8 +45,6 @@ const FellowsSettingsContent = () => {
         null
     });
   }
-
-  useEffect(() => {console.log(selectedFellow)});
 
   return (
     <div className="settings-content-fellows">
@@ -112,6 +109,17 @@ const FellowsSettingsContent = () => {
       </div>
       <div className="settings-content-fellow-threads-title">Fellow threads</div>
       <div className="settings-content-fellow-threads">
+        {getThreads(selectedFellow.threads)}
+        {getThreads(selectedFellow.threads)}
+        {getThreads(selectedFellow.threads)}
+        {getThreads(selectedFellow.threads)}
+        {getThreads(selectedFellow.threads)}
+        {getThreads(selectedFellow.threads)}
+        {getThreads(selectedFellow.threads)}
+        {getThreads(selectedFellow.threads)}
+        {getThreads(selectedFellow.threads)}
+        {getThreads(selectedFellow.threads)}
+        {getThreads(selectedFellow.threads)}
         {getThreads(selectedFellow.threads)}
       </div>
     </div>
