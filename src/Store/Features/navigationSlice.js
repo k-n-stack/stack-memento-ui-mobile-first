@@ -3,10 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import { 
   updateBookmarkThunk,
   deactivateBookmarkThunk,
+  deleteBookmarkTagsThunk,
+  postBookmarkTagsThunk,
 } from "Store/Thunks/userThunks";
 
 export const updateBookmark = updateBookmarkThunk();
 export const deactivateBookmark = deactivateBookmarkThunk();
+export const deleteBookmarkTags = deleteBookmarkTagsThunk();
+export const postBookmarkTags = postBookmarkTagsThunk();
 
 export const navigationSlice = createSlice({
 
@@ -154,6 +158,16 @@ export const navigationSlice = createSlice({
     [deactivateBookmark.fulfilled]: (state, action) => {
       if (action.payload.status === "bookmark deleted") {
         state.showBookmark = false;
+      }
+    },
+    [deleteBookmarkTags.fulfilled]: (state, action) => {
+      if (action.payload.status === "tags removed from bookmark") {
+        state.selectedBookmark = action.payload.bookmark;
+      }
+    },
+    [postBookmarkTags.fulfilled]: (state, action) => {
+      if (action.payload.status === "tags added to bookmark") {
+        state.selectedBookmark = action.payload.bookmark;
       }
     }
   }

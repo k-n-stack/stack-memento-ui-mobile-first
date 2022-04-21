@@ -17,6 +17,8 @@ import {
   postThreadThunk,
   updateBookmarkThunk,
   deactivateBookmarkThunk,
+  postBookmarkTagsThunk,
+  deleteBookmarkTagsThunk,
 } from "Store/Thunks/userThunks";
 
 export const login = fetchUserByEmailThunk();
@@ -36,6 +38,8 @@ export const postBookmarks = postBookmarksThunk();
 export const postThread = postThreadThunk();
 export const updateBookmark = updateBookmarkThunk();
 export const deactivateBookmark = deactivateBookmarkThunk();
+export const postBookmarkTags = postBookmarkTagsThunk();
+export const deleteBookmarkTags = deleteBookmarkTagsThunk();
 
 export const userSlice = createSlice({
   
@@ -226,6 +230,42 @@ export const userSlice = createSlice({
             }
             return result;
           }, []);
+          thread.bookmarks = bookmarks;
+          return thread;
+        });
+      }
+    },
+
+    [postBookmarkTags.rejected]: (state, action) => {},
+    [postBookmarkTags.pending]: (state, action) => {},
+    [postBookmarkTags.fulfilled]: (state, action) => {
+      state.status = action.payload.status;
+      if (action.payload.status === "tags added to bookmark") {
+        const bookmarkId = action.payload.bookmark.id;
+        state.threads = state.threads.map(function (thread) {
+          const bookmarks = thread.bookmarks.map(function (bookmark) {
+            return bookmark.id === bookmarkId ? 
+              action.payload.bookmark :
+              bookmark;
+          });
+          thread.bookmarks = bookmarks;
+          return thread;
+        });
+      }
+    },
+
+    [deleteBookmarkTags.rejected]: (state, action) => {},
+    [deleteBookmarkTags.pending]: (state, action) => {},
+    [deleteBookmarkTags.fulfilled]: (state, action) => {
+      state.status = action.payload.status;
+      if (action.payload.status === "tags removed from bookmark") {
+        const bookmarkId = action.payload.bookmark.id;
+        state.threads = state.threads.map(function (thread) {
+          const bookmarks = thread.bookmarks.map(function (bookmark) {
+            return bookmark.id === bookmarkId ? 
+              action.payload.bookmark :
+              bookmark;
+          });
           thread.bookmarks = bookmarks;
           return thread;
         });

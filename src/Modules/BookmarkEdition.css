@@ -1,6 +1,7 @@
 .bookmark-edition {
   border-radius: 10px;
   display: flex;
+  width: 100%;
   flex-direction: column;
   padding: 10px 20px;
   overflow: hidden;
@@ -23,6 +24,7 @@
   color: #3650AB;
 }
 
+
 .bookmark-edition-top {
   user-select: none;
 }
@@ -34,6 +36,11 @@
 .bookmark-edition-tags,
 .bookmark-edition-comments {
   margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.bookmark-edition-tags-input {
+  margin-bottom: 5px;
 }
 
 .bookmark-edition-url {
@@ -55,16 +62,38 @@
 }
 
 .bookmark-edition-tags-list {
-  background-color: rgb(126, 126, 190);
+  background-color: rgb(255, 255, 255);
+  gap: 5px;
+  padding: 5px;
   display: flex;
   flex-wrap: wrap;
-  max-height: 100px;
-  overflow-y: scroll;
+  height: 100px;
+  overflow-y: auto;
+  flex-shrink: 0;
+  align-items: flex-start;
+  align-content: flex-start;
+
+  border-radius: 10px;
+  box-shadow: inset -10px -5px 50px rgba(52, 0, 175, 0.288),
+    inset 5px 5px 5px rgba(0, 82, 175, 0.171);
+}
+
+
+.bookmark-edition-tag {
+  padding: 3px 5px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 .bookmark-edition-comments-list {
-  background-color: blueviolet;
-  overflow-y: scroll;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: inset -10px -5px 50px rgba(52, 0, 175, 0.288),
+  inset 5px 5px 5px rgba(0, 82, 175, 0.171);
+  padding: 5px;
+  overflow-y: auto;
+  min-height: 100px;
 }
 
 .bookmark-edition-close-icon {
@@ -77,6 +106,13 @@
   width: 100%;
 }
 
-.asdf{
-  background-color: #6839d6;
+/* .bookmark-edition-comment {
+  padding: 5px 10px;
+} */
+
+.bookmark-edition-comment {
+  box-sizing: border-box;
+  background-color:bisque;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
