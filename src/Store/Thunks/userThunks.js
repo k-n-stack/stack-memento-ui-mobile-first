@@ -25,6 +25,15 @@ const routes = {
   fetchUserVoteCount: "/user-vote-count",
   fetchUserThreads: "/user-thread-full",
   fetchUserPinnedThreads: "/user-pinned",
+  fetchUserSubscribedGroups: "/user-subscribed-group",
+  fetchUserOwnGroups: "/user-own-group",
+  fetchUserFriends: "/user-fellows",
+  postBookmarks: "/post-bookmark",
+  postThread: "/post-thread",
+  updateBookmark: "/update-bookmark",
+  deactivateBookmark: "/deactivate-bookmark",
+  postBookmarkTags: "/post-bookmark-tags",
+  deleteBookmarkTags: "/delete-bookmark-tags",
 };
 
 const fetchUserByEmailThunk = () => createAsyncThunk(
@@ -217,6 +226,208 @@ const fetchUserPinnedThreadsThunk = () => createAsyncThunk(
   }
 );
 
+const fetchUserSubscribedGroupsThunk = () => createAsyncThunk(
+  "user/fetchUserSubscribedGroups",
+  async (data, { rejectWithValue }) => {
+    try {
+      return await fetch(routes.fetchUserSubscribedGroups, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        }
+      })
+      .then(res => res.json());
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const fetchUserOwnGroupsThunk = () => createAsyncThunk(
+  "user/fetchUserOwnGroups",
+  async (data, { rejectWithValue }) => {
+    try {
+      return await fetch(routes.fetchUserOwnGroups, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        }
+      })
+      .then(res => res.json());
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const fetchUserFriendsThunk = () => createAsyncThunk(
+  "user/fetchUserFriends",
+  async (data, { rejectWithValue }) => {
+    try {
+      return await fetch(routes.fetchUserFriends, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        }
+      })
+      .then(res => res.json());
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const postBookmarksThunk = () => createAsyncThunk(
+  "user/postBookmarks",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { thread_anids, url, description, comment, tags } = data;
+      const res = await fetch(routes.postBookmarks, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+        body: JSON.stringify({
+          thread_anids, 
+          url,
+          description,
+          comment,
+          tags,
+        }),
+      })
+      .then(res => res.json());
+      return res;
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const postThreadThunk = () => createAsyncThunk(
+  "user/postThread",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { title, visibility, color } = data;
+      const res = await fetch(routes.postThread, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+        body: JSON.stringify({
+          title,
+          visibility,
+          color,
+        }),
+      })
+      .then(res => res.json());
+      return res;
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const updateBookmarkThunk = () => createAsyncThunk(
+  "user/updateBookmark",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { description, url, id } = data;
+      const res = await fetch(routes.updateBookmark, {
+        method: "PUT",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+        body: JSON.stringify({
+          description,
+          url,
+          id,
+        }),
+      })
+      .then(res => res.json());
+      return res;
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const deactivateBookmarkThunk = () => createAsyncThunk(
+  "user/deactivateBookmark",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { id } = data;
+      const res = await fetch(routes.deactivateBookmark, {
+        method: "DELETE",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+        body: JSON.stringify({
+          id,
+        }),
+      })
+      .then(res => res.json());
+      return res;
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const postBookmarkTagsThunk = () => createAsyncThunk(
+  "user/postBookmarkTagsThunk",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { bookmark_id, tags } = data;
+      const res = await fetch(routes.postBookmarkTags, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+        body: JSON.stringify({
+          bookmark_id,
+          tags,
+        }),
+      })
+      .then(res => res.json());
+      return res;
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const deleteBookmarkTagsThunk = () => createAsyncThunk(
+  "user/deleteBookmarkTagsThunk",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { bookmark_id, tags } = data;
+      const res = await fetch(routes.deleteBookmarkTags, {
+        method: "DELETE",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+        body: JSON.stringify({
+          bookmark_id,
+          tags,
+        }),
+      })
+      .then(res => res.json());
+      return res;
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
 export {
   fetchUserByEmailThunk,
   fetchUserRegistrationThunk,
@@ -228,4 +439,13 @@ export {
   fetchUserVoteCountThunk,
   fetchUserThreadsThunk,
   fetchUserPinnedThreadsThunk,
+  fetchUserSubscribedGroupsThunk,
+  fetchUserOwnGroupsThunk,
+  fetchUserFriendsThunk,
+  postBookmarksThunk,
+  postThreadThunk,
+  updateBookmarkThunk,
+  deactivateBookmarkThunk,
+  postBookmarkTagsThunk,
+  deleteBookmarkTagsThunk,
 };

@@ -18,7 +18,6 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  /* overflow-x: hidden; ?????????????? */
 }
 
 .thread-dot-name {
@@ -26,10 +25,13 @@
   align-items: center;
 }
 
+.hello-papa {
+  z-index: 1;
+}
+
 .thread-name-container {
   display: flex;
   align-items: center;
-
 }
 
 .thread-name {
@@ -40,12 +42,4 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.thread-menu-container {
-  position: absolute;
-  top: 100px;
-  background-color: rgba(206, 13, 13, 0.26);
-  width: 400px;
-  height: 100px;
 }

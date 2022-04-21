@@ -1,0 +1,131 @@
+.settings-content-fellows {
+  flex-grow: 1;
+  overflow: hidden;
+  margin: 30px 10px;
+  display: flex; 
+  flex-direction: column;
+}
+
+.settings-content-fellows-headers {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.settings-content-fellow-headers-infos {
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+.settings-content-fellow-headers-infos-pseudonym {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.settings-content-fellow-headers-infos-date {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.settings-content-fellow-headers-infos > div {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.settings-content-fellow-header-avatar > img {
+  width: 150px;
+  height: 150px;
+  border-radius: 95px;
+}
+
+.settings-content-fellow-sub-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.settings-content-fellow-sub-header-left > div {
+  display: flex;
+  align-items: baseline;
+  font-size: 23px;
+
+}
+
+.settings-content-fellow-sub-header-left-text {
+  font-size: 18px;
+}
+
+.settings-content-fellow-sub-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  font-size: 20px;
+}
+
+.settings-content-fellow-sub-header-right > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.settings-content-fellow-sub-header-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.settings-content-fellow-threads {
+  box-sizing: border-box;
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.settings-content-fellow-threads-title {
+  margin-top: 40px;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.settings-content-thread-list-element {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.thread-list-element-small {
+  font-size: 12px;
+}
+
+.bookmark-count {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+}
+
+.settings-thread-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #444444;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.settings-thread-dot {
+  flex-shrink: 0;
+}
+
+@media screen and (min-width: 1600px) {
+  .settings-thread-title {
+    max-width: 250px;
+  }
+}

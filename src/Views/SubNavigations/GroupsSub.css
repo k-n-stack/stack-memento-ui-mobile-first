@@ -1,0 +1,53 @@
+.groups-sub {
+  margin: 40px 0px;
+  display: flex;
+  gap: 25px;
+  flex-direction: column;
+}
+
+.group-sub-list-element {
+  overflow: hidden;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.group-sub-list-element > img {
+  width: 65px;
+  height: 65px; 
+  border-radius: 33px;
+}
+
+.group-sub-list-element-infos {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.group-sub-list-element-infos-stats > div > span {
+  font-size: 14px;
+}
+
+.group-sub-list-element-infos-name {
+  font-size: 20px;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.group-sub-list-element-infos-owner > span {
+  font-size: 14px;
+}
+
+.group-sub-list-element-infos-owner {
+  font-size: 16px;
+}
+
+.group-sub-list-element-stats {
+  margin-top: 8px;
+  margin-right: 5px;
+  display: flex;
+  justify-content: space-between;
+}

@@ -52,14 +52,6 @@ const UserPanel = () => {
     }
   };
 
-  const getImageModule = (image) => {
-    try {
-      return require(`../Ressources/Images/Avatars/${image}`);
-    } catch (error) {
-      return require("../Ressources/Images/Avatars/default.png");
-    }
-  };
-
   useEffect(() => {
     dispatch(setUserBookmarkCount());
     dispatch(setUserThreadCount());
@@ -89,7 +81,7 @@ const UserPanel = () => {
         userPanelView === "stats" &&
         <div className="user-panel-avatar-big">
           <img 
-            src={getImageModule(sessionStorage.getItem('stmn_image_url'))}
+            src={`http://localhost:8000/api/${sessionStorage.getItem('stmn_image_url')}`}
             width="100%"
             height="100%"
             onClick={() => {
