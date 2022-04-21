@@ -19,7 +19,6 @@ import Modal from "./Modal";
 import { setUserThreads, setUserSubscribedGroups, setUserOwnGroups, setUserFriends } from "Store/Features/userSlice";
 import { setGlobalThreads } from "Store/Features/globalSlice";
 import { setBrowseThread } from "Store/Features/navigationSlice";
-import Modal from "Modules/Modal";
 
 const Interface = () => {
 

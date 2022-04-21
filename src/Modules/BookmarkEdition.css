@@ -6,6 +6,7 @@
   padding: 10px 20px;
   overflow: hidden;
   max-height: calc(100vh - 200px);
+  z-index: 100;
 }
 
 .bookmark-edition-top {

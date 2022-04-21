@@ -29,6 +29,7 @@ const BookmarkEdition = (props) => {
   const [tags, setTags] = useState("");
 
   const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedComments, setSelectedComments] = useState([]);
 
   const handleUpdateBookmark = () => {
     setEditTitle(false);
@@ -106,21 +107,38 @@ const BookmarkEdition = (props) => {
     return comments.length === 0 ? <div>No comments yet</div> :
       comments.map(function (comment) {
       return (
-        <div 
+        <motion.div 
           className="bookmark-edition-comment-container" 
           style={{ marginLeft: _marginLeft }}
+          onClick={() => {
+            const _selectedComments = [...selectedComments];
+            if (_selectedComments.includes(comment.id)) {
+              const i = _selectedComments.indexOf(comment.id);
+              if (i > -1) {
+                _selectedComments.splice(i, 1);
+              }
+            } else {
+              _selectedComments.push(comment.id);
+            }
+            setSelectedComments(_selectedComments);
+          }}
+          animate={
+            selectedComments.includes(comment.id) ?
+            { opacity: 0.5 } :
+            { opacity: 1 }
+          }
         >
           <div className="bookmark-edition-comment">
             <p>{comment.body}</p>
             <p>{comment.user.pseudonym}</p>
           </div>
           {comment.childs.length ? getComments(comment.childs, _marginLeft + 20) : null}
-        </div>
+        </motion.div>
       );
     });
   }
 
-  useEffect(()=> {console.log(selectedBookmark)});
+  useEffect(()=> {console.log(selectedComments)});
 
   return (
     <div className="bookmark-edition">
