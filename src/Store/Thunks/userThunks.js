@@ -34,6 +34,8 @@ const routes = {
   deactivateBookmark: "/deactivate-bookmark",
   postBookmarkTags: "/post-bookmark-tags",
   deleteBookmarkTags: "/delete-bookmark-tags",
+  deleteComments: "/delete-comments",
+  validateComments: "/validate-comments",
 };
 
 const fetchUserByEmailThunk = () => createAsyncThunk(
@@ -428,6 +430,52 @@ const deleteBookmarkTagsThunk = () => createAsyncThunk(
   }
 );
 
+const deleteCommentsThunk = () => createAsyncThunk(
+  "user/deleteCommentsThunk",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { comments } = data;
+      const res = await fetch(routes.deleteComments, {
+        method: "DELETE",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+        body: JSON.stringify({
+          comments,
+        }),
+      })
+      .then(res => res.json());
+      return res;
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
+const validateCommentsThunk = () => createAsyncThunk(
+  "user/validateCommentsThunk",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { comments } = data;
+      const res = await fetch(routes.validateComments, {
+        method: "PUT",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+        body: JSON.stringify({
+          comments,
+        }),
+      })
+      .then(res => res.json());
+      return res;
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
 export {
   fetchUserByEmailThunk,
   fetchUserRegistrationThunk,
@@ -448,4 +496,6 @@ export {
   deactivateBookmarkThunk,
   postBookmarkTagsThunk,
   deleteBookmarkTagsThunk,
+  deleteCommentsThunk,
+  validateCommentsThunk,
 };

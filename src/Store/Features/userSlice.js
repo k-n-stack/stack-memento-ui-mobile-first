@@ -19,6 +19,8 @@ import {
   deactivateBookmarkThunk,
   postBookmarkTagsThunk,
   deleteBookmarkTagsThunk,
+  deleteCommentsThunk,
+  validateCommentsThunk,
 } from "Store/Thunks/userThunks";
 
 export const login = fetchUserByEmailThunk();
@@ -40,6 +42,8 @@ export const updateBookmark = updateBookmarkThunk();
 export const deactivateBookmark = deactivateBookmarkThunk();
 export const postBookmarkTags = postBookmarkTagsThunk();
 export const deleteBookmarkTags = deleteBookmarkTagsThunk();
+export const deleteComments = deleteCommentsThunk();
+export const validateComments = validateCommentsThunk();
 
 export const userSlice = createSlice({
   
@@ -263,6 +267,42 @@ export const userSlice = createSlice({
         state.threads = state.threads.map(function (thread) {
           const bookmarks = thread.bookmarks.map(function (bookmark) {
             return bookmark.id === bookmarkId ? 
+              action.payload.bookmark :
+              bookmark;
+          });
+          thread.bookmarks = bookmarks;
+          return thread;
+        });
+      }
+    },
+
+    [deleteComments.rejected]: (state, action) => {},
+    [deleteComments.pending]: (state, action) => {},
+    [deleteComments.fulfilled]: (state, action) => {
+      state.status = action.payload.status;
+      if (action.payload.status === "comments deleted") {
+        const bookmarkId = action.payload.bookmark.id;
+        state.threads = state.threads.map(function (thread) {
+          const bookmarks = thread.bookmarks.map(function (bookmark) {
+            return bookmark.id == bookmarkId ? 
+              action.payload.bookmark :
+              bookmark;
+          });
+          thread.bookmarks = bookmarks;
+          return thread;
+        });
+      }
+    },
+
+    [validateComments.rejected]: (state, action) => {},
+    [validateComments.pending]: (state, action) => {},
+    [validateComments.fulfilled]: (state, action) => {
+      state.status = action.payload.status;
+      if (action.payload.status === "comments validated") {
+        const bookmarkId = action.payload.bookmark.id;
+        state.threads = state.threads.map(function (thread) {
+          const bookmarks = thread.bookmarks.map(function (bookmark) {
+            return bookmark.id == bookmarkId ? 
               action.payload.bookmark :
               bookmark;
           });

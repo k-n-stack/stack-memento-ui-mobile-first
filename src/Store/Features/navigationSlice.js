@@ -5,12 +5,16 @@ import {
   deactivateBookmarkThunk,
   deleteBookmarkTagsThunk,
   postBookmarkTagsThunk,
+  deleteCommentsThunk,
+  validateCommentsThunk,
 } from "Store/Thunks/userThunks";
 
 export const updateBookmark = updateBookmarkThunk();
 export const deactivateBookmark = deactivateBookmarkThunk();
 export const deleteBookmarkTags = deleteBookmarkTagsThunk();
 export const postBookmarkTags = postBookmarkTagsThunk();
+export const deleteComments = deleteCommentsThunk();
+export const validateComments = validateCommentsThunk();
 
 export const navigationSlice = createSlice({
 
@@ -150,6 +154,8 @@ export const navigationSlice = createSlice({
   },
 
   extraReducers: {
+    // UPDATE SELECTED BOOKMARK STATE FORCING COMPONENT RELOAD !!!!
+
     [updateBookmark.fulfilled]: (state, action) => {
       if (action.payload.status === "Bookmark updated") {
         state.selectedBookmark = action.payload.bookmark;
@@ -165,11 +171,21 @@ export const navigationSlice = createSlice({
         state.selectedBookmark = action.payload.bookmark;
       }
     },
+    [deleteComments.fulfilled]: (state, action) => {
+      if (action.payload.status === "comments deleted") {
+        state.selectedBookmark = action.payload.bookmark;
+      }
+    },
     [postBookmarkTags.fulfilled]: (state, action) => {
       if (action.payload.status === "tags added to bookmark") {
         state.selectedBookmark = action.payload.bookmark;
       }
-    }
+    },
+    [validateComments.fulfilled]: (state, action) => {
+      if (action.payload.status === "comments validated") {
+        state.selectedBookmark = action.payload.bookmark;
+      }
+    },
   }
 });
 
