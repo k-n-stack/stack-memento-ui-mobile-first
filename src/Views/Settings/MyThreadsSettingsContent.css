@@ -69,3 +69,23 @@
   align-items: flex-end;
 }
 
+.settings-content-threads-groups-title {
+  margin-top: 40px;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.settings-content-threads-groups {
+  box-sizing: border-box;
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.settings-content-group-container {
+  display: flex;
+  background-color: aqua;
+}
