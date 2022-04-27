@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 import Icon from "Components/Icon/Icon";
 
-import { setSelectedBookmark, setShowBookmark } from "Store/Features/navigationSlice";
+import { setSelectedBookmark, setShowBookmark, setSelectedComment } from "Store/Features/navigationSlice";
 
 import "./Bookmark.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +13,7 @@ const Bookmark = (props) => {
   const dispatch = useDispatch();
   const [showUrl, setShowUrl] = useState(false);
   const selectedBookmark = useSelector((state) => (state.navigation.selectedBookmark));
+  const selectedComment = useSelector((state) => state.navigation.selectedComment);
 
   const {
     pigtailColor = "555555",
@@ -29,16 +31,24 @@ const Bookmark = (props) => {
   // !!! RECURSIVE
   const getComments = (comments, _marginLeft = 0) => {
     return comments.map(function (comment) {
+      console.log(comment);
       return (
-        <div style={{ marginLeft: _marginLeft }}>
-          <div style={{
-            backgroundColor: "pink"
-          }}>
-            <p>{comment.body}</p>
-            <p>{comment.poster_name}</p>
+        <motion.div 
+          style={{ marginLeft: _marginLeft }}
+          onClick={() => {
+            dispatch(setSelectedComment(comment));
+          }}
+          animate={{
+            x: selectedComment.id === comment.id ? 5 : 0,
+            backgroundColor: selectedComment.id === comment.id ? "rgb(162, 209, 253)" : "rgb(209, 232, 253)",
+          }}
+        >
+          <div className="comment">
+            <div>{comment.body}</div>
+            <div className="comment-pseudonym">{comment.user.pseudonym}</div>
           </div>
           {comment.childs.length ? getComments(comment.childs, _marginLeft + 20) : null}
-        </div>
+        </motion.div>
       );
     });
   }
@@ -145,6 +155,10 @@ const Bookmark = (props) => {
               {/* !!! RECURSIVE */}
               <div className="bookmark-comments">
                 {getComments(props.bookmark.comments)}
+              </div>
+
+              <div className="bookmark-comment-edition-panel">
+                hello
               </div>
             </>  
           }
