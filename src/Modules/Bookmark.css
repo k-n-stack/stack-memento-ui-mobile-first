@@ -138,3 +138,12 @@
   align-self: flex-end;
   color: rgb(92, 92, 92);
 }
+
+.bookmark-comment-edition-panel {
+  display: flex;
+  gap: 20px;
+  color: #3650AB;
+  font-size: 20;
+  font-weight: bold;
+
+}

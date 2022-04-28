@@ -54,6 +54,7 @@ export const navigationSlice = createSlice({
     selectedThread: {},
 
     selectedBookmark: {},
+    selectedCommentBookmarkId: 0,
     test: "",
 
     selectedFellow: {},
@@ -144,6 +145,9 @@ export const navigationSlice = createSlice({
     setSelectedBookmark: (state, action) => {
       state.selectedBookmark = action.payload;
     },
+    setSelectedCommentBookmarkId: (state, action) => {
+      state.selectedCommentBookmarkId = action.payload;
+    },
     setTest: (state, action) => {
       state.test = action.payload;
     },
@@ -226,6 +230,7 @@ export const {
   setSelectedBookmark,
   setTest,
   setSelectedComment,
+  setSelectedCommentBookmarkId,
 } = navigationSlice.actions;
 
 export default navigationSlice.reducer;

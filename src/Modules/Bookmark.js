@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 import Icon from "Components/Icon/Icon";
 
-import { setSelectedBookmark, setShowBookmark, setSelectedComment } from "Store/Features/navigationSlice";
+import { setSelectedBookmark, setShowBookmark, setSelectedComment, setSelectedCommentBookmarkId } from "Store/Features/navigationSlice";
 
 import "./Bookmark.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +14,7 @@ const Bookmark = (props) => {
   const [showUrl, setShowUrl] = useState(false);
   const selectedBookmark = useSelector((state) => (state.navigation.selectedBookmark));
   const selectedComment = useSelector((state) => state.navigation.selectedComment);
+  const selectedCommentBookmarkId = useSelector((state) => (state.navigation.selectedCommentBookmarkId));
 
   const {
     pigtailColor = "555555",
@@ -29,7 +30,7 @@ const Bookmark = (props) => {
   } = {...props}
 
   // !!! RECURSIVE
-  const getComments = (comments, _marginLeft = 0) => {
+  const getComments = (comments, bookmarkId, _marginLeft = 0) => {
     return comments.map(function (comment) {
       console.log(comment);
       return (
@@ -37,9 +38,10 @@ const Bookmark = (props) => {
           style={{ marginLeft: _marginLeft }}
           onClick={() => {
             dispatch(setSelectedComment(comment));
+            dispatch(setSelectedCommentBookmarkId(bookmarkId));
           }}
           animate={{
-            x: selectedComment.id === comment.id ? 5 : 0,
+            x: selectedComment.id === comment.id ? 2 : 0,
             backgroundColor: selectedComment.id === comment.id ? "rgb(162, 209, 253)" : "rgb(209, 232, 253)",
           }}
         >
@@ -47,7 +49,7 @@ const Bookmark = (props) => {
             <div>{comment.body}</div>
             <div className="comment-pseudonym">{comment.user.pseudonym}</div>
           </div>
-          {comment.childs.length ? getComments(comment.childs, _marginLeft + 20) : null}
+          {comment.childs.length ? getComments(comment.childs, bookmarkId, _marginLeft + 20) : null}
         </motion.div>
       );
     });
@@ -57,6 +59,10 @@ const Bookmark = (props) => {
     if (props.parentRef !== undefined) {
       props.setThreadHeight(props.parentRef.current.clientHeight);
     }
+  });
+
+  useEffect(() => {
+    console.log(selectedCommentBookmarkId);
   });
 
   return (
@@ -154,11 +160,18 @@ const Bookmark = (props) => {
 
               {/* !!! RECURSIVE */}
               <div className="bookmark-comments">
-                {getComments(props.bookmark.comments)}
+                {getComments(props.bookmark.comments, props.bookmark.id)}
               </div>
 
               <div className="bookmark-comment-edition-panel">
-                hello
+                <div>Comment</div>
+                <div
+                  style={{
+                    backgroundColor: props.bookmark.id === selectedCommentBookmarkId ? "blue" : "red",
+                  }}  
+                >
+                  Reply
+                </div>
               </div>
             </>  
           }
