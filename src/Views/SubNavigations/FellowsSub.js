@@ -45,6 +45,10 @@ const FellowsSub = () => {
     });
   }
 
+  useEffect(() => {
+    console.log(fellows);
+  })
+
   return (
     <div className="fellows-sub">
       {getFellowList(fellows)}

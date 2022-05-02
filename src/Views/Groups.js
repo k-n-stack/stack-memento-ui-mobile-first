@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 
 import "./Groups.css";
 import GroupCarousel from "Components/Input/GroupCarousel";
+import ImagesGroups from "Modules/ImagesGroup";
 
 const Groups = () => {
 
@@ -45,7 +46,7 @@ const Groups = () => {
               <div className="groups-group-infos-right">
                 <div className="groups-group-subscriber-header">Subscribers : </div>
                 <div className="group-subscribers">
-                  <GroupCarousel groups={group.subscribers} />
+                  <ImagesGroups group={group.subscribers} />
                 </div>
               </div>
             </div>
@@ -55,7 +56,15 @@ const Groups = () => {
             <div className="groups-group-threads-list">
               {
                 group.threads.map(function (thread) {
-                  return <div>{thread.title}</div>
+                  return <div>{thread.title} {thread.title} {thread.title} {thread.title} 
+                  {thread.title} {thread.title} {thread.title} {thread.title} {thread.title} 
+                  {thread.title} {thread.title} {thread.title} {thread.title} {thread.title} 
+                  {thread.title} {thread.title} {thread.title} {thread.title} {thread.title} 
+                  {thread.title} {thread.title} {thread.title} {thread.title} {thread.title} 
+                  {thread.title} {thread.title} {thread.title} {thread.title} {thread.title} 
+                  {thread.title} {thread.title} {thread.title} {thread.title} {thread.title} 
+                  </div>
+                  // return <div>{thread.title}</div>
                 })
               }
             </div>

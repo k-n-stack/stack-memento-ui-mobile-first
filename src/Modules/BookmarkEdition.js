@@ -132,41 +132,43 @@ const BookmarkEdition = (props) => {
     return comments.length === 0 ? <div>No comments yet</div> :
       comments.map(function (comment) {
       return (
-        <motion.div 
-          className="bookmark-edition-comment-container" 
-          style={{ 
-            marginLeft: _marginLeft,
-          }}
-          onClick={() => {
-            console.log(comment);
-            const _selectedComments = [...selectedComments];
-            if (_selectedComments.includes(comment.id)) {
-              const i = _selectedComments.indexOf(comment.id);
-              if (i > -1) {
-                _selectedComments.splice(i, 1);
-              }
-            } else {
-              _selectedComments.push(comment.id);
-            }
-            setSelectedComments(_selectedComments);
-          }}
-          animate={
-            selectedComments.includes(comment.id) ?
-            { opacity: 0.5 } :
-            { opacity: 1 }
-          }
-        >
-          <div 
-            className="bookmark-edition-comment"
-            style={{
-              backgroundColor: comment.validated_at ? "rgb(132, 155, 255)" : "orange",
+        <>
+          <motion.div 
+            className="bookmark-edition-comment-container" 
+            style={{ 
+              marginLeft: _marginLeft,
             }}
+            onClick={() => {
+              console.log(comment);
+              const _selectedComments = [...selectedComments];
+              if (_selectedComments.includes(comment.id)) {
+                const i = _selectedComments.indexOf(comment.id);
+                if (i > -1) {
+                  _selectedComments.splice(i, 1);
+                }
+              } else {
+                _selectedComments.push(comment.id);
+              }
+              setSelectedComments(_selectedComments);
+            }}
+            animate={
+              selectedComments.includes(comment.id) ?
+              { opacity: 0.5 } :
+              { opacity: 1 }
+            }
           >
-            <p>{comment.body}</p>
-            <p>{comment.user.pseudonym}</p>
-          </div>
+            <div 
+              className="bookmark-edition-comment"
+              style={{
+                backgroundColor: comment.validated_at ? "rgb(132, 155, 255)" : "orange",
+              }}
+            >
+              <p>{comment.body}</p>
+              <p>{comment.user.pseudonym}</p>
+            </div>
+          </motion.div>
           {comment.childs.length ? getComments(comment.childs, _marginLeft + 20) : null}
-        </motion.div>
+        </>
       );
     });
   }

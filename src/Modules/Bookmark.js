@@ -1,8 +1,19 @@
 import React, { useEffect, useState } from "react";
 
+import { motion } from "framer-motion";
+
 import Icon from "Components/Icon/Icon";
 
-import { setSelectedBookmark, setShowBookmark } from "Store/Features/navigationSlice";
+import { 
+  setSelectedBookmark, 
+  setShowBookmark, 
+  setSelectedComment, 
+  setSelectedCommentBookmarkId,
+} from "Store/Features/navigationSlice";
+
+import { 
+  postComment 
+} from "Store/Features/userSlice";
 
 import "./Bookmark.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +23,11 @@ const Bookmark = (props) => {
   const dispatch = useDispatch();
   const [showUrl, setShowUrl] = useState(false);
   const selectedBookmark = useSelector((state) => (state.navigation.selectedBookmark));
+  const selectedComment = useSelector((state) => state.navigation.selectedComment);
+  const selectedCommentBookmarkId = useSelector((state) => (state.navigation.selectedCommentBookmarkId));
+  const [comment, setComment] = useState(false);
+  const [reply, setReply] = useState(false);
+  const [body, setBody] = useState('');
 
   const {
     pigtailColor = "555555",
@@ -27,26 +43,57 @@ const Bookmark = (props) => {
   } = {...props}
 
   // !!! RECURSIVE
-  const getComments = (comments, _marginLeft = 0) => {
+  const getComments = (comments, bookmarkId, _marginLeft = 0) => {
     return comments.map(function (comment) {
+      // console.log(comment);
       return (
-        <div style={{ marginLeft: _marginLeft }}>
-          <div style={{
-            backgroundColor: "pink"
-          }}>
-            <p>{comment.body}</p>
-            <p>{comment.poster_name}</p>
-          </div>
-          {comment.childs.length ? getComments(comment.childs, _marginLeft + 20) : null}
-        </div>
+        <>
+          <motion.div 
+            style={{ marginLeft: _marginLeft }}
+            onClick={() => {
+              dispatch(setSelectedComment(comment));
+              dispatch(setSelectedCommentBookmarkId(bookmarkId));
+              setReply(true);
+              setComment(false);
+            }}
+            animate={{
+              x: selectedComment.id === comment.id ? 2 : 0,
+              backgroundColor: selectedComment.id === comment.id ? "rgb(162, 209, 253)" : "rgb(209, 232, 253)",
+            }}
+          >
+            <div className="comment">
+              <div>{comment.body}</div>
+              <div className="comment-pseudonym">{comment.user.pseudonym}</div>
+            </div>
+          </motion.div>
+          {comment.childs.length ? getComments(comment.childs, bookmarkId, _marginLeft + 20) : null}
+        </>
       );
     });
+  };
+
+  const handleCommentSubmit = () => {
+    console.log('here');
+    if (body !== "") {
+      dispatch(postComment({
+        body: body,
+        bookmark_id: props.bookmark.id,
+        parent_id: Object.keys(selectedComment).length !== 0 ? selectedComment.id : 0,
+      }));
+    }
   }
 
   useEffect(() => {
     if (props.parentRef !== undefined) {
       props.setThreadHeight(props.parentRef.current.clientHeight);
     }
+  });
+
+  useEffect(() => {
+    // console.log('comment', comment);
+    // console.log('reply', reply);
+    // console.log(selectedComment);
+    console.log(props.bookmark.comments);
   });
 
   return (
@@ -143,9 +190,77 @@ const Bookmark = (props) => {
               </div>
 
               {/* !!! RECURSIVE */}
-              <div className="bookmark-comments">
-                {getComments(props.bookmark.comments)}
+              {
+                props.bookmark.comments.length !== 0 &&
+                <div className="bookmark-comments">
+                  {getComments(props.bookmark.comments, props.bookmark.id)}
+                </div>
+              }
+
+              <div className="bookmark-comment-edition-panel">
+                <div
+                  style={{
+                    opacity: (Object.keys(selectedComment).length !== 0 && props.bookmark.id === selectedCommentBookmarkId) ? 0.5 : 1
+                  }} 
+                  onClick={() => {
+                    setComment(true);
+                    setReply(false);
+                    dispatch(setSelectedComment({}));
+                    dispatch(setSelectedCommentBookmarkId(0));
+                  }}
+                >
+                  Comment
+                </div>
+                <div
+                  style={{
+                    opacity: props.bookmark.id === selectedCommentBookmarkId ? 1 : 0.5,
+                  }}
+                >
+                  Reply
+                </div>
               </div>
+
+              <motion.div
+                className="bookmark-comment-container"
+                initial={{
+                  height: "0px",
+                }}
+                animate={{
+                  height: (comment || reply) ? "auto" : "0px",
+                }}
+              > 
+
+                <textarea 
+                  className="bookmark-comment-textarea" 
+                  onChange={(event) => {
+                    setBody(event.target.value);
+                  }}  
+                />
+
+                <div className="bookmark-comment-validation-panel">
+
+                  <div
+                    onClick={() => {
+                      handleCommentSubmit();
+                    }}
+                  >
+                    Send
+                  </div>
+
+                  <div
+                    onClick={() => {
+                      setComment(false);
+                      setReply(false);
+                      dispatch(setSelectedComment({}));
+                      dispatch(setSelectedCommentBookmarkId(0));
+                    }}
+                  >
+                    Cancel
+                  </div>
+
+                </div>
+              </motion.div>
+
             </>  
           }
 

@@ -36,6 +36,7 @@ const routes = {
   deleteBookmarkTags: "/delete-bookmark-tags",
   deleteComments: "/delete-comments",
   validateComments: "/validate-comments",
+  postComment: "/post-comment",
 };
 
 const fetchUserByEmailThunk = () => createAsyncThunk(
@@ -476,6 +477,31 @@ const validateCommentsThunk = () => createAsyncThunk(
   }
 );
 
+const postCommentThunk = () => createAsyncThunk(
+  "user/postCommentThunk",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { body, bookmark_id, parent_id } = data;
+      const res = await fetch(routes.postComment, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+        body: JSON.stringify({
+          body,
+          bookmark_id,
+          parent_id,
+        }),
+      })
+      .then(res => res.json());
+      return res;
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
 export {
   fetchUserByEmailThunk,
   fetchUserRegistrationThunk,
@@ -498,4 +524,5 @@ export {
   deleteBookmarkTagsThunk,
   deleteCommentsThunk,
   validateCommentsThunk,
+  postCommentThunk,
 };

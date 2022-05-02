@@ -8,6 +8,24 @@ const MyThreadsSettingsContent = (props) => {
 
   const thread = useSelector((state) => (state.navigation.selectedThread));
 
+  const getGroups = (groups) => {
+    return Object.keys(groups).length === 0 ? <div>No group</div> :
+    groups.map(function (group) {
+      return (
+        <div className="settings-content-group-container">
+          <div className="settings-content-group-image">
+            <img src={`http://localhost:8000/api/ressource/groups/${group.alphanumeric_id}`} />
+          </div>
+          <div>{group.name}</div>
+        </div>
+      );
+    });
+  }
+
+  useEffect(() => {
+    console.log(thread);
+  });
+
   return (
     <div className="settings-content-mythreads">
       <div className="settings-content-mythreads-headers">
@@ -57,6 +75,14 @@ const MyThreadsSettingsContent = (props) => {
             <div>{thread.comment_count}</div>
           </div>
         </div>
+      </div>
+
+      
+      <div className="settings-content-threads-groups-title">Groups</div>
+      <div className="settings-content-threads-groups">
+        {
+          getGroups(Object.keys(thread).length !== 0 ? thread.groups : {})
+        }
       </div>
     </div>
   );

@@ -110,17 +110,6 @@ const FellowsSettingsContent = () => {
       <div className="settings-content-fellow-threads-title">Fellow threads</div>
       <div className="settings-content-fellow-threads">
         {getThreads(selectedFellow.threads)}
-        {getThreads(selectedFellow.threads)}
-        {getThreads(selectedFellow.threads)}
-        {getThreads(selectedFellow.threads)}
-        {getThreads(selectedFellow.threads)}
-        {getThreads(selectedFellow.threads)}
-        {getThreads(selectedFellow.threads)}
-        {getThreads(selectedFellow.threads)}
-        {getThreads(selectedFellow.threads)}
-        {getThreads(selectedFellow.threads)}
-        {getThreads(selectedFellow.threads)}
-        {getThreads(selectedFellow.threads)}
       </div>
     </div>
   )

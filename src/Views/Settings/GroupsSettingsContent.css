@@ -36,6 +36,12 @@
   text-overflow: ellipsis;
 }
 
+.settings-content-group-header-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .settings-content-group-header-avatar > img {
   width: 150px;
   height: 150px;

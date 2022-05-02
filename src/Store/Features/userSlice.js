@@ -21,6 +21,7 @@ import {
   deleteBookmarkTagsThunk,
   deleteCommentsThunk,
   validateCommentsThunk,
+  postCommentThunk,
 } from "Store/Thunks/userThunks";
 
 export const login = fetchUserByEmailThunk();
@@ -44,6 +45,7 @@ export const postBookmarkTags = postBookmarkTagsThunk();
 export const deleteBookmarkTags = deleteBookmarkTagsThunk();
 export const deleteComments = deleteCommentsThunk();
 export const validateComments = validateCommentsThunk();
+export const postComment = postCommentThunk();
 
 export const userSlice = createSlice({
   
@@ -299,6 +301,24 @@ export const userSlice = createSlice({
     [validateComments.fulfilled]: (state, action) => {
       state.status = action.payload.status;
       if (action.payload.status === "comments validated") {
+        const bookmarkId = action.payload.bookmark.id;
+        state.threads = state.threads.map(function (thread) {
+          const bookmarks = thread.bookmarks.map(function (bookmark) {
+            return bookmark.id == bookmarkId ? 
+              action.payload.bookmark :
+              bookmark;
+          });
+          thread.bookmarks = bookmarks;
+          return thread;
+        });
+      }
+    },
+
+    [postComment.rejected]: (state, action) => {},
+    [postComment.pending]: (state, action) => {},
+    [postComment.fulfilled]: (state, action) => {
+      state.status = action.payload.status;
+      if (action.payload.status === "comment added to bookmark") {
         const bookmarkId = action.payload.bookmark.id;
         state.threads = state.threads.map(function (thread) {
           const bookmarks = thread.bookmarks.map(function (bookmark) {
