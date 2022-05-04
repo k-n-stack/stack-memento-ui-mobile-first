@@ -56,15 +56,11 @@ const Groups = () => {
             <div className="groups-group-threads-list">
               {
                 group.threads.map(function (thread) {
-                  return <div>{thread.title} {thread.title} {thread.title} {thread.title} 
-                  {thread.title} {thread.title} {thread.title} {thread.title} {thread.title} 
-                  {thread.title} {thread.title} {thread.title} {thread.title} {thread.title} 
-                  {thread.title} {thread.title} {thread.title} {thread.title} {thread.title} 
-                  {thread.title} {thread.title} {thread.title} {thread.title} {thread.title} 
-                  {thread.title} {thread.title} {thread.title} {thread.title} {thread.title} 
-                  {thread.title} {thread.title} {thread.title} {thread.title} {thread.title} 
-                  </div>
-                  // return <div>{thread.title}</div>
+                  return (
+                    <div>
+                      {thread.title}
+                    </div>
+                  );
                 })
               }
             </div>

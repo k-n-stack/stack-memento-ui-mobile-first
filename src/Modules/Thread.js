@@ -43,6 +43,7 @@ const Thread = (props) => {
     compactBookmark: props.compactBookmark || false,
     bookmarkTitleOnly: props.bookmarkTitleOnly || false,
     bookmarkClickable: props.bookmarkClickable || false,
+    bookmarkImage: props.bookmarkImage || false,
   }
 
   const threadLineProps = {

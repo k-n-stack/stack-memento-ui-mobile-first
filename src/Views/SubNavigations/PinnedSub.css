@@ -1,0 +1,15 @@
+.pinned-sub-image-container {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+}
+
+.pinned-sub-image-container > img {
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+}
+
+.pinned-sub-thread {
+  display: flex;
+}

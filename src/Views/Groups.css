@@ -2,7 +2,7 @@
   margin-top: 50px;
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 100px;
   overflow: hidden;
 }
 
@@ -67,11 +67,13 @@
   /* margin: 20px 0px; */
 }
 
-/* .groups-group-threads-header {
-  flex-grow: 1;
-} */
+.groups-group-threads-header {
+  font-size: 14px;
+}
 
 .groups-group-threads-list {
+  font-size: 18px;
+  font-weight: bold;
   display: flex;
   overflow: scroll-x;
   gap: 10px;
@@ -81,5 +83,7 @@
 .groups-group-threads {
   overflow: hidden;
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  margin-top: 20px;
+  color: #555555
 }

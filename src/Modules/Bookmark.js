@@ -40,6 +40,7 @@ const Bookmark = (props) => {
     compactBookmark = false,
     bookmarkClickable = false,
     noPigtail = false,
+    bookmarkImage = false,
   } = {...props}
 
   // !!! RECURSIVE
@@ -94,6 +95,7 @@ const Bookmark = (props) => {
     // console.log('reply', reply);
     // console.log(selectedComment);
     console.log(props.bookmark.comments);
+    console.log(props);
   });
 
   return (
@@ -145,15 +147,20 @@ const Bookmark = (props) => {
         onClick={() => setShowUrl(!showUrl)}
       >
         <div className="bookmark-content-container">
-
-          <p 
-            className="bookmark-title"
-            style={{
-              fontSize: `${bookmarkTitleSize}px`,
-            }}
-          >
-            {props.bookmark.description || "Error: No title provided"}
-          </p>
+          <div className="bookmark-title-container">
+            {
+              props.bookmark.user && bookmarkImage &&
+              <img src={`http://localhost:8000/api/${props.bookmark.user.image_url}`} />
+            }
+            <p 
+              className="bookmark-title"
+              style={{
+                fontSize: `${bookmarkTitleSize}px`,
+              }}
+            >
+              {props.bookmark.description || "Error: No title provided"}
+            </p>
+          </div>
           {
             !bookmarkTitleOnly &&
             <>

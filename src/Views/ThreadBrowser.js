@@ -18,6 +18,7 @@ const ThreadBrowser = () => {
     bookmarksTop: 40,
     noMenu: true,
     bookmarksOnly: true,
+    bookmarkImage: true, 
   }
   
   return (
