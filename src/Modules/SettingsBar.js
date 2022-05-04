@@ -10,6 +10,7 @@ import { setExpandSearchPanel, setExpandUserPanel } from "Store/Features/navigat
 import MyThreadsSettingsContent from "Views/Settings/MyThreadsSettingsContent";
 import FellowsSettingsContent from "Views/Settings/FellowsSettingsContent";
 import GroupsSettingsContent from "Views/Settings/GroupsSettingsContent";
+import PinnedThreadsSettingsContent from "Views/Settings/PinnedThreadsSettingsContent";
 
 import "./SettingsBar.css";
 import { useSelector } from "react-redux";
@@ -31,8 +32,8 @@ const SettingsBar = (props) => {
     switch (true) {
       case view === "myThreads" :
         return <MyThreadsSettingsContent />;
-      // case view === "pinnedThreads" :
-      //   return <PinnedThreadsSettingsContent />;
+      case view === "pinnedThreads" :
+        return <PinnedThreadsSettingsContent />;
       case view === "fellows" :
         return <FellowsSettingsContent />;
       case view === "groups" :

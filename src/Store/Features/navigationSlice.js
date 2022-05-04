@@ -3,10 +3,20 @@ import { createSlice } from "@reduxjs/toolkit";
 import { 
   updateBookmarkThunk,
   deactivateBookmarkThunk,
+  deleteBookmarkTagsThunk,
+  postBookmarkTagsThunk,
+  deleteCommentsThunk,
+  validateCommentsThunk,
+  postCommentThunk,
 } from "Store/Thunks/userThunks";
 
 export const updateBookmark = updateBookmarkThunk();
 export const deactivateBookmark = deactivateBookmarkThunk();
+export const deleteBookmarkTags = deleteBookmarkTagsThunk();
+export const postBookmarkTags = postBookmarkTagsThunk();
+export const deleteComments = deleteCommentsThunk();
+export const validateComments = validateCommentsThunk();
+export const postComment = postCommentThunk();
 
 export const navigationSlice = createSlice({
 
@@ -50,6 +60,10 @@ export const navigationSlice = createSlice({
 
     selectedFellow: {},
     selectedGroup: {},
+
+    selectedComment: {},
+
+    selectedCommentBookmarkId: 0,
   },
 
   reducers: {
@@ -143,9 +157,17 @@ export const navigationSlice = createSlice({
     setSelectedGroup: (state, action) => {
       state.selectedGroup = action.payload;
     },
+    setSelectedComment: (state, action) => {
+      state.selectedComment = action.payload;
+    },
+    setSelectedCommentBookmarkId: (state, action) => {
+      state.selectedCommentBookmarkId = action.payload;
+    },
   },
 
   extraReducers: {
+    // UPDATE SELECTED BOOKMARK STATE FORCING COMPONENT RELOAD !!!!
+
     [updateBookmark.fulfilled]: (state, action) => {
       if (action.payload.status === "Bookmark updated") {
         state.selectedBookmark = action.payload.bookmark;
@@ -155,7 +177,37 @@ export const navigationSlice = createSlice({
       if (action.payload.status === "bookmark deleted") {
         state.showBookmark = false;
       }
-    }
+    },
+    [deleteBookmarkTags.fulfilled]: (state, action) => {
+      if (action.payload.status === "tags removed from bookmark") {
+        state.selectedBookmark = action.payload.bookmark;
+      }
+    },
+    [deleteComments.fulfilled]: (state, action) => {
+      if (action.payload.status === "comments deleted") {
+        state.selectedBookmark = action.payload.bookmark;
+      }
+    },
+    [postBookmarkTags.fulfilled]: (state, action) => {
+      if (action.payload.status === "tags added to bookmark") {
+        state.selectedBookmark = action.payload.bookmark;
+      }
+    },
+    [validateComments.fulfilled]: (state, action) => {
+      if (action.payload.status === "comments validated") {
+        state.selectedBookmark = action.payload.bookmark;
+      }
+    },
+    [postComment.fulfilled]: (state, action) => {
+      if (action.payload.status === "comment added to bookmark") {
+        const bookmarkId = action.payload.bookmark.id;
+        state.browseThread.bookmarks = state.browseThread.bookmarks.map(function (bookmark) {
+          return bookmark.id == bookmarkId ?
+            action.payload.bookmark :
+            bookmark;
+        });
+      }
+    },
   }
 });
 
@@ -190,6 +242,8 @@ export const {
   setSelectedThread,
   setSelectedBookmark,
   setTest,
+  setSelectedComment,
+  setSelectedCommentBookmarkId,
 } = navigationSlice.actions;
 
 export default navigationSlice.reducer;

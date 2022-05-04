@@ -6,7 +6,6 @@ import Thread from "Modules/Thread";
 
 const Fellows = () => {
 
-  const fellows = useSelector((state) => (state.user.friends));
   const selectedFellow = useSelector((state) => (state.navigation.selectedFellow));
 
   const style = {
