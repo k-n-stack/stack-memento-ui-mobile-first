@@ -16,28 +16,33 @@ const handleError = (error) => {
 };
 
 const routes = {
-  fetchUserByEmail: "/login",
-  fetchUserRegistration: "/register",
-  fetchUserThreadCount: "/user-thread-count",
-  fetchUserBookmarkCount: "/user-bookmark-count",
-  fetchUserRedirectionCount: "/user-redirection-count",
-  fetchUserCommentCount: "/user-comment-count",
-  fetchUserVoteCount: "/user-vote-count",
-  fetchUserThreads: "/user-thread-full",
-  fetchUserPinnedThreads: "/user-pinned",
-  fetchUserSubscribedGroups: "/user-subscribed-group",
-  fetchUserOwnGroups: "/user-own-group",
-  fetchUserFriends: "/user-fellows",
-  postBookmarks: "/post-bookmark",
-  postThread: "/post-thread",
-  updateBookmark: "/update-bookmark",
-  deactivateBookmark: "/deactivate-bookmark",
-  postBookmarkTags: "/post-bookmark-tags",
-  deleteBookmarkTags: "/delete-bookmark-tags",
-  deleteComments: "/delete-comments",
-  validateComments: "/validate-comments",
-  postComment: "/post-comment",
+  fetchUserByEmail: "https://api.stack.mn/api/login",
+  fetchUserRegistration: "https://api.stack.mn/api/register",
+  fetchUserThreadCount: "https://api.stack.mn/api/user-thread-count",
+  fetchUserBookmarkCount: "https://api.stack.mn/api/user-bookmark-count",
+  fetchUserRedirectionCount: "https://api.stack.mn/api/user-redirection-count",
+  fetchUserCommentCount: "https://api.stack.mn/api/user-comment-count",
+  fetchUserVoteCount: "https://api.stack.mn/api/user-vote-count",
+  fetchUserThreads: "https://api.stack.mn/api/user-thread-full",
+  fetchUserPinnedThreads: "https://api.stack.mn/api/user-pinned",
+  fetchUserSubscribedGroups: "https://api.stack.mn/api/user-subscribed-group",
+  fetchUserOwnGroups: "https://api.stack.mn/api/user-own-group",
+  fetchUserFriends: "https://api.stack.mn/api/user-fellows",
+  postBookmarks: "https://api.stack.mn/api/post-bookmark",
+  postThread: "https://api.stack.mn/api/post-thread",
+  updateBookmark: "https://api.stack.mn/api/update-bookmark",
+  deactivateBookmark: "https://api.stack.mn/api/deactivate-bookmark",
+  postBookmarkTags: "https://api.stack.mn/api/post-bookmark-tags",
+  deleteBookmarkTags: "https://api.stack.mn/api/delete-bookmark-tags",
+  deleteComments: "https://api.stack.mn/api/delete-comments",
+  validateComments: "https://api.stack.mn/api/validate-comments",
+  postComment: "https://api.stack.mn/api/post-comment",
 };
+
+const defaultHeaders = {
+  "Content-Type" : "application/json",
+  "Access-Control-Allow-Origin" : "https://stack.mn/",
+}
 
 const fetchUserByEmailThunk = () => createAsyncThunk(
   "users/fetchUserByEmail",
@@ -46,7 +51,7 @@ const fetchUserByEmailThunk = () => createAsyncThunk(
       const { email, password } = data;
       const res = await fetch(routes.fetchUserByEmail, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {...defaultHeaders},
         body: JSON.stringify({
           email, 
           password,
@@ -74,7 +79,7 @@ const fetchUserRegistrationThunk = () => createAsyncThunk(
       const { email, pseudonym, password } = data;
       const res = await fetch(routes.fetchUserRegistration, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {...defaultHeaders},
         body: JSON.stringify({
           email, 
           pseudonym,
@@ -110,7 +115,7 @@ const fetchUserThreadCountThunk = () => createAsyncThunk(
       return await fetch(routes.fetchUserThreadCount, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         },
       })
@@ -128,7 +133,7 @@ const fetchUserBookmarkCountThunk = () => createAsyncThunk(
       return await fetch(routes.fetchUserBookmarkCount, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         },
       })
@@ -146,7 +151,7 @@ const fetchUserRedirectionCountThunk = () => createAsyncThunk(
       return await fetch(routes.fetchUserRedirectionCount, {
           method: "GET",
           headers: {
-            "Content-Type": "application/json",
+            ...defaultHeaders,
             "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
           },
       })
@@ -164,7 +169,7 @@ const fetchUserCommentCountThunk = () => createAsyncThunk(
       return await fetch(routes.fetchUserCommentCount, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         },
       })
@@ -182,7 +187,7 @@ const fetchUserVoteCountThunk = () => createAsyncThunk(
       return await fetch(routes.fetchUserVoteCount, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         },
       })
@@ -200,7 +205,7 @@ const fetchUserThreadsThunk = () => createAsyncThunk(
       return await fetch(routes.fetchUserThreads, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         },
       })
@@ -218,7 +223,7 @@ const fetchUserPinnedThreadsThunk = () => createAsyncThunk(
       return await fetch(routes.fetchUserPinnedThreads, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         }
       })
@@ -236,7 +241,7 @@ const fetchUserSubscribedGroupsThunk = () => createAsyncThunk(
       return await fetch(routes.fetchUserSubscribedGroups, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         }
       })
@@ -254,7 +259,7 @@ const fetchUserOwnGroupsThunk = () => createAsyncThunk(
       return await fetch(routes.fetchUserOwnGroups, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         }
       })
@@ -272,7 +277,7 @@ const fetchUserFriendsThunk = () => createAsyncThunk(
       return await fetch(routes.fetchUserFriends, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         }
       })
@@ -291,7 +296,7 @@ const postBookmarksThunk = () => createAsyncThunk(
       const res = await fetch(routes.postBookmarks, {
         method: "POST",
         headers: { 
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         },
         body: JSON.stringify({
@@ -318,7 +323,7 @@ const postThreadThunk = () => createAsyncThunk(
       const res = await fetch(routes.postThread, {
         method: "POST",
         headers: { 
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         },
         body: JSON.stringify({
@@ -343,7 +348,7 @@ const updateBookmarkThunk = () => createAsyncThunk(
       const res = await fetch(routes.updateBookmark, {
         method: "PUT",
         headers: { 
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         },
         body: JSON.stringify({
@@ -368,7 +373,7 @@ const deactivateBookmarkThunk = () => createAsyncThunk(
       const res = await fetch(routes.deactivateBookmark, {
         method: "DELETE",
         headers: { 
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         },
         body: JSON.stringify({
@@ -391,7 +396,7 @@ const postBookmarkTagsThunk = () => createAsyncThunk(
       const res = await fetch(routes.postBookmarkTags, {
         method: "POST",
         headers: { 
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         },
         body: JSON.stringify({
@@ -415,7 +420,7 @@ const deleteBookmarkTagsThunk = () => createAsyncThunk(
       const res = await fetch(routes.deleteBookmarkTags, {
         method: "DELETE",
         headers: { 
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         },
         body: JSON.stringify({
@@ -439,7 +444,7 @@ const deleteCommentsThunk = () => createAsyncThunk(
       const res = await fetch(routes.deleteComments, {
         method: "DELETE",
         headers: { 
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         },
         body: JSON.stringify({
@@ -462,7 +467,7 @@ const validateCommentsThunk = () => createAsyncThunk(
       const res = await fetch(routes.validateComments, {
         method: "PUT",
         headers: { 
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         },
         body: JSON.stringify({
@@ -485,7 +490,7 @@ const postCommentThunk = () => createAsyncThunk(
       const res = await fetch(routes.postComment, {
         method: "POST",
         headers: { 
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         },
         body: JSON.stringify({

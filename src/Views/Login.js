@@ -2,16 +2,15 @@ import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { setView, setIsLogin } from "Store/Features/navigationSlice";
-import { setStatus } from "Store/Features/userSlice";
-import { login } from "Store/Features/userSlice";
+import { setStatus, login } from "Store/Features/userSlice";
 
 import Button from "Components/Input/Button";
 import Background from "Components/Layout/Background";
 import LineInput from "Components/Input/LineInput";
 import Icon from "Components/Icon/Icon";
+import ToggleSwitch from "Components/Input/ToggleSwitch";
 
 import "./Login.css";
-import ToggleSwitch from "Components/Input/ToggleSwitch";
 
 const Login = (props) => {
 
@@ -19,7 +18,11 @@ const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const errorControl = useAnimation();
+  const loginControl = useAnimation();
 
+  const loginStatus = useSelector((state) => (state.user.status));
+  
   const handleEmailChange = (value) => {
     setEmail(value);
   };
@@ -28,10 +31,7 @@ const Login = (props) => {
     setPassword(value);
   };
 
-  const loginStatus = useSelector((state) => (state.user.status));
 
-  const errorControl = useAnimation();
-  const loginControl = useAnimation();
 
   const errorMessageAnimation = {
     x: [-10, 10, -10, 10, 0],

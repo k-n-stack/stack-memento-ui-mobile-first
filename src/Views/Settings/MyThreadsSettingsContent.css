@@ -87,7 +87,8 @@
 
 .settings-content-group-container {
   display: flex;
-  background-color: aqua;
+  align-items: center;
+  /* background-color: aqua; */
 }
 
 .settings-content-group-image > img {
@@ -97,6 +98,7 @@
 }
 
 .settings-content-group-image {
+  margin-right: 10px;
   width: 80px;
   height: 80px;
 }
