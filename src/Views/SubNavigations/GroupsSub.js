@@ -16,7 +16,7 @@ const GroupsSub = () => {
   const selectedGroup = useSelector((state) => (state.navigation.selectedGroup));
 
   useEffect(() => {
-    console.log(selectedGroup);
+    // console.log(selectedGroup);
   });
 
   const getGroups = (groups) => {

@@ -74,7 +74,7 @@ const Bookmark = (props) => {
   };
 
   const handleCommentSubmit = () => {
-    console.log('here');
+    // console.log('here');
     if (body !== "") {
       dispatch(postComment({
         body: body,
@@ -94,8 +94,8 @@ const Bookmark = (props) => {
     // console.log('comment', comment);
     // console.log('reply', reply);
     // console.log(selectedComment);
-    console.log(props.bookmark.comments);
-    console.log(props);
+    // console.log(props.bookmark.comments);
+    // console.log(props);
   });
 
   return (

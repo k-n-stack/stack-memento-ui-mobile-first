@@ -139,7 +139,7 @@ const BookmarkEdition = (props) => {
               marginLeft: _marginLeft,
             }}
             onClick={() => {
-              console.log(comment);
+              // console.log(comment);
               const _selectedComments = [...selectedComments];
               if (_selectedComments.includes(comment.id)) {
                 const i = _selectedComments.indexOf(comment.id);
@@ -175,7 +175,7 @@ const BookmarkEdition = (props) => {
 
 
   useEffect(() => {
-    console.log(selectedComments);
+    // console.log(selectedComments);
   })
 
   return (
