@@ -46,7 +46,7 @@ const FellowsSub = () => {
   }
 
   useEffect(() => {
-    console.log(fellows);
+    // console.log(fellows);
   })
 
   return (

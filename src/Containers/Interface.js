@@ -15,6 +15,7 @@ import SearchPanel from "Modules/SearchPanel";
 import ThreadBrowser from "Views/ThreadBrowser";
 
 import Modal from "./Modal";
+import ConfirmationModal from "Components/Input/ConfirmationModal";
 
 import { setUserThreads, setUserSubscribedGroups, setUserOwnGroups, setUserFriends } from "Store/Features/userSlice";
 import { setGlobalThreads } from "Store/Features/globalSlice";
@@ -84,6 +85,7 @@ const Interface = () => {
     <>
       <UserPanel/>
       <SearchPanel/>
+      <ConfirmationModal text="hello, passing text from interface component"/>
       <Modal />
       <InterfaceLayout 
         hasSubPanel={hasSubPanel(view)}

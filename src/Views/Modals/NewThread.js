@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useAnimation } from "framer-motion";
 
 import ColorPicker from "Components/Input/ColorPicker";
 
@@ -11,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "Components/Input/Button";
 import GroupCarousel from "Components/Input/GroupCarousel";
 import { postThread } from "Store/Features/userSlice";
+import { setStatus } from "Store/Features/userSlice";
 
 const NewThread = () => {
 
@@ -19,11 +21,15 @@ const NewThread = () => {
   const subscribedGroups = useSelector((state) => (state.user.subscribedGroups));
   const ownGroups = useSelector((state) => (state.user.ownGroups));
   const friends = useSelector((state) => (state.user.friends));
+  const status = useSelector((state) => (state.user.status));
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [inputColor, setInputColor] = useState('');
   const [inputRef, setInputRef] = useState(null);
   const [selectedButton, setSelectedButton] = useState(3);
   const [title, setTitle] = useState("");
+  const [showError, setShowError] = useState(false);
+  const control = useAnimation();
+  const nameRef = useRef();
 
   const variants = {
     colorPicker: {
@@ -51,7 +57,22 @@ const NewThread = () => {
         opacity: 0.5,
       },
     }
-  }
+  };
+
+  const errorMessageAnimation = {
+    x: [-10, 10, -10, 10, 0],
+    opacity: [1, 1, 0],
+    transition: {
+      x: {
+        duration: 0.5, 
+        times: [0, 0.4, 0.6, 0.8, 1] 
+      },
+      opacity: {
+        duration: 4.5,
+        times: [0, 0.85, 1],
+      }
+    },
+  };
 
   const buttons = [
     { 
@@ -128,12 +149,28 @@ const NewThread = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(postThread({
-      color: color.substr(1),
-      title: title,
-      visibility: getVisibilityEnumValue(selectedButton),
-    }));
+    if (!title) {
+      setShowError(true);
+    } else {
+      dispatch(postThread({
+        color: color.substr(1),
+        title: title,
+        visibility: getVisibilityEnumValue(selectedButton),
+      }));
+    }
   }
+
+  useEffect(() => {
+    if (showError) {
+      control.start(errorMessageAnimation);
+      setShowError(false);
+    }
+    if (status === "thread added") {
+      setTitle("");
+      nameRef.current.value = "";
+      dispatch(setStatus(''));
+    }
+  });
 
   return (
     <>
@@ -144,6 +181,9 @@ const NewThread = () => {
             variants={variants.colorPicker}
             initial={variants.colorPicker.hide}
             animate={showColorPicker ? "show" : "hide"}
+            onClick={() => {
+                setShowColorPicker(false);
+              }}
           >
             <ColorPicker 
               inputRef={inputRef}
@@ -171,9 +211,12 @@ const NewThread = () => {
 
           <div className="new-thread-form-name">
             <label>Thread name :</label>
-            <input onChange={(event) => {
-              setTitle(event.target.value);
-            }}/>
+            <input 
+              onChange={(event) => {
+                setTitle(event.target.value);
+              }}
+              ref={nameRef}
+            />
           </div>
 
           <div className="new-thread-form-visibility">
@@ -210,6 +253,12 @@ const NewThread = () => {
                   buttonText="Add thread"
                   onClick={handleSubmit}
                 />
+                <motion.div 
+                  animate={control}
+                  className="new-thread-error"
+                >
+                  Please, provide a thread name
+                </motion.div>
               </div>
             </div>
           </div>

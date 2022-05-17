@@ -185,6 +185,7 @@ export const userSlice = createSlice({
     [postBookmarks.rejected]: (state, action) => {},
     [postBookmarks.pending]: (state, action) => {},
     [postBookmarks.fulfilled]: (state, action) => {
+      state.status = action.payload.status;
       const threadAnids = action.payload.thread_anids;
       if (action.payload.status === "bookmark added") {
         state.threads = state.threads.map(function (thread) {

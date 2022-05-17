@@ -23,7 +23,7 @@ const MyThreadsSettingsContent = (props) => {
   }
 
   useEffect(() => {
-    console.log(thread);
+    // console.log(thread);
   });
 
   return (

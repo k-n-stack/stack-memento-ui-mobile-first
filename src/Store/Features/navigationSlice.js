@@ -45,6 +45,8 @@ export const navigationSlice = createSlice({
     groupOwner: false,
 
     showModal: false,
+    showConfirmationModal: false,
+    confirmationModalText: "",
     modalView: "",
     modalSubOptions: [],
 
@@ -126,6 +128,12 @@ export const navigationSlice = createSlice({
     },
     setShowModal: (state, action) => {
       state.showModal = action.payload;
+    },
+    setShowConfirmationModal: (state, action) => {
+      state.showConfirmationModal = action.payload;
+    },
+    setConfirmationModalText: (state, action) => {
+      state.confirmationModalText = action.payload;
     },
     setModalView: (state, action) => {
       state.modalView = action.payload;
@@ -232,6 +240,8 @@ export const {
   setGroupsSelection,
   setGroupOwner,
   setShowModal,
+  setShowConfirmationModal,
+  setConfirmationModalText,
   setModalView,
   setModalSubOptions,
   setShowBookmark,

@@ -1,10 +1,12 @@
 import Icon from "Components/Icon/Icon";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
 
 import AddBookmark from "Views/Modals/AddBookmark";
 
 import { setShowModal, setModalView } from "Store/Features/navigationSlice";
+import { setStatus } from "Store/Features/userSlice";
 
 import "./Modal.css";
 import NewThread from "Views/Modals/NewThread";
@@ -22,6 +24,7 @@ import PendingSubReq from "Views/Modals/PendingSubReq";
 import ManageGroup from "Views/Modals/ManageGroup";
 import LeaveGroup from "Views/Modals/LeaveGroup";
 import SendInvitSuggestion from "Views/Modals/SendInvitSuggestion";
+import Button from "Components/Input/Button";
 
 
 const Modal = (props) => {
@@ -30,6 +33,9 @@ const Modal = (props) => {
   const showModal = useSelector((state) => (state.navigation.showModal));
   const modalView = useSelector((state) => (state.navigation.modalView));
   const modalSubOptions = useSelector((state) => (state.navigation.modalSubOptions));
+  const status = useSelector((state) => (state.user.status));
+  const [showModalModal, setShowModalModal] = useState(false);
+  const [modalModalText, setModalModalText] = useState("");
 
   const getView = (view) => {
     switch (true) {
@@ -75,9 +81,39 @@ const Modal = (props) => {
     }
   }
 
+  useEffect(() => {
+    if (status === "thread added") {
+      setModalModalText("Thread created sucessfully");
+      setShowModalModal(true);
+      dispatch(setStatus(''));
+    }
+    if (status === "bookmark added") {
+      setModalModalText("Bookmark(s) added to Thread sucessfully");
+      setShowModalModal(true);
+      dispatch(setStatus(''));
+    }
+  });
+
   return (
       showModal &&
-      <div className="modal">
+      <motion.div className="modal">
+        {
+          showModalModal &&
+          <div className="modal-modal">
+            <div className="modal-modal-container">
+              <div>
+                {modalModalText}
+              </div>
+              <Button 
+                    noIcon 
+                    buttonText="Close"
+                    onClick={() => {
+                      setShowModalModal(false);
+                    }}
+              />
+            </div>
+          </div>
+        }
         <div className="modal-top">
             {modalSubOptions.map(function (subOption) {
               return <div>{subOption}</div>;
@@ -99,7 +135,7 @@ const Modal = (props) => {
         <div className="modal-content-container">
           {getView(modalView)}
         </div>
-      </div>
+      </motion.div>
   )
 };
 
