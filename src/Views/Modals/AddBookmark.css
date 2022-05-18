@@ -14,6 +14,7 @@
   width: 250px;
   box-shadow: inset -10px -5px 50px rgba(52, 0, 175, 0.288),
       inset 5px 5px 5px rgba(0, 82, 175, 0.171);
+  flex-shrink: 0;
 }
 
 .add-bookmark-thread-list > div {
@@ -69,6 +70,19 @@
       inset 5px 5px 5px rgba(0, 82, 175, 0.171);
   border-radius: 10px;
   margin-bottom: 40px;
+  gap: 10px;
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.add-bookmark-tags-container > div {
+  padding: 3px 5px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 .add-bookmark-textarea-label {
@@ -79,4 +93,12 @@
 .add-bookmark-button-container {
   display: flex;
   flex-direction: row-reverse;
+}
+
+.add-bookmark-error {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  font-style: italic;
+  color: rgb(107, 0, 0);
 }

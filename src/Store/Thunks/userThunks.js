@@ -39,6 +39,7 @@ const routes = {
   deleteComments: `${api}/delete-comments`,
   validateComments: `${api}/validate-comments`,
   postComment: `${api}/post-comment`,
+  fetchTags: `${api}/tag`,
 };
 
 const defaultHeaders = {
@@ -509,6 +510,25 @@ const postCommentThunk = () => createAsyncThunk(
   }
 );
 
+const fetchTagsThunk = () => createAsyncThunk(
+  "user/fetchTagsThunk",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = await fetch(routes.fetchTags, {
+        method: "GET",
+        headers: { 
+          ...defaultHeaders,
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+      })
+      .then(res => res.json());
+      return res;
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
 export {
   fetchUserByEmailThunk,
   fetchUserRegistrationThunk,
@@ -532,4 +552,5 @@ export {
   deleteCommentsThunk,
   validateCommentsThunk,
   postCommentThunk,
+  fetchTagsThunk,
 };

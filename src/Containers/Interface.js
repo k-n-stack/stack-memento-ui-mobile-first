@@ -19,6 +19,7 @@ import ConfirmationModal from "Components/Input/ConfirmationModal";
 
 import { setUserThreads, setUserSubscribedGroups, setUserOwnGroups, setUserFriends } from "Store/Features/userSlice";
 import { setGlobalThreads } from "Store/Features/globalSlice";
+import { fetchTags } from "Store/Features/navigationSlice";
 
 
 const Interface = () => {
@@ -79,6 +80,7 @@ const Interface = () => {
     dispatch(setUserSubscribedGroups());
     dispatch(setUserOwnGroups());
     dispatch(setUserFriends());
+    dispatch(fetchTags());
   }, []);
 
   return (

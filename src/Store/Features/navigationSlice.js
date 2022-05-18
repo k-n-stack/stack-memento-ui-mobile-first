@@ -8,6 +8,7 @@ import {
   deleteCommentsThunk,
   validateCommentsThunk,
   postCommentThunk,
+  fetchTagsThunk,
 } from "Store/Thunks/userThunks";
 
 export const updateBookmark = updateBookmarkThunk();
@@ -17,6 +18,7 @@ export const postBookmarkTags = postBookmarkTagsThunk();
 export const deleteComments = deleteCommentsThunk();
 export const validateComments = validateCommentsThunk();
 export const postComment = postCommentThunk();
+export const fetchTags = fetchTagsThunk();
 
 export const navigationSlice = createSlice({
 
@@ -66,6 +68,8 @@ export const navigationSlice = createSlice({
     selectedComment: {},
 
     selectedCommentBookmarkId: 0,
+
+    tags: [],
   },
 
   reducers: {
@@ -215,6 +219,12 @@ export const navigationSlice = createSlice({
             bookmark;
         });
       }
+    },
+
+    [fetchTags.rejected]: (state, action) => {},
+    [fetchTags.pending]: (state, action) => {},
+    [fetchTags.fulfilled]: (state, action) => {
+      state.tags = action.payload;
     },
   }
 });
