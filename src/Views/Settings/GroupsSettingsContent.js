@@ -62,7 +62,7 @@ const GroupsSettingsContent = () => {
         <div className="settings-content-group-header-avatar">
           { 
             Object.keys(selectedGroup).length !== 0 &&
-            <img src={`http://localhost:8000/api/ressource/groups/${selectedGroup.alphanumeric_id}`} />
+            <img src={`${process.env.REACT_APP_API_DOMAIN}/ressource/groups/${selectedGroup.alphanumeric_id}`} />
           }
 
           <div className="test">

@@ -26,7 +26,7 @@ const FellowsSub = () => {
             { backgroundColor: "rgba(255, 255, 255, 0)" }
           }
         >
-          <img src={`http://localhost:8000/api/${fellow.image_url}`} />
+          <img src={`${process.env.REACT_APP_API_DOMAIN}/${fellow.image_url}`} />
           <div className="fellows-sub-list-element-infos">
             <div className="fellows-sub-list-element-infos-name">{fellow.pseudonym}</div>
             <div className="fellows-sub-list-element-stats">

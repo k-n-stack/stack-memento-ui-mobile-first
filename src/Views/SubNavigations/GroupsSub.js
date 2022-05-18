@@ -36,7 +36,7 @@ const GroupsSub = () => {
             { backgroundColor: "rgba(255, 255, 255, 0)" }
           }
         >
-          <img src={`http://localhost:8000/api/${group.image_url}`} />
+          <img src={`${process.env.REACT_APP_API_DOMAIN}/${group.image_url}`} />
           <div className="group-sub-list-element-infos">
             <div className="group-sub-list-element-infos-name">{group.name}</div>
             <div className="group-sub-list-element-infos-owner"><span>Owner :&nbsp;</span>{group.owner.pseudonym}</div>

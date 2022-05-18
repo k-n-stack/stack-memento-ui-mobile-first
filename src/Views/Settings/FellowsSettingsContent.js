@@ -69,7 +69,7 @@ const FellowsSettingsContent = () => {
         <div className="settings-content-fellow-header-avatar">
           { 
             Object.keys(selectedFellow).length !== 0 &&
-            <img src={`http://localhost:8000/api/ressource/avatars/${selectedFellow.alphanumeric_id}`} />
+            <img src={`${process.env.REACT_APP_API_DOMAIN}/ressource/avatars/${selectedFellow.alphanumeric_id}`} />
           }
         </div>
       </div>

@@ -1,14 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Icon from "Components/Icon/Icon";
-import Button from "Components/Input/Button";
 
 import { 
   setModalSubOptions, 
   setModalView, 
   setShowModal, 
   setShowConfirmationModal, 
-  setConfirmationModalText
+  setConfirmationModalText, 
 } from "Store/Features/navigationSlice";
 
 import "./EditionPanel.css";
@@ -24,7 +23,6 @@ const EditionPanel = (props) => {
   const groupsSelection = useSelector((state) => (state.navigation.groupsSelection));
   const groupOwner = useSelector((state) => (state.navigation.groupOwner));
   const selectedThread = useSelector((state) => (state.navigation.selectedThread));
-  const [showModal, setShowModal] = useState(false);
 
   const options = {
     myThreads: {
@@ -333,14 +331,14 @@ const EditionPanel = (props) => {
       return (
         <div 
           onClick={() => {
-            // if (option.viewName != "deleteThread") {
+            if (option.viewName != "deleteThread") {
               dispatch(setShowModal(true));
               dispatch(setModalView(option.viewName));
               dispatch(setModalSubOptions(option.subOption));
-            // }
-            // if (option.action != null) {
-            //   option.action();
-            // }
+            }
+            if (option.action != null) {
+              option.action();
+            }
           }}
           className={option.isLast ? "edition-panel-container edition-panel-container-last" : "edition-panel-container"}
           style={{
@@ -360,9 +358,6 @@ const EditionPanel = (props) => {
 
   return (
     <div className="edition-panel">
-
-
-
       { 
         !props.isSubPanelStatic &&
         <div className="edition-panel-title">

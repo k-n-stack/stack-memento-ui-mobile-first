@@ -150,7 +150,7 @@ const Bookmark = (props) => {
           <div className="bookmark-title-container">
             {
               props.bookmark.user && bookmarkImage &&
-              <img src={`http://localhost:8000/api/${props.bookmark.user.image_url}`} />
+              <img src={`${process.env.REACT_APP_API_DOMAIN}/${props.bookmark.user.image_url}`} />
             }
             <p 
               className="bookmark-title"

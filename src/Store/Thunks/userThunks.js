@@ -15,33 +15,35 @@ const handleError = (error) => {
   return _error;
 };
 
+const api = process.env.REACT_APP_API_DOMAIN;
+
 const routes = {
-  fetchUserByEmail: "https://api.stack.mn/api/login",
-  fetchUserRegistration: "https://api.stack.mn/api/register",
-  fetchUserThreadCount: "https://api.stack.mn/api/user-thread-count",
-  fetchUserBookmarkCount: "https://api.stack.mn/api/user-bookmark-count",
-  fetchUserRedirectionCount: "https://api.stack.mn/api/user-redirection-count",
-  fetchUserCommentCount: "https://api.stack.mn/api/user-comment-count",
-  fetchUserVoteCount: "https://api.stack.mn/api/user-vote-count",
-  fetchUserThreads: "https://api.stack.mn/api/user-thread-full",
-  fetchUserPinnedThreads: "https://api.stack.mn/api/user-pinned",
-  fetchUserSubscribedGroups: "https://api.stack.mn/api/user-subscribed-group",
-  fetchUserOwnGroups: "https://api.stack.mn/api/user-own-group",
-  fetchUserFriends: "https://api.stack.mn/api/user-fellows",
-  postBookmarks: "https://api.stack.mn/api/post-bookmark",
-  postThread: "https://api.stack.mn/api/post-thread",
-  updateBookmark: "https://api.stack.mn/api/update-bookmark",
-  deactivateBookmark: "https://api.stack.mn/api/deactivate-bookmark",
-  postBookmarkTags: "https://api.stack.mn/api/post-bookmark-tags",
-  deleteBookmarkTags: "https://api.stack.mn/api/delete-bookmark-tags",
-  deleteComments: "https://api.stack.mn/api/delete-comments",
-  validateComments: "https://api.stack.mn/api/validate-comments",
-  postComment: "https://api.stack.mn/api/post-comment",
+  fetchUserByEmail: `${api}/login`,
+  fetchUserRegistration: `${api}/register`,
+  fetchUserThreadCount: `${api}/user-thread-count`,
+  fetchUserBookmarkCount: `${api}/user-bookmark-count`,
+  fetchUserRedirectionCount: `${api}/user-redirection-count`,
+  fetchUserCommentCount: `${api}/user-comment-count`,
+  fetchUserVoteCount: `${api}/user-vote-count`,
+  fetchUserThreads: `${api}/user-thread-full`,
+  fetchUserPinnedThreads: `${api}/user-pinned`,
+  fetchUserSubscribedGroups: `${api}/user-subscribed-group`,
+  fetchUserOwnGroups: `${api}/user-own-group`,
+  fetchUserFriends: `${api}/user-fellows`,
+  postBookmarks: `${api}/post-bookmark`,
+  postThread: `${api}/post-thread`,
+  updateBookmark: `${api}/update-bookmark`,
+  deactivateBookmark: `${api}/deactivate-bookmark`,
+  postBookmarkTags: `${api}/post-bookmark-tags`,
+  deleteBookmarkTags: `${api}/delete-bookmark-tags`,
+  deleteComments: `${api}/delete-comments`,
+  validateComments: `${api}/validate-comments`,
+  postComment: `${api}/post-comment`,
 };
 
 const defaultHeaders = {
   "Content-Type" : "application/json",
-  "Access-Control-Allow-Origin" : "https://stack.mn/",
+  "Access-Control-Allow-Origin" : process.env.REACT_APP_APP_DOMAIN,
 }
 
 const fetchUserByEmailThunk = () => createAsyncThunk(
