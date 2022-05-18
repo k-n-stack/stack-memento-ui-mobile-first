@@ -15,9 +15,16 @@ const handleError = (error) => {
   return _error;
 };
 
+const api = process.env.REACT_APP_API_DOMAIN;
+
 const routes = {
-  fetchGlobalThreads: "/global-thread-full"
+  fetchGlobalThreads: `${api}/global-thread-full`,
 };
+
+const defaultHeaders = {
+  "Content-Type" : "application/json",
+  "Access-Control-Allow-Origin" : process.env.REACT_APP_APP_DOMAIN,
+}
 
 const fetchGlobalThreadsThunk = () => createAsyncThunk(
   "users/fetchGlobalThreads",
@@ -26,7 +33,7 @@ const fetchGlobalThreadsThunk = () => createAsyncThunk(
       return await fetch(routes.fetchGlobalThreads, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          ...defaultHeaders,
           "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
         },
       })

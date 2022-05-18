@@ -22,6 +22,7 @@ import {
   deleteCommentsThunk,
   validateCommentsThunk,
   postCommentThunk,
+  deleteThreadThunk,
 } from "Store/Thunks/userThunks";
 
 export const login = fetchUserByEmailThunk();
@@ -46,6 +47,7 @@ export const deleteBookmarkTags = deleteBookmarkTagsThunk();
 export const deleteComments = deleteCommentsThunk();
 export const validateComments = validateCommentsThunk();
 export const postComment = postCommentThunk();
+export const deleteThread = deleteThreadThunk();
 
 export const userSlice = createSlice({
   
@@ -330,6 +332,20 @@ export const userSlice = createSlice({
           thread.bookmarks = bookmarks;
           return thread;
         });
+      }
+    },
+
+    [deleteThread.rejected]: (state, action) => {},
+    [deleteThread.pending]: (state, action) => {},
+    [deleteThread.fulfilled]: (state, action) => {
+      state.status = action.payload.status;
+      if (action.payload.status === "delete thread sucessfully") {
+        const threadAnid = action.payload.thread_anid;
+        state.threads = state.threads.map(function (thread) {
+          return threadAnid == thread.alphanumeric_id ?
+            null :
+            thread;
+        }).filter(elem => elem);
       }
     },
 

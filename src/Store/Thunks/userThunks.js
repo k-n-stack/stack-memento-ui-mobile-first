@@ -40,6 +40,7 @@ const routes = {
   validateComments: `${api}/validate-comments`,
   postComment: `${api}/post-comment`,
   fetchTags: `${api}/tag`,
+  deleteThread: `${api}/delete-thread`,
 };
 
 const defaultHeaders = {
@@ -529,6 +530,29 @@ const fetchTagsThunk = () => createAsyncThunk(
   }
 );
 
+const deleteThreadThunk = () => createAsyncThunk(
+  "user/deleteThreadThunk",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { alphanumeric_id } = data;
+      const res = await fetch(routes.deleteThread, {
+        method: "DELETE",
+        headers: { 
+          ...defaultHeaders,
+          "Authorization": `Bearer ${sessionStorage.getItem('stmn_token')}`,
+        },
+        body: JSON.stringify({
+          alphanumeric_id,
+        }),
+      })
+      .then(res => res.json());
+      return res;
+    } catch (error) {
+      return rejectWithValue(handleError(error));
+    }
+  }
+);
+
 export {
   fetchUserByEmailThunk,
   fetchUserRegistrationThunk,
@@ -553,4 +577,5 @@ export {
   validateCommentsThunk,
   postCommentThunk,
   fetchTagsThunk,
+  deleteThreadThunk,
 };

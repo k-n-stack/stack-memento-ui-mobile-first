@@ -17,6 +17,7 @@ export const globalSlice = createSlice({
     [setGlobalThreads.rejected]: (state, action) => {},
     [setGlobalThreads.pending]: (state, action) => {},
     [setGlobalThreads.fulfilled]: (state, action) => {
+      console.log(action.payload);
       state.threads = action.payload;
     },
 

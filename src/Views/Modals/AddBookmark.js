@@ -128,6 +128,10 @@ const AddBookmark = () => {
     }
   });
 
+  useEffect(() => {
+    console.log(tags);
+  })
+
   return (
     <div className="add-bookmark">
       <div className="add-bookmark-thread-list">
@@ -157,6 +161,7 @@ const AddBookmark = () => {
                 <div onClick={() => {
                   const _tags = tagsInput.current.value;
                   tagsInput.current.value = `${_tags} ${tag}`;
+                  setTags(tagsInput.current.value.split(" ").filter(elem => elem));
                 }}>
                   {tag}
                 </div>

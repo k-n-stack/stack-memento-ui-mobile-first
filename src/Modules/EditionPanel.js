@@ -109,7 +109,7 @@ const EditionPanel = (props) => {
           color: "#882E2E",
           isLast: true,
           action: () => {
-            dispatch(setConfirmationModalText('Are your sure you want to delete *placehorlde* thread'))
+            dispatch(setConfirmationModalText(`Are you sure you want to delete "${selectedThread.title}" thread ?`));
             dispatch(setShowConfirmationModal(true));
           },
         },
