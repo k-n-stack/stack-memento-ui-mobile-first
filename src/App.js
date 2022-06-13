@@ -10,7 +10,7 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
   get: (searchParams, prop) => searchParams.get(prop),
 });
 let status = params.status;
-window.history.replaceState(null, null, 'http://localhost:3000/');
+window.history.replaceState(null, null, process.env.REACT_APP_APP_DOMAIN);
 
 function App() {
 

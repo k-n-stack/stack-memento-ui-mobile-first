@@ -1,8 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Icon from "Components/Icon/Icon";
 
-import { setModalSubOptions, setModalView, setShowModal } from "Store/Features/navigationSlice";
+import { 
+  setModalSubOptions, 
+  setModalView, 
+  setShowModal, 
+  setShowConfirmationModal, 
+  setConfirmationModalText, 
+} from "Store/Features/navigationSlice";
 
 import "./EditionPanel.css";
 
@@ -16,6 +22,7 @@ const EditionPanel = (props) => {
   const fellowsSelection = useSelector((state) => (state.navigation.fellowsSelection));
   const groupsSelection = useSelector((state) => (state.navigation.groupsSelection));
   const groupOwner = useSelector((state) => (state.navigation.groupOwner));
+  const selectedThread = useSelector((state) => (state.navigation.selectedThread));
 
   const options = {
     myThreads: {
@@ -27,7 +34,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#3650AB",
           isLast: false,
-          action: () => {},
+          action: null,
         },
         {
           name: "Add bookmark", 
@@ -36,7 +43,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#3650AB",
           isLast: false,
-          action: () => {},
+          action: null,
         },
         {
           name: "Import/Export", 
@@ -45,7 +52,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#3650AB",
           isLast: false,
-          action: () => {},
+          action: null,
         },
         {
           name: "Manage sharing", 
@@ -54,7 +61,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#3650AB",
           isLast: false,
-          action: () => {},
+          action: null,
         },
         {
           name: "Delete PHP thread",
@@ -63,7 +70,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#882E2E",
           isLast: true,
-          action: () => {},
+          action: null,
         },
       ],
       noSelection: [
@@ -74,7 +81,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#3650AB",
           isLast: false,
-          action: () => {},
+          action: null,
         },
         {
           name: "Add bookmark", 
@@ -83,7 +90,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#3650AB",
           isLast: false,
-          action: () => {},
+          action: null,
         },
         {
           name: "Import/Export", 
@@ -92,7 +99,19 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#3650AB",
           isLast: false,
-          action: () => {},
+          action: null,
+        },
+        {
+          name: `Delete ${selectedThread.title}`,
+          viewName: 'deleteThread',
+          subOption: [],
+          icon: "", 
+          color: "#882E2E",
+          isLast: true,
+          action: () => {
+            dispatch(setConfirmationModalText(`Are you sure you want to delete "${selectedThread.title}" thread ?`));
+            dispatch(setShowConfirmationModal(true));
+          },
         },
       ],
     },
@@ -105,7 +124,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#3650AB",
           isLast: false,
-          action: () => {},
+          action: null,
         },
         {
           name: "Delete Global:JavaScript pin", 
@@ -114,7 +133,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#882E2E",
           isLast: true,
-          action: () => {},
+          action: null,
         },
       ],
       noSelection: [
@@ -125,7 +144,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#3650AB",
           isLast: false,
-          action: () => {},
+          action: null,
         },
         {
           name: "Delete pins", 
@@ -134,7 +153,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#882E2E",
           isLast: true,
-          action: () => {},
+          action: null,
         },
       ],
     },
@@ -147,7 +166,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#3650AB",
           isLast: false,
-          action: () => {},
+          action: null,
         },
         {
           name: "Pending demands", 
@@ -156,7 +175,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#3650AB",
           isLast: false,
-          action: () => {},
+          action: null,
         },
         {
           name: "Revoke Scripty~Gurlz", 
@@ -165,7 +184,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#882E2E",
           isLast: true,
-          action: () => {},
+          action: null,
         },
       ],
       noSelection: [
@@ -176,7 +195,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#3650AB",
           isLast: false,
-          action: () => {},
+          action: null,
         },
         {
           name: "Pending demands", 
@@ -185,7 +204,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#3650AB",
           isLast: false,
-          action: () => {},
+          action: null,
         },
       ],
     },
@@ -199,7 +218,7 @@ const EditionPanel = (props) => {
             icon: "", 
             color: "#3650AB",
             isLast: false,
-            action: () => {},
+            action: null,
           },
           {
             name: "Send subscription invit", 
@@ -208,7 +227,7 @@ const EditionPanel = (props) => {
             icon: "", 
             color: "#3650AB",
             isLast: false,
-            action: () => {},
+            action: null,
           },
           {
             name: "Pending subscription req (2)", 
@@ -217,7 +236,7 @@ const EditionPanel = (props) => {
             icon: "", 
             color: "#3650AB",
             isLast: false,
-            action: () => {},
+            action: null,
           },
           {
             name: "Manage MyGroup", 
@@ -226,7 +245,7 @@ const EditionPanel = (props) => {
             icon: "", 
             color: "#3650AB",
             isLast: false,
-            action: () => {},
+            action: null,
           },
           {
             name: "Leave MyGroup", 
@@ -235,7 +254,7 @@ const EditionPanel = (props) => {
             icon: "", 
             color: "#882E2E",
             isLast: true,
-            action: () => {},
+            action: null,
           },
         ],
         notOwner: [
@@ -246,7 +265,7 @@ const EditionPanel = (props) => {
             icon: "", 
             color: "#3650AB",
             isLast: false,
-            action: () => {},
+            action: null,
           },
           {
             name: "Send invit suggestion", 
@@ -255,7 +274,7 @@ const EditionPanel = (props) => {
             icon: "", 
             color: "#3650AB",
             isLast: false,
-            action: () => {},
+            action: null,
           },
           {
             name: "Leave Gr4ph15m", 
@@ -264,7 +283,7 @@ const EditionPanel = (props) => {
             icon: "", 
             color: "#882E2E",
             isLast: true,
-            action: () => {},
+            action: null,
           },
         ],
       },
@@ -276,7 +295,7 @@ const EditionPanel = (props) => {
           icon: "", 
           color: "#3650AB",
           isLast: false,
-          action: () => {},
+          action: null,
         },
       ],
     },
@@ -312,16 +331,26 @@ const EditionPanel = (props) => {
       return (
         <div 
           onClick={() => {
-            dispatch(setShowModal(true));
-            dispatch(setModalView(option.viewName));
-            dispatch(setModalSubOptions(option.subOption)); 
+            if (option.viewName != "deleteThread") {
+              dispatch(setShowModal(true));
+              dispatch(setModalView(option.viewName));
+              dispatch(setModalSubOptions(option.subOption));
+            }
+            if (option.action != null) {
+              option.action();
+            }
           }}
           className={option.isLast ? "edition-panel-container edition-panel-container-last" : "edition-panel-container"}
+          style={{
+            display: option.viewName === "deleteThread" ? (Object.keys(selectedThread).length === 0) ? 'none' : null : null,
+          }}
         >
           <div className="edition-panel-icon-container">
             <Icon icon="Plus" iconColor={option.color} />
           </div>
-          <p style={{color: option.color}}>{option.name}</p>
+          <p style={{color: option.color}}>
+            {option.name}
+          </p>
         </div>
       );
     });

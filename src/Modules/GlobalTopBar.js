@@ -10,19 +10,12 @@ import { setExpandSearchPanel, setExpandUserPanel } from "Store/Features/navigat
 import "./GlobalTopBar.css";
 import { useDispatch, useSelector } from "react-redux";
 
-const GlobalTopBar = () => {
+const GlobalTopBar = (props) => {
 
   const dispatch = useDispatch();
   const selectedView = useSelector((state) => (state.navigation.view));
   const browseThread = useSelector((state) => (state.navigation.browseThread));
-
-  const getImageModule = (image) => {
-    try {
-      return require(`../Ressources/Images/Avatars/${image}`);
-    } catch (error) {
-      return require("../Ressources/Images/Avatars/default.png");
-    }
-  };
+  const browseScope = useSelector((state) => (state.navigation.browseScope));
 
   return (
     <div className="global-top-bar">
@@ -59,7 +52,7 @@ const GlobalTopBar = () => {
         </div>
         <div className="global-top-bar-avatar">
           <img 
-            src={`http://localhost:8000/api/${sessionStorage.getItem('stmn_image_url')}`}
+            src={`${process.env.REACT_APP_API_DOMAIN}/${sessionStorage.getItem('stmn_image_url')}`}
             width="100%"
             height="100%"
             onClick={() => {
@@ -82,12 +75,12 @@ const GlobalTopBar = () => {
                 color: `#${browseThread.color}`,
               }}
             >
-              {browseThread.title}
+              {browseThread.title} <span className="thread-owner">({browseScope})</span>
             </h1>
           </div>
           <div className="thread-title-line-container">
             <ThreadLine
-              lineTotalHeight={150}
+              lineTotalHeight={150 + 10}
               dotRadius={33}
               lineBottomY={150}
               color={browseThread.color}

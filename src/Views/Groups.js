@@ -34,7 +34,7 @@ const Groups = () => {
         >
           <div className="groups-group-container">
             <div className="groups-group-image">
-              <img src={group.image_url} />
+              <img src={`${process.env.REACT_APP_API_DOMAIN}/${group.image_url}`} />
             </div>
             <div className="groups-group-infos">
               <div className="groups-group-infos-left">

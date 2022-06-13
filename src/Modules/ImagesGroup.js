@@ -10,7 +10,7 @@ const ImagesGroups = (props) => {
         <div 
           className="image-group-image-container"
         >
-          <img src={`http://localhost:8000/api/${element.image_url}`}/>
+          <img src={`${process.env.REACT_APP_API_DOMAIN}/${element.image_url}`}/>
         </div>
       );
     });

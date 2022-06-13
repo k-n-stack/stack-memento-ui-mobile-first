@@ -303,7 +303,7 @@ const InterfaceLayout = (props) => {
   }
   
   const handleResize = () => {
-    console.log('handle rx');
+    // console.log('handle rx');
     setContentWidth(editionPanelRef.current ? editionPanelRef.current.clientWidth : 0);
     setContentMarginLeft(subPanelRef.current ? subPanelRef.current.clientWidth : 0);
     setExpandNav(false);

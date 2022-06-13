@@ -26,18 +26,18 @@ const ThreadLine = (props) => {
         strokeWidth={threadStrokeWidth} 
         strokeLinecap="round"
       />
-      <path
+      {/* <path
         d={`M${dotRadius} ${lineBottomY + bottomDropGap} L${dotRadius} ${lineBottomY + bottomDropGap + bottomDropLength}`}
         stroke={`#${color}`} 
         strokeWidth={threadStrokeWidth}
         strokeLinecap="round"
-      />
-      <path
+      /> */}
+      {/* <path
         d={`M${dotRadius} ${lineBottomY + bottomDropGap * 2 + bottomDropLength} L${dotRadius} ${lineBottomY + bottomDropGap * 2 + bottomDropLength * 2}`}
         stroke={`#${color}`} 
         strokeWidth={threadStrokeWidth}
         strokeLinecap="round"
-      />
+      /> */}
     </svg>
   );
 };

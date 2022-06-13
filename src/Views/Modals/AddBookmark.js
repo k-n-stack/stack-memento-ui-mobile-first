@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 
 import Button from "Components/Input/Button";
 import ThreadDot from "Components/Svg/ThreadDot";
@@ -17,11 +17,16 @@ const AddBookmark = () => {
 
   const dispatch = useDispatch();
   const threads = useSelector((state) => (state.user.threads));
+  const fullTags = useSelector((state) => (state.navigation.tags));
   const [selectedThreads, setSelectedThreads] = useState([]);
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
   const [tags, setTags] = useState([]);
   const [comment, setComment] = useState("");
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const control = useAnimation();
+  const tagsInput = useRef();
 
   const variants = {
     thread: {
@@ -33,6 +38,21 @@ const AddBookmark = () => {
       }
     }
   }
+
+  const errorMessageAnimation = {
+    x: [-10, 10, -10, 10, 0],
+    opacity: [1, 1, 0],
+    transition: {
+      x: {
+        duration: 0.5, 
+        times: [0, 0.4, 0.6, 0.8, 1] 
+      },
+      opacity: {
+        duration: 4.5,
+        times: [0, 0.85, 1],
+      }
+    },
+  };
 
   const getThreads = (threads) => {
     return threads.map((thread) => {
@@ -66,20 +86,51 @@ const AddBookmark = () => {
     });
   }
 
-  const handleSubmit = () => {
-    dispatch(postBookmarks({
-      thread_anids: selectedThreads,
-      url: url,
-      description: description,
-      comment: comment,
-      tags: tags,
-    }));
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    setErrorMessage('');
+
+    switch (true) {
+      case selectedThreads.length === 0 :
+        setErrorMessage(`At least one thread must be selected\n`);
+        break;
+      case !description :
+        setErrorMessage(`A description must be provided\n`);
+        break;
+      case !url :
+        setErrorMessage(`A url must be provided\n`);
+        break;
+    }
+
+    if (!description || !url || selectedThreads.length === 0) {
+      setShowError(true);
+    } else {
+      dispatch(postBookmarks({
+        thread_anids: selectedThreads,
+        url: url,
+        description: description,
+        comment: comment,
+        tags: tags,
+      }));
+    }
   }
 
   const handleTags = (event) => {
     const _tags = event.target.value.split(" ");
     setTags(_tags);
   }
+
+  useEffect(() => {
+    if (showError) {
+      control.start(errorMessageAnimation);
+      setShowError(false);
+    }
+  });
+
+  useEffect(() => {
+    console.log(tags);
+  })
 
   return (
     <div className="add-bookmark">
@@ -101,10 +152,22 @@ const AddBookmark = () => {
           <div></div><div></div>
 
           <label>Add tag(s) :</label>
-          <input onChange={handleTags}/>
+          <input onChange={handleTags} ref={tagsInput}/>
 
           <div></div>
-          <div className="add-bookmark-tags-container"></div>
+          <div className="add-bookmark-tags-container">
+            {fullTags.map(function (tag) {
+              return (
+                <div onClick={() => {
+                  const _tags = tagsInput.current.value;
+                  tagsInput.current.value = `${_tags} ${tag}`;
+                  setTags(tagsInput.current.value.split(" ").filter(elem => elem));
+                }}>
+                  {tag}
+                </div>
+              );
+            })}
+          </div>
 
           <label className="add-bookmark-textarea-label">Main comment : </label>
           <textarea onChange={(event) => {
@@ -118,6 +181,13 @@ const AddBookmark = () => {
             onClick={handleSubmit}
           />
         </div>
+
+        <motion.div 
+          className="add-bookmark-error"
+          animate={control}
+        >
+          {errorMessage}
+        </motion.div>
 
       </div>
     </div>

@@ -31,9 +31,6 @@
   flex-direction: column;
 }
 
-.bookmark-content-container > p {
-  /* margin: 0px; */
-}
 
 .bookmark-title {
   font-weight: bold;
@@ -176,8 +173,9 @@
 }
 
 .bookmark-title-container > img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
+  width: 35px;
+  height: 35px;
+  border-radius: 35px;
   margin-right: 10px;
+  margin-bottom: 10px;
 }

@@ -15,9 +15,11 @@ import SearchPanel from "Modules/SearchPanel";
 import ThreadBrowser from "Views/ThreadBrowser";
 
 import Modal from "./Modal";
+import ConfirmationModal from "Components/Input/ConfirmationModal";
 
 import { setUserThreads, setUserSubscribedGroups, setUserOwnGroups, setUserFriends } from "Store/Features/userSlice";
 import { setGlobalThreads } from "Store/Features/globalSlice";
+import { fetchTags } from "Store/Features/navigationSlice";
 
 
 const Interface = () => {
@@ -78,12 +80,14 @@ const Interface = () => {
     dispatch(setUserSubscribedGroups());
     dispatch(setUserOwnGroups());
     dispatch(setUserFriends());
+    dispatch(fetchTags());
   }, []);
 
   return (
     <>
       <UserPanel/>
       <SearchPanel/>
+      <ConfirmationModal text="hello, passing text from interface component"/>
       <Modal />
       <InterfaceLayout 
         hasSubPanel={hasSubPanel(view)}

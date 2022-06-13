@@ -93,6 +93,7 @@ const BookmarkEdition = (props) => {
     if (selectedComments.length !== 0) {
       dispatch(validateComments({
         comments: selectedComments,
+        is_mobile: 0,
       }));
     }
     setSelectedComments([]);
@@ -139,7 +140,7 @@ const BookmarkEdition = (props) => {
               marginLeft: _marginLeft,
             }}
             onClick={() => {
-              console.log(comment);
+              // console.log(comment);
               const _selectedComments = [...selectedComments];
               if (_selectedComments.includes(comment.id)) {
                 const i = _selectedComments.indexOf(comment.id);
@@ -175,7 +176,7 @@ const BookmarkEdition = (props) => {
 
 
   useEffect(() => {
-    console.log(selectedComments);
+    // console.log(selectedComments);
   })
 
   return (

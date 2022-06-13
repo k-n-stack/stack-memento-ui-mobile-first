@@ -5,14 +5,21 @@ import Bookmark from "./Bookmark";
 import ThreadDot from "Components/Svg/ThreadDot";
 import ThreadLine from "Components/Svg/ThreadLine";
 
+
+import { useDispatch, useSelector } from "react-redux";
+
+import { setView, setBrowseThread, setBrowseScope } from "Store/Features/navigationSlice";
+
 import "./Thread.css";
 
 const Thread = (props) => {
 
+  const dispatch = useDispatch();
   const threadRef = useRef(null);
   const [threadHeight, setThreadHeight] = useState(0);
   const [threadStaticHeight, setThreadStaticHeight] = useState(0);
   const [isExpand, setIsExpand] = useState(false);
+  const view = useSelector((state) => (state.navigation.view));
 
   const {
     color = "555555",
@@ -25,6 +32,7 @@ const Thread = (props) => {
     nameSize = 30,
     nameColor = "555555",
     nameContainerWidth = "",
+    explore = false,
   } = {...props}
   
   const bookmarksTop = props.bookmarksTop || dotRadius * 2;
@@ -79,6 +87,10 @@ const Thread = (props) => {
     setThreadHeight(height);
   }
 
+  const getBrowseScope = () => {
+    return props.user ? props.user.pseudonym : "Global";
+  }
+
   const variants = {
     threadLine: {
       expand: {
@@ -125,7 +137,7 @@ const Thread = (props) => {
         { !bookmarksOnly &&
           <div className="thread-dot-name">
             <div
-              className="hello-papa"
+              className="thread-dot-name-container"
               onClick={(event) => {
                 event.stopPropagation();
                 event.preventDefault();
@@ -159,6 +171,31 @@ const Thread = (props) => {
               >
                 {props.title || "Error: No thread name"}
               </h1>
+              { 
+                explore &&
+                <h1
+                  className="thread-name-explore"
+                  style={{
+                    fontSize: `${nameSize}px`,
+                  }}
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    dispatch(setView('threadBrowser'));
+                    dispatch(setBrowseScope(getBrowseScope()));
+                    dispatch(setBrowseThread({
+                      alphanumeric_id: props.alphanumeric_id,
+                      bookmarks: props.bookmarks,
+                      color: props.color,
+                      comment_count: props.comment_count,
+                      created_at: props.created_at,
+                      redirection_count: props.redirection_count,
+                      title: props.title,
+                    }));
+                  }}
+                >
+                  Explore
+                </h1>
+              }
             </div>
           </div>
         }

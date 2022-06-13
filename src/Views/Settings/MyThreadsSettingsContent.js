@@ -14,7 +14,7 @@ const MyThreadsSettingsContent = (props) => {
       return (
         <div className="settings-content-group-container">
           <div className="settings-content-group-image">
-            <img src={`http://localhost:8000/api/ressource/groups/${group.alphanumeric_id}`} />
+            <img src={`${process.env.REACT_APP_API_DOMAIN}/ressource/groups/${group.alphanumeric_id}`} />
           </div>
           <div>{group.name}</div>
         </div>
@@ -23,7 +23,7 @@ const MyThreadsSettingsContent = (props) => {
   }
 
   useEffect(() => {
-    console.log(thread);
+    // console.log(thread);
   });
 
   return (

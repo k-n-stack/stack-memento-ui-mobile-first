@@ -22,6 +22,7 @@ import {
   deleteCommentsThunk,
   validateCommentsThunk,
   postCommentThunk,
+  deleteThreadThunk,
 } from "Store/Thunks/userThunks";
 
 export const login = fetchUserByEmailThunk();
@@ -46,6 +47,7 @@ export const deleteBookmarkTags = deleteBookmarkTagsThunk();
 export const deleteComments = deleteCommentsThunk();
 export const validateComments = validateCommentsThunk();
 export const postComment = postCommentThunk();
+export const deleteThread = deleteThreadThunk();
 
 export const userSlice = createSlice({
   
@@ -72,6 +74,8 @@ export const userSlice = createSlice({
     ownGroups: [],
 
     friends: [],
+
+    deletedThread: false,
   },
 
   reducers: {
@@ -89,6 +93,9 @@ export const userSlice = createSlice({
       state.redirectionCount = 0;
       state.commentCount = 0;
       state.voteCount = 0;
+    },
+    setDeletedThread: (state, action) => {
+      state.deletedThread = action.payload;
     },
   },
   
@@ -185,6 +192,7 @@ export const userSlice = createSlice({
     [postBookmarks.rejected]: (state, action) => {},
     [postBookmarks.pending]: (state, action) => {},
     [postBookmarks.fulfilled]: (state, action) => {
+      state.status = action.payload.status;
       const threadAnids = action.payload.thread_anids;
       if (action.payload.status === "bookmark added") {
         state.threads = state.threads.map(function (thread) {
@@ -332,6 +340,21 @@ export const userSlice = createSlice({
       }
     },
 
+    [deleteThread.rejected]: (state, action) => {},
+    [deleteThread.pending]: (state, action) => {},
+    [deleteThread.fulfilled]: (state, action) => {
+      state.status = action.payload.status;
+      if (action.payload.status === "delete thread sucessfully") {
+        const threadAnid = action.payload.thread_anid;
+        state.threads = state.threads.map(function (thread) {
+          return threadAnid == thread.alphanumeric_id ?
+            null :
+            thread;
+        }).filter(elem => elem);
+        state.deletedThread = true;
+      }
+    },
+
   },
 
 });
@@ -339,6 +362,7 @@ export const userSlice = createSlice({
 export const {
   setStatus,
   clearUser,
+  setDeletedThread,
 } = userSlice.actions;
 
 

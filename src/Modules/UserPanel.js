@@ -81,7 +81,7 @@ const UserPanel = () => {
         userPanelView === "stats" &&
         <div className="user-panel-avatar-big">
           <img 
-            src={`http://localhost:8000/api/${sessionStorage.getItem('stmn_image_url')}`}
+            src={`${process.env.REACT_APP_API_DOMAIN}/${sessionStorage.getItem('stmn_image_url')}`}
             width="100%"
             height="100%"
             onClick={() => {

@@ -8,6 +8,7 @@ import {
   deleteCommentsThunk,
   validateCommentsThunk,
   postCommentThunk,
+  fetchTagsThunk,
 } from "Store/Thunks/userThunks";
 
 export const updateBookmark = updateBookmarkThunk();
@@ -17,6 +18,7 @@ export const postBookmarkTags = postBookmarkTagsThunk();
 export const deleteComments = deleteCommentsThunk();
 export const validateComments = validateCommentsThunk();
 export const postComment = postCommentThunk();
+export const fetchTags = fetchTagsThunk();
 
 export const navigationSlice = createSlice({
 
@@ -28,6 +30,7 @@ export const navigationSlice = createSlice({
     view: "homepage",
     overrideView: true,
     browseThread: 0,
+    browseScope: "",
     expandUserPanel: false,
     expandSearchPanel: false,
     expandSearchOptions: false,
@@ -45,6 +48,8 @@ export const navigationSlice = createSlice({
     groupOwner: false,
 
     showModal: false,
+    showConfirmationModal: false,
+    confirmationModalText: "",
     modalView: "",
     modalSubOptions: [],
 
@@ -64,6 +69,8 @@ export const navigationSlice = createSlice({
     selectedComment: {},
 
     selectedCommentBookmarkId: 0,
+
+    tags: [],
   },
 
   reducers: {
@@ -81,6 +88,9 @@ export const navigationSlice = createSlice({
     },
     setBrowseThread: (state, action) => {
       state.browseThread = action.payload;
+    },
+    setBrowseScope: (state, action) => {
+      state.browseScope = action.payload;
     },
     setExpandUserPanel: (state, action) => {
       state.expandUserPanel = action.payload;
@@ -126,6 +136,12 @@ export const navigationSlice = createSlice({
     },
     setShowModal: (state, action) => {
       state.showModal = action.payload;
+    },
+    setShowConfirmationModal: (state, action) => {
+      state.showConfirmationModal = action.payload;
+    },
+    setConfirmationModalText: (state, action) => {
+      state.confirmationModalText = action.payload;
     },
     setModalView: (state, action) => {
       state.modalView = action.payload;
@@ -208,6 +224,12 @@ export const navigationSlice = createSlice({
         });
       }
     },
+
+    [fetchTags.rejected]: (state, action) => {},
+    [fetchTags.pending]: (state, action) => {},
+    [fetchTags.fulfilled]: (state, action) => {
+      state.tags = action.payload;
+    },
   }
 });
 
@@ -217,6 +239,7 @@ export const {
   setView,
   setOverrideView,
   setBrowseThread,
+  setBrowseScope,
   setExpandUserPanel,
   setExpandSearchPanel,
   setExpandSearchOptions,
@@ -232,6 +255,8 @@ export const {
   setGroupsSelection,
   setGroupOwner,
   setShowModal,
+  setShowConfirmationModal,
+  setConfirmationModalText,
   setModalView,
   setModalSubOptions,
   setShowBookmark,

@@ -13,7 +13,7 @@ const PinnedSub = () => {
       return (
         <div className="pinned-sub-thread">
           <div className="pinned-sub-image-container">
-            <img src={`http://localhost:8000/api/${thread.user.image_url}`} />
+            <img src={`${process.env.REACT_APP_API_DOMAIN}/${thread.user.image_url}`} />
           </div>
           <div>{thread.title}</div>
         </div>
