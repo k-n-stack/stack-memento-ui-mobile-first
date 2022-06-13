@@ -13,10 +13,12 @@ const GroupsSettingsContent = () => {
   const getUsers = (users) => {
     return Object.keys(users).length === 0 ? <div>No user</div> :
       users.map(function (user) {
+        console.log(user.image_url);
       return (
         <div className="settings-content-user-element">
           <div className="settings-content-user-element-image">
-            <img src={user.image_url} />
+            {/* <img src={user.image_url} /> */}
+            <img src={`${process.env.REACT_APP_API_DOMAIN}/${user.image_url}`} />
           </div>
           <div>{user.pseudonym}</div>
         </div>
@@ -35,7 +37,9 @@ const GroupsSettingsContent = () => {
             <div className="settings-content-group-owner-avatar">
               {
                 Object.keys(selectedGroup).length !== 0 &&
-                <img src={selectedGroup.owner.image_url} />
+                // <img src={selectedGroup.owner.image_url} />
+                <img src={`${process.env.REACT_APP_API_DOMAIN}/${selectedGroup.owner.image_url}`} />
+
               }
             </div>
 

@@ -18,7 +18,6 @@ const handleError = (error) => {
 const api = process.env.REACT_APP_API_DOMAIN;
 
 const routes = {
-  fetchUserByEmail: `${api}/login`,
   fetchUserRegistration: `${api}/register`,
   fetchUserThreadCount: `${api}/user-thread-count`,
   fetchUserBookmarkCount: `${api}/user-bookmark-count`,
@@ -41,6 +40,7 @@ const routes = {
   postComment: `${api}/post-comment`,
   fetchTags: `${api}/tag`,
   deleteThread: `${api}/delete-thread`,
+  fetchUserByEmail: `${api}/login`,
 };
 
 const defaultHeaders = {
@@ -467,7 +467,7 @@ const validateCommentsThunk = () => createAsyncThunk(
   "user/validateCommentsThunk",
   async (data, { rejectWithValue }) => {
     try {
-      const { comments } = data;
+      const { comments, is_mobile } = data;
       const res = await fetch(routes.validateComments, {
         method: "PUT",
         headers: { 
@@ -476,6 +476,7 @@ const validateCommentsThunk = () => createAsyncThunk(
         },
         body: JSON.stringify({
           comments,
+          is_mobile,
         }),
       })
       .then(res => res.json());

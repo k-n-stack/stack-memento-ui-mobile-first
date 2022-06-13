@@ -25,13 +25,19 @@
   align-items: center;
 }
 
-.hello-papa {
-  z-index: 1;
+.thread-dot-name-container {
+  z-index: 10;
 }
 
 .thread-name-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.thread-name-explore {
+  color: #3650AB;
+  cursor: pointer;
 }
 
 .thread-name {

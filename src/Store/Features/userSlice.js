@@ -74,6 +74,8 @@ export const userSlice = createSlice({
     ownGroups: [],
 
     friends: [],
+
+    deletedThread: false,
   },
 
   reducers: {
@@ -91,6 +93,9 @@ export const userSlice = createSlice({
       state.redirectionCount = 0;
       state.commentCount = 0;
       state.voteCount = 0;
+    },
+    setDeletedThread: (state, action) => {
+      state.deletedThread = action.payload;
     },
   },
   
@@ -346,6 +351,7 @@ export const userSlice = createSlice({
             null :
             thread;
         }).filter(elem => elem);
+        state.deletedThread = true;
       }
     },
 
@@ -356,6 +362,7 @@ export const userSlice = createSlice({
 export const {
   setStatus,
   clearUser,
+  setDeletedThread,
 } = userSlice.actions;
 
 

@@ -30,6 +30,7 @@ export const navigationSlice = createSlice({
     view: "homepage",
     overrideView: true,
     browseThread: 0,
+    browseScope: "",
     expandUserPanel: false,
     expandSearchPanel: false,
     expandSearchOptions: false,
@@ -87,6 +88,9 @@ export const navigationSlice = createSlice({
     },
     setBrowseThread: (state, action) => {
       state.browseThread = action.payload;
+    },
+    setBrowseScope: (state, action) => {
+      state.browseScope = action.payload;
     },
     setExpandUserPanel: (state, action) => {
       state.expandUserPanel = action.payload;
@@ -235,6 +239,7 @@ export const {
   setView,
   setOverrideView,
   setBrowseThread,
+  setBrowseScope,
   setExpandUserPanel,
   setExpandSearchPanel,
   setExpandSearchOptions,

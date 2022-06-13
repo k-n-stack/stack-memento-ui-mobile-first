@@ -5,14 +5,12 @@ import Thread from "./Thread";
 import Icon from "Components/Icon/Icon";
 import BulletNav from "Components/Layout/BulletNav";
 
-import { setView, setBrowseThread } from "Store/Features/navigationSlice";
 
 import "./ThreadsCarousel.css";
-import { useDispatch } from "react-redux";
 
 const ThreadCarousel = (props) => {
   
-  const dispatch = useDispatch();
+
   const [selectedThread, setSelectedThread] = useState(1);
 
   const style = {
@@ -32,6 +30,7 @@ const ThreadCarousel = (props) => {
       noMenu: true,
       bookmarkTitleOnly: true,
       compactBookmark: true,
+      explore: true,
     },
   }
 
@@ -43,13 +42,7 @@ const ThreadCarousel = (props) => {
           style={{opacity: 0.4}}
           animate={{opacity: index === selectedThread - 1 ? 1 : 0.4}}
         >
-          <div 
-            onClick={() => {
-              window.scrollTo(0, 0);
-              dispatch(setView('threadBrowser'));
-              dispatch(setBrowseThread(thread));
-            }
-          }>
+          <div>
             <Thread
               {...thread}
               {...style.multipleBookmarksThread}

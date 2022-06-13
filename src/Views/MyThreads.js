@@ -15,7 +15,7 @@ const MyThreads = () => {
   const selectedThread = useSelector((state) => (state.navigation.selectedThread));
 
   const threadProps = {
-    nameContainerWidth: 250,
+    nameContainerWidth: 270,
     nameSize: 16,
     dotRadius: 10,
     threadStrokeWidth: 5,
@@ -32,6 +32,7 @@ const MyThreads = () => {
     compactBookmark: true,
     expandable: true,
     bookmarkClickable: true,
+    explore: true,
   }
 
   const getExpandableThreads = (threads) => {

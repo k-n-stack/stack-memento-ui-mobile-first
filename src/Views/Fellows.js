@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 
 import Thread from "Modules/Thread";
 
+import "./Fellows.css";
+
 const Fellows = () => {
 
   const selectedFellow = useSelector((state) => (state.navigation.selectedFellow));
@@ -25,6 +27,7 @@ const Fellows = () => {
       noMenu: true,
       bookmarkTitleOnly: true,
       compactBookmark: true,
+      explore: true,
     },
   }
 
@@ -40,7 +43,7 @@ const Fellows = () => {
     }
 
     return threads.map(function (thread) {
-      return thread !== null ? <div>
+      return thread !== null ? <div className="teste">
         <Thread 
           {...thread}
           {...style.multipleBookmarksThread}

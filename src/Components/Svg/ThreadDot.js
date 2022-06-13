@@ -15,6 +15,9 @@ const ThreadDot = (props) => {
       height={`${dotRadius * 2}px`}
       viewBox={`0 0 ${dotRadius * 2} ${dotRadius * 2}`}
       xmlns="http://www.w3.org/2000/svg"
+      style={{
+        cursor: expandable ? 'pointer' : 'auto',
+      }}
     >
       <circle 
         cx={dotRadius} 

@@ -93,6 +93,7 @@ const BookmarkEdition = (props) => {
     if (selectedComments.length !== 0) {
       dispatch(validateComments({
         comments: selectedComments,
+        is_mobile: 0,
       }));
     }
     setSelectedComments([]);

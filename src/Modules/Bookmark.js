@@ -46,7 +46,6 @@ const Bookmark = (props) => {
   // !!! RECURSIVE
   const getComments = (comments, bookmarkId, _marginLeft = 0) => {
     return comments.map(function (comment) {
-      // console.log(comment);
       return (
         <>
           <motion.div 
@@ -74,7 +73,6 @@ const Bookmark = (props) => {
   };
 
   const handleCommentSubmit = () => {
-    // console.log('here');
     if (body !== "") {
       dispatch(postComment({
         body: body,
@@ -88,14 +86,6 @@ const Bookmark = (props) => {
     if (props.parentRef !== undefined) {
       props.setThreadHeight(props.parentRef.current.clientHeight);
     }
-  });
-
-  useEffect(() => {
-    // console.log('comment', comment);
-    // console.log('reply', reply);
-    // console.log(selectedComment);
-    // console.log(props.bookmark.comments);
-    // console.log(props);
   });
 
   return (
@@ -164,7 +154,13 @@ const Bookmark = (props) => {
           {
             !bookmarkTitleOnly &&
             <>
-              <a className="bookmark-url">{props.bookmark.url}</a>
+              <a 
+                className="bookmark-url"
+                href={props.bookmark.url}
+                target="_blank"
+              >
+                {props.bookmark.url}
+              </a>
               <div className="bookmark-info">
                 <div className="bookmark-stats">
                   <div>
@@ -190,6 +186,7 @@ const Bookmark = (props) => {
               </div>
               <div className="bookmark-tags">
                 {
+                  props.bookmark.tags &&
                   props.bookmark.tags.map((tag) => {
                     return <div className="bookmark-tag">{tag.name}</div>
                   })
@@ -198,7 +195,7 @@ const Bookmark = (props) => {
 
               {/* !!! RECURSIVE */}
               {
-                props.bookmark.comments.length !== 0 &&
+                props.bookmark.comments && props.bookmark.comments.length !== 0 &&
                 <div className="bookmark-comments">
                   {getComments(props.bookmark.comments, props.bookmark.id)}
                 </div>
